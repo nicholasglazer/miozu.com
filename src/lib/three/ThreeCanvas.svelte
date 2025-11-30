@@ -3,7 +3,7 @@
   import { browser } from '$app/environment';
 
   interface Props {
-    effect?: 'falling-cubes' | 'sinuous' | 'sinuous-original';
+    effect?: 'falling-cubes' | 'sinuous' | 'sinuous-original' | 'snake-trails';
     class?: string;
   }
 
@@ -40,6 +40,10 @@
     } else if (effect === 'falling-cubes') {
       const { FallingCubesEffect } = await import('./effects/FallingCubes');
       effectInstance = new FallingCubesEffect(sceneManager);
+      await effectInstance.init();
+    } else if (effect === 'snake-trails') {
+      const { SnakeTrailsEffect } = await import('./effects/SnakeTrails');
+      effectInstance = new SnakeTrailsEffect(sceneManager);
       await effectInstance.init();
     }
 

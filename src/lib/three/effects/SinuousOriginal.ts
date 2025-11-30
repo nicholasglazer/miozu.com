@@ -64,6 +64,8 @@ vec3 updateVel(vec3 vel, vec4 pos) {
   float n1b = fbm(pos.yx, pos.w);
   float nn = fbm(vec2(n1a, n1b), 0.0) * 5.8 + 0.5;
   vec2 dir = vec2(cos(nn), sin(nn));
+  // Bias toward top-right
+  dir += vec2(0.15, 0.1);
   vel.xy = mix(vel.xy, dir * 1.5, 0.005);
   return vel;
 }
@@ -95,21 +97,21 @@ void main() {
       col.rgb = vel;
     }
   } else {
-    // Position row
+    // Position row - shifted up by 0.25
     if (mdf < 2.5) {
       float n = noise(vUv * 10.0 + iTime) - 0.5;
-      pos = vec4(-0.99, n, 0.0, col.w + 1.0);
+      pos = vec4(-0.99, n + 0.25, 0.0, col.w + 1.0);
     }
     pos.xy += vel.xy * 0.002;
     col.xyz = pos.xyz;
   }
 
-  // Initialize
+  // Initialize - shifted up by 0.25
   if (iFrame < 15.0) {
     if (fragCoord.y < 30.0) {
       col = vec4(0.1, 0.0, 0.0, 0.0);
     } else {
-      col = vec4(-0.99, noise(vUv * 5.0 + 3.15) - 0.5, 0.0, 0.0);
+      col = vec4(-0.99, noise(vUv * 5.0 + 3.15) - 0.5 + 0.25, 0.0, 0.0);
     }
   }
 
@@ -166,8 +168,16 @@ void main() {
   vec4 base = 1.0 - vec4(1.0, 0.98, 0.9, 0.9) * (1.0 - mag(p + vec2(-0.20, -0.3)) * 0.1);
 
   float mdf = mod(iFrame, 1601.0);
-  if (iFrame < 15.0 || mdf < 2.5) {
+
+  // Smooth fade transition over ~60 frames instead of hard cut
+  float fadeOut = smoothstep(1550.0, 1601.0, mdf);
+  float fadeIn = smoothstep(0.0, 60.0, mdf);
+  float fade = max(fadeOut, 1.0 - fadeIn);
+
+  if (iFrame < 15.0) {
     col = base;
+  } else {
+    col = mix(col, base, fade);
   }
 
   gl_FragColor = 1.0 - col;

@@ -137,8 +137,11 @@
     </a>
 
     <!-- Small Block 4: Updates -->
-    <div class="block block-small">
-      <div class="block-content">
+    <div class="block block-small block-updates">
+      {#if ThreeCanvas}
+        <ThreeCanvas effect="snake-trails" />
+      {/if}
+      <div class="block-content block-content-overlay">
         <span class="block-label">Latest News</span>
         <h2 class="block-title">Updates</h2>
         <p class="block-desc">Stay informed about our portfolio and initiatives.</p>
@@ -338,6 +341,22 @@
   .block-small:nth-of-type(4) { grid-column: 2; grid-row: 2; }
   .block-small:nth-of-type(5) { grid-column: 3; grid-row: 2; }
   .block-small:nth-of-type(6) { grid-column: 4; grid-row: 2; }
+
+  /* Updates block with snake trails */
+  .block-updates {
+    position: relative;
+    padding: 0;
+  }
+
+  .block-content-overlay {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 
   /* Block content */
   .block-content {
