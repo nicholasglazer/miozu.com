@@ -136,7 +136,7 @@
       console.error('Contact form error:', error);
       formState.success = false;
       formState.error = error;
-      formState.message = error.message || 'Something went wrong. Please try emailing us directly at hello@oraklex.com';
+      formState.message = error.message || 'Something went wrong. Please try emailing us directly at partners@oraklex.com';
     } finally {
       formState.submitting = false;
     }
@@ -288,7 +288,7 @@
                 <path d="m2 7 8.97 5.7a1.94 1.94 0 0 0 2.06 0L22 7"/>
               </svg>
             </div>
-            <a href="mailto:hello@oraklex.com" class="email-link">hello@oraklex.com</a>
+            <a href="mailto:partners@oraklex.com" class="email-link">partners@oraklex.com</a>
             <p class="email-subtitle">All inquiries and partnerships</p>
           </div>
 

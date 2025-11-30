@@ -227,7 +227,7 @@
             <Button variant="primary" href={product.dashboardLink}>Launch Dashboard</Button>
             <Button variant="secondary" href={product.link}>Visit Website</Button>
           {:else}
-            <Button variant="secondary" href="mailto:hello@oraklex.com">Get Early Access</Button>
+            <Button variant="secondary" href="mailto:partners@oraklex.com">Get Early Access</Button>
             {#if product.link !== '#contact'}
               <Button variant="secondary" href={product.link}>Learn More</Button>
             {/if}
@@ -267,7 +267,7 @@
       </p>
       <div class="cta-actions">
         <Button variant="primary" href="https://dash.jko.ai">Try J'ko AI Free</Button>
-        <Button variant="secondary" href="mailto:hello@oraklex.com">Partner With Us</Button>
+        <Button variant="secondary" href="mailto:partners@oraklex.com">Partner With Us</Button>
       </div>
     </div>
   </section>

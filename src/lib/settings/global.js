@@ -1,5 +1,5 @@
 export const author = 'Oraklex Team';
-export const contact = 'hello@oraklex.com';
+export const contact = 'partners@oraklex.com';
 
 export const appName = 'Oraklex';
 export const domain = 'https://oraklex.com';

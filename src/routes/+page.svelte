@@ -348,7 +348,7 @@
         </p>
         <div class="cta-actions">
           <Button variant="primary" href="https://jko.ai">Try J'ko AI</Button>
-          <Button variant="secondary" href="mailto:hello@oraklex.com">Partner With Us</Button>
+          <Button variant="secondary" href="mailto:partners@oraklex.com">Partner With Us</Button>
         </div>
       </div>
     </div>

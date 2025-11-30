@@ -258,8 +258,8 @@
         We're always looking for exceptional people who want to shape the future of commerce intelligence. Whether you're an engineer, data scientist, or business leader - let's talk.
       </p>
       <div class="join-actions">
-        <Button variant="primary" href="mailto:careers@oraklex.com">View Open Roles</Button>
-        <Button variant="secondary" href="mailto:hello@oraklex.com">Get in Touch</Button>
+        <Button variant="primary" href="mailto:partners@oraklex.com">View Open Roles</Button>
+        <Button variant="secondary" href="mailto:partners@oraklex.com">Get in Touch</Button>
       </div>
     </div>
   </section>
