@@ -1,0 +1,45 @@
+@import 'tailwindcss';
+@import './lib/styles/theme.css';
+/* @import './lib/styles/fonts.css'; */
+
+/* Base styles using Tailwind 4 */
+@layer base {
+  html {
+    @apply overflow-hidden;
+    @apply text-base5 bg-base0;
+    /* Typography improvements */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-base0 text-base5;
+    /* Improved line height for better readability */
+    line-height: 1.6;
+    letter-spacing: -0.011em;
+  }
+
+  /* Scrollbar improvements */
+  ::-webkit-scrollbar {
+    @apply w-1.5 h-1.5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-base3/50 border-transparent rounded-xs;
+    background-clip: padding-box; /* Ensures the thumb respects the border */
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-base1/50 rounded-xs; /* Track (background) color */
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-base4/60;
+  }
+
+  /* Selection highlighting */
+  *::selection {
+    @apply text-base0 bg-base14/80;
+  }
+}

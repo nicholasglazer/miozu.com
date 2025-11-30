@@ -1,0 +1,13 @@
+name = "jko-ai-landing"
+
+main = "./.svelte-kit/cloudflare/_worker.js"
+
+build.command = "pnpm build"
+
+compatibility_date = "2025-04-14"
+compatibility_flags = ["nodejs_compat"]
+workers_dev = true
+
+[assets]
+directory = "./.svelte-kit/cloudflare"
+binding = "ASSETS"
