@@ -1,149 +1,28 @@
 <script>
-  import {onMount} from 'svelte';
-  import {fade, fly} from 'svelte/transition';
+  import { browser } from '$app/environment';
   import Metadata from '$features/seo/Metadata.svelte';
   import JsonLd from '$features/seo/JsonLd.svelte';
   import {appName, domain} from '$settings/global';
-  import {Button} from '$components/jera';
-  import TypewriterText from '$components/TypewriterText.svelte';
 
-  const heroMetrics = [
-    {value: '$100B+', label: 'e-commerce data market'},
-    {value: '10×', label: 'faster optimization'},
-    {value: '40%+', label: 'revenue attribution'},
-    {value: 'Real-time', label: 'intelligence'}
-  ];
+  // Lazy load Three.js canvas
+  let ThreeCanvas = $state(null);
 
-  const heroHighlights = [
-    'AI Planning & Optimization',
-    'E-Commerce Data Oracle',
-    'LLM Training Datasets'
-  ];
-
-  const pillars = [
-    {
-      phase: '01',
-      label: 'Data Capture',
-      title: 'Complete E-Commerce Funnel',
-      description: 'Capture the entire customer journey from social media discovery to purchase completion. Every interaction, every intent signal, every conversion.',
-      points: [
-        'Social engagement → Virtual try-on → Purchase decision',
-        'Full attribution from content to conversion',
-        'Behavioral signals LLMs need to understand commerce'
-      ]
-    },
-    {
-      phase: '02',
-      label: 'AI Planning',
-      title: 'Intelligent Optimization',
-      description: 'HyperC-powered AI planning for inventory, pricing, and campaign optimization. Mathematical optimization meets e-commerce reality.',
-      points: [
-        'Predictive inventory replenishment',
-        'Dynamic pricing on the efficient frontier',
-        'Optimal campaign timing and content'
-      ]
-    },
-    {
-      phase: '03',
-      label: 'Data Oracle',
-      title: 'Trusted Commerce Intelligence',
-      description: 'The Bloomberg Terminal for e-commerce behavior. Anonymized, structured datasets that power the next generation of AI.',
-      points: [
-        'Training data for LLMs and recommendation engines',
-        'Intent-to-action correlation datasets',
-        'Privacy-compliant, GDPR-ready exports'
-      ]
+  $effect(() => {
+    if (browser) {
+      import('$lib/three/ThreeCanvas.svelte').then(module => {
+        ThreeCanvas = module.default;
+      });
     }
-  ];
-
-  const products = [
-    {
-      name: "J'ko AI",
-      tagline: 'Virtual Try-On for Social Commerce',
-      description: 'AI-powered virtual try-on that converts Instagram DMs into sales. Reduce returns by 30-40%, increase conversion by 20-30%.',
-      link: 'https://jko.ai',
-      features: ['Instagram DM Automation', 'Shopify Integration', 'Full Attribution Tracking'],
-      status: 'Live'
-    },
-    {
-      name: 'Data Oracle API',
-      tagline: 'E-Commerce Behavior Intelligence',
-      description: 'Structured datasets capturing complete conversion funnels. From social impression to purchase - the data LLMs need.',
-      link: '#contact',
-      features: ['Conversion Funnel Data', 'Intent Signals', 'Anonymized Exports'],
-      status: 'Coming Soon'
-    },
-    {
-      name: 'HyperC Integration',
-      tagline: 'AI Planning for Retail',
-      description: 'Large Retail Model optimization for inventory, pricing, and demand forecasting. Partnership with HyperC AI.',
-      link: '#contact',
-      features: ['Inventory Optimization', 'Dynamic Pricing', 'Demand Forecasting'],
-      status: 'In Development'
-    }
-  ];
-
-  const dataValue = [
-    {
-      tier: 'Tier 1',
-      title: 'Complete Conversion Funnels',
-      description: 'Social post → DM → Photo → Try-on → Purchase. The full journey with attributed outcomes.',
-      value: '$0.10-1.00 per funnel'
-    },
-    {
-      tier: 'Tier 2',
-      title: 'Conversational Commerce',
-      description: 'Real sales conversations with purchase outcomes. Train AI on actual buying behavior.',
-      value: '$0.05-0.50 per conversation'
-    },
-    {
-      tier: 'Tier 3',
-      title: 'Product-Purchase Attribution',
-      description: 'Which products were tried, which were bought. Visual preference → purchasing behavior.',
-      value: '$0.01-0.10 per attribution'
-    }
-  ];
-
-  const partners = [
-    {name: 'OpenAI', type: 'Potential Buyer'},
-    {name: 'Anthropic', type: 'Potential Buyer'},
-    {name: 'Google', type: 'Potential Buyer'},
-    {name: 'HyperC', type: 'Technology Partner'},
-    {name: 'Meta', type: 'Platform Partner'}
-  ];
-
-  let animatedSections = $state(new Set());
-
-  const getDelay = (index, base = 0) => base + index * 80;
-
-  onMount(() => {
-    const observer = new IntersectionObserver(
-      entries => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute('data-animate');
-            if (id && !animatedSections.has(id)) {
-              animatedSections = new Set([...animatedSections, id]);
-            }
-          }
-        }
-      },
-      {threshold: 0.2}
-    );
-
-    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
-
-    return () => observer.disconnect();
   });
 </script>
 
 <Metadata
-  title="Oraklex — AI Data Intelligence & Commerce Optimization"
-  description="The Data Oracle for e-commerce. Capture complete conversion funnels, optimize with AI planning, and power the next generation of LLMs with real commerce behavior data."
+  title="Oraklex — Corporate Holding"
+  description="Oraklex is a holding company building the future of commerce intelligence through strategic investments in AI and data infrastructure."
   canonicalUrl={domain}
   ogType="website"
   ogImage={`${domain}/images/oraklex-og-banner.jpg`}
-  ogImageAlt="Oraklex - AI Data Intelligence for E-Commerce"
+  ogImageAlt="Oraklex - Corporate Holding"
   robots="index, follow"
 />
 
@@ -151,572 +30,489 @@
   type="Organization"
   data={{
     name: appName,
-    description: 'AI Data Intelligence and Commerce Optimization. Building the Data Oracle for e-commerce.',
+    description: 'Corporate holding company focused on commerce intelligence and AI infrastructure.',
     url: domain
   }}
 />
 
-<main class="landing">
-  <section class="hero" data-animate="hero" class:visible={animatedSections.has('hero')}>
-    <div class="hero-shell">
-      <div class="hero-copy">
-        <span class="eyebrow">The Future of Commerce Intelligence</span>
-        <h1 in:fly={{y: 24, duration: 400}}>
-          Building the <TypewriterText words={['Data Oracle', 'AI Backbone', 'Intelligence Layer', 'Future']} speed={120} deleteSpeed={60} pauseDuration={2500} /> for E-Commerce
-        </h1>
-        <p in:fade={{duration: 400, delay: 80}}>
-          Oraklex captures the complete e-commerce journey from social discovery to purchase. We combine AI planning technology with unique behavioral data to create the intelligence layer that powers the next generation of commerce.
-        </p>
+<div class="grid-page">
+  <!-- Header Row -->
+  <header class="grid-header">
+    <div class="header-left">
+      <a href="/" class="logo">Oraklex</a>
+    </div>
+    <nav class="header-nav">
+      <a href="/products">Products</a>
+      <a href="/team">Team</a>
+      <a href="/contact">Contact</a>
+    </nav>
+    <div class="header-right">
+      <a href="https://jko.ai" class="cta-btn">J'ko AI</a>
+    </div>
+  </header>
 
-        <div class="cta-row" in:fade={{duration: 400, delay: 120}}>
-          <Button variant="primary" href="/products">Explore Products</Button>
-          <Button variant="secondary" href="/team">Meet the Team</Button>
+  <!-- Main Grid -->
+  <div class="grid-main">
+    <!-- Large Block 1: Hero with Three.js -->
+    <div class="block block-hero">
+      {#if ThreeCanvas}
+        <ThreeCanvas effect="sinuous" />
+      {/if}
+      <div class="block-overlay">
+        <div class="hero-content">
+          <span class="hero-label">Strategic Investments</span>
+          <h1 class="hero-title">ORAKLEX</h1>
         </div>
-
-        <div class="hero-highlights" in:fade={{duration: 400, delay: 140}}>
-          {#each heroHighlights as highlight}
-            <span class="highlight-pill">{highlight}</span>
-          {/each}
-        </div>
-
-        <div class="hero-metrics">
-          {#each heroMetrics as metric, i}
-            <div
-              class="metric-card"
-              data-animate={`metric-${i}`}
-              class:visible={animatedSections.has(`metric-${i}`)}
-              in:fade={{duration: 300, delay: getDelay(i, 160)}}
-            >
-              <span class="metric-value">{metric.value}</span>
-              <span class="metric-label">{metric.label}</span>
-            </div>
-          {/each}
-        </div>
-      </div>
-
-      <div class="hero-visual" data-animate="visual" class:visible={animatedSections.has('visual')}>
-        <div class="oracle-visual" in:fade={{duration: 400, delay: 200}}>
-          <div class="data-flow">
-            <div class="flow-layer layer-1">
-              <span>Social</span>
-              <span>Intent</span>
-              <span>Action</span>
-            </div>
-            <div class="flow-arrow">→</div>
-            <div class="flow-layer layer-2">
-              <span>AI Planning</span>
-              <span>Optimization</span>
-            </div>
-            <div class="flow-arrow">→</div>
-            <div class="flow-layer layer-3">
-              <span>Data Oracle</span>
-              <span>LLM Training</span>
-            </div>
-          </div>
+        <div class="block-corner">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+          </svg>
         </div>
       </div>
     </div>
-  </section>
 
-  <section class="pillars" data-animate="pillars" class:visible={animatedSections.has('pillars')}>
-    <div class="section-header">
-      <span class="section-eyebrow">The Oraklex Stack</span>
-      <h2>Three pillars of commerce intelligence</h2>
-      <p>
-        From data capture to AI optimization to monetizable datasets - a vertically integrated approach to e-commerce intelligence.
-      </p>
-    </div>
-
-    <div class="pillars-grid">
-      {#each pillars as pillar, i}
-        <article
-          class="pillar-card"
-          data-animate={`pillar-${i}`}
-          class:visible={animatedSections.has(`pillar-${i}`)}
-          in:fade={{duration: 400, delay: getDelay(i, 120)}}
-        >
-          <div class="pillar-header">
-            <span class="pillar-phase">{pillar.phase}</span>
-            <span class="pillar-label">{pillar.label}</span>
-          </div>
-          <h3>{pillar.title}</h3>
-          <p>{pillar.description}</p>
-          <ul class="pillar-points">
-            {#each pillar.points as point}
-              <li>{point}</li>
-            {/each}
-          </ul>
-        </article>
-      {/each}
-    </div>
-  </section>
-
-  <section class="products-section" data-animate="products" class:visible={animatedSections.has('products')}>
-    <div class="section-header">
-      <span class="section-eyebrow">Our Products</span>
-      <h2>Intelligence products for modern commerce</h2>
-      <p>
-        Each product captures unique data that feeds the Data Oracle ecosystem.
-      </p>
-    </div>
-
-    <div class="products-grid">
-      {#each products as product, i}
-        <article
-          class="product-card"
-          data-animate={`product-${i}`}
-          class:visible={animatedSections.has(`product-${i}`)}
-          in:fade={{duration: 400, delay: getDelay(i, 120)}}
-        >
-          <div class="product-status" class:live={product.status === 'Live'}>
-            {product.status}
-          </div>
-          <h3>{product.name}</h3>
-          <span class="product-tagline">{product.tagline}</span>
-          <p>{product.description}</p>
-          <ul class="product-features">
-            {#each product.features as feature}
-              <li>{feature}</li>
-            {/each}
-          </ul>
-          <Button
-            variant={product.status === 'Live' ? 'primary' : 'secondary'}
-            href={product.link}
-            fullWidth
-          >
-            {product.status === 'Live' ? 'Visit Product' : 'Learn More'}
-          </Button>
-        </article>
-      {/each}
-    </div>
-  </section>
-
-  <section class="data-value" data-animate="value" class:visible={animatedSections.has('value')}>
-    <div class="section-header">
-      <span class="section-eyebrow">Data Monetization</span>
-      <h2>What makes our data valuable</h2>
-      <p>
-        Complete conversion funnels with attributed outcomes - exactly what AI companies need to train models that understand buying behavior.
-      </p>
-    </div>
-
-    <div class="value-grid">
-      {#each dataValue as item, i}
-        <article
-          class="value-card"
-          data-animate={`value-${i}`}
-          class:visible={animatedSections.has(`value-${i}`)}
-          in:fade={{duration: 400, delay: getDelay(i, 120)}}
-        >
-          <span class="value-tier">{item.tier}</span>
-          <h3>{item.title}</h3>
-          <p>{item.description}</p>
-          <span class="value-price">{item.value}</span>
-        </article>
-      {/each}
-    </div>
-  </section>
-
-  <section class="partners-section" data-animate="partners" class:visible={animatedSections.has('partners')}>
-    <div class="section-header compact">
-      <span class="section-eyebrow">Ecosystem</span>
-      <h2>Building the commerce data consortium</h2>
-    </div>
-
-    <div class="partners-grid">
-      {#each partners as partner, i}
-        <div
-          class="partner-item"
-          data-animate={`partner-${i}`}
-          class:visible={animatedSections.has(`partner-${i}`)}
-          in:fade={{duration: 400, delay: getDelay(i, 100)}}
-        >
-          <span class="partner-name">{partner.name}</span>
-          <span class="partner-type">{partner.type}</span>
+    <!-- Large Block 2: About/Visual with authentic Sinuous -->
+    <a href="/team" class="block block-about">
+      {#if ThreeCanvas}
+        <ThreeCanvas effect="sinuous-original" />
+      {/if}
+      <div class="block-overlay block-overlay-about">
+        <div class="block-content">
+          <span class="block-label">The Holding</span>
+          <h2 class="block-title">About</h2>
+          <p class="block-desc">A vertically integrated approach to commerce intelligence and AI infrastructure.</p>
         </div>
-      {/each}
-    </div>
-  </section>
-
-  <section class="cta" data-animate="cta" class:visible={animatedSections.has('cta')}>
-    <div class="cta-shell">
-      <div class="cta-content" in:fade={{duration: 400}}>
-        <span class="section-eyebrow">Join the Vision</span>
-        <h2>The future of commerce intelligence starts here</h2>
-        <p>
-          We're building the Data Oracle that will power the next generation of AI-driven commerce. Whether you're a brand, an AI company, or an investor - let's talk.
-        </p>
-        <div class="cta-actions">
-          <Button variant="primary" href="https://jko.ai">Try J'ko AI</Button>
-          <Button variant="secondary" href="mailto:partners@oraklex.com">Partner With Us</Button>
+        <div class="block-corner">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+          </svg>
         </div>
       </div>
+    </a>
+
+    <!-- Small Block 1: Portfolio -->
+    <a href="/products" class="block block-small">
+      <div class="block-content">
+        <span class="block-label">Our Companies</span>
+        <h2 class="block-title">Portfolio</h2>
+        <ul class="block-list">
+          <li>J'ko AI</li>
+          <li>Data Oracle</li>
+          <li>HyperC</li>
+        </ul>
+      </div>
+      <div class="block-corner">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17L17 7M17 7H7M17 7V17"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- Small Block 2: Leadership -->
+    <a href="/team" class="block block-small">
+      <div class="block-content">
+        <span class="block-label">Executive Team</span>
+        <h2 class="block-title">Leadership</h2>
+        <p class="block-desc">Building at the intersection of AI and commerce.</p>
+      </div>
+      <div class="block-corner">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17L17 7M17 7H7M17 7V17"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- Small Block 3: Contact -->
+    <a href="/contact" class="block block-small block-light">
+      <div class="block-content">
+        <span class="block-label dark">Get in Touch</span>
+        <h2 class="block-title dark">Contact</h2>
+        <span class="block-email">partners@oraklex.com</span>
+      </div>
+      <div class="block-corner dark">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17L17 7M17 7H7M17 7V17"/>
+        </svg>
+      </div>
+    </a>
+
+    <!-- Small Block 4: Updates -->
+    <div class="block block-small">
+      <div class="block-content">
+        <span class="block-label">Latest News</span>
+        <h2 class="block-title">Updates</h2>
+        <p class="block-desc">Stay informed about our portfolio and initiatives.</p>
+      </div>
     </div>
-  </section>
-</main>
+  </div>
+</div>
 
 <style lang="postcss">
   @reference '$theme';
 
-  .landing {
-    @apply min-h-screen bg-base0 text-base5;
+  .grid-page {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+    width: 100%;
+    gap: 5px;
+    padding: 5px;
+    background: #0a0a0a;
+    box-sizing: border-box;
   }
 
-  section {
-    @apply relative;
+  /* Header */
+  .grid-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 48px;
+    background: #111;
+    border-radius: 8px;
+    border: 1px solid #222;
   }
 
-  .hero {
-    @apply overflow-hidden pt-32 pb-24 bg-base0;
-    position: relative;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--color-border) 50%, transparent);
-  }
-
-  .hero.visible {
-    @apply opacity-100;
-  }
-
-  .hero-shell {
-    @apply mx-auto flex w-full max-w-7xl flex-col gap-16 px-6 lg:flex-row lg:items-center lg:gap-20;
-  }
-
-  .hero-copy {
-    @apply flex w-full flex-col gap-6 lg:max-w-xl;
+  .header-left {
     flex: 0 0 auto;
   }
 
-  .eyebrow {
-    @apply text-sm font-medium uppercase tracking-widest text-base4;
+  .logo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: -0.02em;
   }
 
-  h1 {
-    @apply text-4xl font-semibold leading-tight text-base6 md:text-5xl lg:text-6xl;
+  .header-nav {
+    display: flex;
+    gap: 8px;
   }
 
-  .hero-copy p {
-    @apply text-base leading-relaxed text-base4 md:text-lg;
+  .header-nav a {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    color: #888;
+    text-decoration: none;
+    transition: color 0.2s;
   }
 
-  .cta-row {
-    @apply flex flex-wrap items-center gap-4 pt-4;
+  .header-nav a:hover {
+    color: #fff;
   }
 
-  .hero-highlights {
-    @apply flex flex-wrap gap-2 pt-4;
+  .header-right {
+    flex: 0 0 auto;
   }
 
-  .highlight-pill {
-    @apply inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium tracking-wide;
-    background: rgba(var(--color-base1-rgb), 0.6);
-    color: var(--color-base5);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(var(--color-base3-rgb), 0.2);
+  .cta-btn {
+    padding: 6px 16px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #000;
+    background: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s;
   }
 
-  :root[data-theme='miozu-dark'] .highlight-pill {
-    background: rgba(var(--color-base2-rgb), 0.5);
-    border: 1px solid rgba(var(--color-base3-rgb), 0.25);
+  .cta-btn:hover {
+    background: #e0e0e0;
   }
 
-  .hero-metrics {
-    @apply grid grid-cols-2 gap-4 pt-8 sm:grid-cols-4;
+  /* Main Grid - Asymmetric layout */
+  .grid-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
+    gap: 5px;
+    height: 100%;
+    min-height: 0;
   }
 
-  .metric-card {
-    @apply rounded-xl px-4 py-5 text-center opacity-0 translate-y-4;
-    background: rgba(var(--color-base1-rgb), 0.5);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(var(--color-base3-rgb), 0.2);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Blocks base */
+  .block {
+    position: relative;
+    background: #111;
+    border-radius: 8px;
+    border: 1px solid #222;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.3s ease;
   }
 
-  :root[data-theme='miozu-dark'] .metric-card {
-    background: rgba(var(--color-base2-rgb), 0.4);
-    border: 1px solid rgba(var(--color-base3-rgb), 0.3);
+  .block:hover {
+    border-color: #333;
   }
 
-  .metric-card.visible {
-    @apply opacity-100 translate-y-0;
+  /* Hero block - top left */
+  .block-hero {
+    grid-column: 1;
+    grid-row: 1;
   }
 
-  .metric-value {
-    @apply block text-2xl font-bold mb-1;
-    color: var(--color-base6);
+  .block-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    pointer-events: none;
+    background: linear-gradient(135deg, rgba(17, 17, 17, 0.9) 0%, rgba(17, 17, 17, 0.3) 50%, transparent 100%);
   }
 
-  .metric-label {
-    @apply block text-[11px] font-medium uppercase tracking-wider;
-    color: var(--color-base4);
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
-  .hero-visual {
-    @apply relative flex w-full items-center justify-center;
-    min-height: 400px;
+  .hero-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #666;
   }
 
-  .oracle-visual {
-    @apply relative w-full max-w-[520px] rounded-3xl p-8;
-    background: linear-gradient(145deg, rgba(var(--color-base1-rgb), 0.8), rgba(var(--color-base2-rgb), 0.6));
-    border: 1px solid rgba(var(--color-base3-rgb), 0.3);
-    backdrop-filter: blur(20px);
+  .hero-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.03em;
+    margin: 0;
   }
 
-  .data-flow {
-    @apply flex flex-col gap-6 items-center;
+  /* About block - top right */
+  .block-about {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    padding: 0;
   }
 
-  .flow-layer {
-    @apply flex flex-col gap-2 rounded-xl p-4 w-full text-center;
-    background: rgba(var(--color-base14-rgb), 0.1);
-    border: 1px solid rgba(var(--color-base14-rgb), 0.2);
+  .block-overlay-about {
+    background: linear-gradient(180deg, rgba(17, 17, 17, 0.85) 0%, rgba(17, 17, 17, 0.4) 40%, transparent 100%);
   }
 
-  .flow-layer span {
-    @apply text-sm font-medium text-base5;
+  .block-overlay-about .block-content {
+    padding: 24px;
   }
 
-  .flow-arrow {
-    @apply text-2xl text-base14 font-bold;
+  .block-overlay-about .block-corner {
+    bottom: 16px;
+    right: 16px;
   }
 
-  .pillars,
-  .products-section,
-  .data-value,
-  .partners-section {
-    @apply mx-auto max-w-6xl px-6 py-20;
+  /* Small blocks - bottom row */
+  .block-small {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
   }
 
-  .section-header {
-    @apply mx-auto flex max-w-3xl flex-col gap-4 text-center mb-12;
-  }
-
-  .section-header.compact {
-    @apply mb-10;
-  }
-
-  .section-eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.35em] text-base4;
-  }
-
-  .section-header h2 {
-    @apply text-3xl font-semibold text-base5 md:text-4xl;
-  }
-
-  .section-header p {
-    @apply text-base text-base4 md:text-lg;
-  }
-
-  .pillars-grid {
-    @apply grid gap-6 md:grid-cols-3;
-  }
-
-  .pillar-card {
-    @apply flex flex-col gap-4 rounded-[28px] border border-border/60 bg-base1 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-lg opacity-0 translate-y-2;
-  }
-
-  .pillar-card.visible {
-    @apply opacity-100 translate-y-0;
-  }
-
-  .pillar-header {
-    @apply flex items-center justify-between;
-  }
-
-  .pillar-phase {
-    @apply text-2xl font-bold text-base14;
-  }
-
-  .pillar-label {
-    @apply text-xs font-semibold uppercase tracking-[0.3em] text-base4;
-  }
-
-  .pillar-card h3 {
-    @apply text-xl font-semibold text-base6;
-  }
-
-  .pillar-card p {
-    @apply text-sm text-base4;
-  }
-
-  .pillar-points {
-    @apply flex flex-col gap-2 mt-2;
-  }
-
-  .pillar-points li {
-    @apply text-sm text-base5 pl-4 relative;
-  }
-
-  .pillar-points li::before {
-    content: '→';
-    @apply absolute left-0 text-base14;
-  }
-
-  .products-grid {
-    @apply grid gap-6 md:grid-cols-3;
-  }
-
-  .product-card {
-    @apply flex flex-col gap-4 rounded-[28px] border border-border/60 bg-base1 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-lg opacity-0 translate-y-2;
-  }
-
-  .product-card.visible {
-    @apply opacity-100 translate-y-0;
-  }
-
-  .product-status {
-    @apply self-start rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider;
-    background: rgba(var(--color-base3-rgb), 0.3);
-    color: var(--color-base4);
-  }
-
-  .product-status.live {
-    background: rgba(var(--color-base14-rgb), 0.2);
-    color: var(--color-base14);
-  }
-
-  .product-card h3 {
-    @apply text-xl font-semibold text-base6;
-  }
-
-  .product-tagline {
-    @apply text-sm text-base14 font-medium;
-  }
+  /* Small blocks span the bottom */
+  .block-small:nth-of-type(3) { grid-column: 1; grid-row: 2; }
+  .block-small:nth-of-type(4) { grid-column: 2; grid-row: 2; }
 
-  .product-card p {
-    @apply text-sm text-base4 flex-1;
+  /* Actually we need 4 small blocks in bottom row */
+  .grid-main {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 2fr 1fr;
   }
 
-  .product-features {
-    @apply flex flex-col gap-1 text-xs text-base5;
+  .block-hero {
+    grid-column: 1 / 3;
+    grid-row: 1;
   }
 
-  .product-features li::before {
-    content: '✓ ';
-    @apply text-base14;
+  .block-about {
+    grid-column: 3 / 5;
+    grid-row: 1;
   }
 
-  .value-grid {
-    @apply grid gap-6 md:grid-cols-3;
-  }
-
-  .value-card {
-    @apply flex flex-col gap-3 rounded-[28px] border border-border/60 bg-base1 p-6 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-lg opacity-0 translate-y-2;
-  }
+  .block-small:nth-of-type(3) { grid-column: 1; grid-row: 2; }
+  .block-small:nth-of-type(4) { grid-column: 2; grid-row: 2; }
+  .block-small:nth-of-type(5) { grid-column: 3; grid-row: 2; }
+  .block-small:nth-of-type(6) { grid-column: 4; grid-row: 2; }
 
-  .value-card.visible {
-    @apply opacity-100 translate-y-0;
+  /* Block content */
+  .block-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
 
-  .value-tier {
-    @apply text-xs font-semibold uppercase tracking-[0.3em] text-base14;
+  .block-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #555;
   }
 
-  .value-card h3 {
-    @apply text-lg font-semibold text-base6;
+  .block-label.dark {
+    color: #666;
   }
 
-  .value-card p {
-    @apply text-sm text-base4 flex-1;
+  .block-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.02em;
+    margin: 0;
   }
 
-  .value-price {
-    @apply text-lg font-bold text-base5 mt-2;
+  .block-title.dark {
+    color: #111;
   }
 
-  .partners-grid {
-    @apply flex flex-wrap justify-center gap-6;
+  .block-desc {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.5;
+    margin: 4px 0 0 0;
   }
 
-  .partner-item {
-    @apply flex flex-col items-center gap-1 rounded-xl px-6 py-4 opacity-0 translate-y-2;
-    background: rgba(var(--color-base1-rgb), 0.5);
-    border: 1px solid rgba(var(--color-base3-rgb), 0.2);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  .block-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
   }
 
-  .partner-item.visible {
-    @apply opacity-100 translate-y-0;
+  .block-list li {
+    font-size: 0.8rem;
+    color: #888;
+    position: relative;
+    padding-left: 12px;
   }
 
-  .partner-name {
-    @apply text-base font-semibold text-base6;
+  .block-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #4a9eff;
   }
 
-  .partner-type {
-    @apply text-xs text-base4;
+  .block-email {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #1a365d;
+    margin-top: 8px;
   }
 
-  .cta {
-    @apply px-6 pb-24 pt-12;
+  /* Light block variant */
+  .block-light {
+    background: #f5f5f5;
+    border-color: #e0e0e0;
   }
 
-  .cta-shell {
-    @apply mx-auto max-w-5xl rounded-[36px] border border-border bg-gradient-to-br from-base2 via-base1 to-base14/10 px-8 py-12 text-base5 shadow-lg;
+  .block-light:hover {
+    border-color: #ccc;
   }
 
-  .cta-content {
-    @apply flex flex-col gap-6 text-center;
+  /* Block corner arrow */
+  .block-corner {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #1a1a1a;
+    color: #666;
+    transition: all 0.3s ease;
   }
 
-  .cta-content h2 {
-    @apply text-3xl font-semibold text-base6 md:text-4xl;
+  .block-corner.dark {
+    background: #e5e5e5;
+    color: #666;
   }
 
-  .cta-content p {
-    @apply text-base text-base4 md:text-lg;
+  .block:hover .block-corner {
+    background: #4a9eff;
+    color: #fff;
+    transform: translate(2px, -2px);
   }
 
-  .cta-actions {
-    @apply flex flex-wrap justify-center gap-4 pt-2;
+  .block-light:hover .block-corner {
+    background: #1a365d;
+    color: #fff;
   }
 
+  /* Responsive */
   @media (max-width: 1024px) {
-    .hero {
-      @apply pt-20;
+    .grid-main {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1.5fr 1fr 1fr;
     }
 
-    .hero-shell {
-      @apply gap-12;
+    .block-hero { grid-column: 1; grid-row: 1; }
+    .block-about { grid-column: 2; grid-row: 1; }
+    .block-small:nth-of-type(3) { grid-column: 1; grid-row: 2; }
+    .block-small:nth-of-type(4) { grid-column: 2; grid-row: 2; }
+    .block-small:nth-of-type(5) { grid-column: 1; grid-row: 3; }
+    .block-small:nth-of-type(6) { grid-column: 2; grid-row: 3; }
+
+    .hero-title {
+      font-size: 2rem;
     }
 
-    .hero-visual {
-      min-height: 300px;
+    .block-title {
+      font-size: 1.2rem;
     }
   }
 
-  @media (max-width: 768px) {
-    .hero-shell {
-      @apply px-4;
+  @media (max-width: 640px) {
+    .grid-page {
+      gap: 4px;
+      padding: 4px;
     }
 
-    .pillars,
-    .products-section,
-    .data-value,
-    .partners-section {
-      @apply px-4 py-16;
+    .grid-header {
+      height: 44px;
+      padding: 0 12px;
     }
 
-    .hero-metrics {
-      @apply grid-cols-2 gap-3;
+    .header-nav {
+      display: none;
     }
 
-    .pillars-grid,
-    .products-grid,
-    .value-grid {
-      @apply grid-cols-1;
+    .grid-main {
+      grid-template-columns: 1fr;
+      grid-template-rows: 2fr repeat(5, 1fr);
     }
 
-    .cta-shell {
-      @apply px-6 py-10;
+    .block-hero { grid-column: 1; grid-row: 1; }
+    .block-about { grid-column: 1; grid-row: 2; }
+    .block-small:nth-of-type(3) { grid-column: 1; grid-row: 3; }
+    .block-small:nth-of-type(4) { grid-column: 1; grid-row: 4; }
+    .block-small:nth-of-type(5) { grid-column: 1; grid-row: 5; }
+    .block-small:nth-of-type(6) { grid-column: 1; grid-row: 6; }
+
+    .hero-title {
+      font-size: 1.8rem;
+    }
+
+    .block-title {
+      font-size: 1.1rem;
+    }
+
+    .block-small {
+      padding: 16px;
     }
   }
 </style>

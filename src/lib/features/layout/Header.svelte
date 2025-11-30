@@ -11,11 +11,11 @@
   <div class="header-content">
     <div class="header-left">
       <a href="/" class="logo-link">
-        <Logo size={36} class="header-logo" />
+        <Logo size={32} class="header-logo" />
       </a>
     </div>
 
-    <!-- Desktop navigation - hidden on small screens -->
+    <!-- Desktop navigation -->
     <nav class="main-nav">
       {#each mainRoutes as route}
         <a href={route.path} class="nav-link">
@@ -25,11 +25,9 @@
     </nav>
 
     <div class="header-right">
-      <!-- Desktop login button - links to J'ko dashboard as primary product -->
       <a href="https://jko.ai" class="login-btn hidden md:inline-flex">
         J'ko AI
       </a>
-      <!-- Mobile menu component -->
       <MobileMenu routes={mainRoutes} {l10n} {theme} />
     </div>
   </div>
@@ -41,79 +39,54 @@
   .header {
     @apply sticky top-0;
     z-index: 1000;
-    /* Apple-style glassmorphism */
-    background: rgba(var(--color-base0-rgb), 0.72);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(var(--color-base3-rgb, 255, 255, 255), 0.08);
-    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.03);
+    background: rgba(var(--color-base0-rgb), 0.85);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .header-content {
-    @apply px-6 py-5 w-full flex items-center;
+    @apply px-4 py-4 w-full flex items-center;
   }
 
   .header-right {
-    @apply w-16 sm:w-24 flex items-center justify-end;
+    @apply w-24 flex items-center justify-end;
     position: relative;
     margin-left: auto;
   }
 
   .header-left {
-    @apply w-16 sm:w-24 flex items-center;
+    @apply w-24 flex items-center;
   }
 
   .logo-link {
     @apply flex items-center justify-center no-underline;
   }
 
-  .brand-name {
-    @apply font-bold text-xl sm:text-2xl text-base14;
-    letter-spacing: 0.02em;
-    transition: all 0.3s ease;
-  }
-
-  .logo-link:hover .brand-name {
-    @apply text-base13;
-  }
-
   .main-nav {
-    @apply flex-1 flex items-center justify-center;
-    /* Hide on small screens */
+    @apply flex-1 flex items-center justify-center gap-1;
     @apply hidden md:flex;
   }
 
   .nav-link {
     @apply px-4 py-2 text-base5 hover:text-base6 transition-all duration-200;
-    @apply text-sm font-normal;
+    @apply text-sm font-medium rounded-lg;
     position: relative;
   }
 
-  .nav-link::after {
-    content: '';
-    @apply absolute bottom-0 left-4 right-4 h-px bg-base14;
-    opacity: 0;
-    transform: scaleX(0);
-    transition: all 0.2s ease;
-  }
-
-  .nav-link:hover::after {
-    opacity: 1;
-    transform: scaleX(1);
+  .nav-link:hover {
+    @apply bg-base1;
   }
 
   .login-btn {
-    @apply px-4 py-2 rounded-lg font-medium text-sm no-underline mr-4;
-    color: var(--color-base6);
-    background: rgba(var(--color-base1-rgb), 0.6);
-    border: 1px solid rgba(var(--color-base3-rgb), 0.2);
-    backdrop-filter: blur(8px);
+    @apply px-4 py-2 rounded-xl font-medium text-sm no-underline mr-3;
+    color: var(--color-base0);
+    background: var(--color-base14);
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .login-btn:hover {
-    background: rgba(var(--color-base14-rgb), 0.1);
-    border-color: var(--color-base14);
+    filter: brightness(1.1);
     transform: translateY(-1px);
   }
 </style>

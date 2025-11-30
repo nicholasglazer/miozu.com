@@ -1,28 +1,27 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Base16 Miozu Light Theme - Perceptually Optimized (DEFAULT) */
-  /* Non-linear scaling for better surface separation */
-  --color-base00: #ffffff; /* L*100 - Primary Background */
-  --color-base01: #f7f8fa; /* L*97 - Card/Surface (3% darker) */
-  --color-base02: #eef1f5; /* L*94 - Elevated Surface (6% darker) */
-  --color-base03: #97a3b7; /* L*67 - Disabled/Muted */
-  --color-base04: #5e6b81; /* L*45 - Secondary Text */
-  --color-base05: #1a2332; /* L*14 - Primary Text */
-  --color-base06: #0d1520; /* L*7 - High Emphasis */
-  --color-base07: #000000; /* L*0 - Maximum Contrast */
+  /* Elite Corporate Light Theme - Clean & Expensive */
+  --color-base00: #ffffff; /* Pure white background */
+  --color-base01: #f8f9fa; /* Subtle off-white surface */
+  --color-base02: #f1f3f5; /* Elevated surface */
+  --color-base03: #adb5bd; /* Muted/disabled */
+  --color-base04: #6c757d; /* Secondary text */
+  --color-base05: #212529; /* Primary text */
+  --color-base06: #1a1d20; /* High emphasis */
+  --color-base07: #0d0f10; /* Maximum contrast */
 
-  /* Base16 Accent Colors (Light Theme) - Adjusted for light backgrounds */
-  --color-base08: #dc2626; /* Error Red */
-  --color-base09: #ea580c; /* Warning Orange */
-  --color-base0A: #ca8a04; /* Highlight Yellow */
-  --color-base0B: #16a34a; /* Success Green */
-  --color-base0C: #0891b2; /* Info Cyan */
-  --color-base0D: #2563eb; /* Primary Blue */
-  --color-base0E: #7c3aed; /* Purple */
-  --color-base0F: #d97706; /* Accent Amber */
+  /* Accent - Deep corporate blue */
+  --color-base08: #dc3545; /* Error Red */
+  --color-base09: #fd7e14; /* Warning Orange */
+  --color-base0A: #ffc107; /* Highlight Yellow */
+  --color-base0B: #28a745; /* Success Green */
+  --color-base0C: #17a2b8; /* Info Cyan */
+  --color-base0D: #1a365d; /* Primary Deep Blue */
+  --color-base0E: #5a67d8; /* Purple */
+  --color-base0F: #1a365d; /* Corporate Navy */
 
-  /* Legacy color mappings for backward compatibility */
+  /* Legacy mappings */
   --color-base0: var(--color-base00);
   --color-base1: var(--color-base01);
   --color-base2: var(--color-base02);
@@ -40,88 +39,68 @@
   --color-base14: var(--color-base0F);
   --color-base15: var(--color-base0C);
 
-  /* Border utilities - Light theme defaults */
-  --color-border: #dde3ed;
-  --color-border-light: #eef1f5;
+  /* Border utilities */
+  --color-border: #e9ecef;
+  --color-border-light: #f1f3f5;
 
   --color-black: #000;
   --color-white: #fff;
 
   --font-sans:
-    'ibm plex sans', 'Noto Sans', Inter, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-serif: 'ibm plex serif', 'Domine', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+    'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
   --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-    monospace;
+    'SF Mono', 'Fira Code', monospace;
 }
 
-/* Base theme variables - Light theme by default */
+/* Elite Corporate Light - Default Theme */
 :root,
 :root[data-theme='miozu-light'] {
-  /* Base16 Miozu Light Theme - Perceptually Optimized (DEFAULT) */
-  /* Non-linear scaling for better surface separation */
-  --color-base0: #ffffff; /* L*100 - Primary Background */
-  --color-base1: #f7f8fa; /* L*97 - Card/Surface (3% darker) */
-  --color-base2: #eef1f5; /* L*94 - Elevated Surface (6% darker) */
-  --color-base3: #97a3b7; /* L*67 - Disabled/Muted */
-  --color-base4: #5e6b81; /* L*45 - Secondary Text */
-  --color-base5: #1a2332; /* L*14 - Primary Text */
-  --color-base6: #0d1520; /* L*7 - High Emphasis */
-  --color-base7: #000000; /* L*0 - Maximum Contrast */
+  /* Pure, clean backgrounds */
+  --color-base0: #ffffff;
+  --color-base1: #f8f9fa;
+  --color-base2: #f1f3f5;
+  --color-base3: #dee2e6;
+  --color-base4: #868e96;
+  --color-base5: #343a40;
+  --color-base6: #212529;
+  --color-base7: #0d0f10;
 
-  /* RGB versions for rgba() usage */
+  /* RGB versions */
   --color-base0-rgb: 255, 255, 255;
-  --color-base1-rgb: 247, 248, 250;
-  --color-base2-rgb: 238, 241, 245;
-  --color-base3-rgb: 151, 163, 183;
-  --color-base4-rgb: 94, 107, 129;
-  --color-base5-rgb: 26, 35, 50;
-  --color-base6-rgb: 13, 21, 32;
-  --color-base7-rgb: 0, 0, 0;
+  --color-base1-rgb: 248, 249, 250;
+  --color-base2-rgb: 241, 243, 245;
+  --color-base3-rgb: 222, 226, 230;
+  --color-base4-rgb: 134, 142, 150;
+  --color-base5-rgb: 52, 58, 64;
+  --color-base6-rgb: 33, 37, 41;
+  --color-base7-rgb: 13, 15, 16;
 
-  /* Base16 Accent Colors (Light Theme) - Adjusted for light backgrounds */
-  --color-base8: #dc2626; /* Error Red */
-  --color-base9: #ea580c; /* Warning Orange */
-  --color-base10: #16a34a; /* Success Green */
-  --color-base11: #ca8a04; /* Highlight Yellow */
-  --color-base12: #0891b2; /* Info Cyan */
-  --color-base13: #ea580c; /* Warning Orange (for consistency) */
-  --color-base14: #d97706; /* Accent Amber */
-  --color-base15: #0891b2; /* Info Cyan */
+  /* Corporate accent colors */
+  --color-base8: #dc3545;
+  --color-base9: #fd7e14;
+  --color-base10: #28a745;
+  --color-base11: #ffc107;
+  --color-base12: #17a2b8;
+  --color-base13: #495057;
+  --color-base14: #1a365d; /* Corporate navy - primary accent */
+  --color-base15: #6c757d;
 
-  /* Legacy color mappings for compatibility */
-  --color-base00: #ffffff;
-  --color-base01: #f7f8fa;
-  --color-base02: #eef1f5;
-  --color-base03: #97a3b7;
-  --color-base04: #5e6b81;
-  --color-base05: #1a2332;
-  --color-base06: #0d1520;
-  --color-base07: #000000;
-  --color-base08: #dc2626;
-  --color-base09: #ea580c;
-  --color-base0A: #ca8a04;
-  --color-base0B: #16a34a;
-  --color-base0C: #0891b2;
-  --color-base0D: #2563eb;
-  --color-base0E: #7c3aed;
-  --color-base0F: #d97706;
+  /* RGB for accent */
+  --color-base14-rgb: 26, 54, 93;
 
-  /* Border utilities - Light theme defaults */
-  --color-border: #dde3ed;
-  --color-border-light: #eef1f5;
+  /* Clean borders */
+  --color-border: #e9ecef;
+  --color-border-light: #f1f3f5;
 
   --color-black: #000;
   --color-white: #fff;
 
   --font-sans:
-    'ibm plex sans', 'Noto Sans', Inter, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-serif: 'ibm plex serif', 'Domine', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+    'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
   --font-mono:
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
-    monospace;
+    'SF Mono', 'Fira Code', monospace;
 
   --spacing: 0.25rem;
 
@@ -196,22 +175,22 @@
   --leading-relaxed: 1.625;
   --leading-loose: 2;
 
-  --radius-xs: 0.125rem;
-  --radius-sm: 0.25rem;
-  --radius-md: 0.25rem;
-  --radius-lg: 0.25rem;
-  --radius-xl: 0.25rem;
-  --radius-2xl: 0.25rem;
-  --radius-3xl: 0.25rem;
-  --radius-4xl: 0.25rem;
+  --radius-xs: 0.5rem;
+  --radius-sm: 0.75rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 2.5rem;
+  --radius-4xl: 3rem;
 
-  --shadow-2xs: 0 1px rgb(0 0 0 / 0.02);
-  --shadow-xs: 0 1px rgb(0 0 0 / 0.02);
-  --shadow-sm: 0 1px rgb(0 0 0 / 0.03);
-  --shadow-md: 0 1px rgb(0 0 0 / 0.03);
-  --shadow-lg: 0 1px rgb(0 0 0 / 0.04);
-  --shadow-xl: 0 1px rgb(0 0 0 / 0.04);
-  --shadow-2xl: 0 1px rgb(0 0 0 / 0.05);
+  --shadow-2xs: 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-xs: 0 1px 3px rgb(0 0 0 / 0.06);
+  --shadow-sm: 0 2px 4px rgb(0 0 0 / 0.06);
+  --shadow-md: 0 4px 8px rgb(0 0 0 / 0.08);
+  --shadow-lg: 0 8px 16px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 12px 24px rgb(0 0 0 / 0.12);
+  --shadow-2xl: 0 24px 48px rgb(0 0 0 / 0.16);
 
   --inset-shadow-2xs: inset 0 1px rgb(0 0 0 / 0.05);
   --inset-shadow-xs: inset 0 1px 1px rgb(0 0 0 / 0.05);
@@ -259,85 +238,44 @@
   --default-mono-font-variation-settings: var(--font-mono--font-variation-settings);
 }
 
-/*
-  Theme overrides - Luxury Fashion Light
-  Pastel, expensive palette for brands and influencers
-  Warm neutrals with gold accents - replaces miozu-light
-*/
-:root[data-theme='miozu-light'] {
-  /* Warm neutral backgrounds - creamy whites */
-  --color-base0: #fafaf8; /* Warm white background */
-  --color-base1: #f5f4f1; /* Cream card surface */
-  --color-base2: #edeae4; /* Elevated warm surface */
-  --color-base3: #b8b3a8; /* Warm muted */
-  --color-base4: #6e6960; /* Warm secondary text */
-  --color-base5: #2a2620; /* Warm dark text */
-  --color-base6: #1a1714; /* Deep warm emphasis */
-  --color-base7: #0a0907; /* Maximum warm contrast */
-
-  /* RGB versions for rgba() usage - luxury light */
-  --color-base0-rgb: 250, 250, 248;
-  --color-base1-rgb: 245, 244, 241;
-  --color-base2-rgb: 237, 234, 228;
-  --color-base3-rgb: 184, 179, 168;
-  --color-base4-rgb: 110, 105, 96;
-  --color-base5-rgb: 42, 38, 32;
-  --color-base6-rgb: 26, 23, 20;
-  --color-base7-rgb: 10, 9, 7;
-
-  /* Luxury accent colors - gold & pastel */
-  --color-base8: #dc2626; /* Keep error red */
-  --color-base9: #e98c46; /* Luxury gold orange */
-  --color-base10: #16a34a; /* Keep success green */
-  --color-base11: #d4a574; /* Soft gold */
-  --color-base12: #9ca3af; /* Soft blue-gray */
-  --color-base13: #e98c46; /* Primary luxury gold */
-  --color-base14: #d97706; /* Accent warm amber */
-  --color-base15: #a3a3a3; /* Neutral gray */
-
-  /* Luxury borders - soft and subtle */
-  --color-border: rgba(233, 140, 70, 0.12);
-  --color-border-light: rgba(233, 140, 70, 0.06);
-}
-
-/*
-  Theme overrides - Luxury Fashion Dark
-  Inverse of luxury light - deep warm blacks with gold - replaces miozu-dark
-*/
+/* Elite Corporate Dark Theme */
 :root[data-theme='miozu-dark'] {
-  /* Deep warm backgrounds - rich blacks with warmth */
-  --color-base0: #0a0907; /* Deep warm black */
-  --color-base1: #1a1714; /* Warm dark surface */
-  --color-base2: #2a2620; /* Elevated warm dark */
-  --color-base3: #6e6960; /* Warm muted (inverse) */
-  --color-base4: #b8b3a8; /* Warm light secondary */
-  --color-base5: #edeae4; /* Warm light text */
-  --color-base6: #f5f4f1; /* High emphasis cream */
-  --color-base7: #fafaf8; /* Maximum light contrast */
+  /* Deep, sophisticated dark backgrounds */
+  --color-base0: #0f1419;
+  --color-base1: #1a1f26;
+  --color-base2: #242a33;
+  --color-base3: #4a5568;
+  --color-base4: #a0aec0;
+  --color-base5: #e2e8f0;
+  --color-base6: #f7fafc;
+  --color-base7: #ffffff;
 
-  /* RGB versions for rgba() usage - luxury dark */
-  --color-base0-rgb: 10, 9, 7;
-  --color-base1-rgb: 26, 23, 20;
-  --color-base2-rgb: 42, 38, 32;
-  --color-base3-rgb: 110, 105, 96;
-  --color-base4-rgb: 184, 179, 168;
-  --color-base5-rgb: 237, 234, 228;
-  --color-base6-rgb: 245, 244, 241;
-  --color-base7-rgb: 250, 250, 248;
+  /* RGB versions */
+  --color-base0-rgb: 15, 20, 25;
+  --color-base1-rgb: 26, 31, 38;
+  --color-base2-rgb: 36, 42, 51;
+  --color-base3-rgb: 74, 85, 104;
+  --color-base4-rgb: 160, 174, 192;
+  --color-base5-rgb: 226, 232, 240;
+  --color-base6-rgb: 247, 250, 252;
+  --color-base7-rgb: 255, 255, 255;
 
-  /* Luxury accent colors - brighter gold for dark bg */
-  --color-base8: #ff5757; /* Error red */
-  --color-base9: #f4a661; /* Bright luxury gold */
-  --color-base10: #52d681; /* Success green */
-  --color-base11: #e9c896; /* Bright soft gold */
-  --color-base12: #b8b3a8; /* Warm gray */
-  --color-base13: #f4a661; /* Primary luxury gold (bright) */
-  --color-base14: #ffb157; /* Accent bright amber */
-  --color-base15: #d4d4d4; /* Light gray */
+  /* Corporate accent colors for dark */
+  --color-base8: #fc8181;
+  --color-base9: #f6ad55;
+  --color-base10: #68d391;
+  --color-base11: #faf089;
+  --color-base12: #63b3ed;
+  --color-base13: #a0aec0;
+  --color-base14: #63b3ed; /* Lighter blue for dark theme */
+  --color-base15: #a0aec0;
 
-  /* Luxury borders - gold tinted */
-  --color-border: rgba(244, 166, 97, 0.15);
-  --color-border-light: rgba(244, 166, 97, 0.08);
+  /* RGB for accent */
+  --color-base14-rgb: 99, 179, 237;
+
+  /* Dark borders */
+  --color-border: #2d3748;
+  --color-border-light: #1a202c;
 }
 
 /* Animation keyframes */
