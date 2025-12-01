@@ -1,17 +1,21 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
+  import { canvasRegistry } from '$lib/stores/canvasRegistry';
 
   interface Props {
     type?: 'falling-cubes' | 'sinuous' | 'sinuous-original' | 'snake-trails' | 'synaptic' | 'synaptic-multipass' | 'ether';
     class?: string;
     /** Use lower pixel ratio for better performance on small cards */
     lowRes?: boolean;
+    /** Unique ID for canvas teleportation system */
+    id?: string;
   }
 
-  let { type: effectType = 'sinuous', class: className = '', lowRes = false }: Props = $props();
+  let { type: effectType = 'sinuous', class: className = '', lowRes = false, id }: Props = $props();
 
   let container: HTMLDivElement;
+  let canvas: HTMLCanvasElement | null = $state(null);
   let isLoaded = $state(false);
   let sceneManager = $state<any>(null);
   let effectInstance: any = null;
@@ -82,9 +86,26 @@
     });
 
     isLoaded = true;
+
+    // Get the actual canvas element for registry
+    canvas = container.querySelector('canvas');
+
+    // Register with canvas registry if ID provided
+    if (id && canvas) {
+      canvasRegistry.register(id, {
+        container,
+        canvas,
+        sceneManager: manager,
+        effectInstance
+      });
+    }
   });
 
   onDestroy(() => {
+    // Unregister from canvas registry
+    if (id) {
+      canvasRegistry.unregister(id);
+    }
     effectInstance?.destroy();
     sceneManager?.destroy();
   });

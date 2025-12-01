@@ -6,6 +6,8 @@ export interface CardTransitionState {
   isCollapsing: boolean;
   targetRoute: string | null;
   effectType: string | null;
+  // Canvas ID for teleportation
+  canvasId: string | null;
   // Source card rect for FLIP animation
   sourceRect: DOMRect | null;
   // Content to show (will be loaded dynamically)
@@ -24,6 +26,7 @@ const initialState: CardTransitionState = {
   isCollapsing: false,
   targetRoute: null,
   effectType: null,
+  canvasId: null,
   sourceRect: null,
   contentComponent: null,
   blockInfo: null
@@ -39,6 +42,7 @@ function createTransitionStore() {
     expand: (params: {
       targetRoute: string;
       effectType: string;
+      canvasId: string;
       sourceRect: DOMRect;
       blockInfo: CardTransitionState['blockInfo'];
     }) => {
@@ -49,6 +53,7 @@ function createTransitionStore() {
         isCollapsing: false,
         targetRoute: params.targetRoute,
         effectType: params.effectType,
+        canvasId: params.canvasId,
         sourceRect: params.sourceRect,
         blockInfo: params.blockInfo
       }));

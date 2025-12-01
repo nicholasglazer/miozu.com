@@ -17,10 +17,11 @@
   });
 
   // Card configuration for transitions
-  const cardConfigs = {
+  const cardConfigs: Record<string, { route: string; effectType: string; canvasId: string; label: string; title: string; description: string }> = {
     about: {
       route: '/team',
       effectType: 'sinuous-original',
+      canvasId: 'canvas-about',
       label: 'The Holding',
       title: 'About',
       description: 'A vertically integrated approach to commerce intelligence and AI infrastructure.'
@@ -28,6 +29,7 @@
     portfolio: {
       route: '/products',
       effectType: 'synaptic-multipass',
+      canvasId: 'canvas-portfolio',
       label: 'Our Companies',
       title: 'Portfolio',
       description: 'J\'ko AI, Data Oracle, and HyperC - building the future of commerce intelligence.'
@@ -35,6 +37,7 @@
     leadership: {
       route: '/team',
       effectType: 'synaptic',
+      canvasId: 'canvas-leadership',
       label: 'Executive Team',
       title: 'Leadership',
       description: 'Building at the intersection of AI and commerce.'
@@ -42,6 +45,7 @@
     contact: {
       route: '/contact',
       effectType: 'ether',
+      canvasId: 'canvas-contact',
       label: 'Get in Touch',
       title: 'Contact',
       description: 'Reach out to explore partnerships and opportunities.'
@@ -59,6 +63,7 @@
     cardTransition.expand({
       targetRoute: config.route,
       effectType: config.effectType,
+      canvasId: config.canvasId,
       sourceRect: rect,
       blockInfo: {
         label: config.label,
@@ -69,18 +74,19 @@
   }
 
   // Track which card is being transitioned (to hide it)
+  // Only hide AFTER animation completes (isExpanded) to prevent visual pop
   let expandingCard = $state<string | null>(null);
 
   $effect(() => {
-    if ($cardTransition.isExpanding || $cardTransition.isExpanded) {
-      // Find which card matches the current transition
+    if ($cardTransition.isExpanded) {
+      // Only hide card after expansion animation is complete
       for (const [key, config] of Object.entries(cardConfigs)) {
         if (config.route === $cardTransition.targetRoute && config.effectType === $cardTransition.effectType) {
           expandingCard = key;
           break;
         }
       }
-    } else {
+    } else if (!$cardTransition.isExpanding && !$cardTransition.isCollapsing) {
       expandingCard = null;
     }
   });
@@ -149,7 +155,7 @@
       onclick={(e) => handleCardClick(e, 'about')}
     >
       {#if ThreeCanvas}
-        <ThreeCanvas type="sinuous-original" />
+        <ThreeCanvas type="sinuous-original" id="canvas-about" />
       {/if}
       <div class="block-overlay block-overlay-about">
         <div class="block-content">
@@ -173,7 +179,7 @@
       onclick={(e) => handleCardClick(e, 'portfolio')}
     >
       {#if ThreeCanvas}
-        <ThreeCanvas type="synaptic-multipass" lowRes={true} />
+        <ThreeCanvas type="synaptic-multipass" lowRes={true} id="canvas-portfolio" />
       {/if}
       <div class="block-content block-content-overlay">
         <span class="block-label">Our Companies</span>
@@ -199,7 +205,7 @@
       onclick={(e) => handleCardClick(e, 'leadership')}
     >
       {#if ThreeCanvas}
-        <ThreeCanvas type="synaptic" lowRes={true} />
+        <ThreeCanvas type="synaptic" lowRes={true} id="canvas-leadership" />
       {/if}
       <div class="block-content block-content-overlay">
         <span class="block-label">Executive Team</span>
@@ -221,7 +227,7 @@
       onclick={(e) => handleCardClick(e, 'contact')}
     >
       {#if ThreeCanvas}
-        <ThreeCanvas type="ether" lowRes={true} />
+        <ThreeCanvas type="ether" lowRes={true} id="canvas-contact" />
       {/if}
       <div class="block-content block-content-overlay">
         <span class="block-label">Get in Touch</span>

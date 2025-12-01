@@ -5,7 +5,7 @@
   import { cardTransition, showOverlay } from '$lib/stores/transition';
   import PageContent from './PageContent.svelte';
 
-  // Lazy load Three.js canvas
+  // Lazy load Three.js canvas (more reliable than teleportation)
   let ThreeCanvas: any = $state(null);
 
   $effect(() => {

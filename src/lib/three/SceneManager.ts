@@ -81,6 +81,25 @@ export class SceneManager {
     this.renderer.setSize(width, height);
   }
 
+  /** Force resize - use after DOM relocation (e.g., canvas teleportation) */
+  forceResize(width: number, height: number): void {
+    if (this.isDestroyed) return;
+
+    // Ensure valid dimensions
+    width = Math.floor(width) || 1;
+    height = Math.floor(height) || 1;
+
+    this.lastWidth = width;
+    this.lastHeight = height;
+
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(width, height);
+
+    // Force WebGL context update by clearing
+    this.renderer.clear();
+  }
+
   getScene(): THREE.Scene {
     return this.scene;
   }
