@@ -19,7 +19,11 @@ export class SceneManager {
   private container: HTMLElement;
   private animationId: number | null = null;
   private isDestroyed = false;
+  private isPaused = false;
   private THREE: typeof THREE | null = null;
+  private lastWidth = 0;
+  private lastHeight = 0;
+  private onFrameCallback: ((delta: number) => void) | null = null;
 
   constructor(private config: SceneConfig) {
     this.container = config.container;
@@ -34,8 +38,15 @@ export class SceneManager {
     // Scene
     this.scene = new Scene();
 
+    // Get initial dimensions
+    const rect = this.container.getBoundingClientRect();
+    const width = Math.floor(rect.width) || 1;
+    const height = Math.floor(rect.height) || 1;
+    this.lastWidth = width;
+    this.lastHeight = height;
+
     // Camera
-    const aspect = this.container.clientWidth / this.container.clientHeight;
+    const aspect = width / height;
     this.camera = new PerspectiveCamera(75, aspect, 0.1, 1000);
     this.camera.position.z = 5;
 
@@ -46,24 +57,29 @@ export class SceneManager {
       powerPreference: 'high-performance'
     });
 
-    this.renderer.setSize(this.container.clientWidth, this.container.clientHeight);
+    this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(Math.min(this.config.pixelRatio ?? window.devicePixelRatio, 2));
     this.container.appendChild(this.renderer.domElement);
-
-    // Handle resize
-    window.addEventListener('resize', this.handleResize);
   }
 
-  private handleResize = (): void => {
+  /** Resize renderer and camera - call from Svelte's bind:clientWidth/Height */
+  resize(width: number, height: number): void {
     if (this.isDestroyed) return;
 
-    const width = this.container.clientWidth;
-    const height = this.container.clientHeight;
+    // Ensure valid dimensions
+    width = Math.floor(width) || 1;
+    height = Math.floor(height) || 1;
+
+    // Skip if dimensions unchanged
+    if (width === this.lastWidth && height === this.lastHeight) return;
+
+    this.lastWidth = width;
+    this.lastHeight = height;
 
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(width, height);
-  };
+  }
 
   getScene(): THREE.Scene {
     return this.scene;
@@ -87,6 +103,7 @@ export class SceneManager {
   }
 
   startRenderLoop(onFrame?: (delta: number) => void): void {
+    this.onFrameCallback = onFrame || null;
     let lastTime = performance.now();
 
     const animate = (): void => {
@@ -94,15 +111,33 @@ export class SceneManager {
 
       this.animationId = requestAnimationFrame(animate);
 
+      // Skip rendering when paused (saves GPU cycles)
+      if (this.isPaused) return;
+
       const currentTime = performance.now();
       const delta = (currentTime - lastTime) / 1000;
       lastTime = currentTime;
 
-      onFrame?.(delta);
+      this.onFrameCallback?.(delta);
       this.renderer.render(this.scene, this.camera);
     };
 
     animate();
+  }
+
+  /** Pause rendering (for when canvas is off-screen) */
+  pause(): void {
+    this.isPaused = true;
+  }
+
+  /** Resume rendering */
+  resume(): void {
+    this.isPaused = false;
+  }
+
+  /** Check if rendering is paused */
+  get paused(): boolean {
+    return this.isPaused;
   }
 
   destroy(): void {
@@ -111,8 +146,6 @@ export class SceneManager {
     if (this.animationId !== null) {
       cancelAnimationFrame(this.animationId);
     }
-
-    window.removeEventListener('resize', this.handleResize);
 
     // Clean up Three.js resources
     this.scene?.traverse((object) => {

@@ -88,8 +88,8 @@ varying vec2 vUv;
 
 #define time iTime
 
-const int numParticles = 140;
-const int stepsPerFrame = 7;
+const int numParticles = 50;  // Reduced from 140 for performance
+const int stepsPerFrame = 4;  // Reduced from 7 for performance
 
 float mag(vec3 p) { return dot(p, p); }
 
@@ -221,9 +221,12 @@ export class SynapticMultipassEffect {
     this.targetMouse.y = 1.0 - (e.clientY - rect.top) / rect.height;
   }
 
+  // Resolution scale for render targets (1.0 = full resolution)
+  private readonly BUFFER_SCALE = 1.0;
+
   private createNoiseTexture(): THREE.DataTexture {
     const THREE = this.THREE;
-    const size = 256;
+    const size = 128; // Reduced from 256 for performance
     const data = new Float32Array(size * size * 4);
 
     for (let i = 0; i < size * size; i++) {
@@ -265,14 +268,16 @@ export class SynapticMultipassEffect {
     // Create noise texture
     this.noiseTexture = this.createNoiseTexture();
 
-    // Create ping-pong render targets
+    // Create ping-pong render targets at reduced resolution
+    const bufferWidth = Math.floor(width * this.BUFFER_SCALE);
+    const bufferHeight = Math.floor(height * this.BUFFER_SCALE);
     this.bufferATargets = [
-      this.createRenderTarget(width, height),
-      this.createRenderTarget(width, height)
+      this.createRenderTarget(bufferWidth, bufferHeight),
+      this.createRenderTarget(bufferWidth, bufferHeight)
     ];
     this.bufferBTargets = [
-      this.createRenderTarget(width, height),
-      this.createRenderTarget(width, height)
+      this.createRenderTarget(bufferWidth, bufferHeight),
+      this.createRenderTarget(bufferWidth, bufferHeight)
     ];
 
     const geometry = new THREE.PlaneGeometry(2, 2);
@@ -346,15 +351,17 @@ export class SynapticMultipassEffect {
     const width = container.clientWidth;
     const height = container.clientHeight;
 
-    // Resize targets if needed
-    if (this.bufferATargets[0].width !== width || this.bufferATargets[0].height !== height) {
+    // Resize targets if needed (at scaled resolution)
+    const bufferWidth = Math.floor(width * this.BUFFER_SCALE);
+    const bufferHeight = Math.floor(height * this.BUFFER_SCALE);
+    if (this.bufferATargets[0].width !== bufferWidth || this.bufferATargets[0].height !== bufferHeight) {
       for (const target of [...this.bufferATargets, ...this.bufferBTargets]) {
-        target.setSize(width, height);
+        target.setSize(bufferWidth, bufferHeight);
       }
     }
 
-    // Update uniforms
-    const resolution = new this.THREE.Vector2(width, height);
+    // Update uniforms - use buffer resolution for shaders
+    const resolution = new this.THREE.Vector2(bufferWidth, bufferHeight);
 
     // --- Pass 1: Buffer A (particle simulation) ---
     const prevBufferA = this.bufferATargets[this.currentBufferA];

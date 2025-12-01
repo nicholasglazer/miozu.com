@@ -1,8 +1,9 @@
-<script>
+<script lang="ts">
   import { browser } from '$app/environment';
   import Metadata from '$features/seo/Metadata.svelte';
   import JsonLd from '$features/seo/JsonLd.svelte';
   import {appName, domain} from '$settings/global';
+  import { cardTransition } from '$lib/stores/transition';
 
   // Lazy load Three.js canvas
   let ThreeCanvas = $state(null);
@@ -12,6 +13,75 @@
       import('$lib/three/ThreeCanvas.svelte').then(module => {
         ThreeCanvas = module.default;
       });
+    }
+  });
+
+  // Card configuration for transitions
+  const cardConfigs = {
+    about: {
+      route: '/team',
+      effectType: 'sinuous-original',
+      label: 'The Holding',
+      title: 'About',
+      description: 'A vertically integrated approach to commerce intelligence and AI infrastructure.'
+    },
+    portfolio: {
+      route: '/products',
+      effectType: 'synaptic-multipass',
+      label: 'Our Companies',
+      title: 'Portfolio',
+      description: 'J\'ko AI, Data Oracle, and HyperC - building the future of commerce intelligence.'
+    },
+    leadership: {
+      route: '/team',
+      effectType: 'synaptic',
+      label: 'Executive Team',
+      title: 'Leadership',
+      description: 'Building at the intersection of AI and commerce.'
+    },
+    contact: {
+      route: '/contact',
+      effectType: 'ether',
+      label: 'Get in Touch',
+      title: 'Contact',
+      description: 'Reach out to explore partnerships and opportunities.'
+    }
+  };
+
+  // Handle card click - trigger FLIP transition
+  function handleCardClick(e: MouseEvent, cardKey: string) {
+    e.preventDefault();
+
+    const card = e.currentTarget as HTMLElement;
+    const rect = card.getBoundingClientRect();
+    const config = cardConfigs[cardKey];
+
+    cardTransition.expand({
+      targetRoute: config.route,
+      effectType: config.effectType,
+      sourceRect: rect,
+      blockInfo: {
+        label: config.label,
+        title: config.title,
+        description: config.description
+      }
+    });
+  }
+
+  // Track which card is being transitioned (to hide it)
+  let expandingCard = $state<string | null>(null);
+
+  $effect(() => {
+    if ($cardTransition.isExpanding || $cardTransition.isExpanded) {
+      // Find which card matches the current transition
+      for (const [key, config] of Object.entries(cardConfigs)) {
+        if (config.route === $cardTransition.targetRoute && config.effectType === $cardTransition.effectType) {
+          expandingCard = key;
+          break;
+        }
+      }
+    } else {
+      expandingCard = null;
     }
   });
 </script>
@@ -56,7 +126,7 @@
     <!-- Large Block 1: Hero with Three.js -->
     <div class="block block-hero">
       {#if ThreeCanvas}
-        <ThreeCanvas effect="sinuous" />
+        <ThreeCanvas type="sinuous" />
       {/if}
       <div class="block-overlay">
         <div class="hero-content">
@@ -72,9 +142,14 @@
     </div>
 
     <!-- Large Block 2: About/Visual with authentic Sinuous -->
-    <a href="/team" class="block block-about">
+    <button
+      type="button"
+      class="block block-about"
+      class:hidden-card={expandingCard === 'about'}
+      onclick={(e) => handleCardClick(e, 'about')}
+    >
       {#if ThreeCanvas}
-        <ThreeCanvas effect="sinuous-original" />
+        <ThreeCanvas type="sinuous-original" />
       {/if}
       <div class="block-overlay block-overlay-about">
         <div class="block-content">
@@ -88,12 +163,17 @@
           </svg>
         </div>
       </div>
-    </a>
+    </button>
 
     <!-- Small Block 1: Portfolio -->
-    <a href="/products" class="block block-small block-portfolio">
+    <button
+      type="button"
+      class="block block-small block-portfolio"
+      class:hidden-card={expandingCard === 'portfolio'}
+      onclick={(e) => handleCardClick(e, 'portfolio')}
+    >
       {#if ThreeCanvas}
-        <ThreeCanvas effect="synaptic-multipass" />
+        <ThreeCanvas type="synaptic-multipass" lowRes={true} />
       {/if}
       <div class="block-content block-content-overlay">
         <span class="block-label">Our Companies</span>
@@ -109,12 +189,17 @@
           <path d="M7 17L17 7M17 7H7M17 7V17"/>
         </svg>
       </div>
-    </a>
+    </button>
 
     <!-- Small Block 2: Leadership -->
-    <a href="/team" class="block block-small block-leadership">
+    <button
+      type="button"
+      class="block block-small block-leadership"
+      class:hidden-card={expandingCard === 'leadership'}
+      onclick={(e) => handleCardClick(e, 'leadership')}
+    >
       {#if ThreeCanvas}
-        <ThreeCanvas effect="synaptic" />
+        <ThreeCanvas type="synaptic" lowRes={true} />
       {/if}
       <div class="block-content block-content-overlay">
         <span class="block-label">Executive Team</span>
@@ -126,12 +211,17 @@
           <path d="M7 17L17 7M17 7H7M17 7V17"/>
         </svg>
       </div>
-    </a>
+    </button>
 
     <!-- Small Block 3: Contact -->
-    <a href="/contact" class="block block-small block-ether">
+    <button
+      type="button"
+      class="block block-small block-ether"
+      class:hidden-card={expandingCard === 'contact'}
+      onclick={(e) => handleCardClick(e, 'contact')}
+    >
       {#if ThreeCanvas}
-        <ThreeCanvas effect="ether" />
+        <ThreeCanvas type="ether" lowRes={true} />
       {/if}
       <div class="block-content block-content-overlay">
         <span class="block-label">Get in Touch</span>
@@ -143,12 +233,12 @@
           <path d="M7 17L17 7M17 7H7M17 7V17"/>
         </svg>
       </div>
-    </a>
+    </button>
 
     <!-- Small Block 4: Updates -->
     <div class="block block-small block-updates">
       {#if ThreeCanvas}
-        <ThreeCanvas effect="snake-trails" />
+        <ThreeCanvas type="snake-trails" lowRes={true} />
       {/if}
       <div class="block-content block-content-overlay">
         <span class="block-label">Latest News</span>
@@ -567,5 +657,18 @@
     .block-small {
       padding: 16px;
     }
+  }
+
+  /* Button reset for card buttons */
+  button.block {
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  /* Hidden card during transition */
+  .hidden-card {
+    opacity: 0;
+    pointer-events: none;
   }
 </style>

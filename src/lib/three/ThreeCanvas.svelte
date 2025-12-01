@@ -3,16 +3,29 @@
   import { browser } from '$app/environment';
 
   interface Props {
-    effect?: 'falling-cubes' | 'sinuous' | 'sinuous-original' | 'snake-trails' | 'synaptic' | 'synaptic-multipass' | 'ether';
+    type?: 'falling-cubes' | 'sinuous' | 'sinuous-original' | 'snake-trails' | 'synaptic' | 'synaptic-multipass' | 'ether';
     class?: string;
+    /** Use lower pixel ratio for better performance on small cards */
+    lowRes?: boolean;
   }
 
-  let { effect = 'sinuous', class: className = '' }: Props = $props();
+  let { type: effectType = 'sinuous', class: className = '', lowRes = false }: Props = $props();
 
   let container: HTMLDivElement;
   let isLoaded = $state(false);
-  let sceneManager: any = null;
+  let sceneManager = $state<any>(null);
   let effectInstance: any = null;
+
+  // Svelte 5: Use bind:clientWidth/Height for resize (uses ResizeObserver internally)
+  let containerWidth = $state(0);
+  let containerHeight = $state(0);
+
+  // React to dimension changes - runs when sceneManager or dimensions change
+  $effect(() => {
+    if (sceneManager && containerWidth > 0 && containerHeight > 0) {
+      sceneManager.resize(containerWidth, containerHeight);
+    }
+  });
 
   onMount(async () => {
     if (!browser) return;
@@ -20,47 +33,51 @@
     // Lazy load Three.js components
     const { SceneManager } = await import('./SceneManager');
 
-    sceneManager = new SceneManager({
+    const manager = new SceneManager({
       container,
       alpha: true,
-      antialias: true
+      antialias: !lowRes,
+      pixelRatio: lowRes ? 1 : Math.min(window.devicePixelRatio, 2)
     });
 
-    await sceneManager.init();
+    await manager.init();
+
+    // Set reactive state - this triggers the $effect for initial resize
+    sceneManager = manager;
 
     // Load the effect
-    if (effect === 'sinuous') {
+    if (effectType === 'sinuous') {
       const { SinuousShaderEffect } = await import('./effects/SinuousShader');
-      effectInstance = new SinuousShaderEffect(sceneManager);
+      effectInstance = new SinuousShaderEffect(manager);
       await effectInstance.init();
-    } else if (effect === 'sinuous-original') {
+    } else if (effectType === 'sinuous-original') {
       const { SinuousOriginalEffect } = await import('./effects/SinuousOriginal');
-      effectInstance = new SinuousOriginalEffect(sceneManager);
+      effectInstance = new SinuousOriginalEffect(manager);
       await effectInstance.init();
-    } else if (effect === 'falling-cubes') {
+    } else if (effectType === 'falling-cubes') {
       const { FallingCubesEffect } = await import('./effects/FallingCubes');
-      effectInstance = new FallingCubesEffect(sceneManager);
+      effectInstance = new FallingCubesEffect(manager);
       await effectInstance.init();
-    } else if (effect === 'snake-trails') {
+    } else if (effectType === 'snake-trails') {
       const { SnakeTrailsEffect } = await import('./effects/SnakeTrails');
-      effectInstance = new SnakeTrailsEffect(sceneManager);
+      effectInstance = new SnakeTrailsEffect(manager);
       await effectInstance.init();
-    } else if (effect === 'synaptic') {
+    } else if (effectType === 'synaptic') {
       const { SynapticEffect } = await import('./effects/Synaptic');
-      effectInstance = new SynapticEffect(sceneManager);
+      effectInstance = new SynapticEffect(manager);
       await effectInstance.init();
-    } else if (effect === 'synaptic-multipass') {
+    } else if (effectType === 'synaptic-multipass') {
       const { SynapticMultipassEffect } = await import('./effects/SynapticMultipass');
-      effectInstance = new SynapticMultipassEffect(sceneManager);
+      effectInstance = new SynapticMultipassEffect(manager);
       await effectInstance.init();
-    } else if (effect === 'ether') {
+    } else if (effectType === 'ether') {
       const { EtherEffect } = await import('./effects/Ether');
-      effectInstance = new EtherEffect(sceneManager);
+      effectInstance = new EtherEffect(manager);
       await effectInstance.init();
     }
 
     // Start render loop
-    sceneManager.startRenderLoop((delta: number) => {
+    manager.startRenderLoop((delta: number) => {
       effectInstance?.update(delta);
     });
 
@@ -73,7 +90,12 @@
   });
 </script>
 
-<div bind:this={container} class="three-canvas {className}">
+<div
+  bind:this={container}
+  bind:clientWidth={containerWidth}
+  bind:clientHeight={containerHeight}
+  class="three-canvas {className}"
+>
   {#if !isLoaded}
     <div class="loading">
       <div class="loading-cube"></div>

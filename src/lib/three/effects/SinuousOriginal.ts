@@ -227,6 +227,8 @@ export class SinuousOriginalEffect {
 
   private frame = 0;
   private startTime = 0;
+  private lastWidth = 0;
+  private lastHeight = 0;
 
   constructor(manager: SceneManager) {
     this.manager = manager;
@@ -238,6 +240,8 @@ export class SinuousOriginalEffect {
     const container = this.manager.getContainer();
     const width = container.clientWidth;
     const height = container.clientHeight;
+    this.lastWidth = width;
+    this.lastHeight = height;
 
     // Orthographic camera for quad rendering
     this.quadCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
@@ -325,6 +329,15 @@ export class SinuousOriginalEffect {
     const container = this.manager.getContainer();
     const width = container.clientWidth;
     const height = container.clientHeight;
+
+    // Resize bufferB render targets if container size changed
+    if (width !== this.lastWidth || height !== this.lastHeight) {
+      for (const target of this.bufferB) {
+        target.setSize(width, height);
+      }
+      this.lastWidth = width;
+      this.lastHeight = height;
+    }
 
     const prev = this.currentBuffer;
     const next = 1 - this.currentBuffer;

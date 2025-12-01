@@ -5,6 +5,8 @@
   import {appName} from '$lib/settings/global';
   import Header from '$features/layout/Header.svelte';
   import Footer from '$features/layout/Footer.svelte';
+  import ExpandedView from '$lib/components/ExpandedView.svelte';
+  import {showOverlay} from '$lib/stores/transition';
   import '../app.css';
 
   let {children, data} = $props();
@@ -102,9 +104,12 @@
   <title>{appName}</title>
 </svelte:head>
 
+<!-- Expanded View Overlay (renders on top of everything) -->
+<ExpandedView />
+
 {#if isHomePage}
   <!-- Home page: Full custom layout -->
-  <div class="home-container" style="height: {innerHeight}px;">
+  <div class="home-container" style="height: {innerHeight}px;" class:hidden={$showOverlay}>
     {@render children()}
   </div>
 {:else}
@@ -150,5 +155,10 @@
 
   .content {
     @apply flex-grow w-full;
+  }
+
+  /* Hide homepage when overlay is active */
+  .home-container.hidden {
+    visibility: hidden;
   }
 </style>
