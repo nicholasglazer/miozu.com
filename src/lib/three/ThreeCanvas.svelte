@@ -3,7 +3,7 @@
   import { browser } from '$app/environment';
 
   interface Props {
-    effect?: 'falling-cubes' | 'sinuous' | 'sinuous-original' | 'snake-trails';
+    effect?: 'falling-cubes' | 'sinuous' | 'sinuous-original' | 'snake-trails' | 'synaptic' | 'synaptic-multipass' | 'ether';
     class?: string;
   }
 
@@ -44,6 +44,18 @@
     } else if (effect === 'snake-trails') {
       const { SnakeTrailsEffect } = await import('./effects/SnakeTrails');
       effectInstance = new SnakeTrailsEffect(sceneManager);
+      await effectInstance.init();
+    } else if (effect === 'synaptic') {
+      const { SynapticEffect } = await import('./effects/Synaptic');
+      effectInstance = new SynapticEffect(sceneManager);
+      await effectInstance.init();
+    } else if (effect === 'synaptic-multipass') {
+      const { SynapticMultipassEffect } = await import('./effects/SynapticMultipass');
+      effectInstance = new SynapticMultipassEffect(sceneManager);
+      await effectInstance.init();
+    } else if (effect === 'ether') {
+      const { EtherEffect } = await import('./effects/Ether');
+      effectInstance = new EtherEffect(sceneManager);
       await effectInstance.init();
     }
 

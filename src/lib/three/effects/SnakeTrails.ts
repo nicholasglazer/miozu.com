@@ -41,8 +41,8 @@ void main() {
   vec3 bg = vec3(0.067, 0.067, 0.067);
   vec3 col = vec3(0.0);
 
-  // Draw 16 chaotic snake trails
-  for (int i = 0; i < 16; i++) {
+  // Draw 44 chaotic snake trails
+  for (int i = 0; i < 44; i++) {
     float fi = float(i);
     float seed = hash(fi * 17.3) * 10.0;
     float seed2 = hash(fi * 23.7) * 10.0;
@@ -63,9 +63,9 @@ void main() {
     // White color with slight variation
     vec3 snakeCol = vec3(0.9, 0.92, 0.95);
 
-    // Draw trail segments - more segments for smoother lines
-    for (int j = 0; j < 30; j++) {
-      float fj = float(j) / 29.0;
+    // Draw trail segments - 2x longer bodies
+    for (int j = 0; j < 90; j++) {
+      float fj = float(j) / 89.0;
       float t = mix(max(tailT, -0.3), min(headT, 1.3), fj);
 
       // Starting position - spread across all edges
@@ -126,19 +126,19 @@ void main() {
       vec2 pos = vec2(x, y);
       float d = length(p - pos);
 
-      // Thin, sharp glow
-      float glow = 0.0003 / (d * d + 0.00008);
-      glow += 0.0008 / (d * d + 0.0008);
+      // Thinner, sharper glow - smaller head
+      float glow = 0.00008 / (d * d + 0.00002);
+      glow += 0.00015 / (d * d + 0.00015);
 
-      // Fade along trail - keep consistent brightness
-      float brightness = fj * fj * 0.6 + 0.4;
+      // Fade along trail - tapered tail, smaller head
+      float brightness = fj * fj * fj * fj * 0.8 + 0.2;
 
       // Fade at boundaries
       float edgeFade = smoothstep(-0.2, 0.1, t) * smoothstep(1.3, 1.0, t);
       glow *= brightness * edgeFade;
-      glow = min(glow, 1.5);
+      glow = min(glow, 1.2);
 
-      col += snakeCol * glow * 0.008;
+      col += snakeCol * glow * 0.006;
     }
   }
 

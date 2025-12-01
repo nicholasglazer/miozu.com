@@ -91,8 +91,11 @@
     </a>
 
     <!-- Small Block 1: Portfolio -->
-    <a href="/products" class="block block-small">
-      <div class="block-content">
+    <a href="/products" class="block block-small block-portfolio">
+      {#if ThreeCanvas}
+        <ThreeCanvas effect="synaptic-multipass" />
+      {/if}
+      <div class="block-content block-content-overlay">
         <span class="block-label">Our Companies</span>
         <h2 class="block-title">Portfolio</h2>
         <ul class="block-list">
@@ -109,8 +112,11 @@
     </a>
 
     <!-- Small Block 2: Leadership -->
-    <a href="/team" class="block block-small">
-      <div class="block-content">
+    <a href="/team" class="block block-small block-leadership">
+      {#if ThreeCanvas}
+        <ThreeCanvas effect="synaptic" />
+      {/if}
+      <div class="block-content block-content-overlay">
         <span class="block-label">Executive Team</span>
         <h2 class="block-title">Leadership</h2>
         <p class="block-desc">Building at the intersection of AI and commerce.</p>
@@ -123,13 +129,16 @@
     </a>
 
     <!-- Small Block 3: Contact -->
-    <a href="/contact" class="block block-small block-light">
-      <div class="block-content">
-        <span class="block-label dark">Get in Touch</span>
-        <h2 class="block-title dark">Contact</h2>
-        <span class="block-email">partners@oraklex.com</span>
+    <a href="/contact" class="block block-small block-ether">
+      {#if ThreeCanvas}
+        <ThreeCanvas effect="ether" />
+      {/if}
+      <div class="block-content block-content-overlay">
+        <span class="block-label">Get in Touch</span>
+        <h2 class="block-title">Contact</h2>
+        <span class="block-email-light">partners@oraklex.com</span>
       </div>
-      <div class="block-corner dark">
+      <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M7 17L17 7M17 7H7M17 7V17"/>
         </svg>
@@ -348,6 +357,18 @@
     padding: 0;
   }
 
+  /* Portfolio block with synaptic effect */
+  .block-portfolio {
+    position: relative;
+    padding: 0;
+  }
+
+  /* Leadership block with synaptic effect */
+  .block-leadership {
+    position: relative;
+    padding: 0;
+  }
+
   .block-content-overlay {
     position: relative;
     z-index: 1;
@@ -428,6 +449,19 @@
     font-weight: 500;
     color: #1a365d;
     margin-top: 8px;
+  }
+
+  .block-email-light {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 8px;
+  }
+
+  /* Ether block variant */
+  .block-ether {
+    position: relative;
+    padding: 0;
   }
 
   /* Light block variant */
