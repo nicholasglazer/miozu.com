@@ -10,15 +10,23 @@
     lowRes?: boolean;
     /** Unique ID for canvas teleportation system */
     id?: string;
+    /** Force WebGL even if WebGPU is available */
+    forceWebGL?: boolean;
+    /** Enable adaptive quality based on FPS monitoring */
+    adaptiveQuality?: boolean;
   }
 
-  let { type: effectType = 'sinuous', class: className = '', lowRes = false, id }: Props = $props();
+  let { type: effectType = 'sinuous', class: className = '', lowRes = false, id, forceWebGL = false, adaptiveQuality = true }: Props = $props();
 
   let container: HTMLDivElement;
   let canvas: HTMLCanvasElement | null = $state(null);
   let isLoaded = $state(false);
   let sceneManager = $state<any>(null);
   let effectInstance: any = null;
+
+  // Visibility-based optimization
+  let intersectionObserver: IntersectionObserver | null = null;
+  let isVisible = $state(true);
 
   // Svelte 5: Use bind:clientWidth/Height for resize (uses ResizeObserver internally)
   let containerWidth = $state(0);
@@ -31,17 +39,60 @@
     }
   });
 
+  // Setup visibility observer for performance optimization
+  function setupVisibilityObserver() {
+    if (!browser || !container) return;
+
+    intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        isVisible = entry.isIntersecting;
+
+        if (sceneManager) {
+          if (entry.isIntersecting) {
+            sceneManager.resume();
+          } else {
+            sceneManager.pause();
+          }
+        }
+      },
+      {
+        threshold: 0.05, // Start rendering when 5% visible
+        rootMargin: '50px' // Pre-render slightly before entering viewport
+      }
+    );
+
+    intersectionObserver.observe(container);
+  }
+
+  // Page visibility handling - pause all when tab is hidden
+  function handleVisibilityChange() {
+    if (!sceneManager) return;
+
+    if (document.hidden) {
+      sceneManager.pause();
+    } else if (isVisible) {
+      sceneManager.resume();
+    }
+  }
+
   onMount(async () => {
     if (!browser) return;
 
     // Lazy load Three.js components
     const { SceneManager } = await import('./SceneManager');
 
+    // Cap pixel ratio more aggressively on mobile
+    const isMobile = window.innerWidth < 768;
+    const maxPixelRatio = isMobile ? 1.5 : 2;
+
     const manager = new SceneManager({
       container,
       alpha: true,
       antialias: !lowRes,
-      pixelRatio: lowRes ? 1 : Math.min(window.devicePixelRatio, 2)
+      pixelRatio: lowRes ? 1 : Math.min(window.devicePixelRatio, maxPixelRatio),
+      forceWebGL,
+      adaptiveQuality
     });
 
     await manager.init();
@@ -99,9 +150,26 @@
         effectInstance
       });
     }
+
+    // Setup visibility-based optimization (only for canvases not in registry - those are managed by ExpandedView)
+    if (!id) {
+      setupVisibilityObserver();
+    }
+
+    // Setup page visibility listener
+    document.addEventListener('visibilitychange', handleVisibilityChange);
   });
 
   onDestroy(() => {
+    // Cleanup visibility observer
+    intersectionObserver?.disconnect();
+    intersectionObserver = null;
+
+    // Cleanup page visibility listener
+    if (browser) {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    }
+
     // Unregister from canvas registry
     if (id) {
       canvasRegistry.unregister(id);
