@@ -55,6 +55,7 @@ export default {
         persist: false
       }
     }),
+    // Handle missing routes gracefully during prerender
     prerender: {
       handleHttpError: 'warn',
       handleMissingId: 'warn'

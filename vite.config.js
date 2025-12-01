@@ -45,15 +45,32 @@ export default defineConfig({
     target: 'es2020',
     minify: 'esbuild',
     cssMinify: true,
+    // Disable sourcemaps in production (saves 30-50% bundle size)
+    sourcemap: false,
+    // Report compressed sizes for accurate metrics
+    reportCompressedSize: true,
+    // Warn on large chunks
+    chunkSizeWarningLimit: 500,
     rollupOptions: {
       output: {
-        // TODO Implement more efficient chunking for better caching
-        manualChunks: {
-          vendor: ['svelte', 'svelte/internal']
+        // Optimized chunking for better caching and lazy loading
+        manualChunks: (id) => {
+          // Three.js core - loaded only when needed
+          if (id.includes('node_modules/three')) {
+            return 'three';
+          }
+          // Supabase - separate chunk for auth/data features
+          if (id.includes('@supabase')) {
+            return 'supabase';
+          }
+          // Svelte runtime
+          if (id.includes('svelte')) {
+            return 'svelte';
+          }
+          return undefined;
         }
       }
-    },
-    sourcemap: true
+    }
   },
   server: {
     cors: true,

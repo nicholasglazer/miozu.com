@@ -45,11 +45,15 @@
     return key; // Fallback if l10n is not available
   }
 
+  // Event handlers stored for proper cleanup
+  const handleOnline = () => (online = true);
+  const handleOffline = () => (online = false);
+
   onMount(() => {
     // Check online status
     online = navigator.onLine;
-    window.addEventListener('online', () => (online = true));
-    window.addEventListener('offline', () => (online = false));
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
 
     // Check service worker status
     if ('serviceWorker' in navigator) {
@@ -97,8 +101,8 @@
     }
 
     return () => {
-      window.removeEventListener('online', () => (online = true));
-      window.removeEventListener('offline', () => (online = false));
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
     };
   });
 
