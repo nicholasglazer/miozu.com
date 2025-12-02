@@ -350,9 +350,8 @@ export class SynapticMultipassEffect {
     this.mousePos.x += (this.targetMouse.x - this.mousePos.x) * 0.05;
     this.mousePos.y += (this.targetMouse.y - this.mousePos.y) * 0.05;
 
-    const container = this.manager.getContainer();
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    // Use SceneManager's tracked dimensions (more reliable after teleportation)
+    const { width, height } = this.manager.getSize();
 
     // Skip rendering if dimensions are invalid (prevents framebuffer errors)
     if (width < 1 || height < 1) return;

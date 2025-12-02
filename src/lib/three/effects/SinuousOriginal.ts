@@ -363,14 +363,13 @@ export class SinuousOriginalEffect {
     const renderer = this.manager.getRenderer();
     const time = performance.now() / 1000 - this.startTime;
 
-    const container = this.manager.getContainer();
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    // Use SceneManager's tracked dimensions (more reliable after teleportation)
+    const { width, height } = this.manager.getSize();
 
     // Skip rendering if dimensions are invalid (prevents framebuffer errors)
     if (width < 1 || height < 1) return;
 
-    // Resize bufferB render targets if container size changed
+    // Resize bufferB render targets if size changed
     if (width !== this.lastWidth || height !== this.lastHeight) {
       for (const target of this.bufferB) {
         target.setSize(Math.max(1, width), Math.max(1, height));

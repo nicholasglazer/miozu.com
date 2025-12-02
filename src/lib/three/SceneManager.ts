@@ -186,6 +186,11 @@ export class SceneManager {
 		return this.camera;
 	}
 
+	/** Get current render dimensions (more reliable than reading from container after teleportation) */
+	getSize(): { width: number; height: number } {
+		return { width: this.lastWidth, height: this.lastHeight };
+	}
+
 	getRenderer(): THREE.WebGLRenderer {
 		return this.renderer;
 	}

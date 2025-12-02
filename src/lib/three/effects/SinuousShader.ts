@@ -161,11 +161,9 @@ export class SinuousShaderEffect {
     const elapsed = performance.now() / 1000 - this.startTime;
     this.material.uniforms.iTime.value = elapsed;
 
-    const container = this.manager.getContainer();
-    this.material.uniforms.iResolution.value.set(
-      container.clientWidth,
-      container.clientHeight
-    );
+    // Use SceneManager's tracked dimensions (more reliable after teleportation)
+    const { width, height } = this.manager.getSize();
+    this.material.uniforms.iResolution.value.set(width, height);
   }
 
   /**

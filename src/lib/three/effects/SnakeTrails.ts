@@ -212,11 +212,9 @@ export class SnakeTrailsEffect {
     this.mousePos.y += (this.targetMouse.y - this.mousePos.y) * 0.05;
     this.material.uniforms.iMouse.value.set(this.mousePos.x, this.mousePos.y);
 
-    const container = this.manager.getContainer();
-    this.material.uniforms.iResolution.value.set(
-      container.clientWidth,
-      container.clientHeight
-    );
+    // Use SceneManager's tracked dimensions (more reliable after teleportation)
+    const { width, height } = this.manager.getSize();
+    this.material.uniforms.iResolution.value.set(width, height);
   }
 
   /**
