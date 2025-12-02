@@ -5,9 +5,8 @@
   import {appName, domain} from '$settings/global';
   import { cardTransition } from '$lib/stores/transition';
 
-  // Lazy load Three.js canvas
-  let ThreeCanvas = $state(null);
-
+  // Lazy load ThreeCanvas for performance
+  let ThreeCanvas = $state<any>(null);
   $effect(() => {
     if (browser) {
       import('$lib/three/ThreeCanvas.svelte').then(module => {
@@ -132,7 +131,7 @@
     <!-- Large Block 1: Hero with Three.js -->
     <div class="block block-hero">
       {#if ThreeCanvas}
-        <ThreeCanvas type="sinuous" />
+        <ThreeCanvas type="sinuous-original" />
       {/if}
       <div class="block-overlay">
         <div class="hero-content">
@@ -676,5 +675,14 @@
   .hidden-card {
     opacity: 0;
     pointer-events: none;
+  }
+
+  /* Viewport card fills parent block */
+  :global(.viewport-fill) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
   }
 </style>

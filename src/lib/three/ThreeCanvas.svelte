@@ -203,8 +203,8 @@
 
   .three-canvas :global(canvas) {
     display: block;
-    width: 100% !important;
-    height: 100% !important;
+    /* Don't force 100% - let Three.js control canvas size via setSize() */
+    /* This prevents distortion when canvas buffer dimensions differ from CSS dimensions */
   }
 
   .loading {

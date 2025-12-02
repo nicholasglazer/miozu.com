@@ -1,10 +1,8 @@
 <!-- src/lib/features/layout/MobileMenu.svelte -->
-<script lang="ts">
+<script>
   import {browser} from '$app/environment';
-  import {onMount, onDestroy} from 'svelte';
   import {fly, fade, scale} from 'svelte/transition';
   import {quintOut, cubicOut} from 'svelte/easing';
-  import {appName} from '$settings/global';
   import Logo from '$components/Logo.svelte';
   import ThemeSwitcher from '$features/theme/ThemeSwitcher.svelte';
 
@@ -23,7 +21,7 @@
   }
 
   // Handle escape key - stored as const for proper cleanup
-  function handleKeydown(event: KeyboardEvent) {
+  function handleKeydown(event) {
     if (event.key === 'Escape' && isMenuOpen) {
       closeMenu();
     }

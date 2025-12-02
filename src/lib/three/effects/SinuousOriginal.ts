@@ -27,10 +27,12 @@ uniform float iTime;
 uniform float iFrame;
 uniform vec2 iResolution;
 uniform sampler2D iPrevBuffer;
+uniform float iSeed;
 
 varying vec2 vUv;
 
 vec2 hash(vec2 p) {
+  p += iSeed;
   vec3 p3 = fract(vec3(p.xyx) * vec3(443.897, 441.423, 437.195));
   p3 += dot(p3.zxy, p3.yxz + 19.19);
   return fract(vec2(p3.x * p3.y, p3.z * p3.x)) * 2.0 - 1.0;
@@ -52,7 +54,8 @@ float fbm(vec2 p, float tm) {
   p *= 2.0; p -= tm;
   float z = 2.0, rz = 0.0;
   p += iTime * 0.001 + 0.1;
-  for (float i = 1.0; i < 6.0; i++) {
+  // Reduced from 5 to 4 iterations for performance (barely noticeable difference)
+  for (float i = 1.0; i < 5.0; i++) {
     rz += abs((noise(p) - 0.5) * 2.0) / z;
     z *= 1.93; p = m2 * p * 2.0;
   }
@@ -129,10 +132,12 @@ uniform vec2 iResolution;
 uniform vec2 iSimRes;
 uniform sampler2D iParticles;
 uniform sampler2D iPrevRender;
+uniform float iSeed;
 
 varying vec2 vUv;
 
-#define NUM_PARTICLES 200
+// Reduced from 200 to 150 for better performance
+#define NUM_PARTICLES 150
 
 float mag(vec2 p) { return dot(p, p); }
 
@@ -149,7 +154,7 @@ vec4 drawParticles(vec2 p) {
     d *= 500.0;
     d = 0.01 / (pow(d, 1.0) + 0.001);
 
-    vec3 col = abs(sin(vec3(2.0, 3.4, 1.2) * (iTime * 0.07 + fi * 0.0017 + 2.5) + vec3(0.8, 0.0, 1.2)) * 0.7 + 0.3);
+    vec3 col = abs(sin(vec3(2.0, 3.4, 1.2) * (iTime * 0.07 + fi * 0.0017 + 2.5 + iSeed) + vec3(0.8, 0.0, 1.2)) * 0.7 + 0.3);
     rez.rgb += d * col * 0.04;
   }
 
@@ -204,7 +209,8 @@ export class SinuousOriginalEffect {
   private THREE!: typeof THREE;
 
   // Simulation resolution (small for performance)
-  private simWidth = 256;
+  // Reduced from 256x64 to 200x64 - still has more than enough particles
+  private simWidth = 200;
   private simHeight = 64;
 
   // Render targets
@@ -230,6 +236,9 @@ export class SinuousOriginalEffect {
   private lastWidth = 0;
   private lastHeight = 0;
 
+  // Random seed for instance differentiation (prevents mirroring when multiple instances exist)
+  private seed = Math.random() * 100;
+
   constructor(manager: SceneManager) {
     this.manager = manager;
     this.THREE = manager.getTHREE();
@@ -248,19 +257,25 @@ export class SinuousOriginalEffect {
     this.quadScene = new THREE.Scene();
 
     // Small render targets for particle simulation (Buffer A)
+    // FloatType needed for accurate particle positions
     const simOptions = {
       minFilter: THREE.NearestFilter,
       magFilter: THREE.NearestFilter,
       format: THREE.RGBAFormat,
-      type: THREE.FloatType
+      type: THREE.FloatType,
+      depthBuffer: false, // Not needed - saves memory
+      stencilBuffer: false
     };
 
     // Full-size render targets for rendering (Buffer B)
+    // HalfFloatType sufficient for visual output - half the memory
     const renderOptions = {
       minFilter: THREE.LinearFilter,
       magFilter: THREE.LinearFilter,
       format: THREE.RGBAFormat,
-      type: THREE.HalfFloatType
+      type: THREE.HalfFloatType,
+      depthBuffer: false,
+      stencilBuffer: false
     };
 
     for (let i = 0; i < 2; i++) {
@@ -276,7 +291,8 @@ export class SinuousOriginalEffect {
         iTime: { value: 0 },
         iFrame: { value: 0 },
         iResolution: { value: new THREE.Vector2(this.simWidth, this.simHeight) },
-        iPrevBuffer: { value: null }
+        iPrevBuffer: { value: null },
+        iSeed: { value: this.seed }
       }
     });
 
@@ -290,7 +306,8 @@ export class SinuousOriginalEffect {
         iResolution: { value: new THREE.Vector2(width, height) },
         iSimRes: { value: new THREE.Vector2(this.simWidth, this.simHeight) },
         iParticles: { value: null },
-        iPrevRender: { value: null }
+        iPrevRender: { value: null },
+        iSeed: { value: this.seed }
       }
     });
 
@@ -330,10 +347,13 @@ export class SinuousOriginalEffect {
     const width = container.clientWidth;
     const height = container.clientHeight;
 
+    // Skip rendering if dimensions are invalid (prevents framebuffer errors)
+    if (width < 1 || height < 1) return;
+
     // Resize bufferB render targets if container size changed
     if (width !== this.lastWidth || height !== this.lastHeight) {
       for (const target of this.bufferB) {
-        target.setSize(width, height);
+        target.setSize(Math.max(1, width), Math.max(1, height));
       }
       this.lastWidth = width;
       this.lastHeight = height;

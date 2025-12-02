@@ -14,6 +14,7 @@ void main() {
 }
 `;
 
+// Optimized fragment shader with reduced iterations for performance
 const fragmentShader = `
 precision highp float;
 
@@ -41,8 +42,9 @@ void main() {
   vec3 bg = vec3(0.067, 0.067, 0.067);
   vec3 col = vec3(0.0);
 
-  // Draw 44 chaotic snake trails
-  for (int i = 0; i < 44; i++) {
+  // Draw snake trails - reduced from 44 to 20 for better performance
+  // 20 snakes × 45 segments = 900 iterations (was 3960)
+  for (int i = 0; i < 20; i++) {
     float fi = float(i);
     float seed = hash(fi * 17.3) * 10.0;
     float seed2 = hash(fi * 23.7) * 10.0;
@@ -63,9 +65,9 @@ void main() {
     // White color with slight variation
     vec3 snakeCol = vec3(0.9, 0.92, 0.95);
 
-    // Draw trail segments - 2x longer bodies
-    for (int j = 0; j < 90; j++) {
-      float fj = float(j) / 89.0;
+    // Draw trail segments - optimized from 90 to 45 for performance
+    for (int j = 0; j < 45; j++) {
+      float fj = float(j) / 44.0;
       float t = mix(max(tailT, -0.3), min(headT, 1.3), fj);
 
       // Starting position - spread across all edges

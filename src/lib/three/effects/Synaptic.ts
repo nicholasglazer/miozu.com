@@ -35,9 +35,10 @@ vec2 hash2(float n) {
   return fract(sin(vec2(n, n + 1.0)) * vec2(43758.5453123, 22578.1459123));
 }
 
-// Number of particles
-const int NUM_PARTICLES = 60;
-const int TRAIL_STEPS = 8;
+// Number of particles - optimized for performance
+// 40×6=240 iterations (was 60×8=480)
+const int NUM_PARTICLES = 40;
+const int TRAIL_STEPS = 6;
 
 // Get particle 2D position based on time
 vec2 getParticlePos(float id, float time) {

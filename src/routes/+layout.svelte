@@ -1,5 +1,6 @@
 <script>
   import {tick, onMount, onDestroy} from 'svelte';
+  import {browser} from '$app/environment';
   import {page} from '$app/stores';
   import {afterNavigate, disableScrollHandling} from '$app/navigation';
   import {appName} from '$lib/settings/global';

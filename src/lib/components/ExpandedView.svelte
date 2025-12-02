@@ -1,25 +1,19 @@
 <script lang="ts">
   import { onMount, onDestroy, tick } from 'svelte';
   import { browser } from '$app/environment';
-  import { goto } from '$app/navigation';
   import { cardTransition, showOverlay } from '$lib/stores/transition';
+  import { canvasRegistry } from '$lib/stores/canvasRegistry';
   import PageContent from './PageContent.svelte';
-
-  // Lazy load Three.js canvas (more reliable than teleportation)
-  let ThreeCanvas: any = $state(null);
-
-  $effect(() => {
-    if (browser && $showOverlay) {
-      import('$lib/three/ThreeCanvas.svelte').then(module => {
-        ThreeCanvas = module.default;
-      });
-    }
-  });
 
   // Animation state
   let containerEl: HTMLDivElement;
   let heroEl: HTMLDivElement;
+  let canvasSlotEl: HTMLDivElement;
   let animationPhase = $state<'initial' | 'animating' | 'complete'>('initial');
+
+  // Visibility-based rendering optimization
+  let intersectionObserver: IntersectionObserver | null = null;
+  let isCanvasVisible = $state(true);
 
   // Viewport dimensions
   let viewportWidth = $state(0);
@@ -39,37 +33,78 @@
     return `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
   }
 
+  // Store original rect for collapse
+  let originalRect: { left: number; top: number; width: number; height: number } | null = null;
+
   // Start expand animation
   async function startExpandAnimation() {
-    if (!heroEl) return;
+    if (!heroEl || !canvasSlotEl) return;
 
-    // Set initial position (card position)
+    const state = cardTransition.get();
+    const canvasId = state.canvasId;
+
+    // Store original rect for collapse animation
+    if (state.sourceRect) {
+      originalRect = {
+        left: state.sourceRect.left,
+        top: state.sourceRect.top,
+        width: state.sourceRect.width,
+        height: state.sourceRect.height
+      };
+    }
+
+    // Set initial position FIRST (before any DOM changes)
     const initialTransform = getInitialTransform();
     heroEl.style.transform = initialTransform;
     heroEl.style.borderRadius = '8px';
+    heroEl.style.transition = 'none'; // Disable transition for initial placement
 
-    // Force reflow
-    heroEl.offsetHeight;
+    // Teleport the canvas to expanded view (DOM move, no resize yet)
+    if (canvasId) {
+      canvasRegistry.teleport(canvasId, canvasSlotEl);
+    }
 
+    // Use double-rAF for proper paint scheduling
     animationPhase = 'animating';
 
-    // Animate to fullscreen using requestAnimationFrame for smooth 60fps
     requestAnimationFrame(() => {
-      heroEl.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-      heroEl.style.transform = 'translate(0, 0) scale(1, 1)';
-      heroEl.style.borderRadius = '0px';
+      // First frame: ensure initial position is painted
+      requestAnimationFrame(() => {
+        // Guard against heroEl being null (can happen with HMR)
+        if (!heroEl) return;
+        // Second frame: start the transition
+        heroEl.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+        heroEl.style.transform = 'translate(0, 0) scale(1, 1)';
+        heroEl.style.borderRadius = '0px';
+
+        // Defer resize to not block animation - schedule after transition starts
+        // Let forceResize auto-detect dimensions from the container
+        if (canvasId) {
+          setTimeout(() => {
+            canvasRegistry.forceResize(canvasId);
+          }, 50);
+        }
+      });
     });
 
     // Wait for animation to complete
     await new Promise(resolve => setTimeout(resolve, 520));
 
+    // Final resize after animation to ensure perfect fit
+    // Auto-detect dimensions from container for accuracy
+    if (canvasId) {
+      canvasRegistry.forceResize(canvasId);
+    }
+
     animationPhase = 'complete';
     cardTransition.expandComplete();
 
-    // Update URL without full navigation
-    const state = cardTransition.get();
-    if (state.targetRoute) {
-      goto(state.targetRoute, { replaceState: false, noScroll: true });
+    // Setup visibility observer after expansion is complete
+    setupVisibilityObserver();
+
+    // Update URL cosmetically without SvelteKit navigation
+    if (state.targetRoute && browser) {
+      history.pushState({}, '', state.targetRoute);
     }
   }
 
@@ -77,29 +112,60 @@
   async function startCollapseAnimation() {
     if (!heroEl) return;
 
-    // Scroll to top first
+    const state = cardTransition.get();
+    const canvasId = state.canvasId;
+
+    // Disconnect visibility observer before collapse
+    intersectionObserver?.disconnect();
+    intersectionObserver = null;
+
+    // Resume canvas rendering for collapse animation
+    if (canvasId) {
+      canvasRegistry.resume(canvasId);
+    }
+
+    // Scroll to top first (instant, no animation)
     if (containerEl) {
       containerEl.scrollTop = 0;
     }
 
-    await tick();
     animationPhase = 'animating';
 
-    // Animate back to card position
+    // Pre-resize canvas to card dimensions during animation (deferred)
+    if (canvasId && originalRect) {
+      setTimeout(() => {
+        canvasRegistry.forceResize(canvasId, originalRect!.width, originalRect!.height);
+      }, 200); // Resize midway through animation
+    }
+
+    // Use double-rAF for smooth animation start
     requestAnimationFrame(() => {
-      heroEl.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-      heroEl.style.transform = getInitialTransform();
-      heroEl.style.borderRadius = '8px';
+      requestAnimationFrame(() => {
+        // Guard against heroEl being null (can happen with HMR)
+        if (!heroEl) return;
+        heroEl.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+        heroEl.style.transform = getInitialTransform();
+        heroEl.style.borderRadius = '8px';
+      });
     });
 
     // Wait for animation
     await new Promise(resolve => setTimeout(resolve, 420));
 
-    // Navigate back to home
-    goto('/', { replaceState: false, noScroll: true });
+    // Return canvas to original card
+    if (canvasId) {
+      canvasRegistry.returnHome(canvasId);
+    }
 
+    // Reset transition state
     cardTransition.collapseComplete();
     animationPhase = 'initial';
+    originalRect = null;
+
+    // Update URL without full navigation
+    if (browser) {
+      history.replaceState({}, '', '/');
+    }
   }
 
   // Handle escape key
@@ -112,7 +178,7 @@
     }
   }
 
-  // Watch for expansion trigger - use $cardTransition directly for reactivity
+  // Watch for expansion trigger
   $effect(() => {
     const isExpanding = $cardTransition.isExpanding;
     if (isExpanding && animationPhase === 'initial' && heroEl && viewportWidth > 0) {
@@ -128,6 +194,36 @@
     }
   });
 
+  // Setup IntersectionObserver for visibility-based rendering
+  function setupVisibilityObserver() {
+    if (!browser || !canvasSlotEl) return;
+
+    intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        isCanvasVisible = entry.isIntersecting;
+
+        const state = cardTransition.get();
+        const canvasId = state.canvasId;
+
+        if (canvasId) {
+          if (entry.isIntersecting) {
+            canvasRegistry.resume(canvasId);
+          } else {
+            canvasRegistry.pause(canvasId);
+          }
+        }
+      },
+      {
+        // Start pausing when hero is 10% visible
+        threshold: 0.1,
+        rootMargin: '0px'
+      }
+    );
+
+    intersectionObserver.observe(canvasSlotEl);
+  }
+
   onMount(() => {
     if (browser) {
       window.addEventListener('keydown', handleKeydown);
@@ -138,6 +234,8 @@
     if (browser) {
       window.removeEventListener('keydown', handleKeydown);
     }
+    // Cleanup observer
+    intersectionObserver?.disconnect();
   });
 
   // Close handler
@@ -158,15 +256,14 @@
     class:animating={animationPhase === 'animating'}
     class:complete={animationPhase === 'complete'}
   >
-    <!-- Three.js Hero -->
+    <!-- Hero container with teleported canvas -->
     <div
       bind:this={heroEl}
       class="hero-container"
       style="will-change: transform;"
     >
-      {#if ThreeCanvas && $cardTransition.effectType}
-        <ThreeCanvas type={$cardTransition.effectType} />
-      {/if}
+      <!-- Canvas slot - teleported canvas goes here -->
+      <div bind:this={canvasSlotEl} class="canvas-slot"></div>
 
       <!-- Hero overlay with title -->
       <div class="hero-overlay">
@@ -227,9 +324,24 @@
     position: relative;
     width: 100vw;
     height: 100vh;
-    background: #111;
+    background: #0a0a0a;
     transform-origin: center center;
     overflow: hidden;
+  }
+
+  .canvas-slot {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  /* Teleported canvas needs to fill slot */
+  .canvas-slot :global(.three-canvas) {
+    position: absolute !important;
+    inset: 0 !important;
+    /* Width/height controlled by Three.js setSize() to avoid distortion */
   }
 
   .complete .hero-container {

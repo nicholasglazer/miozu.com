@@ -93,12 +93,18 @@ export const canvasRegistry = {
   },
 
   // Force resize after DOM relocation (teleportation)
-  forceResize(id: string, width: number, height: number) {
+  // If width/height not provided, uses container's actual dimensions
+  forceResize(id: string, width?: number, height?: number) {
     const entry = get(registry).get(id);
     if (!entry?.sceneManager) return;
 
-    // Use forceResize which doesn't skip even if dimensions unchanged
-    entry.sceneManager.forceResize(width, height);
+    // Get actual dimensions from container if not provided
+    const w = width ?? entry.container.offsetWidth;
+    const h = height ?? entry.container.offsetHeight;
+
+    if (w > 0 && h > 0) {
+      entry.sceneManager.forceResize(w, h);
+    }
   },
 
   // Pause rendering

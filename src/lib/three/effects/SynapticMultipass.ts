@@ -88,8 +88,9 @@ varying vec2 vUv;
 
 #define time iTime
 
-const int numParticles = 50;  // Reduced from 140 for performance
-const int stepsPerFrame = 4;  // Reduced from 7 for performance
+// Further optimized: 35×3=105 iterations (was 50×4=200)
+const int numParticles = 35;
+const int stepsPerFrame = 3;
 
 float mag(vec3 p) { return dot(p, p); }
 
@@ -252,7 +253,9 @@ export class SynapticMultipassEffect {
       format: THREE.RGBAFormat,
       type: THREE.FloatType,
       wrapS: THREE.ClampToEdgeWrapping,
-      wrapT: THREE.ClampToEdgeWrapping
+      wrapT: THREE.ClampToEdgeWrapping,
+      depthBuffer: false, // Not needed for 2D shaders
+      stencilBuffer: false
     });
   }
 
@@ -351,9 +354,12 @@ export class SynapticMultipassEffect {
     const width = container.clientWidth;
     const height = container.clientHeight;
 
+    // Skip rendering if dimensions are invalid (prevents framebuffer errors)
+    if (width < 1 || height < 1) return;
+
     // Resize targets if needed (at scaled resolution)
-    const bufferWidth = Math.floor(width * this.BUFFER_SCALE);
-    const bufferHeight = Math.floor(height * this.BUFFER_SCALE);
+    const bufferWidth = Math.max(1, Math.floor(width * this.BUFFER_SCALE));
+    const bufferHeight = Math.max(1, Math.floor(height * this.BUFFER_SCALE));
     if (this.bufferATargets[0].width !== bufferWidth || this.bufferATargets[0].height !== bufferHeight) {
       for (const target of [...this.bufferATargets, ...this.bufferBTargets]) {
         target.setSize(bufferWidth, bufferHeight);
