@@ -178,6 +178,21 @@ export class SceneManager {
 		this.renderer.clear();
 	}
 
+	/** Upgrade to full retina quality - use for expanded views
+	 * @param maxRatio - Maximum pixel ratio (default 2, use 3 for premium single-canvas views)
+	 */
+	upgradeToRetinaQuality(maxRatio: number = 2): void {
+		if (this.isDestroyed) return;
+
+		// Upgrade pixel ratio for retina displays
+		// When expanded (single canvas), we can afford higher quality (up to 3x)
+		const retinaPixelRatio = Math.min(window.devicePixelRatio, maxRatio);
+		if (this.currentPixelRatio < retinaPixelRatio) {
+			this.currentPixelRatio = retinaPixelRatio;
+			this.renderer.setPixelRatio(retinaPixelRatio);
+		}
+	}
+
 	getScene(): THREE.Scene {
 		return this.scene;
 	}

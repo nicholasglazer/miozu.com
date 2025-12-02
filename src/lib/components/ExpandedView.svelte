@@ -30,11 +30,9 @@
   let viewportHeight = $state(0);
 
   // Calculate transform for FLIP animation with sub-pixel precision
-  function getInitialTransform(): string {
-    const state = cardTransition.get();
-    if (!state.sourceRect || viewportWidth === 0 || viewportHeight === 0) return '';
+  function calculateTransform(rect: { left: number; top: number; width: number; height: number }): string {
+    if (viewportWidth === 0 || viewportHeight === 0) return '';
 
-    const rect = state.sourceRect;
     // Use high precision for scale (4 decimals) to avoid size jumps
     const scaleX = Math.round((rect.width / viewportWidth) * 10000) / 10000;
     const scaleY = Math.round((rect.height / viewportHeight) * 10000) / 10000;
@@ -43,6 +41,13 @@
     const translateY = Math.round((rect.top - (viewportHeight - rect.height) / 2) * 100) / 100;
 
     return `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
+  }
+
+  // Get transform from stored sourceRect (for expand animation)
+  function getInitialTransform(): string {
+    const state = cardTransition.get();
+    if (!state.sourceRect) return '';
+    return calculateTransform(state.sourceRect);
   }
 
   // Store original rect for collapse
@@ -104,12 +109,9 @@
     // Wait for animation to complete
     await new Promise(resolve => setTimeout(resolve, EXPAND_DURATION + 30));
 
-    // STEP 3: Keep canvas at original resolution to preserve animation state
-    // Don't call forceResize() - this would reset multi-pass shader buffers
-    // The canvas stays at card resolution, scaled up via CSS (slightly lower quality but preserves animation)
+    // STEP 3: Unlock resize (animation preserved up to this point)
     if (canvasId) {
       canvasRegistry.unlockResize(canvasId);
-      // Note: NOT calling forceResize() to preserve shader state
     }
 
     animationPhase = 'complete';
@@ -121,6 +123,19 @@
     // Update URL cosmetically
     if (state.targetRoute && browser) {
       history.pushState({}, '', state.targetRoute);
+    }
+
+    // STEP 4: Delayed quality upgrade for retina displays
+    // Wait for user to settle into the view, then upgrade to full resolution
+    // This resets the shader but provides crisp visuals for reading
+    if (canvasId) {
+      await new Promise(resolve => setTimeout(resolve, 400));
+      // Only upgrade if still expanded (user might have closed)
+      const currentState = cardTransition.get();
+      if (currentState.isExpanded && !currentState.isCollapsing) {
+        // Upgrade to retina quality + full viewport resolution
+        canvasRegistry.upgradeQuality(canvasId);
+      }
     }
   }
 
@@ -153,10 +168,16 @@
 
     animationPhase = 'animating';
 
-    // Force reflow
+    // STEP 2: Explicitly set starting state (fullscreen) with no transition
+    // This ensures the browser has a clear starting point for the animation
+    heroEl.style.transition = 'none';
+    heroEl.style.transform = 'translate(0, 0) scale(1, 1)';
+    heroEl.style.borderRadius = '0px';
+
+    // Force reflow to apply starting state
     void heroEl.offsetHeight;
 
-    // STEP 2: Animate via CSS transform - canvas continues animating
+    // STEP 3: Animate via CSS transform - canvas continues animating
     requestAnimationFrame(() => {
       if (!heroEl) return;
       heroEl.style.transition = `transform ${COLLAPSE_DURATION}ms ${EASING}, border-radius ${COLLAPSE_DURATION}ms ${EASING}`;
@@ -167,7 +188,7 @@
     // Wait for animation
     await new Promise(resolve => setTimeout(resolve, COLLAPSE_DURATION + 20));
 
-    // STEP 3: Unlock resize and return canvas to original card
+    // STEP 4: Unlock resize and return canvas to original card
     if (canvasId) {
       canvasRegistry.unlockResize(canvasId);
       canvasRegistry.returnHome(canvasId);

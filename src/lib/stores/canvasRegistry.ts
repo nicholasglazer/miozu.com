@@ -62,6 +62,14 @@ export const canvasRegistry = {
     return true;
   },
 
+  // Get fresh rect from original parent (card element) - use before collapse
+  // This ensures animation target matches current card dimensions
+  getOriginalParentRect(id: string): DOMRect | null {
+    const entry = get(registry).get(id);
+    if (!entry?.originalParent) return null;
+    return entry.originalParent.getBoundingClientRect();
+  },
+
   // Return canvas to original position (for collapse)
   returnHome(id: string): boolean {
     const entry = get(registry).get(id);
@@ -114,6 +122,21 @@ export const canvasRegistry = {
       if (entry.effectInstance?.forceResize) {
         entry.effectInstance.forceResize(w, h);
       }
+    }
+  },
+
+  // Upgrade to higher pixel ratio for retina quality - use for expanded views
+  // IMPORTANT: Do NOT resize - that would reset multi-pass shader buffers
+  // The canvas is already at viewport size via CSS transform, higher pixel ratio
+  // alone increases render quality without losing animation state
+  upgradeQuality(id: string) {
+    const entry = get(registry).get(id);
+    if (!entry?.sceneManager) return;
+
+    // Only upgrade pixel ratio - use 3x for expanded single-canvas view
+    // This increases render density without resizing (which would reset shaders)
+    if (entry.sceneManager.upgradeToRetinaQuality) {
+      entry.sceneManager.upgradeToRetinaQuality(3);
     }
   },
 
