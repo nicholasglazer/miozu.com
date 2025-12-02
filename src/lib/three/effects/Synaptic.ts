@@ -9,11 +9,12 @@
 import type * as THREE from 'three';
 import type { SceneManager } from '../SceneManager';
 
+// Fullscreen vertex shader (clip-space, bypasses camera)
 const vertexShader = `
 varying vec2 vUv;
 void main() {
   vUv = uv;
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  gl_Position = vec4(position.xy, 0.0, 1.0);
 }
 `;
 
@@ -166,7 +167,9 @@ export class SynapticEffect {
         iTime: { value: 0 },
         iResolution: { value: new THREE.Vector2(width, height) },
         iMouse: { value: new THREE.Vector2(0.5, 0.5) }
-      }
+      },
+      depthTest: false,
+      depthWrite: false
     });
 
     const geometry = new THREE.PlaneGeometry(2, 2);

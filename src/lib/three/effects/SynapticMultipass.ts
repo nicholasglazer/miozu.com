@@ -171,11 +171,21 @@ void main() {
 }
 `;
 
+// Vertex shader for buffer passes (uses orthographic camera)
 const vertexShader = `
 varying vec2 vUv;
 void main() {
   vUv = uv;
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+`;
+
+// Vertex shader for fullscreen output (clip-space, bypasses camera)
+const fullscreenVert = `
+varying vec2 vUv;
+void main() {
+  vUv = uv;
+  gl_Position = vec4(position.xy, 0.0, 1.0);
 }
 `;
 
@@ -318,14 +328,16 @@ export class SynapticMultipassEffect {
     this.bufferBScene = new THREE.Scene();
     this.bufferBScene.add(new THREE.Mesh(geometry, this.bufferBMaterial));
 
-    // Final output material
+    // Final output material - uses fullscreen vertex shader
     this.finalMaterial = new THREE.ShaderMaterial({
-      vertexShader,
+      vertexShader: fullscreenVert,
       fragmentShader: finalFragment,
       uniforms: {
         iChannel0: { value: null },
         iResolution: { value: new THREE.Vector2(width, height) }
-      }
+      },
+      depthTest: false,
+      depthWrite: false
     });
 
     this.finalMesh = new THREE.Mesh(geometry, this.finalMaterial);

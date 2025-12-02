@@ -11,11 +11,22 @@
 import type * as THREE from 'three';
 import type { SceneManager } from '../SceneManager';
 
+// Vertex shader for buffer passes (uses orthographic camera)
 const quadVert = `
 varying vec2 vUv;
 void main() {
   vUv = uv;
   gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+}
+`;
+
+// Vertex shader for fullscreen output (clip-space, bypasses camera)
+// This ensures the quad always fills the viewport regardless of camera settings
+const fullscreenVert = `
+varying vec2 vUv;
+void main() {
+  vUv = uv;
+  gl_Position = vec4(position.xy, 0.0, 1.0);
 }
 `;
 
@@ -311,14 +322,16 @@ export class SinuousOriginalEffect {
       }
     });
 
-    // Final image material
+    // Final image material - uses fullscreen vertex shader for proper viewport coverage
     this.imageMat = new THREE.ShaderMaterial({
-      vertexShader: quadVert,
+      vertexShader: fullscreenVert,
       fragmentShader: imageFrag,
       uniforms: {
         iTime: { value: 0 },
         iChannel0: { value: null }
-      }
+      },
+      depthTest: false,
+      depthWrite: false
     });
 
     // Quad for offscreen rendering
