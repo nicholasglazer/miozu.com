@@ -1,23 +1,28 @@
 import { writable, derived, get } from 'svelte/store';
 
+// Immutable rect type for FLIP animation
+export interface SourceRect {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+}
+
+export interface BlockInfo {
+  label: string;
+  title: string;
+  description?: string;
+}
+
 export interface CardTransitionState {
   isExpanding: boolean;
   isExpanded: boolean;
   isCollapsing: boolean;
   targetRoute: string | null;
   effectType: string | null;
-  // Canvas ID for teleportation
   canvasId: string | null;
-  // Source card rect for FLIP animation
-  sourceRect: DOMRect | null;
-  // Content to show (will be loaded dynamically)
-  contentComponent: any;
-  // Block content (label, title, etc.)
-  blockInfo: {
-    label: string;
-    title: string;
-    description?: string;
-  } | null;
+  sourceRect: SourceRect | null;
+  blockInfo: BlockInfo | null;
 }
 
 const initialState: CardTransitionState = {
@@ -28,9 +33,16 @@ const initialState: CardTransitionState = {
   effectType: null,
   canvasId: null,
   sourceRect: null,
-  contentComponent: null,
   blockInfo: null
 };
+
+export interface ExpandParams {
+  targetRoute: string;
+  effectType: string;
+  canvasId: string;
+  sourceRect: DOMRect;
+  blockInfo: BlockInfo | null;
+}
 
 function createTransitionStore() {
   const { subscribe, set, update } = writable<CardTransitionState>(initialState);
@@ -38,14 +50,15 @@ function createTransitionStore() {
   return {
     subscribe,
 
-    // Start expansion from a card
-    expand: (params: {
-      targetRoute: string;
-      effectType: string;
-      canvasId: string;
-      sourceRect: DOMRect;
-      blockInfo: CardTransitionState['blockInfo'];
-    }) => {
+    expand: (params: ExpandParams) => {
+      // Convert DOMRect to plain object (immutable copy)
+      const sourceRect: SourceRect = {
+        left: params.sourceRect.left,
+        top: params.sourceRect.top,
+        width: params.sourceRect.width,
+        height: params.sourceRect.height
+      };
+
       update(state => ({
         ...state,
         isExpanding: true,
@@ -54,12 +67,11 @@ function createTransitionStore() {
         targetRoute: params.targetRoute,
         effectType: params.effectType,
         canvasId: params.canvasId,
-        sourceRect: params.sourceRect,
+        sourceRect,
         blockInfo: params.blockInfo
       }));
     },
 
-    // Animation complete - now fully expanded
     expandComplete: () => {
       update(state => ({
         ...state,
@@ -68,7 +80,6 @@ function createTransitionStore() {
       }));
     },
 
-    // Start collapsing back to card
     collapse: () => {
       update(state => ({
         ...state,
@@ -77,38 +88,25 @@ function createTransitionStore() {
       }));
     },
 
-    // Collapse complete - reset to initial
     collapseComplete: () => {
       set(initialState);
     },
 
-    // Set loaded content component
-    setContent: (component: any) => {
-      update(state => ({
-        ...state,
-        contentComponent: component
-      }));
-    },
-
-    // Reset everything
     reset: () => {
       set(initialState);
     },
 
-    // Get current state synchronously
     get: () => get({ subscribe })
   };
 }
 
 export const cardTransition = createTransitionStore();
 
-// Derived store for checking if any transition is active
 export const isTransitioning = derived(
   cardTransition,
   $state => $state.isExpanding || $state.isCollapsing
 );
 
-// Derived store for overlay visibility
 export const showOverlay = derived(
   cardTransition,
   $state => $state.isExpanding || $state.isExpanded || $state.isCollapsing

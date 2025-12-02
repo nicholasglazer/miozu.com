@@ -1,79 +1,81 @@
 import { writable, get } from 'svelte/store';
+import type { SceneManager } from '$lib/three/SceneManager';
 
 interface CanvasEntry {
   container: HTMLElement;
   canvas: HTMLCanvasElement;
-  sceneManager: any;
-  effectInstance: any;
+  sceneManager: SceneManager;
+  effectInstance: { forceResize?: (w: number, h: number) => void; destroy?: () => void } | null;
   originalParent: HTMLElement | null;
   originalNextSibling: Node | null;
   resizeLocked: boolean;
 }
 
-// Registry of active Three.js canvases
+type CanvasRegistration = Omit<CanvasEntry, 'originalParent' | 'originalNextSibling' | 'resizeLocked'>;
+
 const registry = writable<Map<string, CanvasEntry>>(new Map());
 
 export const canvasRegistry = {
   subscribe: registry.subscribe,
 
-  // Register a canvas with its scene manager
-  register(id: string, entry: Omit<CanvasEntry, 'originalParent' | 'originalNextSibling' | 'resizeLocked'>) {
+  register(id: string, entry: CanvasRegistration) {
     registry.update(map => {
-      map.set(id, {
+      const newMap = new Map(map);
+      newMap.set(id, {
         ...entry,
         originalParent: null,
         originalNextSibling: null,
         resizeLocked: false
       });
-      return map;
+      return newMap;
     });
   },
 
-  // Unregister a canvas
   unregister(id: string) {
     registry.update(map => {
-      map.delete(id);
-      return map;
+      const newMap = new Map(map);
+      newMap.delete(id);
+      return newMap;
     });
   },
 
-  // Get a canvas entry
   get(id: string): CanvasEntry | undefined {
     return get(registry).get(id);
   },
 
-  // Teleport canvas to a new parent (for expansion)
   teleport(id: string, newParent: HTMLElement): boolean {
     const entry = get(registry).get(id);
     if (!entry) return false;
 
     // Store original position for return trip
-    entry.originalParent = entry.container.parentElement;
-    entry.originalNextSibling = entry.container.nextSibling;
+    const originalParent = entry.container.parentElement;
+    const originalNextSibling = entry.container.nextSibling;
 
     // Move to new parent
     newParent.appendChild(entry.container);
 
     registry.update(map => {
-      map.set(id, entry);
-      return map;
+      const newMap = new Map(map);
+      newMap.set(id, {
+        ...entry,
+        originalParent,
+        originalNextSibling
+      });
+      return newMap;
     });
 
     return true;
   },
 
-  // Get fresh rect from original parent (card element) - use before collapse
-  // This ensures animation target matches current card dimensions
   getOriginalParentRect(id: string): DOMRect | null {
     const entry = get(registry).get(id);
     if (!entry?.originalParent) return null;
     return entry.originalParent.getBoundingClientRect();
   },
 
-  // Return canvas to original position (for collapse)
   returnHome(id: string): boolean {
     const entry = get(registry).get(id);
-    if (!entry || !entry.originalParent) return false;
+    if (!entry?.originalParent) return false;
 
     // Return to original position
     if (entry.originalNextSibling) {
@@ -82,121 +84,85 @@ export const canvasRegistry = {
       entry.originalParent.appendChild(entry.container);
     }
 
-    // Clear stored position
-    entry.originalParent = null;
-    entry.originalNextSibling = null;
-
     registry.update(map => {
-      map.set(id, entry);
-      return map;
+      const newMap = new Map(map);
+      newMap.set(id, {
+        ...entry,
+        originalParent: null,
+        originalNextSibling: null
+      });
+      return newMap;
     });
 
     return true;
   },
 
-  // Resize a canvas's renderer
   resize(id: string, width: number, height: number) {
     const entry = get(registry).get(id);
-    if (!entry?.sceneManager) return;
-
-    entry.sceneManager.resize(width, height);
+    entry?.sceneManager?.resize(width, height);
   },
 
-  // Force resize after DOM relocation (teleportation)
-  // If width/height not provided, uses container's actual dimensions
   forceResize(id: string, width?: number, height?: number) {
     const entry = get(registry).get(id);
     if (!entry?.sceneManager) return;
 
-    // Get actual dimensions from container if not provided
-    // Use getBoundingClientRect for accurate post-reflow dimensions
     const rect = entry.container.getBoundingClientRect();
     const w = width ?? Math.floor(rect.width);
     const h = height ?? Math.floor(rect.height);
 
     if (w > 0 && h > 0) {
-      // Resize the Three.js renderer
       entry.sceneManager.forceResize(w, h);
-
-      // Also notify the effect to update its buffers/uniforms
-      if (entry.effectInstance?.forceResize) {
-        entry.effectInstance.forceResize(w, h);
-      }
+      entry.effectInstance?.forceResize?.(w, h);
     }
   },
 
-  // Upgrade to higher pixel ratio for retina quality - use for expanded views
-  // IMPORTANT: Do NOT resize - that would reset multi-pass shader buffers
-  // The canvas is already at viewport size via CSS transform, higher pixel ratio
-  // alone increases render quality without losing animation state
   upgradeQuality(id: string) {
     const entry = get(registry).get(id);
-    if (!entry?.sceneManager) return;
-
-    // Only upgrade pixel ratio - use 3x for expanded single-canvas view
-    // This increases render density without resizing (which would reset shaders)
-    if (entry.sceneManager.upgradeToRetinaQuality) {
-      entry.sceneManager.upgradeToRetinaQuality(3);
-    }
+    entry?.sceneManager?.upgradeToRetinaQuality?.(3);
   },
 
-  // Pause rendering
   pause(id: string) {
     const entry = get(registry).get(id);
-    if (entry?.sceneManager?.pause) {
-      entry.sceneManager.pause();
-    }
+    entry?.sceneManager?.pause?.();
   },
 
-  // Resume rendering
   resume(id: string) {
     const entry = get(registry).get(id);
-    if (entry?.sceneManager?.resume) {
-      entry.sceneManager.resume();
-    }
+    entry?.sceneManager?.resume?.();
   },
 
-  // Lock resize (prevent auto-resize during animation)
   lockResize(id: string) {
-    const entry = get(registry).get(id);
-    if (entry) {
-      entry.resizeLocked = true;
-      registry.update(map => {
-        map.set(id, entry);
-        return map;
-      });
-    }
+    registry.update(map => {
+      const entry = map.get(id);
+      if (!entry) return map;
+      const newMap = new Map(map);
+      newMap.set(id, { ...entry, resizeLocked: true });
+      return newMap;
+    });
   },
 
-  // Unlock resize
   unlockResize(id: string) {
-    const entry = get(registry).get(id);
-    if (entry) {
-      entry.resizeLocked = false;
-      registry.update(map => {
-        map.set(id, entry);
-        return map;
-      });
-    }
+    registry.update(map => {
+      const entry = map.get(id);
+      if (!entry) return map;
+      const newMap = new Map(map);
+      newMap.set(id, { ...entry, resizeLocked: false });
+      return newMap;
+    });
   },
 
-  // Check if resize is locked
   isResizeLocked(id: string): boolean {
-    const entry = get(registry).get(id);
-    return entry?.resizeLocked ?? false;
+    return get(registry).get(id)?.resizeLocked ?? false;
   },
 
-  // Capture canvas as data URL for snapshot-based animation
-  // This preserves the exact visual state for smooth transitions
   captureSnapshot(id: string): string | null {
     const entry = get(registry).get(id);
     if (!entry?.canvas) return null;
 
     try {
-      // Force a render to ensure canvas has current content
-      const renderer = entry.sceneManager?.getRenderer();
-      const scene = entry.sceneManager?.getScene();
-      const camera = entry.sceneManager?.getCamera();
+      const renderer = entry.sceneManager?.getRenderer?.();
+      const scene = entry.sceneManager?.getScene?.();
+      const camera = entry.sceneManager?.getCamera?.();
       if (renderer && scene && camera) {
         renderer.render(scene, camera);
       }
