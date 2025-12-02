@@ -99,11 +99,19 @@ export const canvasRegistry = {
     if (!entry?.sceneManager) return;
 
     // Get actual dimensions from container if not provided
-    const w = width ?? entry.container.offsetWidth;
-    const h = height ?? entry.container.offsetHeight;
+    // Use getBoundingClientRect for accurate post-reflow dimensions
+    const rect = entry.container.getBoundingClientRect();
+    const w = width ?? Math.floor(rect.width);
+    const h = height ?? Math.floor(rect.height);
 
     if (w > 0 && h > 0) {
+      // Resize the Three.js renderer
       entry.sceneManager.forceResize(w, h);
+
+      // Also notify the effect to update its buffers/uniforms
+      if (entry.effectInstance?.forceResize) {
+        entry.effectInstance.forceResize(w, h);
+      }
     }
   },
 

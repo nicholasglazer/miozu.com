@@ -408,6 +408,28 @@ export class SynapticMultipassEffect {
     this.frameCount++;
   }
 
+  /**
+   * Force resize render targets and update shader uniforms
+   * Called after canvas teleportation or window resize
+   */
+  forceResize(width: number, height: number): void {
+    if (width < 1 || height < 1) return;
+
+    const bufferWidth = Math.max(1, Math.floor(width * this.BUFFER_SCALE));
+    const bufferHeight = Math.max(1, Math.floor(height * this.BUFFER_SCALE));
+
+    // Resize all render targets
+    for (const target of [...this.bufferATargets, ...this.bufferBTargets]) {
+      target.setSize(bufferWidth, bufferHeight);
+    }
+
+    // Update shader uniforms
+    const resolution = new this.THREE.Vector2(bufferWidth, bufferHeight);
+    this.bufferAMaterial.uniforms.iResolution.value = resolution;
+    this.bufferBMaterial.uniforms.iResolution.value = resolution;
+    this.finalMaterial.uniforms.iResolution.value = resolution;
+  }
+
   destroy(): void {
     const container = this.manager.getContainer();
     container.removeEventListener('mousemove', this.boundMouseMove);

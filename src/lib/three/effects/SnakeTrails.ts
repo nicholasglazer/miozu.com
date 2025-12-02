@@ -219,6 +219,15 @@ export class SnakeTrailsEffect {
     );
   }
 
+  /**
+   * Force resize and update shader uniforms
+   * Called after canvas teleportation or window resize
+   */
+  forceResize(width: number, height: number): void {
+    if (width < 1 || height < 1) return;
+    this.material.uniforms.iResolution.value.set(width, height);
+  }
+
   destroy(): void {
     const container = this.manager.getContainer();
     container.removeEventListener('mousemove', this.boundMouseMove);

@@ -78,11 +78,18 @@
         heroEl.style.borderRadius = '0px';
 
         // Defer resize to not block animation - schedule after transition starts
-        // Let forceResize auto-detect dimensions from the container
+        // Use multiple resize calls to ensure proper DOM reflow
         if (canvasId) {
+          // First resize: after short delay for initial DOM update
           setTimeout(() => {
             canvasRegistry.forceResize(canvasId);
-          }, 50);
+          }, 100);
+          // Second resize: use rAF for better timing with paint cycle
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              canvasRegistry.forceResize(canvasId);
+            });
+          });
         }
       });
     });

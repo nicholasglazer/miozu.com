@@ -339,6 +339,26 @@ export class SinuousOriginalEffect {
     this.startTime = performance.now() / 1000;
   }
 
+  /**
+   * Force resize render targets and update shader uniforms
+   * Called after canvas teleportation or window resize
+   */
+  forceResize(width: number, height: number): void {
+    if (width < 1 || height < 1) return;
+
+    // Resize bufferB render targets
+    for (const target of this.bufferB) {
+      target.setSize(width, height);
+    }
+
+    // Update shader uniforms
+    this.bufferBMat.uniforms.iResolution.value.set(width, height);
+
+    // Update tracking
+    this.lastWidth = width;
+    this.lastHeight = height;
+  }
+
   update(delta: number): void {
     const renderer = this.manager.getRenderer();
     const time = performance.now() / 1000 - this.startTime;
