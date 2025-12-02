@@ -1,5 +1,5 @@
 <!-- src/lib/features/layout/MobileMenu.svelte -->
-<script>
+<script lang="ts">
   import {browser} from '$app/environment';
   import {onMount, onDestroy} from 'svelte';
   import {fly, fade, scale} from 'svelte/transition';
@@ -12,51 +12,42 @@
 
   let isMenuOpen = $state(false);
 
-  // Toggle menu with smooth animation
+  // Toggle menu
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
-
-    // Prevent body scroll when menu is open
-    if (browser) {
-      if (isMenuOpen) {
-        document.body.style.overflow = 'hidden';
-        document.body.classList.add('mobile-menu-open');
-      } else {
-        document.body.style.overflow = '';
-        document.body.classList.remove('mobile-menu-open');
-      }
-    }
   }
 
   // Close menu
   function closeMenu() {
     isMenuOpen = false;
-    if (browser) {
-      document.body.style.overflow = '';
-      document.body.classList.remove('mobile-menu-open');
-    }
   }
 
-  // Handle escape key
-  function handleKeydown(event) {
+  // Handle escape key - stored as const for proper cleanup
+  function handleKeydown(event: KeyboardEvent) {
     if (event.key === 'Escape' && isMenuOpen) {
       closeMenu();
     }
   }
 
-  // Add event listeners
-  onMount(() => {
-    if (browser) {
-      document.addEventListener('keydown', handleKeydown);
-    }
-  });
+  // Use $effect for reactive side effects - manages body scroll state
+  $effect(() => {
+    if (!browser) return;
 
-  onDestroy(() => {
-    if (browser) {
-      document.removeEventListener('keydown', handleKeydown);
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.classList.add('mobile-menu-open');
+      document.addEventListener('keydown', handleKeydown);
+    } else {
       document.body.style.overflow = '';
       document.body.classList.remove('mobile-menu-open');
     }
+
+    // Cleanup function - runs when effect re-runs or component unmounts
+    return () => {
+      document.body.style.overflow = '';
+      document.body.classList.remove('mobile-menu-open');
+      document.removeEventListener('keydown', handleKeydown);
+    };
   });
 </script>
 

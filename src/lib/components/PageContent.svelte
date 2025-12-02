@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-
   interface Props {
     route: string;
   }
@@ -8,7 +6,7 @@
   let { route }: Props = $props();
 
   let ContentComponent: any = $state(null);
-  let mounted = $state(false);
+  let loading = $state(true);
 
   // Map routes to their content components
   const routeMap: Record<string, () => Promise<any>> = {
@@ -17,23 +15,33 @@
     '/contact': () => import('./content/ContactContent.svelte')
   };
 
-  onMount(async () => {
+  // Use $effect to reload content when route changes
+  $effect(() => {
+    loading = true;
+    ContentComponent = null;
+
     const loader = routeMap[route];
     if (loader) {
-      const module = await loader();
-      ContentComponent = module.default;
+      loader().then((module) => {
+        ContentComponent = module.default;
+        loading = false;
+      });
+    } else {
+      loading = false;
     }
-    mounted = true;
   });
 </script>
 
-{#if ContentComponent}
-  <svelte:component this={ContentComponent} />
-{:else if mounted}
-  <div class="loading-content">
-    <p>Loading...</p>
-  </div>
-{/if}
+<!-- Use {#key} to ensure component fully resets when route changes -->
+{#key route}
+  {#if ContentComponent}
+    <svelte:component this={ContentComponent} />
+  {:else if !loading}
+    <div class="loading-content">
+      <p>Content not found</p>
+    </div>
+  {/if}
+{/key}
 
 <style>
   .loading-content {

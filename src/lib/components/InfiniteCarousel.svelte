@@ -19,16 +19,10 @@
 
   let {items = [], speed = 30, class: className = '', gap = 20, pauseOnHover = true} = $props();
 
-  // Clone items for seamless looping
-  let clonedItems = $state([]);
-
-  // Create cloned item sets for seamless looping
-  $effect(() => {
-    if (items.length > 0) {
-      // Create multiple copies to ensure we have enough items for any screen width
-      clonedItems = [...items, ...items, ...items];
-    }
-  });
+  // Clone items for seamless looping - use $derived for pure computation
+  let clonedItems = $derived(
+    items.length > 0 ? [...items, ...items, ...items] : []
+  );
 
   let containerRef = $state(null);
   let carouselRef = $state(null);

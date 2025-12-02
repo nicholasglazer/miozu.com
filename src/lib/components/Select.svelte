@@ -48,10 +48,17 @@
     isOpen = false;
   }
 
+  // Only add/remove listener when isOpen changes, with proper cleanup
   $effect(() => {
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      // Use setTimeout to avoid immediate trigger from the click that opened it
+      const timer = setTimeout(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+      }, 0);
+      return () => {
+        clearTimeout(timer);
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
     }
   });
 </script>

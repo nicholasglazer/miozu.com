@@ -36,11 +36,15 @@
   let itemsContainer;
   let statusItems = $state([]);
 
+  // Event handlers stored for proper cleanup
+  const handleOnline = () => (online = true);
+  const handleOffline = () => (online = false);
+
   // Lifecycle
   onMount(() => {
     // Check online status
-    window.addEventListener('online', () => (online = true));
-    window.addEventListener('offline', () => (online = false));
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
 
     // Check SW status
     checkSwStatus();
@@ -76,8 +80,8 @@
     }
 
     return () => {
-      window.removeEventListener('online', () => (online = true));
-      window.removeEventListener('offline', () => (online = false));
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
       if (resizeObserver) resizeObserver.disconnect();
     };
   });
@@ -264,8 +268,6 @@
     expanded = !expanded;
   }
 </script>
-
-// src/lib/features/status/SystemStatus.svelte // Fix the performance measurement code
 
 <div class="system-status {compact ? 'compact' : 'full'}" class:expanded>
   <!-- Status Content -->
