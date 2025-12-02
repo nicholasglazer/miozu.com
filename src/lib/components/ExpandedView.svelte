@@ -5,6 +5,11 @@
   import { canvasRegistry } from '$lib/stores/canvasRegistry';
   import PageContent from './PageContent.svelte';
 
+  // Animation constants - fast, smooth, professional
+  const EXPAND_DURATION = 350; // ms - fast but smooth
+  const COLLAPSE_DURATION = 300; // ms - slightly faster for close
+  const EASING = 'cubic-bezier(0.32, 0.72, 0, 1)'; // iOS-like spring easing
+
   // Animation state
   let containerEl: HTMLDivElement;
   let heroEl: HTMLDivElement;
@@ -57,59 +62,52 @@
     const initialTransform = getInitialTransform();
     heroEl.style.transform = initialTransform;
     heroEl.style.borderRadius = '8px';
-    heroEl.style.transition = 'none'; // Disable transition for initial placement
+    heroEl.style.transition = 'none';
 
-    // Teleport the canvas to expanded view (DOM move, no resize yet)
+    // Lock resize to prevent ResizeObserver-triggered resizes during animation
+    if (canvasId) {
+      canvasRegistry.lockResize(canvasId);
+    }
+
+    // Teleport the canvas to expanded view - DON'T resize yet
+    // The CSS transform will handle visual scaling during animation
     if (canvasId) {
       canvasRegistry.teleport(canvasId, canvasSlotEl);
     }
 
-    // Use double-rAF for proper paint scheduling
+    // Force a reflow to ensure initial state is painted
+    void heroEl.offsetHeight;
+
+    // Start animation immediately
     animationPhase = 'animating';
 
+    // Apply transition and target state in single rAF
     requestAnimationFrame(() => {
-      // First frame: ensure initial position is painted
-      requestAnimationFrame(() => {
-        // Guard against heroEl being null (can happen with HMR)
-        if (!heroEl) return;
-        // Second frame: start the transition
-        heroEl.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-        heroEl.style.transform = 'translate(0, 0) scale(1, 1)';
-        heroEl.style.borderRadius = '0px';
+      if (!heroEl) return;
 
-        // Defer resize to not block animation - schedule after transition starts
-        // Use multiple resize calls to ensure proper DOM reflow
-        if (canvasId) {
-          // First resize: after short delay for initial DOM update
-          setTimeout(() => {
-            canvasRegistry.forceResize(canvasId);
-          }, 100);
-          // Second resize: use rAF for better timing with paint cycle
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              canvasRegistry.forceResize(canvasId);
-            });
-          });
-        }
-      });
+      heroEl.style.transition = `transform ${EXPAND_DURATION}ms ${EASING}, border-radius ${EXPAND_DURATION}ms ${EASING}`;
+      heroEl.style.transform = 'translate(0, 0) scale(1, 1)';
+      heroEl.style.borderRadius = '0px';
+
+      // NO resize during animation - CSS transform handles scaling
     });
 
     // Wait for animation to complete
-    await new Promise(resolve => setTimeout(resolve, 520));
+    await new Promise(resolve => setTimeout(resolve, EXPAND_DURATION + 20));
 
-    // Final resize after animation to ensure perfect fit
-    // Auto-detect dimensions from container for accuracy
+    // Unlock resize and do final resize ONCE after animation completes
     if (canvasId) {
+      canvasRegistry.unlockResize(canvasId);
       canvasRegistry.forceResize(canvasId);
     }
 
     animationPhase = 'complete';
     cardTransition.expandComplete();
 
-    // Setup visibility observer after expansion is complete
+    // Setup visibility observer after expansion
     setupVisibilityObserver();
 
-    // Update URL cosmetically without SvelteKit navigation
+    // Update URL cosmetically
     if (state.targetRoute && browser) {
       history.pushState({}, '', state.targetRoute);
     }
@@ -131,36 +129,38 @@
       canvasRegistry.resume(canvasId);
     }
 
-    // Scroll to top first (instant, no animation)
+    // Scroll to top first (instant)
     if (containerEl) {
       containerEl.scrollTop = 0;
     }
 
     animationPhase = 'animating';
 
-    // Pre-resize canvas to card dimensions during animation (deferred)
-    if (canvasId && originalRect) {
-      setTimeout(() => {
-        canvasRegistry.forceResize(canvasId, originalRect!.width, originalRect!.height);
-      }, 200); // Resize midway through animation
+    // Lock resize and set canvas to target size BEFORE animation starts
+    // This way CSS transform scales it down smoothly without jumps
+    if (canvasId) {
+      canvasRegistry.lockResize(canvasId);
+      if (originalRect) {
+        canvasRegistry.forceResize(canvasId, originalRect.width, originalRect.height);
+      }
     }
 
-    // Use double-rAF for smooth animation start
+    // Force reflow then animate
+    void heroEl.offsetHeight;
+
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        // Guard against heroEl being null (can happen with HMR)
-        if (!heroEl) return;
-        heroEl.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-        heroEl.style.transform = getInitialTransform();
-        heroEl.style.borderRadius = '8px';
-      });
+      if (!heroEl) return;
+      heroEl.style.transition = `transform ${COLLAPSE_DURATION}ms ${EASING}, border-radius ${COLLAPSE_DURATION}ms ${EASING}`;
+      heroEl.style.transform = getInitialTransform();
+      heroEl.style.borderRadius = '8px';
     });
 
     // Wait for animation
-    await new Promise(resolve => setTimeout(resolve, 420));
+    await new Promise(resolve => setTimeout(resolve, COLLAPSE_DURATION + 20));
 
-    // Return canvas to original card
+    // Return canvas to original card and unlock resize
     if (canvasId) {
+      canvasRegistry.unlockResize(canvasId);
       canvasRegistry.returnHome(canvasId);
     }
 
@@ -348,7 +348,22 @@
   .canvas-slot :global(.three-canvas) {
     position: absolute !important;
     inset: 0 !important;
-    /* Width/height controlled by Three.js setSize() to avoid distortion */
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  /* Force canvas element to stretch and fill container during animation */
+  /* This creates smooth scaling (slightly blurry) then snaps to crisp at end */
+  .canvas-slot :global(canvas) {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+  }
+
+  /* GPU acceleration for smooth animation */
+  .animating .canvas-slot :global(canvas) {
+    will-change: transform;
+    image-rendering: auto; /* smooth scaling during animation */
   }
 
   .complete .hero-container {
@@ -381,8 +396,8 @@
     color: #666;
     margin-bottom: 12px;
     opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.4s ease 0.3s;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
   }
 
   .complete .hero-label {
@@ -397,8 +412,8 @@
     letter-spacing: -0.03em;
     margin: 0;
     opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.4s ease 0.4s;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease 0.05s, transform 0.2s ease 0.05s;
   }
 
   .complete .hero-title {
@@ -413,8 +428,8 @@
     line-height: 1.6;
     max-width: 600px;
     opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.4s ease 0.5s;
+    transform: translateY(10px);
+    transition: opacity 0.2s ease 0.1s, transform 0.2s ease 0.1s;
   }
 
   .complete .hero-desc {
@@ -438,8 +453,8 @@
     cursor: pointer;
     pointer-events: auto;
     opacity: 0;
-    transform: scale(0.8);
-    transition: all 0.3s ease 0.5s;
+    transform: scale(0.9);
+    transition: opacity 0.15s ease, transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
   }
 
   .complete .close-btn {

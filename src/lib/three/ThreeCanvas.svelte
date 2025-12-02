@@ -33,8 +33,13 @@
   let containerHeight = $state(0);
 
   // React to dimension changes - runs when sceneManager or dimensions change
+  // Skip if resize is locked (during animation)
   $effect(() => {
     if (sceneManager && containerWidth > 0 && containerHeight > 0) {
+      // Check if this canvas has resize locked (during animation)
+      if (id && canvasRegistry.isResizeLocked(id)) {
+        return;
+      }
       sceneManager.resize(containerWidth, containerHeight);
     }
   });

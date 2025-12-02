@@ -72,13 +72,25 @@
     });
   }
 
-  // Track which card is being transitioned (to hide it)
-  // Only hide AFTER animation completes (isExpanded) to prevent visual pop
+  // Track which card is being transitioned
+  // fadingCard - immediately when expansion starts (for text fade)
+  // expandingCard - only after animation completes (to hide card)
+  let fadingCard = $state<string | null>(null);
   let expandingCard = $state<string | null>(null);
 
   $effect(() => {
+    // Fade text immediately when expansion starts
+    if ($cardTransition.isExpanding) {
+      for (const [key, config] of Object.entries(cardConfigs)) {
+        if (config.route === $cardTransition.targetRoute && config.effectType === $cardTransition.effectType) {
+          fadingCard = key;
+          break;
+        }
+      }
+    }
+
     if ($cardTransition.isExpanded) {
-      // Only hide card after expansion animation is complete
+      // Hide card after expansion animation is complete
       for (const [key, config] of Object.entries(cardConfigs)) {
         if (config.route === $cardTransition.targetRoute && config.effectType === $cardTransition.effectType) {
           expandingCard = key;
@@ -87,6 +99,7 @@
       }
     } else if (!$cardTransition.isExpanding && !$cardTransition.isCollapsing) {
       expandingCard = null;
+      fadingCard = null;
     }
   });
 </script>
@@ -150,6 +163,7 @@
     <button
       type="button"
       class="block block-about"
+      class:fading-card={fadingCard === 'about'}
       class:hidden-card={expandingCard === 'about'}
       onclick={(e) => handleCardClick(e, 'about')}
     >
@@ -174,6 +188,7 @@
     <button
       type="button"
       class="block block-small block-portfolio"
+      class:fading-card={fadingCard === 'portfolio'}
       class:hidden-card={expandingCard === 'portfolio'}
       onclick={(e) => handleCardClick(e, 'portfolio')}
     >
@@ -200,6 +215,7 @@
     <button
       type="button"
       class="block block-small block-leadership"
+      class:fading-card={fadingCard === 'leadership'}
       class:hidden-card={expandingCard === 'leadership'}
       onclick={(e) => handleCardClick(e, 'leadership')}
     >
@@ -222,6 +238,7 @@
     <button
       type="button"
       class="block block-small block-ether"
+      class:fading-card={fadingCard === 'contact'}
       class:hidden-card={expandingCard === 'contact'}
       onclick={(e) => handleCardClick(e, 'contact')}
     >
@@ -671,7 +688,16 @@
     cursor: pointer;
   }
 
-  /* Hidden card during transition */
+  /* Fading card text during expansion - text fades out quickly */
+  .fading-card .block-content,
+  .fading-card .block-content-overlay,
+  .fading-card .block-overlay .block-content,
+  .fading-card .block-corner {
+    opacity: 0;
+    transition: opacity 0.15s ease-out;
+  }
+
+  /* Hidden card after expansion complete */
   .hidden-card {
     opacity: 0;
     pointer-events: none;

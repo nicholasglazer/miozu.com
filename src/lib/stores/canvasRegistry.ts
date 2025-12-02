@@ -7,6 +7,7 @@ interface CanvasEntry {
   effectInstance: any;
   originalParent: HTMLElement | null;
   originalNextSibling: Node | null;
+  resizeLocked: boolean;
 }
 
 // Registry of active Three.js canvases
@@ -16,12 +17,13 @@ export const canvasRegistry = {
   subscribe: registry.subscribe,
 
   // Register a canvas with its scene manager
-  register(id: string, entry: Omit<CanvasEntry, 'originalParent' | 'originalNextSibling'>) {
+  register(id: string, entry: Omit<CanvasEntry, 'originalParent' | 'originalNextSibling' | 'resizeLocked'>) {
     registry.update(map => {
       map.set(id, {
         ...entry,
         originalParent: null,
-        originalNextSibling: null
+        originalNextSibling: null,
+        resizeLocked: false
       });
       return map;
     });
@@ -129,5 +131,35 @@ export const canvasRegistry = {
     if (entry?.sceneManager?.resume) {
       entry.sceneManager.resume();
     }
+  },
+
+  // Lock resize (prevent auto-resize during animation)
+  lockResize(id: string) {
+    const entry = get(registry).get(id);
+    if (entry) {
+      entry.resizeLocked = true;
+      registry.update(map => {
+        map.set(id, entry);
+        return map;
+      });
+    }
+  },
+
+  // Unlock resize
+  unlockResize(id: string) {
+    const entry = get(registry).get(id);
+    if (entry) {
+      entry.resizeLocked = false;
+      registry.update(map => {
+        map.set(id, entry);
+        return map;
+      });
+    }
+  },
+
+  // Check if resize is locked
+  isResizeLocked(id: string): boolean {
+    const entry = get(registry).get(id);
+    return entry?.resizeLocked ?? false;
   }
 };
