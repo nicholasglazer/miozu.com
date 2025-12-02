@@ -189,12 +189,8 @@
   bind:clientWidth={containerWidth}
   bind:clientHeight={containerHeight}
   class="three-canvas {className}"
+  class:loaded={isLoaded}
 >
-  {#if !isLoaded}
-    <div class="loading">
-      <div class="loading-cube"></div>
-    </div>
-  {/if}
 </div>
 
 <style lang="postcss">
@@ -204,32 +200,17 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease-out;
+  }
+
+  .three-canvas.loaded {
+    opacity: 1;
   }
 
   .three-canvas :global(canvas) {
     display: block;
     /* Don't force 100% - let Three.js control canvas size via setSize() */
     /* This prevents distortion when canvas buffer dimensions differ from CSS dimensions */
-  }
-
-  .loading {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-  }
-
-  .loading-cube {
-    width: 20px;
-    height: 20px;
-    background: var(--color-base3);
-    animation: pulse 1s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 0.3; transform: scale(0.8); }
-    50% { opacity: 1; transform: scale(1); }
   }
 </style>

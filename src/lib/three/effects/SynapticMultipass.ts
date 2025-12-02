@@ -429,6 +429,11 @@ export class SynapticMultipassEffect {
     const bufferWidth = Math.max(1, Math.floor(width * this.BUFFER_SCALE));
     const bufferHeight = Math.max(1, Math.floor(height * this.BUFFER_SCALE));
 
+    // Check if resolution actually changed
+    const resolutionChanged =
+      this.bufferATargets[0].width !== bufferWidth ||
+      this.bufferATargets[0].height !== bufferHeight;
+
     // Resize all render targets
     for (const target of [...this.bufferATargets, ...this.bufferBTargets]) {
       target.setSize(bufferWidth, bufferHeight);
@@ -439,6 +444,12 @@ export class SynapticMultipassEffect {
     this.bufferAMaterial.uniforms.iResolution.value = resolution;
     this.bufferBMaterial.uniforms.iResolution.value = resolution;
     this.finalMaterial.uniforms.iResolution.value = resolution;
+
+    // Reset frame counter to re-initialize particles at new resolution
+    // This prevents corrupted state when UV math changes
+    if (resolutionChanged) {
+      this.frameCount = 0;
+    }
   }
 
   destroy(): void {

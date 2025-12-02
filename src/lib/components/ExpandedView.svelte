@@ -6,15 +6,20 @@
   import PageContent from './PageContent.svelte';
 
   // Animation constants - fast, smooth, professional
-  const EXPAND_DURATION = 350; // ms - fast but smooth
-  const COLLAPSE_DURATION = 300; // ms - slightly faster for close
-  const EASING = 'cubic-bezier(0.32, 0.72, 0, 1)'; // iOS-like spring easing
+  const EXPAND_DURATION = 380; // ms
+  const COLLAPSE_DURATION = 320; // ms
+  // Smooth ease-out without overshoot - precise and professional
+  const EASING = 'cubic-bezier(0.22, 0.61, 0.36, 1)';
 
   // Animation state
   let containerEl: HTMLDivElement;
   let heroEl: HTMLDivElement;
   let canvasSlotEl: HTMLDivElement;
   let animationPhase = $state<'initial' | 'animating' | 'complete'>('initial');
+
+  // Track original canvas dimensions for CSS scaling
+  let originalCanvasWidth = $state(0);
+  let originalCanvasHeight = $state(0);
 
   // Visibility-based rendering optimization
   let intersectionObserver: IntersectionObserver | null = null;
@@ -24,16 +29,18 @@
   let viewportWidth = $state(0);
   let viewportHeight = $state(0);
 
-  // Calculate transform for FLIP animation
+  // Calculate transform for FLIP animation with sub-pixel precision
   function getInitialTransform(): string {
     const state = cardTransition.get();
     if (!state.sourceRect || viewportWidth === 0 || viewportHeight === 0) return '';
 
     const rect = state.sourceRect;
-    const scaleX = rect.width / viewportWidth;
-    const scaleY = rect.height / viewportHeight;
-    const translateX = rect.left - (viewportWidth - rect.width) / 2;
-    const translateY = rect.top - (viewportHeight - rect.height) / 2;
+    // Use high precision for scale (4 decimals) to avoid size jumps
+    const scaleX = Math.round((rect.width / viewportWidth) * 10000) / 10000;
+    const scaleY = Math.round((rect.height / viewportHeight) * 10000) / 10000;
+    // Round translation to 2 decimals for smooth positioning
+    const translateX = Math.round((rect.left - (viewportWidth - rect.width) / 2) * 100) / 100;
+    const translateY = Math.round((rect.top - (viewportHeight - rect.height) / 2) * 100) / 100;
 
     return `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
   }
@@ -41,9 +48,10 @@
   // Store original rect for collapse
   let originalRect: { left: number; top: number; width: number; height: number } | null = null;
 
-  // Start expand animation
+  // Start expand animation - LIVE CANVAS approach
+  // The canvas continues animating during expansion via CSS scaling
   async function startExpandAnimation() {
-    if (!heroEl || !canvasSlotEl) return;
+    if (!heroEl) return;
 
     const state = cardTransition.get();
     const canvasId = state.canvasId;
@@ -56,49 +64,52 @@
         width: state.sourceRect.width,
         height: state.sourceRect.height
       };
+      // Store original dimensions for CSS scaling
+      originalCanvasWidth = state.sourceRect.width;
+      originalCanvasHeight = state.sourceRect.height;
     }
 
-    // Set initial position FIRST (before any DOM changes)
+    // STEP 1: Lock resize to prevent WebGL renderer from changing
+    // This preserves the exact shader state (particles, positions, etc.)
+    if (canvasId) {
+      canvasRegistry.lockResize(canvasId);
+    }
+
+    // STEP 2: Teleport canvas IMMEDIATELY - it will be scaled by CSS transform
+    // The shader keeps running at original resolution
+    if (canvasId && canvasSlotEl) {
+      canvasRegistry.teleport(canvasId, canvasSlotEl);
+    }
+
+    // Set initial position (scaled down to card size)
     const initialTransform = getInitialTransform();
     heroEl.style.transform = initialTransform;
     heroEl.style.borderRadius = '8px';
     heroEl.style.transition = 'none';
 
-    // Lock resize to prevent ResizeObserver-triggered resizes during animation
-    if (canvasId) {
-      canvasRegistry.lockResize(canvasId);
-    }
-
-    // Teleport the canvas to expanded view - DON'T resize yet
-    // The CSS transform will handle visual scaling during animation
-    if (canvasId) {
-      canvasRegistry.teleport(canvasId, canvasSlotEl);
-    }
-
-    // Force a reflow to ensure initial state is painted
+    // Force reflow
     void heroEl.offsetHeight;
 
-    // Start animation immediately
+    // Start animation - canvas is LIVE and continues animating
     animationPhase = 'animating';
 
-    // Apply transition and target state in single rAF
+    // Apply CSS transition - the canvas scales up smoothly via CSS
     requestAnimationFrame(() => {
       if (!heroEl) return;
-
       heroEl.style.transition = `transform ${EXPAND_DURATION}ms ${EASING}, border-radius ${EXPAND_DURATION}ms ${EASING}`;
       heroEl.style.transform = 'translate(0, 0) scale(1, 1)';
       heroEl.style.borderRadius = '0px';
-
-      // NO resize during animation - CSS transform handles scaling
     });
 
     // Wait for animation to complete
-    await new Promise(resolve => setTimeout(resolve, EXPAND_DURATION + 20));
+    await new Promise(resolve => setTimeout(resolve, EXPAND_DURATION + 30));
 
-    // Unlock resize and do final resize ONCE after animation completes
+    // STEP 3: Keep canvas at original resolution to preserve animation state
+    // Don't call forceResize() - this would reset multi-pass shader buffers
+    // The canvas stays at card resolution, scaled up via CSS (slightly lower quality but preserves animation)
     if (canvasId) {
       canvasRegistry.unlockResize(canvasId);
-      canvasRegistry.forceResize(canvasId);
+      // Note: NOT calling forceResize() to preserve shader state
     }
 
     animationPhase = 'complete';
@@ -113,7 +124,7 @@
     }
   }
 
-  // Start collapse animation
+  // Start collapse animation - LIVE CANVAS approach
   async function startCollapseAnimation() {
     if (!heroEl) return;
 
@@ -124,7 +135,7 @@
     intersectionObserver?.disconnect();
     intersectionObserver = null;
 
-    // Resume canvas rendering for collapse animation
+    // Resume canvas rendering for collapse
     if (canvasId) {
       canvasRegistry.resume(canvasId);
     }
@@ -134,20 +145,18 @@
       containerEl.scrollTop = 0;
     }
 
-    animationPhase = 'animating';
-
-    // Lock resize and set canvas to target size BEFORE animation starts
-    // This way CSS transform scales it down smoothly without jumps
+    // STEP 1: Lock resize - canvas is already at card resolution from expand
+    // Don't resize - preserve animation state
     if (canvasId) {
       canvasRegistry.lockResize(canvasId);
-      if (originalRect) {
-        canvasRegistry.forceResize(canvasId, originalRect.width, originalRect.height);
-      }
     }
 
-    // Force reflow then animate
+    animationPhase = 'animating';
+
+    // Force reflow
     void heroEl.offsetHeight;
 
+    // STEP 2: Animate via CSS transform - canvas continues animating
     requestAnimationFrame(() => {
       if (!heroEl) return;
       heroEl.style.transition = `transform ${COLLAPSE_DURATION}ms ${EASING}, border-radius ${COLLAPSE_DURATION}ms ${EASING}`;
@@ -158,7 +167,7 @@
     // Wait for animation
     await new Promise(resolve => setTimeout(resolve, COLLAPSE_DURATION + 20));
 
-    // Return canvas to original card and unlock resize
+    // STEP 3: Unlock resize and return canvas to original card
     if (canvasId) {
       canvasRegistry.unlockResize(canvasId);
       canvasRegistry.returnHome(canvasId);
@@ -188,7 +197,7 @@
   // Watch for expansion trigger
   $effect(() => {
     const isExpanding = $cardTransition.isExpanding;
-    if (isExpanding && animationPhase === 'initial' && heroEl && viewportWidth > 0) {
+    if (isExpanding && animationPhase === 'initial' && heroEl && canvasSlotEl && viewportWidth > 0) {
       startExpandAnimation();
     }
   });
@@ -222,7 +231,6 @@
         }
       },
       {
-        // Start pausing when hero is 10% visible
         threshold: 0.1,
         rootMargin: '0px'
       }
@@ -241,7 +249,6 @@
     if (browser) {
       window.removeEventListener('keydown', handleKeydown);
     }
-    // Cleanup observer
     intersectionObserver?.disconnect();
   });
 
@@ -263,14 +270,17 @@
     class:animating={animationPhase === 'animating'}
     class:complete={animationPhase === 'complete'}
   >
-    <!-- Hero container with teleported canvas -->
+    <!-- Hero container -->
     <div
       bind:this={heroEl}
       class="hero-container"
       style="will-change: transform;"
     >
-      <!-- Canvas slot - teleported canvas goes here -->
-      <div bind:this={canvasSlotEl} class="canvas-slot"></div>
+      <!-- Canvas slot - live canvas teleported here immediately -->
+      <div
+        bind:this={canvasSlotEl}
+        class="canvas-slot visible"
+      ></div>
 
       <!-- Hero overlay with title -->
       <div class="hero-overlay">
@@ -341,10 +351,14 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: 1;
   }
 
-  /* Teleported canvas needs to fill slot */
+  .canvas-slot.visible {
+    opacity: 1;
+  }
+
+  /* Canvas fills slot */
   .canvas-slot :global(.three-canvas) {
     position: absolute !important;
     inset: 0 !important;
@@ -352,18 +366,10 @@
     height: 100% !important;
   }
 
-  /* Force canvas element to stretch and fill container during animation */
-  /* This creates smooth scaling (slightly blurry) then snaps to crisp at end */
   .canvas-slot :global(canvas) {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover;
-  }
-
-  /* GPU acceleration for smooth animation */
-  .animating .canvas-slot :global(canvas) {
-    will-change: transform;
-    image-rendering: auto; /* smooth scaling during animation */
   }
 
   .complete .hero-container {
@@ -381,6 +387,7 @@
     padding: 48px;
     background: linear-gradient(to top, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.5) 40%, transparent 70%);
     pointer-events: none;
+    z-index: 10;
   }
 
   .hero-content {

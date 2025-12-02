@@ -359,6 +359,9 @@ export class SinuousOriginalEffect {
   forceResize(width: number, height: number): void {
     if (width < 1 || height < 1) return;
 
+    // Check if resolution actually changed
+    const resolutionChanged = width !== this.lastWidth || height !== this.lastHeight;
+
     // Resize bufferB render targets
     for (const target of this.bufferB) {
       target.setSize(width, height);
@@ -370,6 +373,12 @@ export class SinuousOriginalEffect {
     // Update tracking
     this.lastWidth = width;
     this.lastHeight = height;
+
+    // Reset frame counter to re-initialize particles at new resolution
+    // This prevents corrupted state when buffer dimensions change
+    if (resolutionChanged) {
+      this.frame = 0;
+    }
   }
 
   update(delta: number): void {

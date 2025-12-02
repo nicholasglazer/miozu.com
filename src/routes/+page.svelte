@@ -5,12 +5,26 @@
   import {appName, domain} from '$settings/global';
   import { cardTransition } from '$lib/stores/transition';
 
-  // Lazy load ThreeCanvas for performance
+  // Priority-based lazy loading for ThreeCanvas
+  // Phase 1: Hero + About (visible immediately, highest priority)
+  // Phase 2: Other cards (load after small delay)
   let ThreeCanvas = $state<any>(null);
+  let priorityCardsReady = $state(false);
+  let allCardsReady = $state(false);
+
   $effect(() => {
     if (browser) {
+      // Load ThreeCanvas component
       import('$lib/three/ThreeCanvas.svelte').then(module => {
         ThreeCanvas = module.default;
+        // Phase 1: Priority cards (Hero + About) render immediately
+        priorityCardsReady = true;
+
+        // Phase 2: Other cards load after 100ms delay
+        // This allows Hero + About to initialize first
+        setTimeout(() => {
+          allCardsReady = true;
+        }, 100);
       });
     }
   });
@@ -141,9 +155,9 @@
 
   <!-- Main Grid -->
   <div class="grid-main">
-    <!-- Large Block 1: Hero with Three.js -->
+    <!-- Large Block 1: Hero with Three.js (PRIORITY 1) -->
     <div class="block block-hero">
-      {#if ThreeCanvas}
+      {#if ThreeCanvas && priorityCardsReady}
         <ThreeCanvas type="sinuous-original" />
       {/if}
       <div class="block-overlay">
@@ -159,7 +173,7 @@
       </div>
     </div>
 
-    <!-- Large Block 2: About/Visual with authentic Sinuous -->
+    <!-- Large Block 2: About/Visual with authentic Sinuous (PRIORITY 1) -->
     <button
       type="button"
       class="block block-about"
@@ -167,7 +181,7 @@
       class:hidden-card={expandingCard === 'about'}
       onclick={(e) => handleCardClick(e, 'about')}
     >
-      {#if ThreeCanvas}
+      {#if ThreeCanvas && priorityCardsReady}
         <ThreeCanvas type="sinuous-original" id="canvas-about" />
       {/if}
       <div class="block-overlay block-overlay-about">
@@ -184,7 +198,7 @@
       </div>
     </button>
 
-    <!-- Small Block 1: Portfolio -->
+    <!-- Small Block 1: Portfolio (PRIORITY 2) -->
     <button
       type="button"
       class="block block-small block-portfolio"
@@ -192,7 +206,7 @@
       class:hidden-card={expandingCard === 'portfolio'}
       onclick={(e) => handleCardClick(e, 'portfolio')}
     >
-      {#if ThreeCanvas}
+      {#if ThreeCanvas && allCardsReady}
         <ThreeCanvas type="synaptic-multipass" lowRes={true} id="canvas-portfolio" />
       {/if}
       <div class="block-content block-content-overlay">
@@ -211,7 +225,7 @@
       </div>
     </button>
 
-    <!-- Small Block 2: Leadership -->
+    <!-- Small Block 2: Leadership (PRIORITY 2) -->
     <button
       type="button"
       class="block block-small block-leadership"
@@ -219,7 +233,7 @@
       class:hidden-card={expandingCard === 'leadership'}
       onclick={(e) => handleCardClick(e, 'leadership')}
     >
-      {#if ThreeCanvas}
+      {#if ThreeCanvas && allCardsReady}
         <ThreeCanvas type="synaptic" lowRes={true} id="canvas-leadership" />
       {/if}
       <div class="block-content block-content-overlay">
@@ -234,7 +248,7 @@
       </div>
     </button>
 
-    <!-- Small Block 3: Contact -->
+    <!-- Small Block 3: Contact (PRIORITY 2) -->
     <button
       type="button"
       class="block block-small block-ether"
@@ -242,7 +256,7 @@
       class:hidden-card={expandingCard === 'contact'}
       onclick={(e) => handleCardClick(e, 'contact')}
     >
-      {#if ThreeCanvas}
+      {#if ThreeCanvas && allCardsReady}
         <ThreeCanvas type="ether" lowRes={true} id="canvas-contact" />
       {/if}
       <div class="block-content block-content-overlay">
@@ -257,9 +271,9 @@
       </div>
     </button>
 
-    <!-- Small Block 4: Updates -->
+    <!-- Small Block 4: Updates (PRIORITY 2) -->
     <div class="block block-small block-updates">
-      {#if ThreeCanvas}
+      {#if ThreeCanvas && allCardsReady}
         <ThreeCanvas type="snake-trails" lowRes={true} />
       {/if}
       <div class="block-content block-content-overlay">

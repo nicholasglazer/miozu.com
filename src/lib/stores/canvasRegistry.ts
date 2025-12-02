@@ -161,5 +161,26 @@ export const canvasRegistry = {
   isResizeLocked(id: string): boolean {
     const entry = get(registry).get(id);
     return entry?.resizeLocked ?? false;
+  },
+
+  // Capture canvas as data URL for snapshot-based animation
+  // This preserves the exact visual state for smooth transitions
+  captureSnapshot(id: string): string | null {
+    const entry = get(registry).get(id);
+    if (!entry?.canvas) return null;
+
+    try {
+      // Force a render to ensure canvas has current content
+      const renderer = entry.sceneManager?.getRenderer();
+      const scene = entry.sceneManager?.getScene();
+      const camera = entry.sceneManager?.getCamera();
+      if (renderer && scene && camera) {
+        renderer.render(scene, camera);
+      }
+      return entry.canvas.toDataURL('image/webp', 0.92);
+    } catch (e) {
+      console.warn('Failed to capture canvas snapshot:', e);
+      return null;
+    }
   }
 };
