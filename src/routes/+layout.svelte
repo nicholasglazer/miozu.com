@@ -7,7 +7,7 @@
   import Header from '$features/layout/Header.svelte';
   import Footer from '$features/layout/Footer.svelte';
   import ExpandedView from '$lib/components/ExpandedView.svelte';
-  import {showOverlay} from '$lib/stores/transition';
+  import {cardTransition} from '$lib/reactiveStates/cardTransition.svelte';
   import '../app.css';
 
   let {children, data} = $props();
@@ -110,7 +110,7 @@
 
 {#if isHomePage}
   <!-- Home page: Full custom layout -->
-  <div class="home-container" style="height: {innerHeight}px;" class:hidden={$showOverlay}>
+  <div class="home-container" style="height: {innerHeight}px;" class:hidden={cardTransition.showOverlay}>
     {@render children()}
   </div>
 {:else}

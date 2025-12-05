@@ -3,7 +3,7 @@
   import Metadata from '$features/seo/Metadata.svelte';
   import JsonLd from '$features/seo/JsonLd.svelte';
   import {appName, domain} from '$settings/global';
-  import { cardTransition } from '$lib/stores/transition';
+  import { cardTransition } from '$lib/reactiveStates/cardTransition.svelte';
 
   // Priority-based lazy loading for ThreeCanvas
   // Phase 1: Hero + About (visible immediately, highest priority)
@@ -94,24 +94,24 @@
 
   $effect(() => {
     // Fade text immediately when expansion starts
-    if ($cardTransition.isExpanding) {
+    if (cardTransition.isExpanding) {
       for (const [key, config] of Object.entries(cardConfigs)) {
-        if (config.route === $cardTransition.targetRoute && config.effectType === $cardTransition.effectType) {
+        if (config.route === cardTransition.targetRoute && config.effectType === cardTransition.effectType) {
           fadingCard = key;
           break;
         }
       }
     }
 
-    if ($cardTransition.isExpanded) {
+    if (cardTransition.isExpanded) {
       // Hide card after expansion animation is complete
       for (const [key, config] of Object.entries(cardConfigs)) {
-        if (config.route === $cardTransition.targetRoute && config.effectType === $cardTransition.effectType) {
+        if (config.route === cardTransition.targetRoute && config.effectType === cardTransition.effectType) {
           expandingCard = key;
           break;
         }
       }
-    } else if (!$cardTransition.isExpanding && !$cardTransition.isCollapsing) {
+    } else if (!cardTransition.isExpanding && !cardTransition.isCollapsing) {
       expandingCard = null;
       fadingCard = null;
     }

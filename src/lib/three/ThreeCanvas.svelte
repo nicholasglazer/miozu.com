@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
-  import { canvasRegistry } from '$lib/stores/canvasRegistry';
+  import { canvasRegistry } from '$lib/reactiveStates/canvasRegistry.svelte';
 
   interface Props {
     type?: 'falling-cubes' | 'sinuous' | 'sinuous-original' | 'snake-trails' | 'synaptic' | 'synaptic-multipass' | 'ether';
@@ -210,9 +210,7 @@
 
   .three-canvas :global(canvas) {
     display: block;
-    width: 100%;
-    height: 100%;
-    /* Canvas fills container, Three.js controls buffer resolution via setSize() */
-    /* This ensures consistent sizing when canvas is teleported between containers */
+    /* Don't force 100% - let Three.js control canvas size via setSize() */
+    /* This prevents distortion when canvas buffer dimensions differ from CSS dimensions */
   }
 </style>
