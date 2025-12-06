@@ -72,7 +72,12 @@ export async function createRenderer(
 	} = config;
 
 	// Check WebGPU availability
-	const canUseWebGPU = !forceWebGL && (await checkWebGPU());
+	// IMPORTANT: Disable WebGPU on mobile - it's experimental and causes black screens on Android Chrome
+	const isMobile = typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+	if (isMobile) {
+		console.info('[RendererFactory] Mobile device detected, forcing WebGL (WebGPU disabled on mobile)');
+	}
+	const canUseWebGPU = !forceWebGL && !isMobile && (await checkWebGPU());
 
 	if (canUseWebGPU) {
 		try {
