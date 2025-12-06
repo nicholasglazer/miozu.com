@@ -32,7 +32,11 @@ void main() {
 
 // Buffer A: Velocity and Position simulation (runs at small resolution)
 const bufferAFrag = `
-precision highp float;
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+#else
+  precision mediump float;
+#endif
 
 uniform float iTime;
 uniform float iFrame;
@@ -135,7 +139,11 @@ void main() {
 
 // Buffer B: Particle rendering with trail accumulation
 const bufferBFrag = `
-precision highp float;
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+#else
+  precision mediump float;
+#endif
 
 uniform float iTime;
 uniform float iFrame;
@@ -202,7 +210,11 @@ void main() {
 
 // Final Image: Color mixing
 const imageFrag = `
-precision highp float;
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+#else
+  precision mediump float;
+#endif
 
 uniform float iTime;
 uniform sampler2D iChannel0;

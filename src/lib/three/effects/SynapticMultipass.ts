@@ -15,7 +15,11 @@ import type { SceneManager } from '../SceneManager';
 
 // Buffer A - Particle velocity and position simulation
 const bufferAFragment = `
-precision highp float;
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+#else
+  precision mediump float;
+#endif
 
 uniform float iTime;
 uniform vec2 iResolution;
@@ -75,7 +79,11 @@ void main() {
 
 // Buffer B - Rendering with feedback
 const bufferBFragment = `
-precision highp float;
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+#else
+  precision mediump float;
+#endif
 
 uniform float iTime;
 uniform vec2 iResolution;
@@ -144,7 +152,11 @@ void main() {
 
 // Final output shader
 const finalFragment = `
-precision highp float;
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+  precision highp float;
+#else
+  precision mediump float;
+#endif
 
 uniform sampler2D iChannel0; // Buffer B
 uniform vec2 iResolution;

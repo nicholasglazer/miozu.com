@@ -25,6 +25,43 @@ export interface PerformanceMetrics {
 // Cached GPU info
 let cachedGPUInfo: GPUInfo | null = null;
 
+// Cached WebGL support check
+let webGLSupported: boolean | null = null;
+
+/**
+ * Check if WebGL is supported in the browser
+ * Caches result for performance
+ */
+export function isWebGLSupported(): boolean {
+	if (webGLSupported !== null) return webGLSupported;
+
+	if (typeof window === 'undefined' || typeof document === 'undefined') {
+		webGLSupported = false;
+		return false;
+	}
+
+	try {
+		const canvas = document.createElement('canvas');
+		const gl =
+			canvas.getContext('webgl2') ||
+			canvas.getContext('webgl') ||
+			canvas.getContext('experimental-webgl');
+
+		webGLSupported = gl !== null;
+
+		// Cleanup
+		if (gl && 'getExtension' in gl) {
+			const loseContext = gl.getExtension('WEBGL_lose_context');
+			if (loseContext) loseContext.loseContext();
+		}
+
+		return webGLSupported;
+	} catch {
+		webGLSupported = false;
+		return false;
+	}
+}
+
 /**
  * Detect WebGPU availability
  */
@@ -81,8 +118,8 @@ export function detectGPUFromWebGL(gl: WebGLRenderingContext | WebGL2RenderingCo
 	// Detect software rendering
 	const isSoftware = /SwiftShader|llvmpipe|Software|Mesa OffScreen|Microsoft Basic/i.test(renderer);
 
-	// Check WebGL2
-	const isWebGL2 = gl instanceof WebGL2RenderingContext;
+	// Check WebGL2 - safely handle browsers where WebGL2RenderingContext is undefined
+	const isWebGL2 = typeof WebGL2RenderingContext !== 'undefined' && gl instanceof WebGL2RenderingContext;
 
 	// Get capabilities
 	const maxTextureSize = gl.getParameter(gl.MAX_TEXTURE_SIZE) || 4096;
