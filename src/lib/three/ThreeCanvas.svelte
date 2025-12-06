@@ -84,23 +84,41 @@
   onMount(async () => {
     if (!browser) return;
 
+    console.info(`[ThreeCanvas] Mounting canvas: ${id || effectType}`);
+
+    // Check container dimensions
+    const rect = container.getBoundingClientRect();
+    console.info(`[ThreeCanvas] Container dimensions: ${rect.width}x${rect.height}`);
+
+    if (rect.width === 0 || rect.height === 0) {
+      console.warn(`[ThreeCanvas] Container has zero dimensions! Canvas may not be visible.`);
+    }
+
     // Lazy load Three.js components
     const { SceneManager } = await import('./SceneManager');
 
     // Cap pixel ratio more aggressively on mobile
-    const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth < 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
     const maxPixelRatio = isMobile ? 1.5 : 2;
+
+    console.info(`[ThreeCanvas] isMobile: ${isMobile}, maxPixelRatio: ${maxPixelRatio}`);
 
     const manager = new SceneManager({
       container,
       alpha: true,
-      antialias: !lowRes,
+      antialias: !lowRes && !isMobile, // Disable antialiasing on mobile for better performance
       pixelRatio: lowRes ? 1 : Math.min(window.devicePixelRatio, maxPixelRatio),
       forceWebGL,
       adaptiveQuality
     });
 
-    await manager.init();
+    try {
+      await manager.init();
+      console.info(`[ThreeCanvas] SceneManager initialized successfully for: ${id || effectType}`);
+    } catch (error) {
+      console.error(`[ThreeCanvas] Failed to initialize SceneManager:`, error);
+      return;
+    }
 
     // Set reactive state - this triggers the $effect for initial resize
     sceneManager = manager;

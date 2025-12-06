@@ -160,6 +160,9 @@ async function createWebGPURenderer(
 	};
 }
 
+// Track active WebGL contexts for debugging
+let activeContextCount = 0;
+
 /**
  * Create WebGL renderer
  */
@@ -176,21 +179,41 @@ function createWebGLRenderer(
 		preserveDrawingBuffer: boolean;
 	}
 ): RendererResult {
-	const renderer = new THREE.WebGLRenderer({
-		canvas: config.canvas,
-		alpha: config.alpha,
-		antialias: config.antialias,
-		powerPreference: config.powerPreference as WebGLPowerPreference,
-		stencil: config.stencil,
-		depth: config.depth,
-		preserveDrawingBuffer: config.preserveDrawingBuffer,
-		failIfMajorPerformanceCaveat: false
-	});
+	activeContextCount++;
+	console.info(`[RendererFactory] Creating WebGL context #${activeContextCount}`);
+
+	// On mobile, use 'default' power preference to avoid issues
+	const isMobile = typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+	const powerPref = isMobile ? 'default' : config.powerPreference;
+
+	let renderer: THREE.WebGLRenderer;
+	try {
+		renderer = new THREE.WebGLRenderer({
+			canvas: config.canvas,
+			alpha: config.alpha,
+			antialias: config.antialias,
+			powerPreference: powerPref as WebGLPowerPreference,
+			stencil: config.stencil,
+			depth: config.depth,
+			preserveDrawingBuffer: config.preserveDrawingBuffer,
+			failIfMajorPerformanceCaveat: false
+		});
+	} catch (error) {
+		console.error('[RendererFactory] Failed to create WebGL renderer:', error);
+		activeContextCount--;
+		throw error;
+	}
 
 	renderer.setPixelRatio(config.pixelRatio);
 
 	// Detect GPU info
 	const gl = renderer.getContext();
+	if (!gl) {
+		console.error('[RendererFactory] Failed to get WebGL context');
+		activeContextCount--;
+		throw new Error('Failed to get WebGL context');
+	}
+
 	const gpuInfo = detectGPUFromWebGL(gl);
 	setGPUInfo(gpuInfo);
 
@@ -198,10 +221,11 @@ function createWebGLRenderer(
 	renderer.debug.checkShaderErrors = true;
 
 	// Log WebGL capabilities for debugging mobile issues
-	console.info('[RendererFactory] WebGL renderer created');
+	console.info(`[RendererFactory] WebGL context #${activeContextCount} created successfully`);
 	console.info('[RendererFactory] WebGL version:', gl.getParameter(gl.VERSION));
 	console.info('[RendererFactory] GLSL version:', gl.getParameter(gl.SHADING_LANGUAGE_VERSION));
 	console.info('[RendererFactory] Max texture size:', gl.getParameter(gl.MAX_TEXTURE_SIZE));
+	console.info('[RendererFactory] Renderer:', gpuInfo.renderer);
 
 	// Check for float texture support (critical for multipass effects)
 	const floatTextures = gl.getExtension('OES_texture_float');
@@ -209,11 +233,24 @@ function createWebGLRenderer(
 	const colorBufferFloat = gl.getExtension('EXT_color_buffer_float') || gl.getExtension('WEBGL_color_buffer_float');
 	console.info('[RendererFactory] Float textures:', !!floatTextures, '| Linear:', !!floatLinear, '| Color buffer:', !!colorBufferFloat);
 
+	// Listen for context loss (important for mobile!)
+	const canvas = renderer.domElement;
+	canvas.addEventListener('webglcontextlost', (event) => {
+		console.error('[RendererFactory] WebGL context LOST! This often happens when too many contexts exist.');
+		event.preventDefault();
+	});
+
+	canvas.addEventListener('webglcontextrestored', () => {
+		console.info('[RendererFactory] WebGL context restored');
+	});
+
 	return {
 		renderer,
 		isWebGPU: false,
 		gpuInfo,
 		dispose: () => {
+			activeContextCount--;
+			console.info(`[RendererFactory] Disposing WebGL context. Remaining: ${activeContextCount}`);
 			renderer.dispose();
 		}
 	};
