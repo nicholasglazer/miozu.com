@@ -32,8 +32,6 @@ void main() {
 
 // Buffer A: Velocity and Position simulation (runs at small resolution)
 const bufferAFrag = `
-precision mediump float;
-
 uniform float iTime;
 uniform float iFrame;
 uniform vec2 iResolution;
@@ -135,8 +133,6 @@ void main() {
 
 // Buffer B: Particle rendering with trail accumulation
 const bufferBFrag = `
-precision mediump float;
-
 uniform float iTime;
 uniform float iFrame;
 uniform vec2 iResolution;
@@ -202,8 +198,6 @@ void main() {
 
 // Final Image: Color mixing
 const imageFrag = `
-precision mediump float;
-
 uniform float iTime;
 uniform sampler2D iChannel0;
 
@@ -318,7 +312,8 @@ export class SinuousOriginalEffect {
         iResolution: { value: new THREE.Vector2(this.simWidth, this.simHeight) },
         iPrevBuffer: { value: null },
         iSeed: { value: this.seed }
-      }
+      },
+      precision: 'mediump' // Required for mobile compatibility
     });
 
     // Buffer B material (particle rendering)
@@ -333,7 +328,8 @@ export class SinuousOriginalEffect {
         iParticles: { value: null },
         iPrevRender: { value: null },
         iSeed: { value: this.seed }
-      }
+      },
+      precision: 'mediump' // Required for mobile compatibility
     });
 
     // Final image material - uses fullscreen vertex shader for proper viewport coverage
@@ -345,7 +341,8 @@ export class SinuousOriginalEffect {
         iChannel0: { value: null }
       },
       depthTest: false,
-      depthWrite: false
+      depthWrite: false,
+      precision: 'mediump' // Required for mobile compatibility
     });
 
     // Quad for offscreen rendering

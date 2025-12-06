@@ -19,8 +19,6 @@ void main() {
 `;
 
 const fragmentShader = `
-precision mediump float;
-
 uniform float iTime;
 uniform vec2 iResolution;
 uniform vec2 iMouse;
@@ -169,7 +167,8 @@ export class SynapticEffect {
         iMouse: { value: new THREE.Vector2(0.5, 0.5) }
       },
       depthTest: false,
-      depthWrite: false
+      depthWrite: false,
+      precision: 'mediump' // Required for mobile compatibility
     });
 
     const geometry = new THREE.PlaneGeometry(2, 2);

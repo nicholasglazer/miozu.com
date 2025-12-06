@@ -19,8 +19,6 @@ void main() {
 `;
 
 const fragmentShader = `
-precision mediump float;
-
 uniform float iTime;
 uniform vec2 iResolution;
 
@@ -149,7 +147,8 @@ export class SinuousShaderEffect {
         iResolution: { value: new Vector2(width, height) }
       },
       depthTest: false,
-      depthWrite: false
+      depthWrite: false,
+      precision: 'mediump' // Required for mobile compatibility
     });
 
     const geometry = new PlaneGeometry(2, 2);

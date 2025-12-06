@@ -15,8 +15,6 @@ import type { SceneManager } from '../SceneManager';
 
 // Buffer A - Particle velocity and position simulation
 const bufferAFragment = `
-precision mediump float;
-
 uniform float iTime;
 uniform vec2 iResolution;
 uniform sampler2D iChannel0; // Self (previous frame)
@@ -75,8 +73,6 @@ void main() {
 
 // Buffer B - Rendering with feedback
 const bufferBFragment = `
-precision mediump float;
-
 uniform float iTime;
 uniform vec2 iResolution;
 uniform vec2 iMouse;
@@ -144,8 +140,6 @@ void main() {
 
 // Final output shader
 const finalFragment = `
-precision mediump float;
-
 uniform sampler2D iChannel0; // Buffer B
 uniform vec2 iResolution;
 
@@ -338,7 +332,8 @@ export class SynapticMultipassEffect {
         iChannel0: { value: null },
         iChannel1: { value: this.noiseTexture },
         iFrame: { value: 0 }
-      }
+      },
+      precision: 'mediump' // Required for mobile compatibility
     });
 
     this.bufferAScene = new THREE.Scene();
@@ -355,7 +350,8 @@ export class SynapticMultipassEffect {
         iChannel0: { value: null },
         iChannel1: { value: null },
         iFrame: { value: 0 }
-      }
+      },
+      precision: 'mediump' // Required for mobile compatibility
     });
 
     this.bufferBScene = new THREE.Scene();
@@ -370,7 +366,8 @@ export class SynapticMultipassEffect {
         iResolution: { value: new THREE.Vector2(width, height) }
       },
       depthTest: false,
-      depthWrite: false
+      depthWrite: false,
+      precision: 'mediump' // Required for mobile compatibility
     });
 
     this.finalMesh = new THREE.Mesh(geometry, this.finalMaterial);
