@@ -73,11 +73,19 @@ export async function createRenderer(
 
 	// Check WebGPU availability
 	// IMPORTANT: Disable WebGPU on mobile - it's experimental and causes black screens on Android Chrome
-	const isMobile = typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-	if (isMobile) {
+	// Must use multiple detection methods because "Request Desktop Site" spoofs User-Agent
+	const isMobileDevice = typeof navigator !== 'undefined' && (
+		// Method 1: User-Agent (works for normal mobile browsing)
+		/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+		// Method 2: Platform contains ARM (reveals mobile even in desktop mode)
+		/arm/i.test(navigator.platform) ||
+		// Method 3: Touch device with small screen (catches spoofed desktop mode)
+		(navigator.maxTouchPoints > 0 && typeof screen !== 'undefined' && screen.width < 1024)
+	);
+	if (isMobileDevice) {
 		console.info('[RendererFactory] Mobile device detected, forcing WebGL (WebGPU disabled on mobile)');
 	}
-	const canUseWebGPU = !forceWebGL && !isMobile && (await checkWebGPU());
+	const canUseWebGPU = !forceWebGL && !isMobileDevice && (await checkWebGPU());
 
 	if (canUseWebGPU) {
 		try {
@@ -188,7 +196,12 @@ function createWebGLRenderer(
 	console.info(`[RendererFactory] Creating WebGL context #${activeContextCount}`);
 
 	// On mobile, use 'default' power preference to avoid issues
-	const isMobile = typeof navigator !== 'undefined' && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+	// Use robust mobile detection (handles "Request Desktop Site" mode)
+	const isMobile = typeof navigator !== 'undefined' && (
+		/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+		/arm/i.test(navigator.platform) ||
+		(navigator.maxTouchPoints > 0 && typeof screen !== 'undefined' && screen.width < 1024)
+	);
 	const powerPref = isMobile ? 'default' : config.powerPreference;
 
 	let renderer: THREE.WebGLRenderer;
