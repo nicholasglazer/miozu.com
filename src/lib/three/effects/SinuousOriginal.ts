@@ -32,11 +32,7 @@ void main() {
 
 // Buffer A: Velocity and Position simulation (runs at small resolution)
 const bufferAFrag = `
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-  precision highp float;
-#else
-  precision mediump float;
-#endif
+precision mediump float;
 
 uniform float iTime;
 uniform float iFrame;
@@ -139,11 +135,7 @@ void main() {
 
 // Buffer B: Particle rendering with trail accumulation
 const bufferBFrag = `
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-  precision highp float;
-#else
-  precision mediump float;
-#endif
+precision mediump float;
 
 uniform float iTime;
 uniform float iFrame;
@@ -210,11 +202,7 @@ void main() {
 
 // Final Image: Color mixing
 const imageFrag = `
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-  precision highp float;
-#else
-  precision mediump float;
-#endif
+precision mediump float;
 
 uniform float iTime;
 uniform sampler2D iChannel0;
@@ -279,24 +267,38 @@ export class SinuousOriginalEffect {
     this.quadCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
     this.quadScene = new THREE.Scene();
 
+    // Detect float texture support for mobile compatibility
+    const renderer = this.manager.getRenderer();
+    const gl = renderer.getContext();
+    const hasFloatTextures = !!gl.getExtension('OES_texture_float');
+    const hasHalfFloatTextures = !!gl.getExtension('OES_texture_half_float');
+    const hasColorBufferFloat = !!(gl.getExtension('EXT_color_buffer_float') || gl.getExtension('WEBGL_color_buffer_float'));
+
+    // Use HalfFloatType as fallback if FloatType isn't fully supported
+    // Mobile GPUs often support float textures but not float render targets
+    const simTextureType = hasColorBufferFloat ? THREE.FloatType :
+                          hasHalfFloatTextures ? THREE.HalfFloatType :
+                          THREE.UnsignedByteType;
+
+    console.info('[SinuousOriginal] Texture support - Float:', hasFloatTextures, 'HalfFloat:', hasHalfFloatTextures, 'ColorBuffer:', hasColorBufferFloat, '-> Using:', simTextureType === THREE.FloatType ? 'Float' : simTextureType === THREE.HalfFloatType ? 'HalfFloat' : 'UnsignedByte');
+
     // Small render targets for particle simulation (Buffer A)
-    // FloatType needed for accurate particle positions
     const simOptions = {
       minFilter: THREE.NearestFilter,
       magFilter: THREE.NearestFilter,
       format: THREE.RGBAFormat,
-      type: THREE.FloatType,
+      type: simTextureType,
       depthBuffer: false, // Not needed - saves memory
       stencilBuffer: false
     };
 
     // Full-size render targets for rendering (Buffer B)
-    // HalfFloatType sufficient for visual output - half the memory
+    // Use same type as simulation for consistency
     const renderOptions = {
       minFilter: THREE.LinearFilter,
       magFilter: THREE.LinearFilter,
       format: THREE.RGBAFormat,
-      type: THREE.HalfFloatType,
+      type: hasHalfFloatTextures ? THREE.HalfFloatType : THREE.UnsignedByteType,
       depthBuffer: false,
       stencilBuffer: false
     };

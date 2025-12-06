@@ -18,11 +18,7 @@ void main() {
 
 // Optimized fragment shader with reduced iterations for performance
 const fragmentShader = `
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-  precision highp float;
-#else
-  precision mediump float;
-#endif
+precision mediump float;
 
 uniform float iTime;
 uniform vec2 iResolution;

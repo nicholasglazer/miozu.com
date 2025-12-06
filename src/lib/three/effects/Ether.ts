@@ -18,11 +18,7 @@ void main() {
 `;
 
 const fragmentShader = `
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-  precision highp float;
-#else
-  precision mediump float;
-#endif
+precision mediump float;
 
 uniform float iTime;
 uniform vec2 iResolution;

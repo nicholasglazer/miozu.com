@@ -194,7 +194,20 @@ function createWebGLRenderer(
 	const gpuInfo = detectGPUFromWebGL(gl);
 	setGPUInfo(gpuInfo);
 
+	// Enable shader error logging for debugging
+	renderer.debug.checkShaderErrors = true;
+
+	// Log WebGL capabilities for debugging mobile issues
 	console.info('[RendererFactory] WebGL renderer created');
+	console.info('[RendererFactory] WebGL version:', gl.getParameter(gl.VERSION));
+	console.info('[RendererFactory] GLSL version:', gl.getParameter(gl.SHADING_LANGUAGE_VERSION));
+	console.info('[RendererFactory] Max texture size:', gl.getParameter(gl.MAX_TEXTURE_SIZE));
+
+	// Check for float texture support (critical for multipass effects)
+	const floatTextures = gl.getExtension('OES_texture_float');
+	const floatLinear = gl.getExtension('OES_texture_float_linear');
+	const colorBufferFloat = gl.getExtension('EXT_color_buffer_float') || gl.getExtension('WEBGL_color_buffer_float');
+	console.info('[RendererFactory] Float textures:', !!floatTextures, '| Linear:', !!floatLinear, '| Color buffer:', !!colorBufferFloat);
 
 	return {
 		renderer,

@@ -15,11 +15,7 @@ import type { SceneManager } from '../SceneManager';
 
 // Buffer A - Particle velocity and position simulation
 const bufferAFragment = `
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-  precision highp float;
-#else
-  precision mediump float;
-#endif
+precision mediump float;
 
 uniform float iTime;
 uniform vec2 iResolution;
@@ -79,11 +75,7 @@ void main() {
 
 // Buffer B - Rendering with feedback
 const bufferBFragment = `
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-  precision highp float;
-#else
-  precision mediump float;
-#endif
+precision mediump float;
 
 uniform float iTime;
 uniform vec2 iResolution;
@@ -152,11 +144,7 @@ void main() {
 
 // Final output shader
 const finalFragment = `
-#ifdef GL_FRAGMENT_PRECISION_HIGH
-  precision highp float;
-#else
-  precision mediump float;
-#endif
+precision mediump float;
 
 uniform sampler2D iChannel0; // Buffer B
 uniform vec2 iResolution;
@@ -247,11 +235,30 @@ export class SynapticMultipassEffect {
   // Resolution scale for render targets (1.0 = full resolution)
   private readonly BUFFER_SCALE = 1.0;
 
+  // Texture type determined based on GPU capabilities
+  private textureType: number = 0;
+
   private createNoiseTexture(): THREE.DataTexture {
     const THREE = this.THREE;
     const size = 128; // Reduced from 256 for performance
-    const data = new Float32Array(size * size * 4);
 
+    // Use Uint8Array for mobile compatibility if float not supported
+    if (this.textureType === THREE.UnsignedByteType) {
+      const data = new Uint8Array(size * size * 4);
+      for (let i = 0; i < size * size; i++) {
+        data[i * 4 + 0] = Math.floor(Math.random() * 255);
+        data[i * 4 + 1] = Math.floor(Math.random() * 255);
+        data[i * 4 + 2] = Math.floor(Math.random() * 255);
+        data[i * 4 + 3] = 255;
+      }
+      const texture = new THREE.DataTexture(data, size, size, THREE.RGBAFormat, THREE.UnsignedByteType);
+      texture.needsUpdate = true;
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.RepeatWrapping;
+      return texture;
+    }
+
+    const data = new Float32Array(size * size * 4);
     for (let i = 0; i < size * size; i++) {
       data[i * 4 + 0] = Math.random();
       data[i * 4 + 1] = Math.random();
@@ -259,7 +266,7 @@ export class SynapticMultipassEffect {
       data[i * 4 + 3] = 1.0;
     }
 
-    const texture = new THREE.DataTexture(data, size, size, THREE.RGBAFormat, THREE.FloatType);
+    const texture = new THREE.DataTexture(data, size, size, THREE.RGBAFormat, this.textureType as THREE.TextureDataType);
     texture.needsUpdate = true;
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
@@ -273,7 +280,7 @@ export class SynapticMultipassEffect {
       minFilter: THREE.NearestFilter,
       magFilter: THREE.NearestFilter,
       format: THREE.RGBAFormat,
-      type: THREE.FloatType,
+      type: this.textureType as THREE.TextureDataType,
       wrapS: THREE.ClampToEdgeWrapping,
       wrapT: THREE.ClampToEdgeWrapping,
       depthBuffer: false, // Not needed for 2D shaders
@@ -286,6 +293,20 @@ export class SynapticMultipassEffect {
     const container = this.manager.getContainer();
     const width = container.clientWidth;
     const height = container.clientHeight;
+
+    // Detect float texture support for mobile compatibility
+    const renderer = this.manager.getRenderer();
+    const gl = renderer.getContext();
+    const hasFloatTextures = !!gl.getExtension('OES_texture_float');
+    const hasHalfFloatTextures = !!gl.getExtension('OES_texture_half_float');
+    const hasColorBufferFloat = !!(gl.getExtension('EXT_color_buffer_float') || gl.getExtension('WEBGL_color_buffer_float'));
+
+    // Determine texture type based on capabilities
+    this.textureType = hasColorBufferFloat ? THREE.FloatType :
+                       hasHalfFloatTextures ? THREE.HalfFloatType :
+                       THREE.UnsignedByteType;
+
+    console.info('[SynapticMultipass] Texture support - Float:', hasFloatTextures, 'HalfFloat:', hasHalfFloatTextures, 'ColorBuffer:', hasColorBufferFloat, '-> Using:', this.textureType === THREE.FloatType ? 'Float' : this.textureType === THREE.HalfFloatType ? 'HalfFloat' : 'UnsignedByte');
 
     // Create orthographic camera for full-screen passes
     this.orthoCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
