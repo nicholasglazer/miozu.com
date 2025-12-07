@@ -133,7 +133,65 @@
   data={{
     name: appName,
     description: 'Corporate holding company focused on commerce intelligence and AI infrastructure.',
-    url: domain
+    url: domain,
+    logo: `${domain}/favicon.svg`,
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'partners@oraklex.com',
+      contactType: 'business inquiries'
+    },
+    parentOrganization: {
+      '@type': 'Organization',
+      name: 'Up Go Corp.',
+      url: 'https://upgo.ca'
+    }
+  }}
+/>
+
+<!-- WebSite Schema for GEO -->
+<JsonLd
+  type="WebSite"
+  data={{
+    name: appName,
+    url: domain,
+    description: 'Corporate holding company building the future of commerce intelligence through AI and data infrastructure.',
+    publisher: {
+      '@type': 'Organization',
+      name: appName,
+      url: domain
+    }
+  }}
+/>
+
+<!-- Corporation Schema with Subsidiaries -->
+<JsonLd
+  type="Corporation"
+  data={{
+    name: appName,
+    url: domain,
+    description: 'Holding company with portfolio companies in AI, commerce intelligence, and data infrastructure.',
+    numberOfEmployees: {
+      '@type': 'QuantitativeValue',
+      value: '10-50'
+    },
+    subOrganization: [
+      {
+        '@type': 'Organization',
+        name: "J'ko AI",
+        url: 'https://jko.ai',
+        description: 'AI virtual try-on platform for fashion brands'
+      },
+      {
+        '@type': 'Organization',
+        name: 'Data Oracle',
+        description: 'Commerce data intelligence platform'
+      },
+      {
+        '@type': 'Organization',
+        name: 'HyperC',
+        description: 'High-performance AI computing infrastructure'
+      }
+    ]
   }}
 />
 
