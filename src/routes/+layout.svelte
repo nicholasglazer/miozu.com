@@ -12,11 +12,17 @@
 
   let {children, data} = $props();
 
-  // Check if we're on the home page (custom layout, no scroll)
-  let isHomePage = $derived($page.url.pathname === '/');
+  // Check if we're on a fullscreen page (custom layout, no scroll)
+  // Home page and contact page have their own fullscreen layouts
+  // Handle both with and without trailing slash
+  let isFullscreenPage = $derived(
+    $page.url.pathname === '/' ||
+    $page.url.pathname === '/contact' ||
+    $page.url.pathname === '/contact/'
+  );
 
   afterNavigate(() => {
-    if (!isHomePage) {
+    if (!isFullscreenPage) {
       disableScrollHandling();
       setTimeout(() => {
         window.scrollTo({top: 0, behavior: 'instant'});
@@ -108,8 +114,8 @@
 <!-- Expanded View Overlay (renders on top of everything) -->
 <ExpandedView />
 
-{#if isHomePage}
-  <!-- Home page: Full custom layout -->
+{#if isFullscreenPage}
+  <!-- Fullscreen pages: Full custom layout (home, contact) -->
   <div class="home-container" style="height: {innerHeight}px;" class:hidden={cardTransition.showOverlay}>
     {@render children()}
   </div>
