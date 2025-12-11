@@ -4,6 +4,7 @@
   import JsonLd from '$features/seo/JsonLd.svelte';
   import {appName, domain} from '$settings/global';
   import { cardTransition } from '$lib/reactiveStates/cardTransition.svelte';
+  import MegaMenu from '$lib/features/layout/MegaMenu.svelte';
 
   // Priority-based lazy loading for ThreeCanvas
   // Phase 1: Hero + About (visible immediately, highest priority)
@@ -32,26 +33,26 @@
   // Card configuration for transitions
   const cardConfigs: Record<string, { route: string; effectType: string; canvasId: string; label: string; title: string; description: string }> = {
     about: {
-      route: '/team',
+      route: '/about',
       effectType: 'sinuous-original',
       canvasId: 'canvas-about',
-      label: 'The Holding',
+      label: 'The Company',
       title: 'About',
-      description: 'A vertically integrated approach to commerce intelligence and AI infrastructure.'
+      description: 'The oracle for the AI age - data intelligence for modern commerce.'
     },
     portfolio: {
-      route: '/products',
+      route: '/solutions',
       effectType: 'synaptic-multipass',
       canvasId: 'canvas-portfolio',
-      label: 'Our Companies',
-      title: 'Portfolio',
-      description: 'J\'ko AI, Data Oracle, and HyperC - building the future of commerce intelligence.'
+      label: 'What We Do',
+      title: 'Solutions',
+      description: 'GEO/AEO optimization, LLM data services, and commerce intelligence.'
     },
     leadership: {
-      route: '/team',
+      route: '/about',
       effectType: 'synaptic',
       canvasId: 'canvas-leadership',
-      label: 'Executive Team',
+      label: 'Our Vision',
       title: 'Leadership',
       description: 'Building at the intersection of AI and commerce.'
     },
@@ -65,13 +66,14 @@
     }
   };
 
-  // Handle card click - trigger FLIP transition
+  // Handle card click - always use FLIP animation for smooth transitions
+  // ExpandedView will handle navigation to fullscreen pages after animation
   function handleCardClick(e: MouseEvent, cardKey: string) {
     e.preventDefault();
 
+    const config = cardConfigs[cardKey];
     const card = e.currentTarget as HTMLElement;
     const rect = card.getBoundingClientRect();
-    const config = cardConfigs[cardKey];
 
     cardTransition.expand({
       targetRoute: config.route,
@@ -184,12 +186,7 @@
       {
         '@type': 'Organization',
         name: 'Data Oracle',
-        description: 'Commerce data intelligence platform'
-      },
-      {
-        '@type': 'Organization',
-        name: 'HyperC',
-        description: 'High-performance AI computing infrastructure'
+        description: 'LLM training data and commerce intelligence platform'
       }
     ]
   }}
@@ -202,13 +199,10 @@
       <a href="/" class="logo">Oraklex</a>
     </div>
     <nav class="header-nav">
-      <a href="/products">Products</a>
-      <a href="/team">Team</a>
-      <a href="/contact">Contact</a>
+      <MegaMenu />
+      <a href="/about" class="nav-link">About</a>
+      <a href="/contact" class="nav-link">Contact</a>
     </nav>
-    <div class="header-right">
-      <a href="https://jko.ai" class="cta-btn">J'ko AI</a>
-    </div>
   </header>
 
   <!-- Main Grid -->
@@ -244,9 +238,9 @@
       {/if}
       <div class="block-overlay block-overlay-about">
         <div class="block-content">
-          <span class="block-label">The Holding</span>
+          <span class="block-label">The Company</span>
           <h2 class="block-title">About</h2>
-          <p class="block-desc">A vertically integrated approach to commerce intelligence and AI infrastructure.</p>
+          <p class="block-desc">The oracle for the AI age - data intelligence for modern commerce.</p>
         </div>
         <div class="block-corner">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -268,12 +262,12 @@
         <ThreeCanvas type="synaptic-multipass" lowRes={true} id="canvas-portfolio" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Our Companies</span>
-        <h2 class="block-title">Portfolio</h2>
+        <span class="block-label">What We Do</span>
+        <h2 class="block-title">Solutions</h2>
         <ul class="block-list">
-          <li>J'ko AI</li>
+          <li>GEO Intelligence</li>
+          <li>AEO Solutions</li>
           <li>Data Oracle</li>
-          <li>HyperC</li>
         </ul>
       </div>
       <div class="block-corner">
@@ -295,7 +289,7 @@
         <ThreeCanvas type="synaptic" lowRes={true} id="canvas-leadership" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Executive Team</span>
+        <span class="block-label">Our Vision</span>
         <h2 class="block-title">Leadership</h2>
         <p class="block-desc">Building at the intersection of AI and commerce.</p>
       </div>
@@ -383,38 +377,22 @@
 
   .header-nav {
     display: flex;
-    gap: 8px;
+    align-items: center;
+    gap: 4px;
   }
 
-  .header-nav a {
-    padding: 6px 14px;
-    font-size: 0.8rem;
+  .nav-link {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    font-weight: 500;
     color: #888;
     text-decoration: none;
-    transition: color 0.2s;
+    transition: color 0.15s;
+    letter-spacing: -0.01em;
   }
 
-  .header-nav a:hover {
+  .nav-link:hover {
     color: #fff;
-  }
-
-  .header-right {
-    flex: 0 0 auto;
-  }
-
-  .cta-btn {
-    padding: 6px 16px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: #000;
-    background: #fff;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-
-  .cta-btn:hover {
-    background: #e0e0e0;
   }
 
   /* Main Grid - Asymmetric layout */

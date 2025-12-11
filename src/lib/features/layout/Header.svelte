@@ -2,6 +2,7 @@
   import {appName} from '$lib/settings/global';
   import {mainRoutes} from '$lib/settings/routes';
   import Logo from '$components/Logo.svelte';
+  import MegaMenu from './MegaMenu.svelte';
   import MobileMenu from './MobileMenu.svelte';
 
   let {headerEl = $bindable(), l10n, theme} = $props();
@@ -15,13 +16,9 @@
       </a>
     </div>
 
-    <!-- Desktop navigation -->
+    <!-- Desktop navigation with mega menu -->
     <nav class="main-nav">
-      {#each mainRoutes as route}
-        <a href={route.path} class="nav-link">
-          {route.translate ? (l10n?.t(route.label) ?? route.label) : route.label}
-        </a>
-      {/each}
+      <MegaMenu {l10n} />
     </nav>
 
     <div class="header-right">

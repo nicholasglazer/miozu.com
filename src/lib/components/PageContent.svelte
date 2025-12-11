@@ -12,7 +12,9 @@
   const routeMap: Record<string, () => Promise<any>> = {
     '/team': () => import('./content/TeamContent.svelte'),
     '/products': () => import('./content/ProductsContent.svelte'),
-    '/contact': () => import('./content/ContactContent.svelte')
+    '/contact': () => import('./content/ContactContent.svelte'),
+    '/about': () => import('./content/AboutContent.svelte'),
+    '/solutions': () => import('./content/SolutionsContent.svelte')
   };
 
   // Use $effect to reload content when route changes

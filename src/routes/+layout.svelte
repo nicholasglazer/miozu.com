@@ -13,12 +13,16 @@
   let {children, data} = $props();
 
   // Check if we're on a fullscreen page (custom layout, no scroll)
-  // Home page and contact page have their own fullscreen layouts
+  // Home page and expanded pages have their own fullscreen layouts
   // Handle both with and without trailing slash
   let isFullscreenPage = $derived(
     $page.url.pathname === '/' ||
     $page.url.pathname === '/contact' ||
-    $page.url.pathname === '/contact/'
+    $page.url.pathname === '/contact/' ||
+    $page.url.pathname === '/solutions' ||
+    $page.url.pathname === '/solutions/' ||
+    $page.url.pathname === '/about' ||
+    $page.url.pathname === '/about/'
   );
 
   afterNavigate(() => {
