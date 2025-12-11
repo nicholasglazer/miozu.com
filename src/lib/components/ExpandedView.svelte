@@ -4,6 +4,7 @@
   import { cardTransition } from '$lib/reactiveStates/cardTransition.svelte';
   import { canvasRegistry } from '$lib/reactiveStates/canvasRegistry.svelte';
   import PageContent from './PageContent.svelte';
+  import Footer from '$lib/features/layout/Footer.svelte';
 
   // Animation constants - fast, smooth, professional
   const EXPAND_DURATION = 380;
@@ -286,16 +287,19 @@
 
     <!-- Scrollable content area -->
     {#if animationPhase === 'complete' && cardTransition.targetRoute}
-      <div class="content-container">
+      <div class="content-container app-container">
         <div class="content-inner">
           <PageContent route={cardTransition.targetRoute} />
         </div>
+        <Footer />
       </div>
     {/if}
   </div>
 {/if}
 
 <style lang="postcss">
+  @reference '$theme';
+
   .expanded-view {
     position: fixed;
     inset: 0;
@@ -470,14 +474,13 @@
 
   .content-container {
     position: relative;
-    background: #f8f8f8;
+    @apply bg-base0;
     min-height: 50vh;
   }
 
   .content-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 80px 24px;
+    width: 100%;
+    padding: 80px 0 40px;
   }
 
   /* Smooth content fade in */

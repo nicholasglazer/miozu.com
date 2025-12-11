@@ -298,7 +298,7 @@
 
   /* Mission Section */
   .mission-section {
-    @apply mx-auto max-w-5xl px-6 py-12;
+    @apply mx-auto max-w-6xl px-8 py-12;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
@@ -349,7 +349,7 @@
 
   /* Values Section */
   .values-section {
-    @apply mx-auto max-w-5xl px-6 py-12;
+    @apply mx-auto max-w-6xl px-8 py-12;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
@@ -391,7 +391,7 @@
 
   /* Timeline Section */
   .timeline-section {
-    @apply mx-auto max-w-5xl px-6 py-12;
+    @apply mx-auto max-w-6xl px-8 py-12;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
@@ -447,7 +447,7 @@
 
   /* Expertise Section */
   .expertise-section {
-    @apply mx-auto max-w-5xl px-6 py-12;
+    @apply mx-auto max-w-6xl px-8 py-12;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
@@ -498,7 +498,7 @@
 
   /* Partners Section */
   .partners-section {
-    @apply mx-auto max-w-5xl px-6 py-12;
+    @apply mx-auto max-w-6xl px-8 py-12;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
@@ -552,7 +552,7 @@
 
   /* CTA Section */
   .cta-section {
-    @apply px-6 py-12;
+    @apply mx-auto max-w-6xl px-8 py-12;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
@@ -585,8 +585,9 @@
     .values-section,
     .timeline-section,
     .expertise-section,
-    .partners-section {
-      @apply px-4 py-8;
+    .partners-section,
+    .cta-section {
+      @apply px-5 py-8;
     }
 
     .mission-content {

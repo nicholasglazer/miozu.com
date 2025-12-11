@@ -240,6 +240,7 @@
     @apply absolute top-full left-1/2 -translate-x-1/2 mt-3;
     @apply rounded-2xl overflow-hidden;
     width: 860px;
+    z-index: 10001;
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
