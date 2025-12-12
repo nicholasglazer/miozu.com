@@ -214,6 +214,31 @@
           <a href={link.path} class="legal-link">{link.label}</a>
         {/each}
       </div>
+
+      <div class="footer-trust">
+        <div class="trust-badges">
+          <span class="trust-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            GDPR
+          </span>
+          <span class="trust-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            CCPA
+          </span>
+        </div>
+        <span class="location">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          Toronto, Canada
+        </span>
+      </div>
+
       <div class="legal-meta">
         <p class="copyright">© {year} {author}</p>
         <p class="built-with">
@@ -271,7 +296,41 @@
   }
 
   .footer-legal {
-    @apply flex flex-wrap justify-between text-xs text-base3 gap-2;
+    @apply flex flex-wrap justify-between items-center text-xs text-base3 gap-4;
+  }
+
+  .footer-trust {
+    @apply flex items-center gap-4;
+  }
+
+  .trust-badges {
+    @apply flex items-center gap-2;
+  }
+
+  .trust-badge {
+    @apply flex items-center gap-1 px-2 py-1 rounded bg-base1 text-base4;
+    font-size: 0.65rem;
+    font-weight: 500;
+  }
+
+  .trust-badge svg {
+    @apply text-green-500;
+  }
+
+  .location {
+    @apply flex items-center gap-1.5 text-base4;
+  }
+
+  .location svg {
+    @apply text-base4;
+  }
+
+  .legal-links {
+    @apply flex gap-3;
+  }
+
+  .legal-link {
+    @apply text-base3 hover:text-base5 transition-colors no-underline;
   }
 
   .footer-tools {

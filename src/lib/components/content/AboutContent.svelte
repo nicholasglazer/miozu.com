@@ -107,21 +107,31 @@
     {
       name: "J'ko AI",
       type: 'Our Platform',
+      badge: 'primary',
       description: 'The try-on product we built. Fashion brands embed it. Shoppers use it. We collect the signals.',
       contribution: '10M+ monthly events'
     },
     {
       name: 'Meta',
-      type: 'Tech Partner',
+      type: 'Tech Provider',
+      badge: 'meta',
       description: 'Official Meta Tech Provider. We plug into Instagram and Facebook commerce flows.',
       contribution: 'Social commerce data'
     },
     {
       name: 'Shopify',
-      type: 'Commerce Partner',
+      type: 'Partner',
+      badge: 'shopify',
       description: 'Native Shopify integration. Inventory, pricing, conversion—all connected.',
       contribution: 'Transaction data'
     }
+  ];
+
+  // Compliance badges for trust
+  const complianceBadges = [
+    { name: 'GDPR', label: 'GDPR Compliant' },
+    { name: 'CCPA', label: 'CCPA Compliant' },
+    { name: 'SOC2', label: 'SOC 2 Type II' }
   ];
 
   const getDelay = (index, base = 0) => base + index * 0.1;
@@ -250,21 +260,40 @@
       {#each partners as partner, i}
         <article
           class="partner-card"
+          class:meta={partner.badge === 'meta'}
+          class:shopify={partner.badge === 'shopify'}
+          class:primary={partner.badge === 'primary'}
           data-animate={`partner-${i}`}
           class:visible={visibleSections.has(`partner-${i}`)}
           style={`--delay: ${getDelay(i, 0.15)}s`}
           in:fade={{duration: 400, delay: i * 80}}
         >
-          <div class="partner-header">
-            <h3>{partner.name}</h3>
-            <span class="partner-type">{partner.type}</span>
+          <div class="partner-badge" class:meta={partner.badge === 'meta'} class:shopify={partner.badge === 'shopify'}>
+            <span class="badge-name">{partner.name}</span>
+            <span class="badge-type">{partner.type}</span>
           </div>
           <p class="partner-description">{partner.description}</p>
           <div class="partner-contribution">
-            <strong>Contribution:</strong> {partner.contribution}
+            <strong>{partner.contribution}</strong>
           </div>
         </article>
       {/each}
+    </div>
+
+    <!-- Compliance Badges -->
+    <div class="compliance-section">
+      <span class="compliance-label">Data Compliance</span>
+      <div class="compliance-badges">
+        {#each complianceBadges as badge}
+          <div class="compliance-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+            <span>{badge.label}</span>
+          </div>
+        {/each}
+      </div>
     </div>
   </section>
 
@@ -516,7 +545,7 @@
   }
 
   .partners-grid {
-    @apply grid gap-4 md:grid-cols-2 max-w-2xl mx-auto;
+    @apply grid gap-4 md:grid-cols-3 max-w-4xl mx-auto;
   }
 
   .partner-card {
@@ -532,16 +561,45 @@
     transform: translateY(0);
   }
 
-  .partner-header {
-    @apply flex items-center justify-between;
+  .partner-card.meta {
+    @apply border-blue-200 bg-gradient-to-br from-blue-50 to-base0;
   }
 
-  .partner-header h3 {
-    @apply text-base font-semibold text-base6;
+  .partner-card.shopify {
+    @apply border-green-200 bg-gradient-to-br from-green-50 to-base0;
   }
 
-  .partner-type {
+  .partner-card.primary {
+    @apply border-base14/20 bg-gradient-to-br from-base14/5 to-base0;
+  }
+
+  .partner-badge {
+    @apply flex flex-col gap-0.5;
+  }
+
+  .badge-name {
+    @apply text-lg font-bold text-base6;
+    letter-spacing: -0.01em;
+  }
+
+  .partner-badge.meta .badge-name {
+    @apply text-blue-600;
+  }
+
+  .partner-badge.shopify .badge-name {
+    @apply text-green-600;
+  }
+
+  .badge-type {
     @apply text-[10px] font-semibold uppercase tracking-wider text-base4;
+  }
+
+  .partner-badge.meta .badge-type {
+    @apply text-blue-500;
+  }
+
+  .partner-badge.shopify .badge-type {
+    @apply text-green-500;
   }
 
   .partner-description {
@@ -554,6 +612,28 @@
 
   .partner-contribution strong {
     @apply text-base6;
+  }
+
+  /* Compliance Section */
+  .compliance-section {
+    @apply mt-10 pt-8 border-t border-base2 text-center;
+  }
+
+  .compliance-label {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base4 block mb-4;
+  }
+
+  .compliance-badges {
+    @apply flex flex-wrap justify-center gap-4;
+  }
+
+  .compliance-badge {
+    @apply flex items-center gap-2 px-4 py-2 rounded-lg bg-base1 border border-base2;
+    @apply text-sm font-medium text-base5;
+  }
+
+  .compliance-badge svg {
+    @apply text-green-500;
   }
 
   /* CTA Section */
