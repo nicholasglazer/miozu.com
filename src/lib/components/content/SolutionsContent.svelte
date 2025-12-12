@@ -31,8 +31,8 @@
       name: 'Commerce Behavior Index',
       tagline: 'First-Party Behavioral Datasets',
       status: 'Early Access',
-      description: 'The richest commerce behavioral dataset in fashion. Structured, anonymized, ready for AI training and analytics.',
-      longDescription: "Built on J'ko's virtual try-on platform, we capture millions of authentic shopping interactions monthly. Every style preference, size consideration, and purchase decision becomes training data for the next generation of AI commerce systems. Enterprise-licensed, privacy-compliant, structured for machine learning.",
+      description: 'Real shopping behavior. Not synthetic data, not surveys, not simulations.',
+      longDescription: "Most AI training data is synthetic or scraped. Ours comes from J'ko—a virtual try-on platform where real shoppers make real choices. 10M+ monthly interactions capturing what people actually want to buy, how they decide, and why they convert. GDPR/CCPA compliant. JSON or Parquet. Licensed for commercial use.",
       metrics: [
         {value: '10M+', label: 'Monthly Events'},
         {value: '500K+', label: 'User Sessions'},
@@ -64,8 +64,8 @@
       name: 'Demand Prediction API',
       tagline: 'Predictive Intelligence for Commerce',
       status: 'Early Access',
-      description: 'Know what customers want before they search for it. Real-time demand signals for inventory, marketing, and AI agents.',
-      longDescription: 'Our prediction engine processes behavioral signals to forecast demand at SKU level. Fashion retailers use it for inventory planning. AI companies use it to power recommendation agents. Marketing teams use it to time campaigns. Sub-100ms latency, enterprise SLAs, proven at scale.',
+      description: 'Stockouts cost money. Overstock costs more. This API tells you what to stock.',
+      longDescription: 'Fashion retailers lose 8-10% of revenue to wrong inventory decisions. Our API predicts demand at SKU level—which sizes, which colors, which products—up to 30 days before the sale. 94% accuracy on held-out data. Sub-100ms latency. Works with your existing systems or feeds autonomous AI agents directly.',
       metrics: [
         {value: '94%', label: 'Accuracy'},
         {value: '<100ms', label: 'Latency'},
@@ -97,8 +97,8 @@
       name: 'GEO Intelligence',
       tagline: 'Generative Engine Optimization',
       status: 'Live',
-      description: 'Be the answer when AI speaks. Strategic positioning for enterprise brands in ChatGPT, Claude, Gemini, and Perplexity.',
-      longDescription: 'When enterprise buyers ask AI for recommendations, your brand needs to be the answer. GEO Intelligence analyzes how LLMs retrieve and cite sources, then positions your digital presence as the authoritative reference. Not SEO for search engines—strategic visibility for the AI-first era.',
+      description: 'Your competitors are showing up in ChatGPT. You are not. We fix that.',
+      longDescription: "Enterprise buyers now ask AI for recommendations before they Google. If you're not in the answer, you're not in the conversation. GEO Intelligence tracks how ChatGPT, Claude, Gemini, and Perplexity cite brands in your category, then positions you as the source they prefer. Real-time monitoring. Competitive benchmarking. Measurable share of voice.",
       metrics: [
         {value: '10x', label: 'AI Citations'},
         {value: '85%', label: 'Share of Voice'},
@@ -130,8 +130,8 @@
       name: 'AEO Solutions',
       tagline: 'Answer Engine Optimization',
       status: 'Live',
-      description: 'Own the AI-generated answer. When Perplexity or AI Overviews respond, be the cited source.',
-      longDescription: 'Answer engines synthesize responses from multiple sources—but they cite their favorites. AEO Solutions structures your enterprise content for answer retrieval, building the trust signals that make Perplexity, Google AI Overviews, and Bing Copilot choose your content as the primary source.',
+      description: 'Perplexity gives one answer. Make sure it cites you.',
+      longDescription: "Answer engines don't show 10 blue links. They synthesize one response and cite 2-3 sources. If you're not cited, you don't exist. AEO Solutions structures your content so Perplexity, Google AI Overviews, and Bing Copilot treat you as the authoritative source. Schema optimization. Trust signal building. Query intelligence.",
       metrics: [
         {value: '40%', label: 'Answer Share'},
         {value: '3x', label: 'Referral Traffic'},
@@ -165,25 +165,25 @@
       step: '01',
       title: 'Capture',
       subtitle: "J'ko Platform",
-      description: "10M+ monthly behavioral events from virtual try-on interactions on J'ko AI."
+      description: "Shoppers try on clothes virtually. We capture every choice they make."
     },
     {
       step: '02',
       title: 'Structure',
       subtitle: 'ML Pipeline',
-      description: 'Transform raw events into labeled datasets optimized for AI training and analytics.'
+      description: 'Raw events become labeled datasets. Intent, preference, conversion signals.'
     },
     {
       step: '03',
       title: 'Predict',
       subtitle: 'Intelligence Engine',
-      description: 'Generate demand forecasts, trend signals, and decision intelligence in real-time.'
+      description: 'Demand forecasts. Trend detection. What sells before it trends.'
     },
     {
       step: '04',
       title: 'Deliver',
       subtitle: 'Enterprise API',
-      description: 'RESTful APIs with sub-100ms latency, enterprise SLAs, and flexible licensing.'
+      description: 'Sub-100ms. 99.9% uptime. Your systems or ours.'
     }
   ];
 
@@ -193,8 +193,8 @@
 <div class="solutions-content">
   <section class="data-flow-section" data-animate="flow" class:visible={visibleSections.has('flow')}>
     <div class="section-header">
-      <span class="section-label">Data Infrastructure</span>
-      <h2>From Behavioral Data to Enterprise Intelligence</h2>
+      <span class="section-label">How It Works</span>
+      <h2>From Shopping Behavior to Prediction</h2>
     </div>
 
     <div class="data-flow">
@@ -284,13 +284,13 @@
 
   <section class="cta-section" data-animate="cta" class:visible={visibleSections.has('cta')}>
     <div class="cta-content">
-      <h2>Ready to License Commerce Intelligence?</h2>
+      <h2>Let's Talk Data</h2>
       <p>
-        Enterprise data licensing, API access, and strategic partnerships for fashion retailers, AI companies, and commerce platforms.
+        You build AI products. We have the behavioral data. Simple.
       </p>
       <div class="cta-actions">
-        <a href="/contact" class="action-btn primary">Request Data Access</a>
-        <a href="mailto:partners@oraklex.com" class="action-btn secondary">Enterprise Partnerships</a>
+        <a href="/contact" class="action-btn primary">Start the Conversation</a>
+        <a href="mailto:partners@oraklex.com" class="action-btn secondary">partners@oraklex.com</a>
       </div>
     </div>
   </section>

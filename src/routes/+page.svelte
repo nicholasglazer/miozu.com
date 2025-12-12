@@ -38,31 +38,31 @@
       canvasId: 'canvas-about',
       label: 'The Company',
       title: 'About',
-      description: 'Building the intelligence layer for enterprise commerce and AI systems.'
+      description: 'Where millions of shopping decisions become predictive data.'
     },
     platform: {
       route: '/solutions',
       effectType: 'synaptic-multipass',
       canvasId: 'canvas-platform',
-      label: 'Intelligence Products',
+      label: 'Our Products',
       title: 'Platform',
-      description: 'Enterprise-grade data products for fashion, retail, and AI companies.'
+      description: 'Demand APIs and datasets that power inventory, marketing, and AI agents.'
     },
     data: {
       route: '/solutions',
       effectType: 'synaptic',
       canvasId: 'canvas-data',
-      label: 'Data Infrastructure',
+      label: 'The Source',
       title: 'Data',
-      description: 'First-party behavioral signals from 10M+ commerce interactions.'
+      description: '10M+ monthly shopping interactions. Structured. Licensed. Ready.'
     },
     contact: {
       route: '/contact',
       effectType: 'ether',
       canvasId: 'canvas-contact',
-      label: 'Enterprise Inquiries',
+      label: 'Work With Us',
       title: 'Contact',
-      description: 'Partner with us for data licensing and enterprise solutions.'
+      description: 'Data licensing for AI companies, retailers, and platforms.'
     }
   };
 
@@ -122,7 +122,7 @@
 
 <Metadata
   title="Oraklex — Commerce Intelligence Infrastructure"
-  description="Enterprise commerce intelligence platform. First-party behavioral data, demand prediction APIs, and AI training datasets for fashion, retail, and AI companies."
+  description="We capture 10M+ shopping interactions monthly and turn them into prediction APIs, AI training datasets, and demand intelligence. Built for AI companies, retailers, and commerce platforms."
   canonicalUrl={domain}
   ogType="website"
   ogImage={`${domain}/images/oraklex-og-banner.jpg`}
@@ -219,7 +219,7 @@
         <div class="hero-content">
           <span class="hero-label">Commerce Intelligence</span>
           <h1 class="hero-title">ORAKLEX</h1>
-          <p class="hero-tagline">Enterprise data infrastructure for AI-native commerce</p>
+          <p class="hero-tagline">We turn shopping behavior into prediction intelligence</p>
         </div>
       </div>
     </div>
@@ -239,7 +239,7 @@
         <div class="block-content">
           <span class="block-label">The Company</span>
           <h2 class="block-title">About</h2>
-          <p class="block-desc">Building the intelligence layer for enterprise commerce and AI systems.</p>
+          <p class="block-desc">Where millions of shopping decisions become predictive data.</p>
         </div>
         <div class="block-corner">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -261,12 +261,12 @@
         <ThreeCanvas type="synaptic-multipass" lowRes={true} id="canvas-platform" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Intelligence Products</span>
+        <span class="block-label">Our Products</span>
         <h2 class="block-title">Platform</h2>
         <ul class="block-list">
           <li>Demand Prediction API</li>
-          <li>AI Training Datasets</li>
-          <li>Behavior Intelligence</li>
+          <li>Behavioral Datasets</li>
+          <li>AI Visibility Services</li>
         </ul>
       </div>
       <div class="block-corner">
@@ -288,9 +288,9 @@
         <ThreeCanvas type="synaptic" lowRes={true} id="canvas-data" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Data Infrastructure</span>
+        <span class="block-label">The Source</span>
         <h2 class="block-title">Data</h2>
-        <p class="block-desc">First-party behavioral signals from 10M+ commerce interactions.</p>
+        <p class="block-desc">10M+ monthly shopping interactions. Structured. Licensed. Ready.</p>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -311,7 +311,7 @@
         <ThreeCanvas type="ether" lowRes={true} id="canvas-contact" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Enterprise Inquiries</span>
+        <span class="block-label">Work With Us</span>
         <h2 class="block-title">Contact</h2>
         <span class="block-email-light">partners@oraklex.com</span>
       </div>
@@ -333,9 +333,9 @@
         <ThreeCanvas type="snake-trails" lowRes={true} />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Data Collection Layer</span>
+        <span class="block-label">Where Data Comes From</span>
         <h2 class="block-title">J'ko AI</h2>
-        <p class="block-desc">Virtual try-on platform powering our commerce behavioral data.</p>
+        <p class="block-desc">Our virtual try-on platform. Every style choice becomes data.</p>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

@@ -59,7 +59,7 @@
       <div class="hero-content" class:visible={mounted}>
         <span class="hero-label">The Company</span>
         <h1 class="hero-title">About</h1>
-        <p class="hero-desc">Commerce intelligence infrastructure. From behavioral data collection to enterprise data products.</p>
+        <p class="hero-desc">We built a try-on platform. Now we license the data it generates.</p>
       </div>
 
       <!-- Close button -->

@@ -57,9 +57,9 @@
     <!-- Hero overlay with title -->
     <div class="hero-overlay">
       <div class="hero-content" class:visible={mounted}>
-        <span class="hero-label">Enterprise Inquiries</span>
+        <span class="hero-label">Work With Us</span>
         <h1 class="hero-title">Contact</h1>
-        <p class="hero-desc">Data licensing, API access, and strategic partnerships for enterprise.</p>
+        <p class="hero-desc">Tell us what you're building. We'll tell you how we can help.</p>
       </div>
 
       <!-- Close button -->

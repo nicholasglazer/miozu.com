@@ -29,98 +29,98 @@
     title: 'Commerce Intelligence Infrastructure',
     description: 'We capture, process, and monetize commerce behavioral data at scale. Our platform generates first-party intelligence for enterprise brands, AI companies, and commerce platforms.',
     points: [
-      "J'ko AI captures 10M+ monthly behavioral events from virtual try-on",
-      'Enterprise-grade data products for fashion and retail intelligence',
-      'Privacy-compliant datasets structured for AI training and analytics',
-      'Prediction APIs powering inventory, marketing, and AI agents'
+      "We built J'ko—a virtual try-on platform used by fashion brands globally",
+      'Every try-on generates behavioral data: preferences, intent, conversion signals',
+      '10M+ monthly interactions become training data for AI and prediction APIs',
+      'Now we license that intelligence to companies building the next commerce layer'
     ]
   };
 
   const values = [
     {
-      title: 'Data-First Business',
-      description: 'We own the data collection layer. Every interaction becomes enterprise-licensed intelligence.',
+      title: 'We Own the Source',
+      description: "Most data companies buy or scrape. We generate data from a platform we built and control.",
       icon: 'brain'
     },
     {
-      title: 'Privacy by Design',
-      description: 'GDPR/CCPA compliant. Differential privacy. Enterprise-grade security and data governance.',
+      title: 'Privacy Is Non-Negotiable',
+      description: 'GDPR/CCPA compliant from day one. Differential privacy. Your lawyers will approve it.',
       icon: 'shield'
     },
     {
-      title: 'Predictive Intelligence',
-      description: 'Not just data collection—94% accurate demand forecasts and real-time trend detection.',
+      title: 'Predictions That Work',
+      description: "94% accuracy on held-out data. We don't publish numbers we can't prove.",
       icon: 'chart'
     },
     {
-      title: 'Enterprise Scale',
-      description: 'Built for million-dollar data licensing deals. API infrastructure that scales globally.',
+      title: 'Built for Enterprise',
+      description: 'Sub-100ms latency. 99.9% uptime. Contracts that make sense. Real support.',
       icon: 'rocket'
     }
   ];
 
   const timeline = [
     {
-      phase: 'Active',
-      title: "J'ko AI - Data Collection",
-      description: 'Virtual try-on platform generating behavioral data from fashion e-commerce globally.',
+      phase: 'Live',
+      title: "J'ko AI",
+      description: 'Our try-on platform. Running. Generating data. Fashion brands use it daily.',
       status: 'active'
     },
     {
       phase: 'Early Access',
       title: 'Commerce Behavior Index',
-      description: 'First-party behavioral datasets licensed to AI companies for training and analytics.',
+      description: 'Datasets for AI training. Select partners have access. Expanding capacity.',
       status: 'building'
     },
     {
       phase: 'Scaling',
       title: 'Demand Prediction API',
-      description: 'Enterprise intelligence APIs powering inventory, marketing, and AI agent systems.',
+      description: 'The prediction layer. Working with first enterprise customers now.',
       status: 'building'
     }
   ];
 
   const expertise = [
     {
-      area: 'Behavioral Data Collection',
-      description: "J'ko AI captures every style preference, size consideration, and purchase signal.",
-      applications: ['Virtual Try-On Events', 'Style Affinity Signals', 'Conversion Attribution']
+      area: 'Data Collection',
+      description: "We don't just analyze data—we generate it. J'ko is ours. The data is first-party.",
+      applications: ['Try-On Events', 'Style Preferences', 'Purchase Intent']
     },
     {
-      area: 'ML Data Engineering',
-      description: 'Transform raw events into labeled datasets optimized for machine learning pipelines.',
-      applications: ['Intent Classification', 'Feature Engineering', 'Training Data Curation']
+      area: 'ML Engineering',
+      description: 'Raw clicks become labeled training data. We know how to structure it for models.',
+      applications: ['Intent Classification', 'Feature Engineering', 'Training Pipelines']
     },
     {
       area: 'Demand Forecasting',
-      description: 'SKU-level predictions from behavioral signals before they hit search volume.',
-      applications: ['Inventory Optimization', 'Trend Detection', 'Marketing Timing']
+      description: 'Predict what sells before Google Trends knows about it. Behavioral signals move first.',
+      applications: ['Inventory Planning', 'Trend Detection', 'Campaign Timing']
     },
     {
-      area: 'Enterprise API Infrastructure',
-      description: 'Sub-100ms latency, 99.9% uptime SLA, flexible licensing for data access.',
-      applications: ['RESTful APIs', 'Batch Exports', 'Real-time Streams']
+      area: 'Enterprise APIs',
+      description: 'We built infrastructure that handles load. Sub-100ms responses. Real SLAs.',
+      applications: ['REST APIs', 'Batch Exports', 'Real-time Streams']
     }
   ];
 
   const partners = [
     {
       name: "J'ko AI",
-      type: 'Data Source',
-      description: 'Our virtual try-on platform serving fashion brands globally—the primary data collection layer.',
-      contribution: '10M+ monthly behavioral events'
+      type: 'Our Platform',
+      description: 'The try-on product we built. Fashion brands embed it. Shoppers use it. We collect the signals.',
+      contribution: '10M+ monthly events'
     },
     {
       name: 'Meta',
-      type: 'Platform Partner',
-      description: 'Official Meta Tech Provider status enabling commerce data integration via Instagram/Facebook.',
-      contribution: 'Social commerce data enrichment'
+      type: 'Tech Partner',
+      description: 'Official Meta Tech Provider. We plug into Instagram and Facebook commerce flows.',
+      contribution: 'Social commerce data'
     },
     {
       name: 'Shopify',
       type: 'Commerce Partner',
-      description: 'Native integration for real-time inventory, pricing, and conversion attribution.',
-      contribution: 'E-commerce transaction data'
+      description: 'Native Shopify integration. Inventory, pricing, conversion—all connected.',
+      contribution: 'Transaction data'
     }
   ];
 
@@ -142,12 +142,12 @@
     <div class="mission-content">
       <div class="mission-text">
         <span class="section-label">What We Do</span>
-        <h2>Commerce Intelligence Infrastructure</h2>
+        <h2>The Short Version</h2>
         <p>
-          Oraklex is a data infrastructure company. We own J'ko AI—a virtual try-on platform that captures millions of authentic shopping interactions monthly from fashion brands globally.
+          We built a virtual try-on platform called J'ko. Fashion brands use it. Millions of shoppers use it. Every interaction generates behavioral data.
         </p>
         <p>
-          We transform these behavioral signals into enterprise data products: licensed datasets for AI training, prediction APIs for inventory and marketing, and intelligence services for AI visibility.
+          Now we license that data. AI companies use it for training. Retailers use it for demand prediction. It's first-party, GDPR-compliant, and structured for production.
         </p>
       </div>
       <div class="mission-points">
@@ -165,8 +165,8 @@
 
   <section class="values-section" data-animate="values" class:visible={visibleSections.has('values')}>
     <div class="section-header">
-      <span class="section-label">Our Approach</span>
-      <h2>Enterprise Data Infrastructure</h2>
+      <span class="section-label">Why Us</span>
+      <h2>What Makes This Different</h2>
     </div>
 
     <div class="values-grid">
@@ -190,8 +190,8 @@
 
   <section class="timeline-section" data-animate="timeline" class:visible={visibleSections.has('timeline')}>
     <div class="section-header">
-      <span class="section-label">Product Roadmap</span>
-      <h2>Our Data Products</h2>
+      <span class="section-label">Where We Are</span>
+      <h2>Current Status</h2>
     </div>
 
     <div class="timeline">
@@ -215,8 +215,8 @@
 
   <section class="expertise-section" data-animate="expertise" class:visible={visibleSections.has('expertise')}>
     <div class="section-header">
-      <span class="section-label">Technical Capabilities</span>
-      <h2>Our Data Stack</h2>
+      <span class="section-label">What We're Good At</span>
+      <h2>Technical Capabilities</h2>
     </div>
 
     <div class="expertise-grid">
@@ -242,8 +242,8 @@
 
   <section class="partners-section" data-animate="partners" class:visible={visibleSections.has('partners')}>
     <div class="section-header">
-      <span class="section-label">Data Sources & Partners</span>
-      <h2>Our Data Ecosystem</h2>
+      <span class="section-label">The Ecosystem</span>
+      <h2>Where Data Comes From</h2>
     </div>
 
     <div class="partners-grid">
@@ -270,13 +270,13 @@
 
   <section class="cta-section" data-animate="cta" class:visible={visibleSections.has('cta')}>
     <div class="cta-content">
-      <h2>Enterprise Data Partnerships</h2>
+      <h2>Interested?</h2>
       <p>
-        Data licensing, API access, and strategic partnerships for fashion retailers, AI companies, and commerce platforms.
+        We work with AI companies building training datasets, retailers optimizing inventory, and platforms adding prediction features.
       </p>
       <div class="cta-actions">
-        <Button variant="primary" href="/contact">Request Data Access</Button>
-        <Button variant="secondary" href="/solutions">View Platform</Button>
+        <Button variant="primary" href="/contact">Get in Touch</Button>
+        <Button variant="secondary" href="/solutions">See the Products</Button>
       </div>
     </div>
   </section>

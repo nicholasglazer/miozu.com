@@ -139,9 +139,9 @@
   <div class="contact-grid">
     <div class="contact-main">
       <div class="contact-intro">
-        <h2>Enterprise Inquiries</h2>
+        <h2>Let's Talk</h2>
         <p>
-          Data licensing, API access, and strategic partnerships. Tell us about your use case and we'll connect you with the right team.
+          Tell us what you're building. We'll tell you if our data can help.
         </p>
       </div>
 
@@ -204,7 +204,7 @@
               bind:value={formData.message}
               onblur={() => (validationErrors.message = validateMessage(formData.message))}
               rows="5"
-              placeholder="Tell us about your company and data needs. What are you looking for: datasets for AI training, prediction APIs, visibility services?"
+              placeholder="What are you building? What kind of data would help? The more context, the better we can help."
               disabled={formState.submitting}
               maxlength="2000"
               class:input-error={validationErrors.message}
@@ -246,32 +246,32 @@
       </div>
 
       <div class="partnership-card">
-        <h3>Data Licensing Options</h3>
-        <p>Enterprise data access:</p>
+        <h3>Ways to Work Together</h3>
+        <p>Depends on what you need:</p>
         <ul>
-          <li>AI Training Datasets (batch licensing)</li>
-          <li>Prediction APIs (SaaS subscription)</li>
+          <li>Training datasets (batch licensing)</li>
+          <li>Prediction API (subscription)</li>
           <li>Custom data feeds (enterprise)</li>
-          <li>Strategic partnerships (equity/revenue share)</li>
+          <li>Strategic partnerships (let's talk)</li>
         </ul>
       </div>
 
       <div class="info-card">
-        <h3>Response Times</h3>
-        <p>We monitor support requests during business hours (Monday-Friday).</p>
-        <p class="note">Most messages receive a response within 1-2 business days.</p>
+        <h3>Response Time</h3>
+        <p>We read every message. Real humans, not autoresponders.</p>
+        <p class="note">Expect a response within 1-2 business days.</p>
       </div>
 
       <div class="products-card">
-        <h3>Our Data Products</h3>
+        <h3>Quick Links</h3>
         <div class="product-links">
           <a href="https://jko.ai" target="_blank" rel="noopener" class="product-link">
             <span class="product-name">J'ko AI</span>
-            <span class="product-desc">Data Collection Layer</span>
+            <span class="product-desc">See where the data comes from</span>
           </a>
           <a href="/solutions" class="product-link">
             <span class="product-name">Platform</span>
-            <span class="product-desc">View all data products</span>
+            <span class="product-desc">Browse all products</span>
           </a>
         </div>
       </div>

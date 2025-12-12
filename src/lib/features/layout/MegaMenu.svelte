@@ -20,7 +20,7 @@
       id: 'behavioral-data',
       name: 'Commerce Behavior Index',
       tagline: 'First-Party Datasets',
-      description: 'Licensed behavioral data from 10M+ monthly commerce interactions for AI training.',
+      description: 'Stop training AI on synthetic data. 10M+ real shopping interactions monthly, licensed and ready.',
       href: '/solutions#behavioral-data',
       status: 'early',
       icon: 'oracle'
@@ -29,7 +29,7 @@
       id: 'demand-api',
       name: 'Demand Prediction API',
       tagline: 'Predictive Intelligence',
-      description: '94% accurate SKU-level forecasts for inventory, marketing, and AI agents.',
+      description: 'Know what sells before it trends. 94% accurate SKU-level forecasts, 30 days ahead.',
       href: '/solutions#demand-api',
       status: 'early',
       icon: 'intelligence'
@@ -38,7 +38,7 @@
       id: 'geo',
       name: 'GEO Intelligence',
       tagline: 'AI Visibility',
-      description: 'Strategic positioning in ChatGPT, Claude, Gemini, and Perplexity responses.',
+      description: "When enterprise buyers ask ChatGPT for recommendations, are you the answer?",
       href: '/solutions#geo',
       status: 'live',
       icon: 'geo'
@@ -47,7 +47,7 @@
       id: 'aeo',
       name: 'AEO Solutions',
       tagline: 'Answer Engine Optimization',
-      description: 'Be the cited source in Perplexity, AI Overviews, and answer engines.',
+      description: 'Own the AI-generated answer. Be the source Perplexity and AI Overviews cite.',
       href: '/solutions#aeo',
       status: 'live',
       icon: 'aeo'
