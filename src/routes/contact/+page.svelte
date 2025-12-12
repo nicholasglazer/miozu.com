@@ -41,8 +41,8 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <Metadata
-  title="Contact - Oraklex | Get in Touch"
-  description="Contact Oraklex for partnerships, data licensing, or to learn more about our AI visibility and commerce intelligence solutions."
+  title="Contact - Oraklex | Enterprise Data Partnerships"
+  description="Enterprise data licensing, API access, and strategic partnerships. Contact us about behavioral datasets, prediction APIs, and commerce intelligence solutions."
 />
 
 <div class="expanded-page">
@@ -57,9 +57,9 @@
     <!-- Hero overlay with title -->
     <div class="hero-overlay">
       <div class="hero-content" class:visible={mounted}>
-        <span class="hero-label">Get in Touch</span>
+        <span class="hero-label">Enterprise Inquiries</span>
         <h1 class="hero-title">Contact</h1>
-        <p class="hero-desc">Reach out to explore partnerships and opportunities.</p>
+        <p class="hero-desc">Data licensing, API access, and strategic partnerships for enterprise.</p>
       </div>
 
       <!-- Close button -->

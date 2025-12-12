@@ -17,10 +17,28 @@
   // Extended data for the mega menu
   const solutionCards = [
     {
+      id: 'behavioral-data',
+      name: 'Commerce Behavior Index',
+      tagline: 'First-Party Datasets',
+      description: 'Licensed behavioral data from 10M+ monthly commerce interactions for AI training.',
+      href: '/solutions#behavioral-data',
+      status: 'early',
+      icon: 'oracle'
+    },
+    {
+      id: 'demand-api',
+      name: 'Demand Prediction API',
+      tagline: 'Predictive Intelligence',
+      description: '94% accurate SKU-level forecasts for inventory, marketing, and AI agents.',
+      href: '/solutions#demand-api',
+      status: 'early',
+      icon: 'intelligence'
+    },
+    {
       id: 'geo',
       name: 'GEO Intelligence',
-      tagline: 'Generative Engine Optimization',
-      description: 'Get featured in AI-generated responses from ChatGPT, Claude, Gemini, and next-gen search.',
+      tagline: 'AI Visibility',
+      description: 'Strategic positioning in ChatGPT, Claude, Gemini, and Perplexity responses.',
       href: '/solutions#geo',
       status: 'live',
       icon: 'geo'
@@ -29,28 +47,10 @@
       id: 'aeo',
       name: 'AEO Solutions',
       tagline: 'Answer Engine Optimization',
-      description: 'Structure content for Perplexity, AI Overviews, and conversational search platforms.',
+      description: 'Be the cited source in Perplexity, AI Overviews, and answer engines.',
       href: '/solutions#aeo',
       status: 'live',
       icon: 'aeo'
-    },
-    {
-      id: 'data-oracle',
-      name: 'LLM Data Oracle',
-      tagline: 'Training Data for AI',
-      description: 'Privacy-compliant commerce behavior data for LLM fine-tuning and AI agent training.',
-      href: '/solutions#data-oracle',
-      status: 'coming',
-      icon: 'oracle'
-    },
-    {
-      id: 'intelligence',
-      name: 'Commerce Intelligence',
-      tagline: 'Predictive Analytics',
-      description: 'Real-time insights and predictions to power AI agents and recommendation engines.',
-      href: '/solutions#intelligence',
-      status: 'coming',
-      icon: 'intelligence'
     }
   ];
 
@@ -160,7 +160,7 @@
     aria-expanded={isOpen}
     aria-haspopup="true"
   >
-    <span>Solutions</span>
+    <span>Platform</span>
     <svg
       class="chevron"
       class:rotated={isOpen}
@@ -191,14 +191,15 @@
               href={solution.href}
               class="solution-card"
               class:live={solution.status === 'live'}
+              class:early={solution.status === 'early'}
               in:fade={{duration: 150, delay: 30 + i * 40}}
             >
               <div class="card-top">
-                <div class="card-icon" class:live={solution.status === 'live'}>
+                <div class="card-icon" class:live={solution.status === 'live'} class:early={solution.status === 'early'}>
                   {@html getIcon(solution.icon)}
                 </div>
-                {#if solution.status === 'coming'}
-                  <span class="status-badge">Soon</span>
+                {#if solution.status === 'early'}
+                  <span class="status-badge early">Early Access</span>
                 {/if}
               </div>
               <div class="card-body">
@@ -208,7 +209,7 @@
               </div>
               <div class="card-footer">
                 <span class="learn-more">
-                  {solution.status === 'live' ? 'Learn more' : 'Get notified'}
+                  {solution.status === 'live' ? 'Learn more' : 'Request access'}
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                     <path d="M5 12h14m-7-7l7 7-7 7"/>
                   </svg>
@@ -326,6 +327,11 @@
     background: rgba(0, 0, 0, 0.03);
   }
 
+  .solution-card.early:hover {
+    background: rgba(74, 158, 255, 0.04);
+    border-color: rgba(74, 158, 255, 0.1);
+  }
+
   .card-top {
     @apply flex items-center justify-between;
   }
@@ -342,6 +348,11 @@
     color: #333;
   }
 
+  .card-icon.early {
+    background: linear-gradient(135deg, rgba(74, 158, 255, 0.15), rgba(99, 102, 241, 0.15));
+    color: #4a9eff;
+  }
+
   .solution-card:hover .card-icon {
     background: rgba(0, 0, 0, 0.08);
     color: #000;
@@ -351,6 +362,11 @@
     @apply px-2 py-0.5 rounded text-[10px] font-medium uppercase tracking-wider;
     background: rgba(0, 0, 0, 0.04);
     color: #888;
+  }
+
+  .status-badge.early {
+    background: linear-gradient(135deg, #4a9eff, #6366f1);
+    color: #fff;
   }
 
   .card-body {

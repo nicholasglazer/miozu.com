@@ -139,9 +139,9 @@
   <div class="contact-grid">
     <div class="contact-main">
       <div class="contact-intro">
-        <h2>Let's Connect</h2>
+        <h2>Enterprise Inquiries</h2>
         <p>
-          Interested in partnering with us, licensing data, or learning more about the Data Oracle ecosystem? We'd love to hear from you.
+          Data licensing, API access, and strategic partnerships. Tell us about your use case and we'll connect you with the right team.
         </p>
       </div>
 
@@ -204,7 +204,7 @@
               bind:value={formData.message}
               onblur={() => (validationErrors.message = validateMessage(formData.message))}
               rows="5"
-              placeholder="Tell us about your issue, question, or feedback..."
+              placeholder="Tell us about your company and data needs. What are you looking for: datasets for AI training, prediction APIs, visibility services?"
               disabled={formState.submitting}
               maxlength="2000"
               class:input-error={validationErrors.message}
@@ -246,13 +246,13 @@
       </div>
 
       <div class="partnership-card">
-        <h3>Partnership Opportunities</h3>
-        <p>We're looking for:</p>
+        <h3>Data Licensing Options</h3>
+        <p>Enterprise data access:</p>
         <ul>
-          <li>AI companies needing commerce training data</li>
-          <li>E-commerce brands for data contribution</li>
-          <li>Technology partners for integrations</li>
-          <li>Investors aligned with our vision</li>
+          <li>AI Training Datasets (batch licensing)</li>
+          <li>Prediction APIs (SaaS subscription)</li>
+          <li>Custom data feeds (enterprise)</li>
+          <li>Strategic partnerships (equity/revenue share)</li>
         </ul>
       </div>
 
@@ -263,15 +263,15 @@
       </div>
 
       <div class="products-card">
-        <h3>Our Products</h3>
+        <h3>Our Data Products</h3>
         <div class="product-links">
           <a href="https://jko.ai" target="_blank" rel="noopener" class="product-link">
             <span class="product-name">J'ko AI</span>
-            <span class="product-desc">Virtual Try-On</span>
+            <span class="product-desc">Data Collection Layer</span>
           </a>
-          <a href="https://dash.jko.ai" target="_blank" rel="noopener" class="product-link">
-            <span class="product-name">Dashboard</span>
-            <span class="product-desc">Manage your account</span>
+          <a href="/solutions" class="product-link">
+            <span class="product-name">Platform</span>
+            <span class="product-desc">View all data products</span>
           </a>
         </div>
       </div>

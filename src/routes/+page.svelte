@@ -38,31 +38,31 @@
       canvasId: 'canvas-about',
       label: 'The Company',
       title: 'About',
-      description: 'The oracle for the AI age - data intelligence for modern commerce.'
+      description: 'Building the intelligence layer for enterprise commerce and AI systems.'
     },
-    portfolio: {
+    platform: {
       route: '/solutions',
       effectType: 'synaptic-multipass',
-      canvasId: 'canvas-portfolio',
-      label: 'What We Do',
-      title: 'Solutions',
-      description: 'GEO/AEO optimization, LLM data services, and commerce intelligence.'
+      canvasId: 'canvas-platform',
+      label: 'Intelligence Products',
+      title: 'Platform',
+      description: 'Enterprise-grade data products for fashion, retail, and AI companies.'
     },
-    leadership: {
-      route: '/about',
+    data: {
+      route: '/solutions',
       effectType: 'synaptic',
-      canvasId: 'canvas-leadership',
-      label: 'Our Vision',
-      title: 'Leadership',
-      description: 'Building at the intersection of AI and commerce.'
+      canvasId: 'canvas-data',
+      label: 'Data Infrastructure',
+      title: 'Data',
+      description: 'First-party behavioral signals from 10M+ commerce interactions.'
     },
     contact: {
       route: '/contact',
       effectType: 'ether',
       canvasId: 'canvas-contact',
-      label: 'Get in Touch',
+      label: 'Enterprise Inquiries',
       title: 'Contact',
-      description: 'Reach out to explore partnerships and opportunities.'
+      description: 'Partner with us for data licensing and enterprise solutions.'
     }
   };
 
@@ -121,12 +121,12 @@
 </script>
 
 <Metadata
-  title="Oraklex — Corporate Holding"
-  description="Oraklex is a holding company building the future of commerce intelligence through strategic investments in AI and data infrastructure."
+  title="Oraklex — Commerce Intelligence Infrastructure"
+  description="Enterprise commerce intelligence platform. First-party behavioral data, demand prediction APIs, and AI training datasets for fashion, retail, and AI companies."
   canonicalUrl={domain}
   ogType="website"
   ogImage={`${domain}/images/oraklex-og-banner.jpg`}
-  ogImageAlt="Oraklex - Corporate Holding"
+  ogImageAlt="Oraklex - Commerce Intelligence Infrastructure"
   robots="index, follow"
 />
 
@@ -134,13 +134,13 @@
   type="Organization"
   data={{
     name: appName,
-    description: 'Corporate holding company focused on commerce intelligence and AI infrastructure.',
+    description: 'Commerce intelligence infrastructure company providing enterprise data products, demand prediction APIs, and AI training datasets.',
     url: domain,
     logo: `${domain}/favicon.svg`,
     contactPoint: {
       '@type': 'ContactPoint',
       email: 'partners@oraklex.com',
-      contactType: 'business inquiries'
+      contactType: 'enterprise inquiries'
     },
     parentOrganization: {
       '@type': 'Organization',
@@ -156,7 +156,7 @@
   data={{
     name: appName,
     url: domain,
-    description: 'Corporate holding company building the future of commerce intelligence through AI and data infrastructure.',
+    description: 'Enterprise commerce intelligence platform providing behavioral data, demand prediction, and AI training datasets for fashion, retail, and AI companies.',
     publisher: {
       '@type': 'Organization',
       name: appName,
@@ -165,13 +165,13 @@
   }}
 />
 
-<!-- Corporation Schema with Subsidiaries -->
+<!-- Corporation Schema with Products -->
 <JsonLd
   type="Corporation"
   data={{
     name: appName,
     url: domain,
-    description: 'Holding company with portfolio companies in AI, commerce intelligence, and data infrastructure.',
+    description: 'Commerce intelligence infrastructure for enterprise brands and AI systems. Data collection, processing, and prediction at scale.',
     numberOfEmployees: {
       '@type': 'QuantitativeValue',
       value: '10-50'
@@ -181,13 +181,16 @@
         '@type': 'Organization',
         name: "J'ko AI",
         url: 'https://jko.ai',
-        description: 'AI virtual try-on platform for fashion brands'
-      },
-      {
-        '@type': 'Organization',
-        name: 'Data Oracle',
-        description: 'LLM training data and commerce intelligence platform'
+        description: 'AI virtual try-on platform - primary data collection layer for commerce behavioral signals'
       }
+    ],
+    knowsAbout: [
+      'Commerce Intelligence',
+      'AI Training Data',
+      'Demand Prediction',
+      'Fashion Analytics',
+      'Behavioral Data',
+      'Enterprise Data Products'
     ]
   }}
 />
@@ -214,13 +217,9 @@
       {/if}
       <div class="block-overlay">
         <div class="hero-content">
-          <span class="hero-label">Strategic Investments</span>
+          <span class="hero-label">Commerce Intelligence</span>
           <h1 class="hero-title">ORAKLEX</h1>
-        </div>
-        <div class="block-corner">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M7 17L17 7M17 7H7M17 7V17"/>
-          </svg>
+          <p class="hero-tagline">Enterprise data infrastructure for AI-native commerce</p>
         </div>
       </div>
     </div>
@@ -240,7 +239,7 @@
         <div class="block-content">
           <span class="block-label">The Company</span>
           <h2 class="block-title">About</h2>
-          <p class="block-desc">The oracle for the AI age - data intelligence for modern commerce.</p>
+          <p class="block-desc">Building the intelligence layer for enterprise commerce and AI systems.</p>
         </div>
         <div class="block-corner">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -250,24 +249,24 @@
       </div>
     </button>
 
-    <!-- Small Block 1: Portfolio (PRIORITY 2) -->
+    <!-- Small Block 1: Platform (PRIORITY 2) -->
     <button
       type="button"
-      class="block block-small block-portfolio"
-      class:fading-card={fadingCard === 'portfolio'}
-      class:hidden-card={expandingCard === 'portfolio'}
-      onclick={(e) => handleCardClick(e, 'portfolio')}
+      class="block block-small block-platform"
+      class:fading-card={fadingCard === 'platform'}
+      class:hidden-card={expandingCard === 'platform'}
+      onclick={(e) => handleCardClick(e, 'platform')}
     >
       {#if ThreeCanvas && allCardsReady}
-        <ThreeCanvas type="synaptic-multipass" lowRes={true} id="canvas-portfolio" />
+        <ThreeCanvas type="synaptic-multipass" lowRes={true} id="canvas-platform" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">What We Do</span>
-        <h2 class="block-title">Solutions</h2>
+        <span class="block-label">Intelligence Products</span>
+        <h2 class="block-title">Platform</h2>
         <ul class="block-list">
-          <li>GEO Intelligence</li>
-          <li>AEO Solutions</li>
-          <li>Data Oracle</li>
+          <li>Demand Prediction API</li>
+          <li>AI Training Datasets</li>
+          <li>Behavior Intelligence</li>
         </ul>
       </div>
       <div class="block-corner">
@@ -277,21 +276,21 @@
       </div>
     </button>
 
-    <!-- Small Block 2: Leadership (PRIORITY 2) -->
+    <!-- Small Block 2: Data (PRIORITY 2) -->
     <button
       type="button"
-      class="block block-small block-leadership"
-      class:fading-card={fadingCard === 'leadership'}
-      class:hidden-card={expandingCard === 'leadership'}
-      onclick={(e) => handleCardClick(e, 'leadership')}
+      class="block block-small block-data"
+      class:fading-card={fadingCard === 'data'}
+      class:hidden-card={expandingCard === 'data'}
+      onclick={(e) => handleCardClick(e, 'data')}
     >
       {#if ThreeCanvas && allCardsReady}
-        <ThreeCanvas type="synaptic" lowRes={true} id="canvas-leadership" />
+        <ThreeCanvas type="synaptic" lowRes={true} id="canvas-data" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Our Vision</span>
-        <h2 class="block-title">Leadership</h2>
-        <p class="block-desc">Building at the intersection of AI and commerce.</p>
+        <span class="block-label">Data Infrastructure</span>
+        <h2 class="block-title">Data</h2>
+        <p class="block-desc">First-party behavioral signals from 10M+ commerce interactions.</p>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -303,7 +302,7 @@
     <!-- Small Block 3: Contact (PRIORITY 2) -->
     <button
       type="button"
-      class="block block-small block-ether"
+      class="block block-small block-contact"
       class:fading-card={fadingCard === 'contact'}
       class:hidden-card={expandingCard === 'contact'}
       onclick={(e) => handleCardClick(e, 'contact')}
@@ -312,7 +311,7 @@
         <ThreeCanvas type="ether" lowRes={true} id="canvas-contact" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Get in Touch</span>
+        <span class="block-label">Enterprise Inquiries</span>
         <h2 class="block-title">Contact</h2>
         <span class="block-email-light">partners@oraklex.com</span>
       </div>
@@ -323,17 +322,27 @@
       </div>
     </button>
 
-    <!-- Small Block 4: Updates (PRIORITY 2) -->
-    <div class="block block-small block-updates">
+    <!-- Small Block 4: J'ko (Data Source) (PRIORITY 2) -->
+    <a
+      href="https://jko.ai"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="block block-small block-jko"
+    >
       {#if ThreeCanvas && allCardsReady}
         <ThreeCanvas type="snake-trails" lowRes={true} />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Latest News</span>
-        <h2 class="block-title">Updates</h2>
-        <p class="block-desc">Stay informed about our portfolio and initiatives.</p>
+        <span class="block-label">Data Collection Layer</span>
+        <h2 class="block-title">J'ko AI</h2>
+        <p class="block-desc">Virtual try-on platform powering our commerce behavioral data.</p>
       </div>
-    </div>
+      <div class="block-corner">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17L17 7M17 7H7M17 7V17"/>
+        </svg>
+      </div>
+    </a>
   </div>
 </div>
 
@@ -513,20 +522,26 @@
   .block-small:nth-of-type(5) { grid-column: 3; grid-row: 2; }
   .block-small:nth-of-type(6) { grid-column: 4; grid-row: 2; }
 
-  /* Updates block with snake trails */
-  .block-updates {
+  /* J'ko block with snake trails */
+  .block-jko {
     position: relative;
     padding: 0;
   }
 
-  /* Portfolio block with synaptic effect */
-  .block-portfolio {
+  /* Platform block with synaptic effect */
+  .block-platform {
     position: relative;
     padding: 0;
   }
 
-  /* Leadership block with synaptic effect */
-  .block-leadership {
+  /* Data block with synaptic effect */
+  .block-data {
+    position: relative;
+    padding: 0;
+  }
+
+  /* Contact block with ether effect */
+  .block-contact {
     position: relative;
     padding: 0;
   }
@@ -618,12 +633,6 @@
     font-weight: 500;
     color: rgba(255, 255, 255, 0.9);
     margin-top: 8px;
-  }
-
-  /* Ether block variant */
-  .block-ether {
-    position: relative;
-    padding: 0;
   }
 
   /* Light block variant */

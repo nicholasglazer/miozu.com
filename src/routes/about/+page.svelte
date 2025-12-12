@@ -41,8 +41,8 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <Metadata
-  title="About - Oraklex | Data Intelligence for the AI Era"
-  description="Oraklex is the oracle for AI-first commerce. GEO/AEO optimization, LLM training data, and predictive intelligence for the next generation of business."
+  title="About - Oraklex | Commerce Intelligence Infrastructure"
+  description="Oraklex owns J'ko AI—a virtual try-on platform generating 10M+ monthly behavioral events. We transform this data into enterprise products: licensed datasets, prediction APIs, and AI visibility services."
 />
 
 <div class="expanded-page">
@@ -57,9 +57,9 @@
     <!-- Hero overlay with title -->
     <div class="hero-overlay">
       <div class="hero-content" class:visible={mounted}>
-        <span class="hero-label">About Oraklex</span>
-        <h1 class="hero-title">The Oracle for the AI Age</h1>
-        <p class="hero-desc">Building the intelligence layer that helps brands thrive in the AI-first world.</p>
+        <span class="hero-label">The Company</span>
+        <h1 class="hero-title">About</h1>
+        <p class="hero-desc">Commerce intelligence infrastructure. From behavioral data collection to enterprise data products.</p>
       </div>
 
       <!-- Close button -->

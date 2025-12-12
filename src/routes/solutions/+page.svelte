@@ -41,8 +41,8 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <Metadata
-  title="Solutions - Oraklex | AI Visibility & Data Intelligence"
-  description="GEO and AEO optimization for AI visibility, plus LLM training data and commerce intelligence for the AI-first era."
+  title="Platform - Oraklex | Commerce Intelligence & Data Products"
+  description="Enterprise data products: Commerce Behavior Index, Demand Prediction API, GEO/AEO Intelligence. First-party behavioral data for fashion, retail, and AI companies."
 />
 
 <div class="expanded-page">
@@ -57,9 +57,9 @@
     <!-- Hero overlay with title -->
     <div class="hero-overlay">
       <div class="hero-content" class:visible={mounted}>
-        <span class="hero-label">AI-First Intelligence</span>
-        <h1 class="hero-title">Solutions</h1>
-        <p class="hero-desc">Data solutions for the AI era. From visibility optimization to intelligence services.</p>
+        <span class="hero-label">Enterprise Data Products</span>
+        <h1 class="hero-title">Platform</h1>
+        <p class="hero-desc">Commerce intelligence infrastructure. Behavioral datasets, prediction APIs, and AI visibility services.</p>
       </div>
 
       <!-- Close button -->

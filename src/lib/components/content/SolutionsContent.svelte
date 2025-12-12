@@ -27,163 +27,163 @@
 
   const solutions = [
     {
+      id: 'behavioral-data',
+      name: 'Commerce Behavior Index',
+      tagline: 'First-Party Behavioral Datasets',
+      status: 'Early Access',
+      description: 'The richest commerce behavioral dataset in fashion. Structured, anonymized, ready for AI training and analytics.',
+      longDescription: "Built on J'ko's virtual try-on platform, we capture millions of authentic shopping interactions monthly. Every style preference, size consideration, and purchase decision becomes training data for the next generation of AI commerce systems. Enterprise-licensed, privacy-compliant, structured for machine learning.",
+      metrics: [
+        {value: '10M+', label: 'Monthly Events'},
+        {value: '500K+', label: 'User Sessions'},
+        {value: 'GDPR/CCPA', label: 'Compliant'},
+        {value: 'JSON/Parquet', label: 'Formats'}
+      ],
+      features: [
+        {
+          title: 'Try-On Behavior Signals',
+          description: 'Virtual try-on interactions revealing style preferences, size confidence, and purchase intent.'
+        },
+        {
+          title: 'Fashion Intent Classification',
+          description: 'Pre-labeled datasets mapping browsing patterns to purchase probability and style affinity.'
+        },
+        {
+          title: 'Conversion Event Streams',
+          description: 'Real-time event data from discovery to checkout, structured for ML pipelines.'
+        },
+        {
+          title: 'Enterprise Data Licensing',
+          description: 'Flexible licensing: API access, batch exports, or dedicated data feeds for training.'
+        }
+      ],
+      contribution: "Powered by J'ko AI's virtual try-on platform serving fashion brands globally."
+    },
+    {
+      id: 'demand-api',
+      name: 'Demand Prediction API',
+      tagline: 'Predictive Intelligence for Commerce',
+      status: 'Early Access',
+      description: 'Know what customers want before they search for it. Real-time demand signals for inventory, marketing, and AI agents.',
+      longDescription: 'Our prediction engine processes behavioral signals to forecast demand at SKU level. Fashion retailers use it for inventory planning. AI companies use it to power recommendation agents. Marketing teams use it to time campaigns. Sub-100ms latency, enterprise SLAs, proven at scale.',
+      metrics: [
+        {value: '94%', label: 'Accuracy'},
+        {value: '<100ms', label: 'Latency'},
+        {value: '99.9%', label: 'Uptime SLA'},
+        {value: 'RESTful', label: 'API'}
+      ],
+      features: [
+        {
+          title: 'SKU-Level Forecasting',
+          description: 'Predict demand for specific products, sizes, and variants up to 30 days ahead.'
+        },
+        {
+          title: 'Trend Detection',
+          description: 'Identify emerging style trends from behavioral signals before they hit search volume.'
+        },
+        {
+          title: 'Inventory Optimization',
+          description: 'Reduce stockouts by 40% and overstock by 25% with demand-driven replenishment signals.'
+        },
+        {
+          title: 'AI Agent Integration',
+          description: 'Structured prediction payloads designed for autonomous agent consumption.'
+        }
+      ],
+      contribution: 'Intelligence layer for AI agents, inventory systems, and marketing automation.'
+    },
+    {
       id: 'geo',
       name: 'GEO Intelligence',
       tagline: 'Generative Engine Optimization',
       status: 'Live',
-      description: 'Make your brand visible in the AI-first world. As users shift from search engines to AI assistants, traditional SEO becomes obsolete.',
-      longDescription: 'GEO Intelligence ensures your brand appears when ChatGPT, Claude, Gemini, and other AI systems answer questions about your industry. We analyze how LLMs retrieve and present information, then optimize your digital presence to be the authoritative source AI systems reference.',
+      description: 'Be the answer when AI speaks. Strategic positioning for enterprise brands in ChatGPT, Claude, Gemini, and Perplexity.',
+      longDescription: 'When enterprise buyers ask AI for recommendations, your brand needs to be the answer. GEO Intelligence analyzes how LLMs retrieve and cite sources, then positions your digital presence as the authoritative reference. Not SEO for search engines—strategic visibility for the AI-first era.',
       metrics: [
-        {value: '10x', label: 'AI Visibility'},
-        {value: '85%', label: 'Citation Rate'},
+        {value: '10x', label: 'AI Citations'},
+        {value: '85%', label: 'Share of Voice'},
         {value: 'Real-time', label: 'Monitoring'},
-        {value: '24/7', label: 'Optimization'}
+        {value: 'Multi-LLM', label: 'Coverage'}
       ],
       features: [
         {
-          title: 'LLM Citation Analysis',
-          description: 'Track when and how AI systems reference your brand, products, or content across major models.'
+          title: 'Citation Intelligence',
+          description: 'Track when and how AI systems reference your brand across GPT-4, Claude, Gemini, and Perplexity.'
         },
         {
-          title: 'Authority Building',
-          description: 'Strategic content and structured data optimization to become the trusted source AI systems prefer.'
+          title: 'Authority Positioning',
+          description: 'Strategic content architecture that makes your brand the source LLMs prefer to cite.'
         },
         {
-          title: 'Competitive Intelligence',
-          description: 'Monitor competitor visibility in AI responses and identify opportunities to capture share.'
+          title: 'Competitive Monitoring',
+          description: "Real-time alerts when competitors gain or lose AI visibility in your category."
         },
         {
-          title: 'Performance Dashboard',
-          description: 'Real-time metrics on AI citations, sentiment analysis, and visibility trends.'
+          title: 'Enterprise Dashboard',
+          description: 'Executive reporting on AI visibility, citation sentiment, and market position.'
         }
       ],
-      contribution: 'Powers the Data Oracle with AI interaction patterns, citation data, and LLM behavior insights.'
+      contribution: 'Generates AI interaction patterns and citation data that feed our prediction models.'
     },
     {
       id: 'aeo',
       name: 'AEO Solutions',
       tagline: 'Answer Engine Optimization',
       status: 'Live',
-      description: 'Own the answers. When Perplexity, Google AI Overviews, or Bing Copilot respond to queries, be the source they cite.',
-      longDescription: 'Answer engines are replacing traditional search with direct, synthesized responses. AEO Solutions structures your content specifically for answer retrieval - ensuring your expertise becomes the foundation of AI-generated answers across Perplexity, AI Overviews, and conversational search interfaces.',
+      description: 'Own the AI-generated answer. When Perplexity or AI Overviews respond, be the cited source.',
+      longDescription: 'Answer engines synthesize responses from multiple sources—but they cite their favorites. AEO Solutions structures your enterprise content for answer retrieval, building the trust signals that make Perplexity, Google AI Overviews, and Bing Copilot choose your content as the primary source.',
       metrics: [
         {value: '40%', label: 'Answer Share'},
-        {value: '3x', label: 'Click-through'},
+        {value: '3x', label: 'Referral Traffic'},
         {value: 'Schema', label: 'Optimized'},
-        {value: 'Multi-LLM', label: 'Coverage'}
+        {value: '24/7', label: 'Monitoring'}
       ],
       features: [
         {
-          title: 'Answer Schema Markup',
-          description: 'Implement structured data that answer engines can easily parse and cite.'
+          title: 'Answer-First Architecture',
+          description: 'Structure content specifically for how answer engines parse and synthesize information.'
         },
         {
-          title: 'Question Targeting',
-          description: 'Identify and optimize for the specific questions your audience asks AI systems.'
+          title: 'Query Intelligence',
+          description: 'Identify the questions enterprise buyers ask AI systems in your category.'
         },
         {
-          title: 'Source Authority',
-          description: 'Build the trust signals that make answer engines choose your content as the primary source.'
+          title: 'Source Authority Building',
+          description: 'Build the trust signals that make answer engines prefer your content over competitors.'
         },
         {
-          title: 'Multi-Platform Reach',
-          description: 'Optimize for Perplexity, Google AI Overviews, Bing Copilot, and emerging answer platforms.'
+          title: 'Multi-Platform Optimization',
+          description: 'Unified strategy for Perplexity, Google AI Overviews, Bing Copilot, and emerging platforms.'
         }
       ],
-      contribution: 'Feeds query patterns and answer structures into the Data Oracle for predictive intelligence.'
-    },
-    {
-      id: 'data-oracle',
-      name: 'LLM Data Oracle',
-      tagline: 'Training Data for AI Systems',
-      status: 'Coming Soon',
-      description: 'The intelligence layer that makes AI systems smarter. Curated, structured commerce behavior data for the next generation of AI.',
-      longDescription: 'As AI systems become central to commerce, they need high-quality training data that captures real human behavior. The LLM Data Oracle aggregates anonymized interaction patterns, purchase journeys, and decision signals - providing the structured datasets AI companies need to build models that truly understand commerce.',
-      metrics: [
-        {value: '100M+', label: 'Data Points'},
-        {value: 'GDPR', label: 'Compliant'},
-        {value: 'Real-time', label: 'Updates'},
-        {value: 'API', label: 'Access'}
-      ],
-      features: [
-        {
-          title: 'Behavior Datasets',
-          description: 'Rich interaction patterns from discovery to purchase, structured for LLM training.'
-        },
-        {
-          title: 'Intent Signals',
-          description: 'Labeled data showing what users want before they explicitly state it.'
-        },
-        {
-          title: 'Privacy-First Design',
-          description: 'Differential privacy, k-anonymity, and full GDPR/CCPA compliance built in.'
-        },
-        {
-          title: 'Flexible Export',
-          description: 'RESTful API for real-time access or batch exports in training-ready formats.'
-        }
-      ],
-      contribution: 'The core data monetization layer - packaging insights from all Oraklex products for AI training.'
-    },
-    {
-      id: 'intelligence',
-      name: 'Commerce Intelligence',
-      tagline: 'Predictive Analytics for AI Agents',
-      status: 'Coming Soon',
-      description: 'Turn data into decisions. Real-time predictions and recommendations that power AI agents and automated commerce systems.',
-      longDescription: 'AI agents need more than raw data - they need actionable intelligence. Commerce Intelligence processes behavioral signals in real-time to deliver predictions, recommendations, and decision support that AI systems can act on. From inventory forecasting to personalization, we power the intelligence layer of autonomous commerce.',
-      metrics: [
-        {value: '95%', label: 'Accuracy'},
-        {value: '<100ms', label: 'Latency'},
-        {value: 'Autonomous', label: 'Operations'},
-        {value: 'Scalable', label: 'Infrastructure'}
-      ],
-      features: [
-        {
-          title: 'Demand Prediction',
-          description: 'Forecast demand before it materializes using behavioral leading indicators.'
-        },
-        {
-          title: 'Agent Recommendations',
-          description: 'Structured decision signals that AI agents can consume and act on autonomously.'
-        },
-        {
-          title: 'Inventory Intelligence',
-          description: 'Predictive replenishment and optimization based on real-time demand signals.'
-        },
-        {
-          title: 'Personalization Engine',
-          description: 'Context-aware recommendations that power AI-driven customer experiences.'
-        }
-      ],
-      contribution: 'Transforms raw data into actionable intelligence for AI agents and automated systems.'
+      contribution: 'Query patterns and answer structures feed predictive intelligence for demand forecasting.'
     }
   ];
 
   const dataFlow = [
     {
       step: '01',
-      title: 'Collect',
-      subtitle: 'Data Ingestion',
-      description: 'Capture behavioral signals and commerce data through platform integrations.'
+      title: 'Capture',
+      subtitle: "J'ko Platform",
+      description: "10M+ monthly behavioral events from virtual try-on interactions on J'ko AI."
     },
     {
       step: '02',
-      title: 'Process',
-      subtitle: 'Intelligence Layer',
-      description: 'Transform raw data into structured insights using proprietary processing.'
+      title: 'Structure',
+      subtitle: 'ML Pipeline',
+      description: 'Transform raw events into labeled datasets optimized for AI training and analytics.'
     },
     {
       step: '03',
       title: 'Predict',
-      subtitle: 'AI Oracle',
-      description: 'Generate predictions and decision signals for AI systems and agents.'
+      subtitle: 'Intelligence Engine',
+      description: 'Generate demand forecasts, trend signals, and decision intelligence in real-time.'
     },
     {
       step: '04',
       title: 'Deliver',
-      subtitle: 'Real-time API',
-      description: 'Serve intelligence to AI agents and automated systems via low-latency APIs.'
+      subtitle: 'Enterprise API',
+      description: 'RESTful APIs with sub-100ms latency, enterprise SLAs, and flexible licensing.'
     }
   ];
 
@@ -193,8 +193,8 @@
 <div class="solutions-content">
   <section class="data-flow-section" data-animate="flow" class:visible={visibleSections.has('flow')}>
     <div class="section-header">
-      <span class="section-label">The Data Pipeline</span>
-      <h2>How We Create Intelligence</h2>
+      <span class="section-label">Data Infrastructure</span>
+      <h2>From Behavioral Data to Enterprise Intelligence</h2>
     </div>
 
     <div class="data-flow">
@@ -225,12 +225,12 @@
     <section
       id={solution.id}
       class="solution-section"
-      class:featured={solution.status === 'Live'}
+      class:featured={solution.status === 'Live' || solution.status === 'Early Access'}
       data-animate={`solution-${solutionIndex}`}
       class:visible={visibleSections.has(`solution-${solutionIndex}`)}
     >
       <div class="solution-header">
-        <div class="solution-status" class:live={solution.status === 'Live'} class:soon={solution.status === 'Coming Soon'}>
+        <div class="solution-status" class:live={solution.status === 'Live'} class:early={solution.status === 'Early Access'}>
           {solution.status}
         </div>
         <h2>{solution.name}</h2>
@@ -249,8 +249,11 @@
         <div class="solution-actions">
           {#if solution.status === 'Live'}
             <a href="/contact" class="action-btn primary">Get Started</a>
+          {:else if solution.status === 'Early Access'}
+            <a href="/contact" class="action-btn primary">Request Early Access</a>
+            <a href="mailto:partners@oraklex.com" class="action-btn secondary">Enterprise Inquiry</a>
           {:else}
-            <a href="mailto:partners@oraklex.com" class="action-btn secondary">Get Early Access</a>
+            <a href="mailto:partners@oraklex.com" class="action-btn secondary">Join Waitlist</a>
           {/if}
         </div>
       </div>
@@ -281,13 +284,13 @@
 
   <section class="cta-section" data-animate="cta" class:visible={visibleSections.has('cta')}>
     <div class="cta-content">
-      <h2>Ready for AI-First Visibility?</h2>
+      <h2>Ready to License Commerce Intelligence?</h2>
       <p>
-        Join forward-thinking brands already optimizing for the AI era. Start with GEO/AEO intelligence today.
+        Enterprise data licensing, API access, and strategic partnerships for fashion retailers, AI companies, and commerce platforms.
       </p>
       <div class="cta-actions">
-        <a href="/contact" class="action-btn primary">Start Your Strategy</a>
-        <a href="mailto:partners@oraklex.com" class="action-btn secondary">Partner With Us</a>
+        <a href="/contact" class="action-btn primary">Request Data Access</a>
+        <a href="mailto:partners@oraklex.com" class="action-btn secondary">Enterprise Partnerships</a>
       </div>
     </div>
   </section>
@@ -398,9 +401,9 @@
     color: var(--color-base0);
   }
 
-  .solution-status.soon {
-    background: rgba(var(--color-base3-rgb), 0.4);
-    color: var(--color-base4);
+  .solution-status.early {
+    background: linear-gradient(135deg, #4a9eff, #6366f1);
+    color: #fff;
   }
 
   .solution-header h2 {
