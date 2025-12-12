@@ -8,6 +8,11 @@
 
   let isOpen = $state(false);
   let closeTimeout = $state(null);
+  let containerEl = $state(null);
+  let menuPosition = $state({ left: '50%', transform: 'translateX(-50%)' });
+
+  const MENU_WIDTH = 860;
+  const VIEWPORT_PADDING = 16;
 
   // Extended data for the mega menu
   const solutionCards = [
@@ -54,11 +59,53 @@
     {name: 'Contact', href: '/contact'}
   ];
 
+  function calculateMenuPosition() {
+    if (!browser || !containerEl) return;
+
+    const rect = containerEl.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+
+    // Calculate where the menu would be if centered
+    const triggerCenter = rect.left + rect.width / 2;
+    const menuHalfWidth = MENU_WIDTH / 2;
+
+    // Check if menu would overflow right edge
+    const rightOverflow = triggerCenter + menuHalfWidth > viewportWidth - VIEWPORT_PADDING;
+    // Check if menu would overflow left edge
+    const leftOverflow = triggerCenter - menuHalfWidth < VIEWPORT_PADDING;
+
+    if (rightOverflow && !leftOverflow) {
+      // Align to right edge
+      const rightOffset = viewportWidth - VIEWPORT_PADDING - rect.right;
+      menuPosition = {
+        left: 'auto',
+        right: `${-rightOffset}px`,
+        transform: 'none'
+      };
+    } else if (leftOverflow && !rightOverflow) {
+      // Align to left edge
+      const leftOffset = rect.left - VIEWPORT_PADDING;
+      menuPosition = {
+        left: `${-leftOffset}px`,
+        right: 'auto',
+        transform: 'none'
+      };
+    } else {
+      // Center normally
+      menuPosition = {
+        left: '50%',
+        right: 'auto',
+        transform: 'translateX(-50%)'
+      };
+    }
+  }
+
   function openMenu() {
     if (closeTimeout) {
       clearTimeout(closeTimeout);
       closeTimeout = null;
     }
+    calculateMenuPosition();
     isOpen = true;
   }
 
@@ -101,6 +148,7 @@
 </script>
 
 <div
+  bind:this={containerEl}
   class="mega-menu-container"
   role="navigation"
   onmouseenter={openMenu}
@@ -131,6 +179,7 @@
   {#if isOpen}
     <div
       class="mega-menu-panel"
+      style="left: {menuPosition.left}; right: {menuPosition.right ?? 'auto'}; transform: {menuPosition.transform};"
       in:fly={{y: -8, duration: 200, easing: quintOut}}
       out:fly={{y: -8, duration: 120, easing: cubicOut}}
     >
@@ -237,9 +286,12 @@
   }
 
   .mega-menu-panel {
-    @apply absolute top-full left-1/2 -translate-x-1/2 mt-3;
-    @apply rounded-2xl overflow-hidden;
+    @apply absolute top-full mt-3;
+    @apply rounded-2xl;
     width: 860px;
+    max-width: calc(100vw - 32px);
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
     z-index: 10001;
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px) saturate(180%);

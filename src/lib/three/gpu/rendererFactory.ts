@@ -72,20 +72,34 @@ export async function createRenderer(
 	} = config;
 
 	// Check WebGPU availability
-	// IMPORTANT: Disable WebGPU on mobile - it's experimental and causes black screens on Android Chrome
-	// Must use multiple detection methods because "Request Desktop Site" spoofs User-Agent
+	// IMPORTANT: Disable WebGPU on most platforms - it's experimental and causes issues:
+	// - Mobile: Black screens on Android Chrome (known issue)
+	// - Chrome/Edge Windows/Mac: "WebGPU Device Lost" errors causing black/gray screens
+	//   See: https://github.com/mrdoob/three.js/issues/30099
+	// Only Firefox handles WebGPU fallback gracefully across platforms
+
+	// Detect mobile devices (multiple methods for "Request Desktop Site" mode)
 	const isMobileDevice = typeof navigator !== 'undefined' && (
-		// Method 1: User-Agent (works for normal mobile browsing)
 		/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-		// Method 2: Platform contains ARM (reveals mobile even in desktop mode)
 		/arm/i.test(navigator.platform) ||
-		// Method 3: Touch device with small screen (catches spoofed desktop mode)
 		(navigator.maxTouchPoints > 0 && typeof screen !== 'undefined' && screen.width < 1024)
 	);
+
+	// Detect Chrome/Edge on Windows/Mac (problematic WebGPU implementations)
+	const isChromiumDesktop = typeof navigator !== 'undefined' &&
+		/Chrome|Edg/i.test(navigator.userAgent) &&
+		/Windows|Mac/i.test(navigator.userAgent) &&
+		!/Android/i.test(navigator.userAgent);
+
+	// Log which platform-specific WebGPU disabling is applied
 	if (isMobileDevice) {
 		console.info('[RendererFactory] Mobile device detected, forcing WebGL (WebGPU disabled on mobile)');
+	} else if (isChromiumDesktop) {
+		console.info('[RendererFactory] Chrome/Edge on Windows/Mac detected, forcing WebGL (WebGPU has known device-lost issues)');
 	}
-	const canUseWebGPU = !forceWebGL && !isMobileDevice && (await checkWebGPU());
+
+	// Only use WebGPU on platforms where it's stable (Linux, Firefox)
+	const canUseWebGPU = !forceWebGL && !isMobileDevice && !isChromiumDesktop && (await checkWebGPU());
 
 	if (canUseWebGPU) {
 		try {

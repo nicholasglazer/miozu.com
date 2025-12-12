@@ -1,10 +1,14 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
+  import { page } from '$app/stores';
   import { cardTransition } from '$lib/reactiveStates/cardTransition.svelte';
   import { canvasRegistry } from '$lib/reactiveStates/canvasRegistry.svelte';
   import PageContent from './PageContent.svelte';
   import Footer from '$lib/features/layout/Footer.svelte';
+
+  // Get theme from layout data
+  let theme = $derived($page.data?.theme);
 
   // Animation constants - fast, smooth, professional
   const EXPAND_DURATION = 380;
@@ -56,13 +60,20 @@
       canvasRegistry.teleport(canvasId, canvasSlotEl);
     }
 
-    // Set initial position (scaled down to card size)
+    // Set initial position (scaled down to card size) with opacity 0 to prevent flash
     const initialTransform = getInitialTransform();
+    heroEl.style.opacity = '0';
     heroEl.style.transform = initialTransform;
     heroEl.style.borderRadius = '8px';
     heroEl.style.transition = 'none';
 
-    // Force reflow
+    // Force reflow to ensure initial styles are applied
+    void heroEl.offsetHeight;
+
+    // Now make visible with the transform already applied
+    heroEl.style.opacity = '1';
+
+    // Force another reflow
     void heroEl.offsetHeight;
 
     // Start animation
@@ -291,7 +302,7 @@
         <div class="content-inner">
           <PageContent route={cardTransition.targetRoute} />
         </div>
-        <Footer />
+        <Footer {theme} />
       </div>
     {/if}
   </div>
@@ -320,6 +331,8 @@
     background: #0a0a0a;
     transform-origin: center center;
     overflow: hidden;
+    /* Start invisible - JS will show after transform is set */
+    opacity: 0;
   }
 
   .canvas-slot {

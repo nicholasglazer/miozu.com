@@ -1,9 +1,14 @@
 <script lang="ts">
   import { browser } from '$app/environment';
   import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import { onMount } from 'svelte';
   import AboutContent from '$lib/components/content/AboutContent.svelte';
+  import Footer from '$lib/features/layout/Footer.svelte';
   import Metadata from '$features/seo/Metadata.svelte';
+
+  // Get theme from layout data
+  let theme = $derived($page.data?.theme);
 
   // Dynamically load ThreeCanvas
   let ThreeCanvas = $state<any>(null);
@@ -74,14 +79,17 @@
   </div>
 
   <!-- Content area -->
-  <div class="content-container">
+  <div class="content-container app-container">
     <div class="content-inner">
       <AboutContent />
     </div>
+    <Footer {theme} />
   </div>
 </div>
 
 <style lang="postcss">
+  @reference '$theme';
+
   .expanded-page {
     position: fixed;
     inset: 0;
@@ -231,7 +239,7 @@
 
   .content-container {
     position: relative;
-    background: #f8f8f8;
+    @apply bg-base0;
     min-height: 50vh;
     opacity: 0;
     transform: translateY(20px);
@@ -247,9 +255,8 @@
   }
 
   .content-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 60px 24px 80px;
+    width: 100%;
+    padding: 60px 0 40px;
   }
 
   @media (max-width: 768px) {
@@ -258,7 +265,7 @@
     }
 
     .content-inner {
-      padding: 40px 16px 60px;
+      padding: 40px 0 20px;
     }
   }
 </style>

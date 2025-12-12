@@ -314,7 +314,7 @@
   }
 
   .data-flow-section {
-    @apply mx-auto max-w-5xl px-6 py-16;
+    @apply mx-auto max-w-6xl px-8 py-16;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
@@ -365,7 +365,7 @@
   }
 
   .solution-section {
-    @apply mx-auto max-w-5xl px-6 py-12;
+    @apply mx-auto max-w-6xl px-8 py-12;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
@@ -510,7 +510,7 @@
   }
 
   .cta-section {
-    @apply px-6 py-16;
+    @apply mx-auto max-w-6xl px-8 py-16;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
