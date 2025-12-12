@@ -203,6 +203,7 @@
     </div>
     <nav class="header-nav">
       <MegaMenu />
+      <a href="/insights" class="nav-link nav-link-highlight">Insights</a>
       <a href="/about" class="nav-link">About</a>
       <a href="/contact" class="nav-link">Contact</a>
     </nav>
@@ -402,6 +403,14 @@
 
   .nav-link:hover {
     color: #fff;
+  }
+
+  .nav-link-highlight {
+    color: #4a9eff;
+  }
+
+  .nav-link-highlight:hover {
+    color: #6bb3ff;
   }
 
   /* Main Grid - Asymmetric layout */

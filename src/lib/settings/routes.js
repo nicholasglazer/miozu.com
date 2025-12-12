@@ -48,6 +48,8 @@ export const solutions = [
 // Main navigation routes (for mobile menu and footer)
 export const mainRoutes = [
   {path: '/solutions', label: 'Solutions', translate: false},
+  {path: '/insights', label: 'Insights', translate: false, badge: 'New'},
+  {path: '/data', label: 'Data', translate: false},
   {path: '/about', label: 'About', translate: false},
   {path: '/contact', label: 'Contact', translate: true}
 ];
@@ -55,6 +57,8 @@ export const mainRoutes = [
 // Footer-specific additional links
 export const footerRoutes = [
   {path: '/solutions', label: 'Solutions', translate: false},
+  {path: '/insights', label: 'Insights Report', translate: false},
+  {path: '/data', label: 'Data Schema', translate: false},
   {path: '/about', label: 'About', translate: false},
   {path: '/contact', label: 'Contact', translate: true}
 ];

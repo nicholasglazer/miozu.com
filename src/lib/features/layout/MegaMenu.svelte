@@ -56,6 +56,8 @@
 
   const quickLinks = [
     {name: 'About', href: '/about'},
+    {name: 'Insights Report', href: '/insights', badge: 'New'},
+    {name: 'Data Schema', href: '/data'},
     {name: 'Contact', href: '/contact'}
   ];
 
@@ -225,7 +227,12 @@
             <span class="sidebar-label">Company</span>
             <div class="quick-links">
               {#each quickLinks as link}
-                <a href={link.href} class="quick-link">{link.name}</a>
+                <a href={link.href} class="quick-link">
+                  {link.name}
+                  {#if link.badge}
+                    <span class="link-badge">{link.badge}</span>
+                  {/if}
+                </a>
               {/each}
             </div>
           </div>
@@ -437,6 +444,12 @@
   .quick-link:hover {
     @apply text-neutral-900;
     background: rgba(0, 0, 0, 0.03);
+  }
+
+  .link-badge {
+    @apply ml-2 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider rounded;
+    background: linear-gradient(135deg, #4a9eff, #6366f1);
+    color: #fff;
   }
 
   .sidebar-cta {
