@@ -199,7 +199,7 @@
   <!-- Header Row -->
   <header class="grid-header">
     <div class="header-left">
-      <a href="/" class="logo">Oraklex</a>
+      <a href="/" class="logo">orakle<span class="logo-x">X</span></a>
     </div>
     <nav class="header-nav">
       <MegaMenu />
@@ -218,9 +218,9 @@
       {/if}
       <div class="block-overlay">
         <div class="hero-content">
-          <span class="hero-label">Enterprise Data</span>
-          <h1 class="hero-title">ORAKLEX</h1>
-          <p class="hero-tagline">First-party commerce data for AI training</p>
+          <span class="hero-label">Commerce Data Infrastructure</span>
+          <h1 class="hero-title">orakle<span class="title-x">X</span></h1>
+          <p class="hero-tagline">Enterprise behavioral data for AI systems</p>
         </div>
       </div>
     </div>
@@ -384,6 +384,11 @@
     letter-spacing: -0.02em;
   }
 
+  .logo-x {
+    font-weight: 700;
+    color: #4a9eff;
+  }
+
   .header-nav {
     display: flex;
     align-items: center;
@@ -474,6 +479,14 @@
     color: #fff;
     letter-spacing: -0.03em;
     margin: 0;
+  }
+
+  .title-x {
+    font-weight: 800;
+    color: #4a9eff;
+    display: inline-block;
+    transform: scaleX(1.15);
+    margin-left: -0.02em;
   }
 
   /* About block - top right */

@@ -14,7 +14,9 @@
     '/products': () => import('./content/ProductsContent.svelte'),
     '/contact': () => import('./content/ContactContent.svelte'),
     '/about': () => import('./content/AboutContent.svelte'),
-    '/solutions': () => import('./content/SolutionsContent.svelte')
+    '/solutions': () => import('./content/SolutionsContent.svelte'),
+    '/data': () => import('./content/DataContent.svelte'),
+    '/insights': () => import('./content/InsightsContent.svelte')
   };
 
   // Use $effect to reload content when route changes

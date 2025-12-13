@@ -18,9 +18,9 @@
 <span
   class="logo-text {className}"
   style="font-size: {fontSize}px; color: {fillColor}; height: {size}px;"
-  aria-label="Oraklex Logo"
+  aria-label="orakleX Logo"
 >
-  <span class="logo-icon">O</span><span class="logo-rest">raklex</span>
+  <span class="logo-main">orakle</span><span class="logo-x">X</span>
 </span>
 
 <style lang="postcss">
@@ -38,12 +38,15 @@
     @apply opacity-90;
   }
 
-  .logo-icon {
-    @apply font-bold;
-    color: var(--color-base14);
+  .logo-main {
+    color: inherit;
   }
 
-  .logo-rest {
-    color: inherit;
+  .logo-x {
+    @apply font-bold;
+    color: var(--color-base14);
+    display: inline-block;
+    transform: scaleX(1.1) translateY(-0.5px);
+    margin-left: -0.02em;
   }
 </style>
