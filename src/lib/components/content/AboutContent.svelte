@@ -1,6 +1,5 @@
 <script>
   import {onMount} from 'svelte';
-  import {fade} from 'svelte/transition';
   import {Button} from '$components/jera';
 
   let visibleSections = $state(new Set());
@@ -25,287 +24,230 @@
     return () => observer.disconnect();
   });
 
-  const mission = {
-    title: 'Commerce Intelligence Infrastructure',
-    description: 'We capture, process, and monetize commerce behavioral data at scale. Our platform generates first-party intelligence for enterprise brands, AI companies, and commerce platforms.',
-    points: [
-      "We built J'ko—a virtual try-on platform used by fashion brands globally",
-      'Every try-on generates behavioral data: preferences, intent, conversion signals',
-      '10M+ monthly interactions become training data for AI and prediction APIs',
-      'Now we license that intelligence to companies building the next commerce layer'
-    ]
-  };
-
-  const values = [
+  const capabilities = [
     {
-      title: 'We Own the Source',
-      description: "Most data companies buy or scrape. We generate data from a platform we built and control.",
-      icon: 'brain'
+      title: 'First-Party Data Generation',
+      description: 'We own J\'ko AI—a production virtual try-on platform. The data is ours, not scraped or licensed.',
+      icon: 'source'
     },
     {
-      title: 'Privacy Is Non-Negotiable',
-      description: 'GDPR/CCPA compliant from day one. Differential privacy. Your lawyers will approve it.',
+      title: 'Enterprise-Grade Compliance',
+      description: 'GDPR and CCPA compliant. Differential privacy implemented. SOC 2 Type II in progress.',
       icon: 'shield'
     },
     {
-      title: 'Predictions That Work',
-      description: "94% accuracy on held-out data. We don't publish numbers we can't prove.",
-      icon: 'chart'
+      title: 'Production Infrastructure',
+      description: 'Sub-100ms API latency. 99.9% uptime SLA. Batch exports or real-time streams.',
+      icon: 'infra'
     },
     {
-      title: 'Built for Enterprise',
-      description: 'Sub-100ms latency. 99.9% uptime. Contracts that make sense. Real support.',
-      icon: 'rocket'
+      title: 'ML-Ready Format',
+      description: 'Structured for training pipelines. JSON, Parquet, or custom schema. Intent-labeled.',
+      icon: 'data'
     }
   ];
 
-  const timeline = [
+  const dataProducts = [
     {
-      phase: 'Live',
-      title: "J'ko AI",
-      description: 'Our try-on platform. Running. Generating data. Fashion brands use it daily.',
-      status: 'active'
+      name: 'Commerce Behavior Index',
+      description: 'Licensed behavioral datasets for AI training',
+      volume: 'Monthly event streams',
+      format: 'JSON / Parquet',
+      status: 'Accepting enterprise partners'
     },
     {
-      phase: 'Early Access',
-      title: 'Commerce Behavior Index',
-      description: 'Datasets for AI training. Select partners have access. Expanding capacity.',
-      status: 'building'
-    },
-    {
-      phase: 'Scaling',
-      title: 'Demand Prediction API',
-      description: 'The prediction layer. Working with first enterprise customers now.',
-      status: 'building'
+      name: 'Demand Prediction API',
+      description: 'SKU-level demand forecasting',
+      latency: '<100ms response',
+      accuracy: 'Validated on held-out data',
+      status: 'Enterprise pilot program'
     }
   ];
 
-  const expertise = [
+  const integrations = [
     {
-      area: 'Data Collection',
-      description: "We don't just analyze data—we generate it. J'ko is ours. The data is first-party.",
-      applications: ['Try-On Events', 'Style Preferences', 'Purchase Intent']
+      name: 'Meta Tech Provider',
+      description: 'Official Meta technology partner for commerce integrations'
     },
     {
-      area: 'ML Engineering',
-      description: 'Raw clicks become labeled training data. We know how to structure it for models.',
-      applications: ['Intent Classification', 'Feature Engineering', 'Training Pipelines']
-    },
-    {
-      area: 'Demand Forecasting',
-      description: 'Predict what sells before Google Trends knows about it. Behavioral signals move first.',
-      applications: ['Inventory Planning', 'Trend Detection', 'Campaign Timing']
-    },
-    {
-      area: 'Enterprise APIs',
-      description: 'We built infrastructure that handles load. Sub-100ms responses. Real SLAs.',
-      applications: ['REST APIs', 'Batch Exports', 'Real-time Streams']
+      name: 'Shopify Partner',
+      description: 'Native integration with Shopify commerce ecosystem'
     }
-  ];
-
-  const partners = [
-    {
-      name: "J'ko AI",
-      type: 'Our Platform',
-      badge: 'primary',
-      description: 'The try-on product we built. Fashion brands embed it. Shoppers use it. We collect the signals.',
-      contribution: '10M+ monthly events'
-    },
-    {
-      name: 'Meta',
-      type: 'Tech Provider',
-      badge: 'meta',
-      description: 'Official Meta Tech Provider. We plug into Instagram and Facebook commerce flows.',
-      contribution: 'Social commerce data'
-    },
-    {
-      name: 'Shopify',
-      type: 'Partner',
-      badge: 'shopify',
-      description: 'Native Shopify integration. Inventory, pricing, conversion—all connected.',
-      contribution: 'Transaction data'
-    }
-  ];
-
-  // Compliance badges for trust
-  const complianceBadges = [
-    { name: 'GDPR', label: 'GDPR Compliant' },
-    { name: 'CCPA', label: 'CCPA Compliant' },
-    { name: 'SOC2', label: 'SOC 2 Type II' }
   ];
 
   const getDelay = (index, base = 0) => base + index * 0.1;
 
-  function getValueIcon(iconName) {
+  function getIcon(iconName) {
     const icons = {
-      brain: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 1.892.402 3.13 1.5 4.5L12 22l6.5-7.5c1.098-1.37 1.5-2.608 1.5-4.5a8 8 0 0 0-8-8z"/><path d="M9 10h.01M15 10h.01M9 14c.5.5 1.5 1 3 1s2.5-.5 3-1"/></svg>`,
-      shield: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>`,
-      chart: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>`,
-      rocket: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>`
+      source: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>`,
+      shield: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>`,
+      infra: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg>`,
+      data: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`
     };
     return icons[iconName] || '';
   }
 </script>
 
 <div class="about-content">
-  <section class="mission-section" data-animate="mission" class:visible={visibleSections.has('mission')}>
-    <div class="mission-content">
-      <div class="mission-text">
-        <span class="section-label">What We Do</span>
-        <h2>The Short Version</h2>
-        <p>
-          We built a virtual try-on platform called J'ko. Fashion brands use it. Millions of shoppers use it. Every interaction generates behavioral data.
+  <!-- Company Overview -->
+  <section class="overview-section" data-animate="overview" class:visible={visibleSections.has('overview')}>
+    <div class="overview-grid">
+      <div class="overview-main">
+        <span class="section-label">Company</span>
+        <h2>Commerce Data Infrastructure</h2>
+        <p class="lead">
+          Oraklex provides enterprise behavioral data products for AI training and demand intelligence.
+          We generate first-party commerce data through J'ko AI, our production virtual try-on platform.
         </p>
-        <p>
-          Now we license that data. AI companies use it for training. Retailers use it for demand prediction. It's first-party, GDPR-compliant, and structured for production.
-        </p>
-      </div>
-      <div class="mission-points">
-        {#each mission.points as point, i}
-          <div class="mission-point" style={`--delay: ${getDelay(i, 0.1)}s`}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14m-7-7l7 7-7 7"/>
-            </svg>
-            <span>{point}</span>
+        <div class="key-facts">
+          <div class="fact">
+            <span class="fact-label">Parent Company</span>
+            <span class="fact-value">Up Go Corp.</span>
           </div>
-        {/each}
+          <div class="fact">
+            <span class="fact-label">Headquarters</span>
+            <span class="fact-value">Toronto, Canada</span>
+          </div>
+          <div class="fact">
+            <span class="fact-label">Data Source</span>
+            <span class="fact-value">J'ko AI Platform</span>
+          </div>
+        </div>
+      </div>
+      <div class="overview-stats">
+        <div class="stat-card primary">
+          <span class="stat-value">First-Party</span>
+          <span class="stat-label">Data Generation</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">GDPR/CCPA</span>
+          <span class="stat-label">Compliant</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">99.9%</span>
+          <span class="stat-label">Uptime SLA</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">&lt;100ms</span>
+          <span class="stat-label">API Latency</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="values-section" data-animate="values" class:visible={visibleSections.has('values')}>
+  <!-- Capabilities -->
+  <section class="capabilities-section" data-animate="capabilities" class:visible={visibleSections.has('capabilities')}>
     <div class="section-header">
-      <span class="section-label">Why Us</span>
-      <h2>What Makes This Different</h2>
+      <span class="section-label">Platform</span>
+      <h2>Enterprise Capabilities</h2>
     </div>
 
-    <div class="values-grid">
-      {#each values as value, i}
+    <div class="capabilities-grid">
+      {#each capabilities as capability, i}
         <article
-          class="value-card"
-          data-animate={`value-${i}`}
-          class:visible={visibleSections.has(`value-${i}`)}
+          class="capability-card"
+          data-animate={`capability-${i}`}
+          class:visible={visibleSections.has(`capability-${i}`)}
           style={`--delay: ${getDelay(i)}s`}
-          in:fade={{duration: 400, delay: i * 80}}
         >
-          <div class="value-icon">
-            {@html getValueIcon(value.icon)}
+          <div class="capability-icon">
+            {@html getIcon(capability.icon)}
           </div>
-          <h3>{value.title}</h3>
-          <p>{value.description}</p>
+          <h3>{capability.title}</h3>
+          <p>{capability.description}</p>
         </article>
       {/each}
     </div>
   </section>
 
-  <section class="timeline-section" data-animate="timeline" class:visible={visibleSections.has('timeline')}>
+  <!-- Data Products -->
+  <section class="products-section" data-animate="products" class:visible={visibleSections.has('products')}>
     <div class="section-header">
-      <span class="section-label">Where We Are</span>
-      <h2>Current Status</h2>
+      <span class="section-label">Products</span>
+      <h2>Data Products</h2>
     </div>
 
-    <div class="timeline">
-      {#each timeline as phase, i}
+    <div class="products-grid">
+      {#each dataProducts as product, i}
         <article
-          class="timeline-card"
-          class:active={phase.status === 'active'}
-          data-animate={`timeline-${i}`}
-          class:visible={visibleSections.has(`timeline-${i}`)}
+          class="product-card"
+          data-animate={`product-${i}`}
+          class:visible={visibleSections.has(`product-${i}`)}
           style={`--delay: ${getDelay(i, 0.1)}s`}
         >
-          <div class="timeline-phase" class:active={phase.status === 'active'} class:building={phase.status === 'building'}>
-            {phase.phase}
-          </div>
-          <h3>{phase.title}</h3>
-          <p>{phase.description}</p>
-        </article>
-      {/each}
-    </div>
-  </section>
-
-  <section class="expertise-section" data-animate="expertise" class:visible={visibleSections.has('expertise')}>
-    <div class="section-header">
-      <span class="section-label">What We're Good At</span>
-      <h2>Technical Capabilities</h2>
-    </div>
-
-    <div class="expertise-grid">
-      {#each expertise as area, i}
-        <article
-          class="expertise-card"
-          data-animate={`expertise-${i}`}
-          class:visible={visibleSections.has(`expertise-${i}`)}
-          style={`--delay: ${getDelay(i, 0.2)}s`}
-          in:fade={{duration: 400, delay: i * 80}}
-        >
-          <h3>{area.area}</h3>
-          <p>{area.description}</p>
-          <ul class="applications-list">
-            {#each area.applications as app}
-              <li>{app}</li>
+          <h3>{product.name}</h3>
+          <p class="product-desc">{product.description}</p>
+          <div class="product-specs">
+            {#each Object.entries(product).filter(([k]) => !['name', 'description', 'status'].includes(k)) as [key, value]}
+              <div class="spec">
+                <span class="spec-label">{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                <span class="spec-value">{value}</span>
+              </div>
             {/each}
-          </ul>
+          </div>
+          <div class="product-status">{product.status}</div>
         </article>
       {/each}
     </div>
   </section>
 
-  <section class="partners-section" data-animate="partners" class:visible={visibleSections.has('partners')}>
+  <!-- Integrations -->
+  <section class="integrations-section" data-animate="integrations" class:visible={visibleSections.has('integrations')}>
     <div class="section-header">
-      <span class="section-label">The Ecosystem</span>
-      <h2>Where Data Comes From</h2>
+      <span class="section-label">Ecosystem</span>
+      <h2>Technology Partners</h2>
     </div>
 
-    <div class="partners-grid">
-      {#each partners as partner, i}
+    <div class="integrations-grid">
+      {#each integrations as integration, i}
         <article
-          class="partner-card"
-          class:meta={partner.badge === 'meta'}
-          class:shopify={partner.badge === 'shopify'}
-          class:primary={partner.badge === 'primary'}
-          data-animate={`partner-${i}`}
-          class:visible={visibleSections.has(`partner-${i}`)}
-          style={`--delay: ${getDelay(i, 0.15)}s`}
-          in:fade={{duration: 400, delay: i * 80}}
+          class="integration-card"
+          data-animate={`integration-${i}`}
+          class:visible={visibleSections.has(`integration-${i}`)}
+          style={`--delay: ${getDelay(i, 0.1)}s`}
         >
-          <div class="partner-badge" class:meta={partner.badge === 'meta'} class:shopify={partner.badge === 'shopify'}>
-            <span class="badge-name">{partner.name}</span>
-            <span class="badge-type">{partner.type}</span>
-          </div>
-          <p class="partner-description">{partner.description}</p>
-          <div class="partner-contribution">
-            <strong>{partner.contribution}</strong>
-          </div>
+          <h3>{integration.name}</h3>
+          <p>{integration.description}</p>
         </article>
       {/each}
     </div>
 
-    <!-- Compliance Badges -->
-    <div class="compliance-section">
-      <span class="compliance-label">Data Compliance</span>
-      <div class="compliance-badges">
-        {#each complianceBadges as badge}
-          <div class="compliance-badge">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              <path d="M9 12l2 2 4-4"/>
-            </svg>
-            <span>{badge.label}</span>
-          </div>
-        {/each}
+    <!-- Compliance -->
+    <div class="compliance-row">
+      <div class="compliance-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+        <span>GDPR Compliant</span>
+      </div>
+      <div class="compliance-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+        <span>CCPA Compliant</span>
+      </div>
+      <div class="compliance-badge pending">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+        <span>SOC 2 Type II (In Progress)</span>
       </div>
     </div>
   </section>
 
+  <!-- CTA -->
   <section class="cta-section" data-animate="cta" class:visible={visibleSections.has('cta')}>
     <div class="cta-content">
-      <h2>Interested?</h2>
+      <h2>Request Data Access</h2>
       <p>
-        We work with AI companies building training datasets, retailers optimizing inventory, and platforms adding prediction features.
+        Enterprise data partnerships for AI training, demand forecasting, and commerce intelligence.
       </p>
       <div class="cta-actions">
-        <Button variant="primary" href="/contact">Get in Touch</Button>
-        <Button variant="secondary" href="/solutions">See the Products</Button>
+        <Button variant="primary" href="/contact">Schedule Consultation</Button>
+        <Button variant="secondary" href="/data">View Data Schema</Button>
       </div>
     </div>
   </section>
@@ -319,321 +261,245 @@
   }
 
   .section-header {
-    @apply mx-auto mb-8 max-w-3xl text-center;
+    @apply mb-8 max-w-3xl;
   }
 
   .section-label {
-    @apply text-xs font-semibold uppercase tracking-[0.25em] text-base4;
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base4;
   }
 
   .section-header h2 {
-    @apply mt-2 text-2xl font-semibold text-base6 md:text-3xl;
+    @apply mt-2 text-2xl font-semibold text-base6;
     letter-spacing: -0.02em;
   }
 
-  /* Mission Section */
-  .mission-section {
+  /* Overview Section */
+  .overview-section {
     @apply mx-auto max-w-6xl px-8 py-12;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .mission-section.visible {
+  .overview-section.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .mission-content {
-    @apply grid gap-8 md:grid-cols-2 items-center;
+  .overview-grid {
+    @apply grid gap-10 lg:grid-cols-5;
   }
 
-  .mission-text {
-    @apply flex flex-col gap-3;
+  .overview-main {
+    @apply lg:col-span-3;
   }
 
-  .mission-text h2 {
-    @apply text-2xl font-semibold text-base6 mt-1;
+  .overview-main h2 {
+    @apply mt-2 text-2xl font-semibold text-base6;
     letter-spacing: -0.02em;
   }
 
-  .mission-text p {
-    @apply text-sm text-base4 leading-relaxed;
+  .lead {
+    @apply mt-4 text-base text-base5 leading-relaxed;
   }
 
-  .mission-points {
-    @apply flex flex-col gap-3 p-5 rounded-2xl bg-base1 border border-base3;
+  .key-facts {
+    @apply mt-6 flex flex-wrap gap-6;
   }
 
-  .mission-point {
-    @apply flex items-center gap-2.5 text-sm text-base5;
-    opacity: 0;
-    transform: translateX(-8px);
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    transition-delay: var(--delay, 0s);
+  .fact {
+    @apply flex flex-col gap-1;
   }
 
-  .mission-section.visible .mission-point {
-    opacity: 1;
-    transform: translateX(0);
+  .fact-label {
+    @apply text-xs text-base4 uppercase tracking-wider;
   }
 
-  .mission-point svg {
-    @apply flex-shrink-0 text-base6;
+  .fact-value {
+    @apply text-sm font-medium text-base6;
   }
 
-  /* Values Section */
-  .values-section {
+  .overview-stats {
+    @apply lg:col-span-2 grid grid-cols-2 gap-3;
+  }
+
+  .stat-card {
+    @apply flex flex-col items-center justify-center p-4 rounded-xl border border-base3 bg-base0 text-center;
+  }
+
+  .stat-card.primary {
+    @apply border-base14/30 bg-base14/5;
+  }
+
+  .stat-value {
+    @apply text-lg font-bold text-base6;
+  }
+
+  .stat-card.primary .stat-value {
+    @apply text-base14;
+  }
+
+  .stat-label {
+    @apply text-xs text-base4 mt-1;
+  }
+
+  /* Capabilities Section */
+  .capabilities-section {
     @apply mx-auto max-w-6xl px-8 py-12;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .values-section.visible {
+  .capabilities-section.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .values-grid {
+  .capabilities-grid {
     @apply grid gap-4 md:grid-cols-2 lg:grid-cols-4;
   }
 
-  .value-card {
-    @apply flex flex-col gap-2 rounded-2xl border border-base3 bg-base0 p-5 text-center;
+  .capability-card {
+    @apply flex flex-col gap-3 rounded-xl border border-base3 bg-base0 p-5;
     opacity: 0;
     transform: translateY(16px);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     transition-delay: var(--delay, 0s);
   }
 
-  .value-card.visible {
+  .capability-card.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .value-icon {
-    @apply mx-auto w-12 h-12 rounded-xl flex items-center justify-center bg-base2 text-base6;
+  .capability-icon {
+    @apply w-10 h-10 rounded-lg flex items-center justify-center bg-base2 text-base6;
   }
 
-  .value-card h3 {
+  .capability-card h3 {
     @apply text-sm font-semibold text-base6;
   }
 
-  .value-card p {
-    @apply text-xs text-base4;
+  .capability-card p {
+    @apply text-xs text-base4 leading-relaxed;
   }
 
-  /* Timeline Section */
-  .timeline-section {
+  /* Products Section */
+  .products-section {
     @apply mx-auto max-w-6xl px-8 py-12;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .timeline-section.visible {
+  .products-section.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .timeline {
-    @apply flex flex-col md:flex-row gap-4 justify-center;
+  .products-grid {
+    @apply grid gap-4 md:grid-cols-2;
   }
 
-  .timeline-card {
-    @apply flex-1 flex flex-col gap-2 rounded-2xl border border-base3 bg-base0 p-5;
-    max-width: 280px;
+  .product-card {
+    @apply flex flex-col gap-3 rounded-xl border border-base3 bg-base0 p-6;
     opacity: 0;
     transform: translateY(16px);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     transition-delay: var(--delay, 0s);
   }
 
-  .timeline-card.visible {
+  .product-card.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .timeline-card.active {
-    @apply border-base6 bg-base1;
+  .product-card h3 {
+    @apply text-lg font-semibold text-base6;
   }
 
-  .timeline-phase {
-    @apply inline-block self-start px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider;
-    @apply bg-base2 text-base4;
+  .product-desc {
+    @apply text-sm text-base4;
   }
 
-  .timeline-phase.active {
-    @apply bg-base6 text-base0;
+  .product-specs {
+    @apply flex flex-col gap-2 py-3 border-y border-base2;
   }
 
-  .timeline-phase.building {
-    @apply bg-base2 text-base5;
+  .spec {
+    @apply flex justify-between text-xs;
   }
 
-  .timeline-card h3 {
-    @apply text-base font-semibold text-base6;
+  .spec-label {
+    @apply text-base4;
   }
 
-  .timeline-card p {
-    @apply text-xs text-base4;
+  .spec-value {
+    @apply text-base6 font-medium;
   }
 
-  /* Expertise Section */
-  .expertise-section {
+  .product-status {
+    @apply text-xs text-base14 font-medium;
+  }
+
+  /* Integrations Section */
+  .integrations-section {
     @apply mx-auto max-w-6xl px-8 py-12;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .expertise-section.visible {
+  .integrations-section.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .expertise-grid {
-    @apply grid gap-4 md:grid-cols-2;
+  .integrations-grid {
+    @apply grid gap-4 md:grid-cols-2 max-w-2xl;
   }
 
-  .expertise-card {
-    @apply flex flex-col gap-2 rounded-2xl border border-base3 bg-base0 p-5;
+  .integration-card {
+    @apply flex flex-col gap-2 rounded-xl border border-base3 bg-base0 p-5;
     opacity: 0;
     transform: translateY(16px);
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     transition-delay: var(--delay, 0s);
   }
 
-  .expertise-card.visible {
+  .integration-card.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .expertise-card h3 {
-    @apply text-base font-semibold text-base6;
+  .integration-card h3 {
+    @apply text-sm font-semibold text-base6;
   }
 
-  .expertise-card p {
+  .integration-card p {
     @apply text-xs text-base4;
   }
 
-  .applications-list {
-    @apply flex flex-col gap-0.5 mt-1;
-  }
-
-  .applications-list li {
-    @apply text-xs text-base5 pl-3 relative;
-  }
-
-  .applications-list li::before {
-    content: '\2192';
-    @apply absolute left-0 text-base4;
-  }
-
-  /* Partners Section */
-  .partners-section {
-    @apply mx-auto max-w-6xl px-8 py-12;
-    opacity: 0;
-    transform: translateY(24px);
-    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .partners-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .partners-grid {
-    @apply grid gap-4 md:grid-cols-3 max-w-4xl mx-auto;
-  }
-
-  .partner-card {
-    @apply flex flex-col gap-3 rounded-2xl border border-base3 bg-base0 p-5;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    transition-delay: var(--delay, 0s);
-  }
-
-  .partner-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .partner-card.meta {
-    @apply border-blue-200 bg-gradient-to-br from-blue-50 to-base0;
-  }
-
-  .partner-card.shopify {
-    @apply border-green-200 bg-gradient-to-br from-green-50 to-base0;
-  }
-
-  .partner-card.primary {
-    @apply border-base14/20 bg-gradient-to-br from-base14/5 to-base0;
-  }
-
-  .partner-badge {
-    @apply flex flex-col gap-0.5;
-  }
-
-  .badge-name {
-    @apply text-lg font-bold text-base6;
-    letter-spacing: -0.01em;
-  }
-
-  .partner-badge.meta .badge-name {
-    @apply text-blue-600;
-  }
-
-  .partner-badge.shopify .badge-name {
-    @apply text-green-600;
-  }
-
-  .badge-type {
-    @apply text-[10px] font-semibold uppercase tracking-wider text-base4;
-  }
-
-  .partner-badge.meta .badge-type {
-    @apply text-blue-500;
-  }
-
-  .partner-badge.shopify .badge-type {
-    @apply text-green-500;
-  }
-
-  .partner-description {
-    @apply text-xs text-base4;
-  }
-
-  .partner-contribution {
-    @apply text-xs text-base5 mt-auto pt-3 border-t border-base2;
-  }
-
-  .partner-contribution strong {
-    @apply text-base6;
-  }
-
-  /* Compliance Section */
-  .compliance-section {
-    @apply mt-10 pt-8 border-t border-base2 text-center;
-  }
-
-  .compliance-label {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base4 block mb-4;
-  }
-
-  .compliance-badges {
-    @apply flex flex-wrap justify-center gap-4;
+  .compliance-row {
+    @apply mt-8 flex flex-wrap gap-4;
   }
 
   .compliance-badge {
-    @apply flex items-center gap-2 px-4 py-2 rounded-lg bg-base1 border border-base2;
-    @apply text-sm font-medium text-base5;
+    @apply flex items-center gap-2 px-4 py-2 rounded-lg bg-green-50 border border-green-200;
+    @apply text-xs font-medium text-green-700;
   }
 
   .compliance-badge svg {
     @apply text-green-500;
+  }
+
+  .compliance-badge.pending {
+    @apply bg-amber-50 border-amber-200 text-amber-700;
+  }
+
+  .compliance-badge.pending svg {
+    @apply text-amber-500;
   }
 
   /* CTA Section */
@@ -650,16 +516,15 @@
   }
 
   .cta-content {
-    @apply mx-auto max-w-3xl flex flex-col items-center gap-4 rounded-3xl border border-base3 bg-base0 px-8 py-10 text-center;
+    @apply mx-auto max-w-2xl flex flex-col items-center gap-4 rounded-2xl border border-base3 bg-base1 px-8 py-10 text-center;
   }
 
   .cta-content h2 {
-    @apply text-2xl font-semibold text-base6 md:text-3xl;
-    letter-spacing: -0.02em;
+    @apply text-xl font-semibold text-base6;
   }
 
   .cta-content p {
-    @apply max-w-xl text-base text-base4;
+    @apply text-sm text-base4;
   }
 
   .cta-actions {
@@ -667,34 +532,33 @@
   }
 
   @media (max-width: 768px) {
-    .mission-section,
-    .values-section,
-    .timeline-section,
-    .expertise-section,
-    .partners-section,
+    .overview-section,
+    .capabilities-section,
+    .products-section,
+    .integrations-section,
     .cta-section {
       @apply px-5 py-8;
     }
 
-    .mission-content {
+    .overview-grid {
       @apply grid-cols-1;
     }
 
-    .values-grid {
+    .overview-stats {
+      @apply grid-cols-2;
+    }
+
+    .capabilities-grid {
       @apply grid-cols-1;
     }
 
-    .timeline {
-      @apply flex-col items-center;
-    }
-
-    .timeline-card {
-      @apply max-w-full;
-    }
-
-    .expertise-grid,
-    .partners-grid {
+    .products-grid,
+    .integrations-grid {
       @apply grid-cols-1;
+    }
+
+    .compliance-row {
+      @apply flex-col;
     }
 
     .cta-content {

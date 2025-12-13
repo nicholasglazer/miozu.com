@@ -36,33 +36,33 @@
       route: '/about',
       effectType: 'sinuous-original',
       canvasId: 'canvas-about',
-      label: 'The Company',
+      label: 'Company',
       title: 'About',
-      description: 'Where millions of shopping decisions become predictive data.'
+      description: 'Commerce data infrastructure. Enterprise-ready.'
     },
     platform: {
       route: '/solutions',
       effectType: 'synaptic-multipass',
       canvasId: 'canvas-platform',
-      label: 'Our Products',
+      label: 'Products',
       title: 'Platform',
-      description: 'Demand APIs and datasets that power inventory, marketing, and AI agents.'
+      description: 'Data licensing and prediction APIs for enterprise.'
     },
     data: {
-      route: '/solutions',
+      route: '/data',
       effectType: 'synaptic',
       canvasId: 'canvas-data',
-      label: 'The Source',
-      title: 'Data',
-      description: '10M+ monthly shopping interactions. Structured. Licensed. Ready.'
+      label: 'Documentation',
+      title: 'Schema',
+      description: 'Event types, field specs, and delivery formats.'
     },
     contact: {
       route: '/contact',
       effectType: 'ether',
       canvasId: 'canvas-contact',
-      label: 'Work With Us',
+      label: 'Inquiries',
       title: 'Contact',
-      description: 'Data licensing for AI companies, retailers, and platforms.'
+      description: 'Request data access for your organization.'
     }
   };
 
@@ -121,8 +121,8 @@
 </script>
 
 <Metadata
-  title="Oraklex — Commerce Intelligence Infrastructure"
-  description="We capture 10M+ shopping interactions monthly and turn them into prediction APIs, AI training datasets, and demand intelligence. Built for AI companies, retailers, and commerce platforms."
+  title="Oraklex — Enterprise Commerce Data"
+  description="First-party behavioral data for AI training. Licensed commerce datasets and demand prediction APIs for enterprise."
   canonicalUrl={domain}
   ogType="website"
   ogImage={`${domain}/images/oraklex-og-banner.jpg`}
@@ -203,7 +203,7 @@
     </div>
     <nav class="header-nav">
       <MegaMenu />
-      <a href="/insights" class="nav-link nav-link-highlight">Insights</a>
+      <a href="/data" class="nav-link">Schema</a>
       <a href="/about" class="nav-link">About</a>
       <a href="/contact" class="nav-link">Contact</a>
     </nav>
@@ -218,9 +218,9 @@
       {/if}
       <div class="block-overlay">
         <div class="hero-content">
-          <span class="hero-label">Commerce Intelligence</span>
+          <span class="hero-label">Enterprise Data</span>
           <h1 class="hero-title">ORAKLEX</h1>
-          <p class="hero-tagline">We turn shopping behavior into prediction intelligence</p>
+          <p class="hero-tagline">First-party commerce data for AI training</p>
         </div>
       </div>
     </div>
@@ -238,9 +238,9 @@
       {/if}
       <div class="block-overlay block-overlay-about">
         <div class="block-content">
-          <span class="block-label">The Company</span>
+          <span class="block-label">Company</span>
           <h2 class="block-title">About</h2>
-          <p class="block-desc">Where millions of shopping decisions become predictive data.</p>
+          <p class="block-desc">Commerce data infrastructure. Enterprise-ready.</p>
         </div>
         <div class="block-corner">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -262,12 +262,11 @@
         <ThreeCanvas type="synaptic-multipass" lowRes={true} id="canvas-platform" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Our Products</span>
+        <span class="block-label">Products</span>
         <h2 class="block-title">Platform</h2>
         <ul class="block-list">
+          <li>Commerce Behavior Index</li>
           <li>Demand Prediction API</li>
-          <li>Behavioral Datasets</li>
-          <li>AI Visibility Services</li>
         </ul>
       </div>
       <div class="block-corner">
@@ -277,7 +276,7 @@
       </div>
     </button>
 
-    <!-- Small Block 2: Data (PRIORITY 2) -->
+    <!-- Small Block 2: Data Schema (PRIORITY 2) -->
     <button
       type="button"
       class="block block-small block-data"
@@ -289,9 +288,9 @@
         <ThreeCanvas type="synaptic" lowRes={true} id="canvas-data" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">The Source</span>
-        <h2 class="block-title">Data</h2>
-        <p class="block-desc">10M+ monthly shopping interactions. Structured. Licensed. Ready.</p>
+        <span class="block-label">Documentation</span>
+        <h2 class="block-title">Schema</h2>
+        <p class="block-desc">Event types, field specs, delivery formats.</p>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -312,9 +311,9 @@
         <ThreeCanvas type="ether" lowRes={true} id="canvas-contact" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Work With Us</span>
+        <span class="block-label">Inquiries</span>
         <h2 class="block-title">Contact</h2>
-        <span class="block-email-light">partners@oraklex.com</span>
+        <span class="block-email-light">Request data access</span>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -334,9 +333,9 @@
         <ThreeCanvas type="snake-trails" lowRes={true} />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Where Data Comes From</span>
+        <span class="block-label">Data Source</span>
         <h2 class="block-title">J'ko AI</h2>
-        <p class="block-desc">Our virtual try-on platform. Every style choice becomes data.</p>
+        <p class="block-desc">Production virtual try-on platform.</p>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

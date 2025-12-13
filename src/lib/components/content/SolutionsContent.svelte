@@ -1,7 +1,5 @@
 <script>
   import {onMount} from 'svelte';
-  import {fade} from 'svelte/transition';
-  import {Button} from '$components/jera';
 
   let visibleSections = $state(new Set());
 
@@ -25,165 +23,62 @@
     return () => observer.disconnect();
   });
 
-  const solutions = [
+  const products = [
     {
       id: 'behavioral-data',
       name: 'Commerce Behavior Index',
-      tagline: 'First-Party Behavioral Datasets',
-      status: 'Early Access',
-      description: 'Real shopping behavior. Not synthetic data, not surveys, not simulations.',
-      longDescription: "Most AI training data is synthetic or scraped. Ours comes from J'ko—a virtual try-on platform where real shoppers make real choices. 10M+ monthly interactions capturing what people actually want to buy, how they decide, and why they convert. GDPR/CCPA compliant. JSON or Parquet. Licensed for commercial use.",
-      metrics: [
-        {value: '10M+', label: 'Monthly Events'},
-        {value: '500K+', label: 'User Sessions'},
-        {value: 'GDPR/CCPA', label: 'Compliant'},
-        {value: 'JSON/Parquet', label: 'Formats'}
+      category: 'Data Licensing',
+      headline: 'First-party behavioral data for AI training',
+      description: 'Licensed datasets from production commerce applications. Not synthetic. Not scraped. Generated from real shopping behavior on platforms we own and operate.',
+      specs: [
+        {label: 'Data Type', value: 'Behavioral events'},
+        {label: 'Source', value: 'J\'ko AI platform'},
+        {label: 'Format', value: 'JSON / Parquet'},
+        {label: 'Compliance', value: 'GDPR, CCPA'}
       ],
-      features: [
-        {
-          title: 'Try-On Behavior Signals',
-          description: 'Virtual try-on interactions revealing style preferences, size confidence, and purchase intent.'
-        },
-        {
-          title: 'Fashion Intent Classification',
-          description: 'Pre-labeled datasets mapping browsing patterns to purchase probability and style affinity.'
-        },
-        {
-          title: 'Conversion Event Streams',
-          description: 'Real-time event data from discovery to checkout, structured for ML pipelines.'
-        },
-        {
-          title: 'Enterprise Data Licensing',
-          description: 'Flexible licensing: API access, batch exports, or dedicated data feeds for training.'
-        }
+      useCases: [
+        'Train recommendation systems on real purchase intent signals',
+        'Build demand forecasting models with behavioral ground truth',
+        'Develop personalization AI with authentic user preferences'
       ],
-      contribution: "Powered by J'ko AI's virtual try-on platform serving fashion brands globally."
+      access: 'Enterprise licensing'
     },
     {
       id: 'demand-api',
       name: 'Demand Prediction API',
-      tagline: 'Predictive Intelligence for Commerce',
-      status: 'Early Access',
-      description: 'Stockouts cost money. Overstock costs more. This API tells you what to stock.',
-      longDescription: 'Fashion retailers lose 8-10% of revenue to wrong inventory decisions. Our API predicts demand at SKU level—which sizes, which colors, which products—up to 30 days before the sale. 94% accuracy on held-out data. Sub-100ms latency. Works with your existing systems or feeds autonomous AI agents directly.',
-      metrics: [
-        {value: '94%', label: 'Accuracy'},
-        {value: '<100ms', label: 'Latency'},
-        {value: '99.9%', label: 'Uptime SLA'},
-        {value: 'RESTful', label: 'API'}
+      category: 'Prediction Infrastructure',
+      headline: 'SKU-level demand forecasting',
+      description: 'Predict which products, sizes, and variants will sell before they trend. Built on behavioral signals that precede purchase decisions.',
+      specs: [
+        {label: 'Latency', value: '<100ms'},
+        {label: 'Uptime', value: '99.9% SLA'},
+        {label: 'Protocol', value: 'REST API'},
+        {label: 'Format', value: 'JSON'}
       ],
-      features: [
-        {
-          title: 'SKU-Level Forecasting',
-          description: 'Predict demand for specific products, sizes, and variants up to 30 days ahead.'
-        },
-        {
-          title: 'Trend Detection',
-          description: 'Identify emerging style trends from behavioral signals before they hit search volume.'
-        },
-        {
-          title: 'Inventory Optimization',
-          description: 'Reduce stockouts by 40% and overstock by 25% with demand-driven replenishment signals.'
-        },
-        {
-          title: 'AI Agent Integration',
-          description: 'Structured prediction payloads designed for autonomous agent consumption.'
-        }
+      useCases: [
+        'Reduce inventory waste with demand-driven replenishment',
+        'Identify emerging trends before search volume signals',
+        'Optimize marketing spend with conversion probability scores'
       ],
-      contribution: 'Intelligence layer for AI agents, inventory systems, and marketing automation.'
-    },
-    {
-      id: 'geo',
-      name: 'GEO Intelligence',
-      tagline: 'Generative Engine Optimization',
-      status: 'Live',
-      description: 'Your competitors are showing up in ChatGPT. You are not. We fix that.',
-      longDescription: "Enterprise buyers now ask AI for recommendations before they Google. If you're not in the answer, you're not in the conversation. GEO Intelligence tracks how ChatGPT, Claude, Gemini, and Perplexity cite brands in your category, then positions you as the source they prefer. Real-time monitoring. Competitive benchmarking. Measurable share of voice.",
-      metrics: [
-        {value: '10x', label: 'AI Citations'},
-        {value: '85%', label: 'Share of Voice'},
-        {value: 'Real-time', label: 'Monitoring'},
-        {value: 'Multi-LLM', label: 'Coverage'}
-      ],
-      features: [
-        {
-          title: 'Citation Intelligence',
-          description: 'Track when and how AI systems reference your brand across GPT-4, Claude, Gemini, and Perplexity.'
-        },
-        {
-          title: 'Authority Positioning',
-          description: 'Strategic content architecture that makes your brand the source LLMs prefer to cite.'
-        },
-        {
-          title: 'Competitive Monitoring',
-          description: "Real-time alerts when competitors gain or lose AI visibility in your category."
-        },
-        {
-          title: 'Enterprise Dashboard',
-          description: 'Executive reporting on AI visibility, citation sentiment, and market position.'
-        }
-      ],
-      contribution: 'Generates AI interaction patterns and citation data that feed our prediction models.'
-    },
-    {
-      id: 'aeo',
-      name: 'AEO Solutions',
-      tagline: 'Answer Engine Optimization',
-      status: 'Live',
-      description: 'Perplexity gives one answer. Make sure it cites you.',
-      longDescription: "Answer engines don't show 10 blue links. They synthesize one response and cite 2-3 sources. If you're not cited, you don't exist. AEO Solutions structures your content so Perplexity, Google AI Overviews, and Bing Copilot treat you as the authoritative source. Schema optimization. Trust signal building. Query intelligence.",
-      metrics: [
-        {value: '40%', label: 'Answer Share'},
-        {value: '3x', label: 'Referral Traffic'},
-        {value: 'Schema', label: 'Optimized'},
-        {value: '24/7', label: 'Monitoring'}
-      ],
-      features: [
-        {
-          title: 'Answer-First Architecture',
-          description: 'Structure content specifically for how answer engines parse and synthesize information.'
-        },
-        {
-          title: 'Query Intelligence',
-          description: 'Identify the questions enterprise buyers ask AI systems in your category.'
-        },
-        {
-          title: 'Source Authority Building',
-          description: 'Build the trust signals that make answer engines prefer your content over competitors.'
-        },
-        {
-          title: 'Multi-Platform Optimization',
-          description: 'Unified strategy for Perplexity, Google AI Overviews, Bing Copilot, and emerging platforms.'
-        }
-      ],
-      contribution: 'Query patterns and answer structures feed predictive intelligence for demand forecasting.'
+      access: 'Enterprise pilot program'
     }
   ];
 
-  const dataFlow = [
+  const pipeline = [
     {
       step: '01',
-      title: 'Capture',
-      subtitle: "J'ko Platform",
-      description: "Shoppers try on clothes virtually. We capture every choice they make."
+      title: 'Generate',
+      description: 'Commerce interactions on J\'ko AI platform'
     },
     {
       step: '02',
       title: 'Structure',
-      subtitle: 'ML Pipeline',
-      description: 'Raw events become labeled datasets. Intent, preference, conversion signals.'
+      description: 'Events labeled for intent and outcome'
     },
     {
       step: '03',
-      title: 'Predict',
-      subtitle: 'Intelligence Engine',
-      description: 'Demand forecasts. Trend detection. What sells before it trends.'
-    },
-    {
-      step: '04',
       title: 'Deliver',
-      subtitle: 'Enterprise API',
-      description: 'Sub-100ms. 99.9% uptime. Your systems or ours.'
+      description: 'API access or batch exports'
     }
   ];
 
@@ -191,27 +86,27 @@
 </script>
 
 <div class="solutions-content">
-  <section class="data-flow-section" data-animate="flow" class:visible={visibleSections.has('flow')}>
+  <!-- Pipeline Overview -->
+  <section class="pipeline-section" data-animate="pipeline" class:visible={visibleSections.has('pipeline')}>
     <div class="section-header">
-      <span class="section-label">How It Works</span>
-      <h2>From Shopping Behavior to Prediction</h2>
+      <span class="section-label">Infrastructure</span>
+      <h2>Data Pipeline</h2>
     </div>
 
-    <div class="data-flow">
-      {#each dataFlow as step, i}
+    <div class="pipeline-flow">
+      {#each pipeline as step, i}
         <article
-          class="flow-step"
-          data-animate={`flow-${i}`}
-          class:visible={visibleSections.has(`flow-${i}`)}
+          class="pipeline-step"
+          data-animate={`pipeline-${i}`}
+          class:visible={visibleSections.has(`pipeline-${i}`)}
           style={`--delay: ${getDelay(i)}s`}
         >
           <span class="step-number">{step.step}</span>
           <h3>{step.title}</h3>
-          <span class="step-subtitle">{step.subtitle}</span>
           <p>{step.description}</p>
         </article>
-        {#if i < dataFlow.length - 1}
-          <div class="flow-connector">
+        {#if i < pipeline.length - 1}
+          <div class="pipeline-connector">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M5 12h14m-7-7l7 7-7 7"/>
             </svg>
@@ -221,76 +116,61 @@
     </div>
   </section>
 
-  {#each solutions as solution, solutionIndex}
+  <!-- Products -->
+  {#each products as product, productIndex}
     <section
-      id={solution.id}
-      class="solution-section"
-      class:featured={solution.status === 'Live' || solution.status === 'Early Access'}
-      data-animate={`solution-${solutionIndex}`}
-      class:visible={visibleSections.has(`solution-${solutionIndex}`)}
+      id={product.id}
+      class="product-section"
+      data-animate={`product-${productIndex}`}
+      class:visible={visibleSections.has(`product-${productIndex}`)}
     >
-      <div class="solution-header">
-        <div class="solution-status" class:live={solution.status === 'Live'} class:early={solution.status === 'Early Access'}>
-          {solution.status}
-        </div>
-        <h2>{solution.name}</h2>
-        <span class="solution-tagline">{solution.tagline}</span>
-        <p class="solution-description">{solution.longDescription}</p>
+      <div class="product-header">
+        <span class="product-category">{product.category}</span>
+        <h2>{product.name}</h2>
+        <p class="product-headline">{product.headline}</p>
+        <p class="product-description">{product.description}</p>
+      </div>
 
-        <div class="solution-metrics">
-          {#each solution.metrics as metric, i}
-            <div class="metric-card" in:fade={{duration: 300, delay: i * 80}}>
-              <span class="metric-value">{metric.value}</span>
-              <span class="metric-label">{metric.label}</span>
-            </div>
-          {/each}
+      <div class="product-details">
+        <div class="specs-section">
+          <h3>Specifications</h3>
+          <div class="specs-grid">
+            {#each product.specs as spec}
+              <div class="spec-item">
+                <span class="spec-label">{spec.label}</span>
+                <span class="spec-value">{spec.value}</span>
+              </div>
+            {/each}
+          </div>
         </div>
 
-        <div class="solution-actions">
-          {#if solution.status === 'Live'}
-            <a href="/contact" class="action-btn primary">Get Started</a>
-          {:else if solution.status === 'Early Access'}
-            <a href="/contact" class="action-btn primary">Request Early Access</a>
-            <a href="mailto:partners@oraklex.com" class="action-btn secondary">Enterprise Inquiry</a>
-          {:else}
-            <a href="mailto:partners@oraklex.com" class="action-btn secondary">Join Waitlist</a>
-          {/if}
+        <div class="use-cases-section">
+          <h3>Applications</h3>
+          <ul class="use-cases-list">
+            {#each product.useCases as useCase}
+              <li>{useCase}</li>
+            {/each}
+          </ul>
         </div>
       </div>
 
-      <div class="solution-features">
-        <h3>Key Capabilities</h3>
-        <div class="features-grid">
-          {#each solution.features as feature, i}
-            <article
-              class="feature-card"
-              data-animate={`feature-${solutionIndex}-${i}`}
-              class:visible={visibleSections.has(`feature-${solutionIndex}-${i}`)}
-              style={`--delay: ${getDelay(i, 0.1)}s`}
-            >
-              <h4>{feature.title}</h4>
-              <p>{feature.description}</p>
-            </article>
-          {/each}
-        </div>
-      </div>
-
-      <div class="data-contribution">
-        <span class="contribution-label">Data Oracle Contribution</span>
-        <p>{solution.contribution}</p>
+      <div class="product-cta">
+        <span class="access-label">{product.access}</span>
+        <a href="/contact" class="cta-btn">Request Access</a>
       </div>
     </section>
   {/each}
 
-  <section class="cta-section" data-animate="cta" class:visible={visibleSections.has('cta')}>
-    <div class="cta-content">
-      <h2>Let's Talk Data</h2>
+  <!-- Enterprise CTA -->
+  <section class="enterprise-section" data-animate="enterprise" class:visible={visibleSections.has('enterprise')}>
+    <div class="enterprise-content">
+      <h2>Enterprise Data Partnerships</h2>
       <p>
-        You build AI products. We have the behavioral data. Simple.
+        Custom data licensing, dedicated infrastructure, and priority support for enterprise deployments.
       </p>
-      <div class="cta-actions">
-        <a href="/contact" class="action-btn primary">Start the Conversation</a>
-        <a href="mailto:partners@oraklex.com" class="action-btn secondary">partners@oraklex.com</a>
+      <div class="enterprise-actions">
+        <a href="/contact" class="cta-btn primary">Schedule Consultation</a>
+        <a href="/data" class="cta-btn secondary">View Data Schema</a>
       </div>
     </div>
   </section>
@@ -304,269 +184,242 @@
   }
 
   .section-header {
-    @apply mx-auto mb-10 max-w-3xl text-center;
+    @apply mb-8;
   }
 
   .section-label {
-    @apply text-xs font-semibold uppercase tracking-[0.25em] text-base4;
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base4;
   }
 
   .section-header h2 {
-    @apply mt-2 text-2xl font-semibold text-base6 md:text-3xl;
+    @apply mt-2 text-2xl font-semibold text-base6;
     letter-spacing: -0.02em;
   }
 
-  .data-flow-section {
-    @apply mx-auto max-w-6xl px-8 py-16;
+  /* Pipeline Section */
+  .pipeline-section {
+    @apply mx-auto max-w-4xl px-8 py-12;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .data-flow-section.visible {
+  .pipeline-section.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .data-flow {
-    @apply flex flex-col lg:flex-row items-center justify-center gap-3;
+  .pipeline-flow {
+    @apply flex flex-col md:flex-row items-center justify-center gap-4;
   }
 
-  .flow-step {
-    @apply flex flex-col items-center gap-1.5 rounded-2xl border border-base3/40 bg-base0 p-5 text-center;
-    min-width: 160px;
+  .pipeline-step {
+    @apply flex flex-col items-center gap-2 p-5 rounded-xl border border-base3 bg-base0 text-center;
     flex: 1;
+    max-width: 200px;
     opacity: 0;
     transform: translateY(16px);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     transition-delay: var(--delay, 0s);
   }
 
-  .flow-step.visible {
+  .pipeline-step.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
   .step-number {
-    @apply text-2xl font-bold text-base14;
+    @apply text-xl font-bold text-base14;
   }
 
-  .flow-step h3 {
-    @apply text-base font-semibold text-base6;
+  .pipeline-step h3 {
+    @apply text-sm font-semibold text-base6;
   }
 
-  .step-subtitle {
-    @apply text-xs text-base14 font-medium uppercase tracking-wider;
+  .pipeline-step p {
+    @apply text-xs text-base4;
   }
 
-  .flow-step p {
-    @apply text-xs text-base4 mt-1;
+  .pipeline-connector {
+    @apply text-base3 hidden md:flex;
   }
 
-  .flow-connector {
-    @apply text-base3 hidden lg:flex items-center justify-center;
-  }
-
-  .solution-section {
-    @apply mx-auto max-w-6xl px-8 py-12;
+  /* Product Section */
+  .product-section {
+    @apply mx-auto max-w-4xl px-8 py-12 my-4;
+    @apply rounded-2xl border border-base3 bg-base0;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     scroll-margin-top: 100px;
   }
 
-  .solution-section.visible {
+  .product-section.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .solution-section.featured {
-    @apply rounded-3xl my-6;
-    background: linear-gradient(145deg, rgba(var(--color-base14-rgb), 0.03), rgba(var(--color-base2-rgb), 0.5));
-    border: 1px solid rgba(var(--color-base3-rgb), 0.3);
+  .product-header {
+    @apply mb-8;
   }
 
-  .solution-header {
-    @apply flex flex-col items-center gap-3 text-center mb-10;
-  }
-
-  .solution-status {
-    @apply rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider;
-    background: rgba(var(--color-base3-rgb), 0.3);
-    color: var(--color-base4);
-  }
-
-  .solution-status.live {
-    background: var(--color-base14);
-    color: var(--color-base0);
-  }
-
-  .solution-status.early {
-    background: linear-gradient(135deg, #4a9eff, #6366f1);
-    color: #fff;
-  }
-
-  .solution-header h2 {
-    @apply text-3xl font-semibold text-base6 md:text-4xl;
-    letter-spacing: -0.02em;
-  }
-
-  .solution-tagline {
-    @apply text-base text-base14 font-medium;
-  }
-
-  .solution-description {
-    @apply max-w-2xl text-sm text-base4 leading-relaxed;
-  }
-
-  .solution-metrics {
-    @apply grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 w-full max-w-xl;
-  }
-
-  .metric-card {
-    @apply rounded-xl px-4 py-4 text-center;
-    background: rgba(var(--color-base2-rgb), 0.5);
-    border: 1px solid rgba(var(--color-base3-rgb), 0.3);
-  }
-
-  .metric-value {
-    @apply block text-xl font-bold text-base6;
-  }
-
-  .metric-label {
-    @apply block text-[10px] font-medium uppercase tracking-wider text-base4 mt-1;
-  }
-
-  .solution-actions {
-    @apply flex flex-wrap justify-center gap-4 mt-6;
-  }
-
-  .action-btn {
-    @apply inline-flex items-center justify-center px-8 py-3 rounded-lg text-sm font-semibold no-underline;
-    @apply transition-all duration-200;
-    min-width: 180px;
-  }
-
-  .action-btn.primary {
-    background: var(--color-base14);
-    color: var(--color-base0);
-  }
-
-  .action-btn.primary:hover {
-    background: var(--color-base6);
-  }
-
-  .action-btn.secondary {
-    background: transparent;
-    color: var(--color-base14);
-    border: 1px solid var(--color-base14);
-  }
-
-  .action-btn.secondary:hover {
-    background: rgba(var(--color-base14-rgb), 0.1);
-  }
-
-  .solution-features {
-    @apply mt-8;
-  }
-
-  .solution-features h3 {
-    @apply text-lg font-semibold text-base6 text-center mb-6;
-  }
-
-  .features-grid {
-    @apply grid gap-4 md:grid-cols-2;
-  }
-
-  .feature-card {
-    @apply rounded-2xl border border-base3/30 bg-base0 p-5;
-    opacity: 0;
-    transform: translateY(12px);
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    transition-delay: var(--delay, 0s);
-  }
-
-  .feature-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .feature-card h4 {
-    @apply text-sm font-semibold text-base6 mb-2;
-  }
-
-  .feature-card p {
-    @apply text-xs text-base4 leading-relaxed;
-  }
-
-  .data-contribution {
-    @apply mt-8 p-6 rounded-2xl text-center;
-    background: rgba(var(--color-base14-rgb), 0.05);
-  }
-
-  .contribution-label {
+  .product-category {
     @apply text-xs font-semibold uppercase tracking-[0.15em] text-base14;
   }
 
-  .data-contribution p {
-    @apply text-sm text-base5 mt-2;
+  .product-header h2 {
+    @apply mt-2 text-2xl font-semibold text-base6;
+    letter-spacing: -0.02em;
   }
 
-  .cta-section {
-    @apply mx-auto max-w-6xl px-8 py-16;
+  .product-headline {
+    @apply mt-2 text-base font-medium text-base5;
+  }
+
+  .product-description {
+    @apply mt-3 text-sm text-base4 leading-relaxed max-w-2xl;
+  }
+
+  .product-details {
+    @apply grid gap-8 md:grid-cols-2 mb-8;
+  }
+
+  .specs-section h3,
+  .use-cases-section h3 {
+    @apply text-xs font-semibold uppercase tracking-[0.15em] text-base4 mb-4;
+  }
+
+  .specs-grid {
+    @apply grid grid-cols-2 gap-3;
+  }
+
+  .spec-item {
+    @apply flex flex-col gap-1 p-3 rounded-lg bg-base1;
+  }
+
+  .spec-label {
+    @apply text-xs text-base4;
+  }
+
+  .spec-value {
+    @apply text-sm font-medium text-base6;
+  }
+
+  .use-cases-list {
+    @apply flex flex-col gap-2;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .use-cases-list li {
+    @apply text-sm text-base5 pl-5 relative;
+  }
+
+  .use-cases-list li::before {
+    content: '';
+    @apply absolute left-0 top-2 w-2 h-2 rounded-full bg-base14/50;
+  }
+
+  .product-cta {
+    @apply flex items-center justify-between pt-6 border-t border-base2;
+  }
+
+  .access-label {
+    @apply text-sm text-base4;
+  }
+
+  .cta-btn {
+    @apply inline-flex items-center justify-center px-6 py-2.5 rounded-lg text-sm font-medium no-underline;
+    @apply transition-all duration-200;
+    background: var(--color-base14);
+    color: var(--color-base0);
+  }
+
+  .cta-btn:hover {
+    filter: brightness(1.1);
+  }
+
+  .cta-btn.secondary {
+    background: transparent;
+    color: var(--color-base6);
+    border: 1px solid var(--color-base3);
+  }
+
+  .cta-btn.secondary:hover {
+    background: var(--color-base1);
+  }
+
+  /* Enterprise Section */
+  .enterprise-section {
+    @apply mx-auto max-w-4xl px-8 py-12;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .cta-section.visible {
+  .enterprise-section.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .cta-content {
-    @apply mx-auto max-w-3xl flex flex-col items-center gap-5 rounded-3xl border border-base3/30 px-8 py-12 text-center;
-    background: linear-gradient(135deg, var(--color-base1), var(--color-base2));
+  .enterprise-content {
+    @apply flex flex-col items-center gap-4 rounded-2xl bg-base1 border border-base3 px-8 py-10 text-center;
   }
 
-  .cta-content h2 {
-    @apply text-2xl font-semibold text-base6 md:text-3xl;
-    letter-spacing: -0.02em;
+  .enterprise-content h2 {
+    @apply text-xl font-semibold text-base6;
   }
 
-  .cta-content p {
-    @apply max-w-xl text-base text-base4;
+  .enterprise-content p {
+    @apply text-sm text-base4 max-w-lg;
   }
 
-  .cta-actions {
-    @apply flex flex-wrap justify-center gap-4 mt-2;
+  .enterprise-actions {
+    @apply flex flex-wrap justify-center gap-3 mt-2;
   }
 
   @media (max-width: 768px) {
-    .data-flow-section,
-    .solution-section {
-      @apply px-4;
+    .pipeline-section,
+    .product-section,
+    .enterprise-section {
+      @apply px-5;
     }
 
-    .data-flow {
+    .pipeline-flow {
       @apply flex-col;
     }
 
-    .flow-connector {
+    .pipeline-step {
+      @apply max-w-full;
+    }
+
+    .pipeline-connector {
       @apply flex rotate-90;
     }
 
-    .features-grid {
+    .product-details {
       @apply grid-cols-1;
     }
 
-    .cta-content {
+    .specs-grid {
+      @apply grid-cols-2;
+    }
+
+    .product-cta {
+      @apply flex-col gap-4 items-start;
+    }
+
+    .enterprise-content {
       @apply px-5 py-8;
     }
 
-    .action-btn {
+    .enterprise-actions {
+      @apply flex-col w-full;
+    }
+
+    .cta-btn {
       @apply w-full;
-      min-width: auto;
     }
   }
 </style>

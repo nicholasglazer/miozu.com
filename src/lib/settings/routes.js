@@ -6,40 +6,21 @@
 // Solutions for the mega menu and mobile menu
 export const solutions = [
   {
-    category: 'AI Visibility',
+    category: 'Data Products',
     items: [
       {
-        path: '/solutions#geo',
-        label: 'GEO Intelligence',
-        tagline: 'Generative Engine Optimization',
-        description: 'Get your brand featured in AI-generated responses',
-        status: 'live'
+        path: '/solutions#behavioral-data',
+        label: 'Commerce Behavior Index',
+        tagline: 'Data Licensing',
+        description: 'First-party behavioral datasets for AI training',
+        status: 'early'
       },
       {
-        path: '/solutions#aeo',
-        label: 'AEO Solutions',
-        tagline: 'Answer Engine Optimization',
-        description: 'Optimize content for answer engines',
-        status: 'live'
-      }
-    ]
-  },
-  {
-    category: 'Data Services',
-    items: [
-      {
-        path: '/solutions#data-oracle',
-        label: 'LLM Data Oracle',
-        tagline: 'Training Data for AI',
-        description: 'Curated commerce data for LLM training',
-        status: 'coming'
-      },
-      {
-        path: '/solutions#intelligence',
-        label: 'Commerce Intelligence',
-        tagline: 'Predictive Analytics',
-        description: 'Insights to power AI agents',
-        status: 'coming'
+        path: '/solutions#demand-api',
+        label: 'Demand Prediction API',
+        tagline: 'Prediction Infrastructure',
+        description: 'SKU-level demand forecasting',
+        status: 'early'
       }
     ]
   }
@@ -47,18 +28,17 @@ export const solutions = [
 
 // Main navigation routes (for mobile menu and footer)
 export const mainRoutes = [
-  {path: '/solutions', label: 'Solutions', translate: false},
-  {path: '/insights', label: 'Insights', translate: false, badge: 'New'},
-  {path: '/data', label: 'Data', translate: false},
+  {path: '/solutions', label: 'Products', translate: false},
+  {path: '/data', label: 'Schema', translate: false},
   {path: '/about', label: 'About', translate: false},
   {path: '/contact', label: 'Contact', translate: true}
 ];
 
 // Footer-specific additional links
 export const footerRoutes = [
-  {path: '/solutions', label: 'Solutions', translate: false},
-  {path: '/insights', label: 'Insights Report', translate: false},
+  {path: '/solutions', label: 'Products', translate: false},
   {path: '/data', label: 'Data Schema', translate: false},
+  {path: '/insights', label: 'Research', translate: false},
   {path: '/about', label: 'About', translate: false},
   {path: '/contact', label: 'Contact', translate: true}
 ];
