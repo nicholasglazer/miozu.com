@@ -126,7 +126,8 @@
 </script>
 
 <div class="contact-content" class:mounted>
-  <div class="contact-grid">
+  <div class="contact-wrapper">
+    <div class="contact-grid">
     <div class="contact-main">
       <div class="contact-intro">
         <h2>Request Data Access</h2>
@@ -274,10 +275,13 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 </div>
 
 <style lang="postcss">
+  @reference '$theme';
+
   .contact-content {
     color: #1a1a1a;
     opacity: 0;
@@ -288,6 +292,10 @@
   .contact-content.mounted {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  .contact-wrapper {
+    @apply mx-auto max-w-6xl px-8 py-12;
   }
 
   .contact-grid {
@@ -565,5 +573,11 @@
   .resource-desc {
     font-size: 0.65rem;
     color: #888;
+  }
+
+  @media (max-width: 768px) {
+    .contact-wrapper {
+      @apply px-5 py-8;
+    }
   }
 </style>
