@@ -486,20 +486,21 @@
   }
 
   .compliance-badge {
-    @apply flex items-center gap-2 px-4 py-2 rounded-lg bg-green-50 border border-green-200;
-    @apply text-xs font-medium text-green-700;
+    @apply flex items-center gap-2 px-4 py-2 rounded-lg;
+    @apply bg-base10/10 border border-base10/30;
+    @apply text-xs font-medium text-base10;
   }
 
   .compliance-badge svg {
-    @apply text-green-500;
+    @apply text-base10;
   }
 
   .compliance-badge.pending {
-    @apply bg-amber-50 border-amber-200 text-amber-700;
+    @apply bg-base13/10 border-base13/30 text-base13;
   }
 
   .compliance-badge.pending svg {
-    @apply text-amber-500;
+    @apply text-base13;
   }
 
   /* CTA Section */

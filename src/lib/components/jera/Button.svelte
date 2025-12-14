@@ -91,12 +91,13 @@
     @apply inline-flex items-center justify-center;
     @apply cursor-pointer select-none;
     @apply font-medium whitespace-nowrap;
-    @apply focus:outline-none;
-    @apply no-underline; /* For link buttons */
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-base14/50 focus-visible:ring-offset-2;
+    @apply no-underline;
     background: transparent;
-    border: 1px solid transparent;
+    border: none;
+    border-radius: 10px;
     text-decoration: none;
-    transition: all 0.2s ease-out;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .button-text {
@@ -117,53 +118,73 @@
 
   /* Icon-only buttons */
   .icon-only {
-    @apply p-1;
+    @apply p-2;
     aspect-ratio: 1;
+    border-radius: 10px;
   }
 
   /* Size variants */
   .btn.sm {
-    @apply py-1 px-3 text-xs;
-    height: 28px;
-  }
-
-  .btn.md {
-    @apply py-1.5 px-4 text-sm;
+    @apply py-1.5 px-4 text-xs;
     height: 32px;
   }
 
-  .btn.lg {
-    @apply py-2 px-5 text-base;
+  .btn.md {
+    @apply py-2 px-5 text-sm;
     height: 40px;
   }
 
-  /* Button Variants */
+  .btn.lg {
+    @apply py-2.5 px-6 text-base;
+    height: 48px;
+  }
 
-  /* Primary Button - Dark background with light text */
+  /* Button Variants - 2025 Modern Style */
+
+  /* Primary Button - Solid accent with depth */
   .primary {
-    @apply bg-base1 text-base6;
-    @apply border border-base3/30;
-    @apply hover:bg-base2 hover:border-base3/50 hover:text-base7;
+    @apply bg-base14 text-white;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
   }
 
-  /* Secondary Button - Transparent with subtle border */
+  .primary:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .primary:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Secondary Button - Subtle surface with border */
   .secondary {
-    @apply bg-transparent text-base5;
-    @apply border border-base3/20;
-    @apply hover:bg-base1/50 hover:border-base3/30 hover:text-base6;
+    @apply bg-base1 text-base6;
+    @apply border border-base3;
   }
 
-  /* Minimal Button - Like secondary but without borders */
+  .secondary:hover {
+    @apply bg-base2 border-base4/50;
+  }
+
+  /* Minimal Button - Ghost style */
   .minimal {
-    @apply bg-transparent text-base5 border-none;
-    @apply hover:bg-base1/30 hover:text-base6;
+    @apply bg-transparent text-base5;
   }
 
-  /* Accent Button - Uses the brand accent color */
+  .minimal:hover {
+    @apply bg-base1 text-base6;
+  }
+
+  /* Accent Button - Outlined accent */
   .accent {
-    @apply bg-transparent text-base14;
+    @apply bg-base14/10 text-base14;
     @apply border border-base14/30;
-    @apply hover:bg-base14/10 hover:border-base14/50;
+  }
+
+  .accent:hover {
+    @apply bg-base14/20 border-base14/50;
   }
 
   /* Disabled state */
