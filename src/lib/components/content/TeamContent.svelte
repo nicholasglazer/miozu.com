@@ -178,39 +178,33 @@
 </div>
 
 <style lang="postcss">
+  @reference '$theme';
+
   .team-content {
-    color: #1a1a1a;
+    @apply text-base5;
   }
 
   .section-header {
-    text-align: center;
-    margin-bottom: 3rem;
+    @apply text-center mb-12;
   }
 
   .section-eyebrow {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: #666;
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base4;
   }
 
   .section-header h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #111;
-    margin: 0.5rem 0;
+    @apply text-2xl font-semibold text-base6 mt-2 mb-0;
+    letter-spacing: -0.02em;
   }
 
   .section-header p {
-    color: #666;
-    margin-top: 0.5rem;
+    @apply text-base4 mt-2;
   }
 
   .leadership-section,
   .advisors-section,
   .partners-section {
-    padding: 3rem 0;
+    @apply py-12;
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -224,20 +218,12 @@
   }
 
   .leadership-grid {
-    display: flex;
-    justify-content: center;
+    @apply flex justify-center;
   }
 
   .person-card {
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 2rem;
-    background: #fff;
-    border-radius: 1rem;
-    border: 1px solid #e5e5e5;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    @apply max-w-xl flex flex-col gap-6 p-8 bg-base1 border border-base3;
+    border-radius: 12px;
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -251,69 +237,43 @@
 
   @media (min-width: 640px) {
     .person-card {
-      flex-direction: row;
+      @apply flex-row;
     }
   }
 
   .avatar-placeholder {
-    width: 80px;
-    height: 80px;
-    border-radius: 0.75rem;
-    background: #f0f0f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #888;
+    @apply w-20 h-20 flex items-center justify-center bg-base2 text-base4;
+    border-radius: 12px;
   }
 
   .person-info h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #111;
-    margin: 0;
+    @apply text-xl font-semibold text-base6 m-0;
   }
 
   .person-role {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: #4a9eff;
+    @apply text-xs font-semibold uppercase tracking-[0.15em] text-base14;
   }
 
   .person-bio {
-    font-size: 0.9rem;
-    color: #555;
-    line-height: 1.6;
-    margin: 0.5rem 0;
+    @apply text-sm text-base5 leading-relaxed my-2;
   }
 
   .expertise-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    @apply flex flex-wrap gap-2 mt-2;
   }
 
   .tag {
-    padding: 0.25rem 0.75rem;
+    @apply px-3 py-1 text-xs font-medium bg-base2 text-base5;
     border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    background: #f5f5f5;
-    color: #555;
   }
 
   .advisors-grid {
-    max-width: 600px;
-    margin: 0 auto;
+    @apply max-w-xl mx-auto;
   }
 
   .advisor-card {
-    padding: 1.5rem;
-    background: #fff;
-    border-radius: 1rem;
-    border: 1px solid #e5e5e5;
+    @apply p-6 bg-base1 border border-base3;
+    border-radius: 12px;
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -326,68 +286,46 @@
   }
 
   .advisor-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    @apply flex items-center gap-4 mb-4;
   }
 
   .advisor-avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 0.75rem;
-    background: linear-gradient(135deg, #4a9eff, #667eea);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @apply w-12 h-12 flex items-center justify-center bg-base14;
+    border-radius: 12px;
   }
 
   .avatar-initial {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #fff;
+    @apply text-xl font-semibold text-white;
   }
 
   .advisor-title h3 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: #111;
-    margin: 0;
+    @apply text-lg font-semibold text-base6 m-0;
   }
 
   .advisor-role {
-    font-size: 0.8rem;
-    color: #666;
+    @apply text-sm text-base4;
   }
 
   .advisor-company {
-    font-size: 0.8rem;
-    color: #4a9eff;
-    text-decoration: none;
+    @apply text-sm text-base14 no-underline;
   }
 
   .advisor-company:hover {
-    text-decoration: underline;
+    @apply underline;
   }
 
   .advisor-bio {
-    font-size: 0.875rem;
-    color: #555;
-    line-height: 1.6;
-    margin: 0 0 1rem;
+    @apply text-sm text-base5 leading-relaxed mb-4;
   }
 
   .partners-grid {
-    display: grid;
-    gap: 1.5rem;
+    @apply grid gap-6;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   }
 
   .partner-card {
-    padding: 1.5rem;
-    background: #fff;
-    border-radius: 1rem;
-    border: 1px solid #e5e5e5;
+    @apply p-6 bg-base1 border border-base3;
+    border-radius: 12px;
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -400,41 +338,26 @@
   }
 
   .partner-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
+    @apply flex justify-between items-center mb-3;
   }
 
   .partner-header h3 {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: #111;
-    margin: 0;
+    @apply text-lg font-semibold text-base6 m-0;
   }
 
   .partner-type {
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: #4a9eff;
+    @apply text-xs font-semibold uppercase tracking-[0.15em] text-base14;
   }
 
   .partner-description {
-    font-size: 0.875rem;
-    color: #555;
-    margin: 0 0 1rem;
+    @apply text-sm text-base5 mb-4;
   }
 
   .partner-contribution {
-    font-size: 0.8rem;
-    color: #666;
-    padding-top: 0.75rem;
-    border-top: 1px solid #e5e5e5;
+    @apply text-sm text-base4 pt-3 border-t border-base3;
   }
 
   .partner-contribution strong {
-    color: #4a9eff;
+    @apply text-base14;
   }
 </style>

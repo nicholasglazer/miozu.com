@@ -242,8 +242,7 @@
   }
 
   .trigger-btn {
-    @apply flex items-center gap-1.5 px-4 py-2 text-sm font-medium;
-    color: #888;
+    @apply flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-base4;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -253,16 +252,6 @@
 
   .trigger-btn:hover,
   .trigger-btn.active {
-    color: #fff;
-  }
-
-  /* Light theme variant (for standard header) */
-  :global(.app-container) .trigger-btn {
-    @apply text-base5;
-  }
-
-  :global(.app-container) .trigger-btn:hover,
-  :global(.app-container) .trigger-btn.active {
     @apply text-base6;
   }
 
@@ -276,20 +265,16 @@
   }
 
   .mega-menu-panel {
-    @apply absolute top-full mt-3;
-    @apply rounded-2xl;
+    @apply absolute top-full mt-3 bg-base1 border border-base3;
+    border-radius: 16px;
     width: 860px;
     max-width: calc(100vw - 32px);
     max-height: calc(100vh - 80px);
     overflow-y: auto;
     z-index: 10001;
-    background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow:
-      0 25px 50px -12px rgba(0, 0, 0, 0.15),
-      0 0 0 1px rgba(0, 0, 0, 0.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
   }
 
   .menu-content {
@@ -301,24 +286,18 @@
   }
 
   .solution-card {
-    @apply relative flex flex-col gap-3 p-4 rounded-xl no-underline;
+    @apply relative flex flex-col gap-3 p-4 no-underline border border-transparent;
     @apply transition-all duration-150;
+    border-radius: 12px;
     background: transparent;
-    border: 1px solid transparent;
   }
 
   .solution-card:hover {
-    background: rgba(0, 0, 0, 0.02);
-    border-color: rgba(0, 0, 0, 0.04);
-  }
-
-  .solution-card.live:hover {
-    background: rgba(0, 0, 0, 0.03);
+    @apply bg-base2/50 border-base3;
   }
 
   .solution-card.early:hover {
-    background: rgba(74, 158, 255, 0.04);
-    border-color: rgba(74, 158, 255, 0.1);
+    @apply bg-base14/5 border-base14/20;
   }
 
   .card-top {
@@ -326,36 +305,30 @@
   }
 
   .card-icon {
-    @apply w-9 h-9 rounded-lg flex items-center justify-center;
-    background: rgba(0, 0, 0, 0.04);
-    color: #666;
+    @apply w-9 h-9 flex items-center justify-center bg-base2 text-base5;
+    border-radius: 10px;
     transition: all 0.15s ease;
   }
 
   .card-icon.live {
-    background: rgba(0, 0, 0, 0.06);
-    color: #333;
+    @apply bg-base3 text-base6;
   }
 
   .card-icon.early {
-    background: linear-gradient(135deg, rgba(74, 158, 255, 0.15), rgba(99, 102, 241, 0.15));
-    color: #4a9eff;
+    @apply bg-base14/15 text-base14;
   }
 
   .solution-card:hover .card-icon {
-    background: rgba(0, 0, 0, 0.08);
-    color: #000;
+    @apply bg-base3 text-base6;
   }
 
   .status-badge {
-    @apply px-2 py-0.5 rounded text-[10px] font-medium uppercase tracking-wider;
-    background: rgba(0, 0, 0, 0.04);
-    color: #888;
+    @apply px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider bg-base2 text-base4;
+    border-radius: 6px;
   }
 
   .status-badge.early {
-    background: linear-gradient(135deg, #4a9eff, #6366f1);
-    color: #fff;
+    @apply bg-base14 text-white;
   }
 
   .card-body {
@@ -363,16 +336,16 @@
   }
 
   .card-body h3 {
-    @apply text-sm font-semibold text-neutral-900;
+    @apply text-sm font-semibold text-base6;
     letter-spacing: -0.01em;
   }
 
   .card-tagline {
-    @apply text-xs text-neutral-500 font-medium;
+    @apply text-xs text-base4 font-medium;
   }
 
   .card-description {
-    @apply text-xs text-neutral-400 leading-relaxed mt-1;
+    @apply text-xs text-base4 leading-relaxed mt-1;
   }
 
   .card-footer {
@@ -380,7 +353,7 @@
   }
 
   .learn-more {
-    @apply flex items-center gap-1 text-xs font-medium text-neutral-400;
+    @apply flex items-center gap-1 text-xs font-medium text-base4;
     @apply transition-colors duration-150;
   }
 
@@ -391,7 +364,7 @@
   }
 
   .solution-card:hover .learn-more {
-    color: #000;
+    @apply text-base6;
   }
 
   .solution-card:hover .learn-more svg {
@@ -400,9 +373,7 @@
   }
 
   .sidebar {
-    @apply w-52 p-5 flex flex-col gap-6;
-    background: rgba(0, 0, 0, 0.02);
-    border-left: 1px solid rgba(0, 0, 0, 0.04);
+    @apply w-52 p-5 flex flex-col gap-6 bg-base2/50 border-l border-base3;
   }
 
   .sidebar-section {
@@ -410,7 +381,7 @@
   }
 
   .sidebar-label {
-    @apply text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-400 px-2;
+    @apply text-[10px] font-semibold uppercase tracking-[0.15em] text-base4 px-2;
   }
 
   .quick-links {
@@ -418,20 +389,19 @@
   }
 
   .quick-link {
-    @apply px-3 py-2 rounded-lg text-sm text-neutral-600 no-underline;
+    @apply px-3 py-2 text-sm text-base5 no-underline;
+    border-radius: 8px;
     @apply transition-colors duration-150;
     font-weight: 450;
   }
 
   .quick-link:hover {
-    @apply text-neutral-900;
-    background: rgba(0, 0, 0, 0.03);
+    @apply text-base6 bg-base2;
   }
 
   .link-badge {
-    @apply ml-2 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider rounded;
-    background: linear-gradient(135deg, #4a9eff, #6366f1);
-    color: #fff;
+    @apply ml-2 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider bg-base14 text-white;
+    border-radius: 4px;
   }
 
   .sidebar-cta {
@@ -439,18 +409,17 @@
   }
 
   .cta-label {
-    @apply text-[10px] font-semibold uppercase tracking-[0.15em] text-neutral-400 px-2;
+    @apply text-[10px] font-semibold uppercase tracking-[0.15em] text-base4 px-2;
   }
 
   .cta-button {
-    @apply flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium no-underline;
-    @apply transition-all duration-150;
-    background: #0a0a0a;
-    color: #fff;
+    @apply flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium no-underline;
+    @apply transition-all duration-150 bg-base14 text-white;
+    border-radius: 10px;
   }
 
   .cta-button:hover {
-    background: #1a1a1a;
+    filter: brightness(1.1);
   }
 
   .cta-button svg {

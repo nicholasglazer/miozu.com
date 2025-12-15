@@ -176,32 +176,27 @@
 </div>
 
 <style lang="postcss">
+  @reference '$theme';
+
   .products-content {
-    color: #1a1a1a;
+    @apply text-base5;
   }
 
   .section-header {
-    text-align: center;
-    margin-bottom: 2rem;
+    @apply text-center mb-8;
   }
 
   .section-eyebrow {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: #666;
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base4;
   }
 
   .section-header h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #111;
-    margin: 0.5rem 0;
+    @apply text-2xl font-semibold text-base6 mt-2 mb-0;
+    letter-spacing: -0.02em;
   }
 
   .ecosystem-section {
-    padding: 2rem 0 3rem;
+    @apply py-8 pb-12;
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -213,26 +208,18 @@
   }
 
   .ecosystem-flow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    @apply flex flex-col items-center gap-4;
   }
 
   @media (min-width: 768px) {
     .ecosystem-flow {
-      flex-direction: row;
-      justify-content: center;
+      @apply flex-row justify-center;
     }
   }
 
   .ecosystem-step {
-    min-width: 200px;
-    padding: 1.5rem;
-    text-align: center;
-    background: #fff;
-    border-radius: 1rem;
-    border: 1px solid #e5e5e5;
+    @apply min-w-[200px] p-6 text-center bg-base1 border border-base3;
+    border-radius: 12px;
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -245,34 +232,23 @@
   }
 
   .step-number {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #4a9eff;
+    @apply text-2xl font-bold text-base14;
   }
 
   .ecosystem-step h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #111;
-    margin: 0.5rem 0 0.25rem;
+    @apply text-base font-semibold text-base6 mt-2 mb-1;
   }
 
   .step-product {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: #4a9eff;
+    @apply text-sm font-medium text-base14;
   }
 
   .ecosystem-step p {
-    font-size: 0.8rem;
-    color: #666;
-    margin: 0.5rem 0 0;
+    @apply text-sm text-base4 mt-2;
   }
 
   .ecosystem-arrow {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #4a9eff;
+    @apply text-2xl font-bold text-base14;
   }
 
   @media (max-width: 767px) {
@@ -282,8 +258,7 @@
   }
 
   .product-section {
-    padding: 3rem 0;
-    border-top: 1px solid #e5e5e5;
+    @apply py-12 border-t border-base3;
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -295,161 +270,107 @@
   }
 
   .product-section.featured {
-    background: linear-gradient(145deg, rgba(74, 158, 255, 0.05), transparent);
-    border-radius: 1.5rem;
-    padding: 3rem 2rem;
-    margin: 1rem 0;
+    @apply bg-base14/5 my-4 px-8;
+    border-radius: 16px;
   }
 
   .product-header {
-    text-align: center;
-    margin-bottom: 2rem;
+    @apply text-center mb-8;
   }
 
   .product-status {
-    display: inline-block;
-    padding: 0.35rem 1rem;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    @apply inline-block px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] mb-4 bg-base2 text-base4;
     border-radius: 999px;
-    background: #f0f0f0;
-    color: #666;
-    margin-bottom: 1rem;
   }
 
   .product-status.live {
-    background: rgba(74, 158, 255, 0.15);
-    color: #4a9eff;
+    @apply bg-base14/15 text-base14;
   }
 
   .product-status.soon {
-    background: #f5f5f5;
-    color: #888;
+    @apply bg-base2 text-base4;
   }
 
   .product-header h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
-    color: #111;
-    margin: 0;
+    @apply text-4xl font-semibold text-base6 m-0;
+    letter-spacing: -0.02em;
   }
 
   .product-tagline {
-    display: block;
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #4a9eff;
-    margin-top: 0.5rem;
+    @apply block text-lg font-medium text-base14 mt-2;
   }
 
   .product-description {
-    max-width: 500px;
-    margin: 1rem auto;
-    color: #555;
+    @apply max-w-lg mx-auto mt-4 text-base5;
   }
 
   .product-metrics {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    max-width: 500px;
-    margin: 1.5rem auto;
+    @apply grid grid-cols-2 gap-4 max-w-lg mx-auto mt-6;
   }
 
   @media (min-width: 640px) {
     .product-metrics {
-      grid-template-columns: repeat(4, 1fr);
+      @apply grid-cols-4;
     }
   }
 
   .metric-card {
-    padding: 1rem;
-    text-align: center;
-    background: #fff;
-    border-radius: 0.75rem;
-    border: 1px solid #e5e5e5;
+    @apply p-4 text-center bg-base1 border border-base3;
+    border-radius: 12px;
   }
 
   .metric-value {
-    display: block;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #111;
+    @apply block text-xl font-bold text-base6;
   }
 
   .metric-label {
-    display: block;
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #888;
-    margin-top: 0.25rem;
+    @apply block text-xs font-semibold uppercase tracking-[0.1em] text-base4 mt-1;
   }
 
   .product-actions {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1.5rem;
+    @apply flex justify-center gap-4 mt-6;
   }
 
   .btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    text-decoration: none;
-    border-radius: 0.5rem;
-    transition: all 0.2s;
+    @apply inline-block px-6 py-3 text-sm font-medium no-underline;
+    border-radius: 10px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .btn-primary {
-    background: #111;
-    color: #fff;
+    @apply bg-base14 text-white;
   }
 
   .btn-primary:hover {
-    background: #333;
+    filter: brightness(1.1);
+    transform: translateY(-1px);
   }
 
   .btn-secondary {
-    background: #f5f5f5;
-    color: #111;
-    border: 1px solid #e5e5e5;
+    @apply bg-base1 text-base6 border border-base3;
   }
 
   .btn-secondary:hover {
-    background: #eee;
+    @apply bg-base2;
   }
 
   .product-features h3 {
-    text-align: center;
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #111;
-    margin-bottom: 1.5rem;
+    @apply text-center text-xl font-semibold text-base6 mb-6;
   }
 
   .features-grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr;
+    @apply grid gap-4 grid-cols-1;
   }
 
   @media (min-width: 640px) {
     .features-grid {
-      grid-template-columns: repeat(2, 1fr);
+      @apply grid-cols-2;
     }
   }
 
   .feature-card {
-    padding: 1.5rem;
-    background: #fff;
-    border-radius: 1rem;
-    border: 1px solid #e5e5e5;
+    @apply p-6 bg-base1 border border-base3;
+    border-radius: 12px;
     opacity: 0;
     transform: translateY(16px);
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -462,15 +383,10 @@
   }
 
   .feature-card h4 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #111;
-    margin: 0 0 0.5rem;
+    @apply text-base font-semibold text-base6 mb-2;
   }
 
   .feature-card p {
-    font-size: 0.875rem;
-    color: #555;
-    margin: 0;
+    @apply text-sm text-base5 m-0;
   }
 </style>

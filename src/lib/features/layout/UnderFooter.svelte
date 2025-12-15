@@ -63,10 +63,7 @@
   @reference '$theme';
 
   .under-footer {
-    @apply w-full;
-    /* Using the same background color as the handshake image */
-    background: #1c1c1c;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    @apply w-full bg-base0 border-t border-base3;
   }
 
   .under-footer-container {
@@ -78,8 +75,7 @@
   }
 
   .pledge-title {
-    @apply text-3xl lg:text-4xl font-light mb-12 lg:mb-16;
-    color: #ffffff;
+    @apply text-3xl lg:text-4xl font-light mb-12 lg:mb-16 text-base6;
     letter-spacing: 0.05em;
   }
 
@@ -93,14 +89,12 @@
   }
 
   .pledge-subtitle {
-    @apply text-xl lg:text-2xl font-semibold mb-6;
-    color: #ffffff;
+    @apply text-xl lg:text-2xl font-semibold mb-6 text-base6;
     line-height: 1.3;
   }
 
   .pledge-description {
-    @apply text-base lg:text-lg leading-relaxed;
-    color: #cccccc;
+    @apply text-base lg:text-lg leading-relaxed text-base4;
     max-width: 400px;
     margin: 0 auto;
   }
@@ -118,7 +112,6 @@
 
   .handshake-image {
     @apply w-full h-full object-contain;
-    /* Remove all filters to keep original colors */
   }
 
   /* Right section - guarantees */
@@ -127,19 +120,16 @@
   }
 
   .guarantee-item {
-    @apply flex items-center gap-3 text-left;
-    justify-content: center;
+    @apply flex items-center gap-3 text-left justify-center;
   }
 
   .guarantee-icon {
     @apply flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold;
-    background: #ff6b35;
-    color: #ffffff;
+    @apply bg-base14 text-white;
   }
 
   .guarantee-text {
-    @apply text-base lg:text-lg font-medium;
-    color: #ffffff;
+    @apply text-base lg:text-lg font-medium text-base6;
   }
 
   /* Mobile responsive adjustments */
@@ -196,6 +186,4 @@
       height: 120px;
     }
   }
-
-  /* Remove all theme-based image filters to maintain consistent appearance */
 </style>

@@ -55,7 +55,9 @@
   <span class="cursor" class:typing={!isDeleting}>|</span>
 </span>
 
-<style>
+<style lang="postcss">
+  @reference '$theme';
+
   .typewriter {
     display: inline-flex;
     align-items: center;
@@ -65,7 +67,7 @@
 
   .typewriter-text {
     font-weight: inherit;
-    background: linear-gradient(135deg, #e98c46 0%, #f4a661 50%, #e98c46 100%);
+    background: linear-gradient(135deg, var(--color-base14) 0%, var(--color-base13) 50%, var(--color-base14) 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -78,7 +80,7 @@
   .cursor {
     display: inline-block;
     margin-left: 2px;
-    color: #e98c46;
+    @apply text-base14;
     opacity: 0;
     animation: blink 1s infinite;
   }
