@@ -21,11 +21,11 @@
         // Phase 1: Priority cards (Hero + About) render immediately
         priorityCardsReady = true;
 
-        // Phase 2: Other cards load after 100ms delay
+        // Phase 2: Other cards load after 50ms delay
         // This allows Hero + About to initialize first
         setTimeout(() => {
           allCardsReady = true;
-        }, 100);
+        }, 50);
       });
     }
   });
@@ -38,7 +38,7 @@
       canvasId: 'canvas-about',
       label: 'Company',
       title: 'About',
-      description: 'Commerce data infrastructure. Enterprise-ready.'
+      description: 'The behavioral data layer powering next-gen AI.'
     },
     platform: {
       route: '/solutions',
@@ -46,7 +46,7 @@
       canvasId: 'canvas-platform',
       label: 'Products',
       title: 'Platform',
-      description: 'Data licensing and prediction APIs for enterprise.'
+      description: 'Commerce Behavior Index & Demand Prediction APIs.'
     },
     data: {
       route: '/data',
@@ -218,9 +218,9 @@
       {/if}
       <div class="block-overlay">
         <div class="hero-content">
-          <span class="hero-label">Commerce Data Infrastructure</span>
+          <span class="hero-label">AI Commerce Intelligence</span>
           <h1 class="hero-title">orakle<span class="title-x">X</span></h1>
-          <p class="hero-tagline">Enterprise behavioral data for AI systems</p>
+          <p class="hero-tagline">Transform shopping behavior into AI training data</p>
         </div>
       </div>
     </div>
@@ -766,6 +766,15 @@
     font: inherit;
     text-align: left;
     cursor: pointer;
+    transition: transform 0.2s ease-out;
+  }
+
+  button.block:hover {
+    transform: scale(1.01);
+  }
+
+  button.block:active {
+    transform: scale(0.99);
   }
 
   /* Fading card text during expansion - text fades out quickly */

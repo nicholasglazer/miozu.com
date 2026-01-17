@@ -11,13 +11,16 @@
       title: 'Getting Started',
       items: [
         {label: 'Introduction', href: '/design-system/docs'},
-        {label: 'Installation', href: '/design-system/docs/installation'}
+        {label: 'Installation', href: '/design-system/docs/installation'},
+        {label: 'Theming', href: '/design-system/docs/theming'}
       ]
     },
     {
       title: 'Design Tokens',
       items: [
-        {label: 'Colors', href: '/design-system/docs/colors'}
+        {label: 'Colors', href: '/design-system/docs/colors'},
+        {label: 'Spacing', href: '/design-system/docs/spacing'},
+        {label: 'Typography', href: '/design-system/docs/typography'}
       ]
     },
     {
@@ -26,8 +29,25 @@
         {label: 'Button', href: '/design-system/docs/button'},
         {label: 'Badge', href: '/design-system/docs/badge'},
         {label: 'Input', href: '/design-system/docs/input'},
+        {label: 'Select', href: '/design-system/docs/select'},
         {label: 'Checkbox', href: '/design-system/docs/checkbox'},
-        {label: 'Switch', href: '/design-system/docs/switch'}
+        {label: 'Switch', href: '/design-system/docs/switch'},
+        {label: 'Toast', href: '/design-system/docs/toast'}
+      ]
+    },
+    {
+      title: 'Utilities',
+      items: [
+        {label: 'cn()', href: '/design-system/docs/cn'},
+        {label: 'cv()', href: '/design-system/docs/cv'}
+      ]
+    },
+    {
+      title: 'Actions',
+      items: [
+        {label: 'clickOutside', href: '/design-system/docs/click-outside'},
+        {label: 'focusTrap', href: '/design-system/docs/focus-trap'},
+        {label: 'portal', href: '/design-system/docs/portal'}
       ]
     }
   ];
