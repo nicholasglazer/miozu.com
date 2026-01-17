@@ -12,8 +12,8 @@
 </script>
 
 <Metadata
-  title="Privacy Policy - Oraklex"
-  description="How Oraklex collects, uses, and protects data. GDPR and CCPA compliant data practices for our commerce intelligence platform."
+  title="Privacy Policy - Miozu"
+  description="How Miozu collects, uses, and protects data. GDPR and CCPA compliant data practices for our commerce intelligence platform."
 />
 
 <div class="legal-page">
@@ -25,7 +25,7 @@
         </svg>
         Back
       </button>
-      <a href="/" class="logo">Oraklex</a>
+      <a href="/" class="logo">Miozu</a>
     </div>
   </header>
 
@@ -37,15 +37,15 @@
       <section>
         <h2>Who We Are</h2>
         <p>
-          Oraklex is a commerce intelligence platform operated by <strong>Up Go Corp.</strong> (<a href="https://upgo.ca" target="_blank" rel="noopener">upgo.ca</a>),
+          Miozu is a commerce intelligence platform operated by <strong>Up Go Corp.</strong> (<a href="https://upgo.ca" target="_blank" rel="noopener">upgo.ca</a>),
           a Canadian corporation based in Toronto, Ontario. When we say "we," "us," or "our" in this policy, we mean Up Go Corp. and its brands.
         </p>
         <p>
           Up Go Corp. also owns and operates <strong>J'ko AI</strong> (<a href="https://jko.ai" target="_blank" rel="noopener">jko.ai</a>),
-          a virtual try-on platform for fashion e-commerce. The behavioral data generated through J'ko AI forms the foundation of Oraklex's data products.
+          a virtual try-on platform for fashion e-commerce. The behavioral data generated through J'ko AI forms the foundation of Miozu's data products.
         </p>
         <p>
-          This privacy policy covers both oraklex.com and data practices related to our commerce intelligence services.
+          This privacy policy covers both miozu.com and data practices related to our commerce intelligence services.
           For J'ko AI's platform-specific privacy policy, see <a href="https://dash.jko.ai/legal" target="_blank" rel="noopener">dash.jko.ai/legal</a>.
         </p>
       </section>
@@ -65,7 +65,7 @@
           through J'ko AI. All behavioral data is anonymized and aggregated before processing.
         </p>
 
-        <h3>From Oraklex Website Visitors</h3>
+        <h3>From Miozu Website Visitors</h3>
         <ul>
           <li><strong>Contact form submissions:</strong> Name, email, message content (when you contact us)</li>
           <li><strong>Analytics:</strong> Standard website analytics (pages visited, referral source)</li>
@@ -169,7 +169,7 @@
         <p class="contact-block">
           <strong>Up Go Corp.</strong><br>
           Toronto, Ontario, Canada<br>
-          <a href="mailto:partners@oraklex.com">partners@oraklex.com</a><br>
+          <a href="mailto:partners@miozu.com">partners@miozu.com</a><br>
           <a href="https://upgo.ca" target="_blank" rel="noopener">upgo.ca</a>
         </p>
         <p>

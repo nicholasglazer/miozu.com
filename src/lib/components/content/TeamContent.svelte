@@ -152,7 +152,7 @@
     <div class="section-header">
       <span class="section-eyebrow">Strategic Partners</span>
       <h2>Building Together</h2>
-      <p>Key partnerships that power the Oraklex ecosystem.</p>
+      <p>Key partnerships that power the Miozu ecosystem.</p>
     </div>
 
     <div class="partners-grid">

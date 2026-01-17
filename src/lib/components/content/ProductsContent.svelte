@@ -150,7 +150,7 @@
           </div>
         {:else}
           <div class="product-actions">
-            <a href="mailto:partners@oraklex.com" class="btn btn-secondary">Get Early Access</a>
+            <a href="mailto:partners@miozu.com" class="btn btn-secondary">Get Early Access</a>
           </div>
         {/if}
       </div>

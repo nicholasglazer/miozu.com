@@ -1,8 +1,8 @@
 {
-  "name": "oraklex-landing",
+  "name": "miozu-landing",
   "version": "1.0.0",
-  "description": "Oraklex - AI Data Intelligence & Commerce Optimization",
-  "author": "Oraklex Team",
+  "description": "Miozu - Design System & Component Library",
+  "author": "Miozu",
   "license": "MIT",
   "scripts": {
     "dev": "vite dev",

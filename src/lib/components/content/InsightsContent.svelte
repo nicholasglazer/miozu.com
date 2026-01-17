@@ -33,7 +33,7 @@
     <div class="section-header">
       <span class="section-label">Research</span>
       <h2>Commerce Data Insights</h2>
-      <p class="lead">Analysis and methodology from Oraklex's behavioral data platform.</p>
+      <p class="lead">Analysis and methodology from Miozu's behavioral data platform.</p>
     </div>
 
     <div class="coming-card">

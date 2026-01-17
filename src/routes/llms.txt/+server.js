@@ -62,7 +62,7 @@ ${appName} is positioned to become a leading provider of Generative Engine Optim
 
 ## LLM-Friendly Content (Markdown)
 
-- [About Oraklex](${domain}/content/about.md)
+- [About Miozu](${domain}/content/about.md)
 
 ## Contact
 

@@ -12,8 +12,8 @@
 </script>
 
 <Metadata
-  title="Terms of Service - Oraklex"
-  description="Terms and conditions for using Oraklex services, including data licensing, API access, and platform usage."
+  title="Terms of Service - Miozu"
+  description="Terms and conditions for using Miozu services, including data licensing, API access, and platform usage."
 />
 
 <div class="legal-page">
@@ -25,7 +25,7 @@
         </svg>
         Back
       </button>
-      <a href="/" class="logo">Oraklex</a>
+      <a href="/" class="logo">Miozu</a>
     </div>
   </header>
 
@@ -37,11 +37,11 @@
       <section>
         <h2>Agreement to Terms</h2>
         <p>
-          These Terms of Service ("Terms") govern your access to and use of Oraklex services, including our
-          website (oraklex.com), APIs, data products, and related services (collectively, "Services").
+          These Terms of Service ("Terms") govern your access to and use of Miozu services, including our
+          website (miozu.com), APIs, data products, and related services (collectively, "Services").
         </p>
         <p>
-          Oraklex is operated by <strong>Up Go Corp.</strong> (<a href="https://upgo.ca" target="_blank" rel="noopener">upgo.ca</a>),
+          Miozu is operated by <strong>Up Go Corp.</strong> (<a href="https://upgo.ca" target="_blank" rel="noopener">upgo.ca</a>),
           a Canadian corporation registered in Ontario ("Company," "we," "us," or "our"). Up Go Corp. also operates
           J'ko AI (<a href="https://jko.ai" target="_blank" rel="noopener">jko.ai</a>), which powers our commerce data infrastructure.
         </p>
@@ -53,7 +53,7 @@
 
       <section>
         <h2>Services Description</h2>
-        <p>Oraklex provides:</p>
+        <p>Miozu provides:</p>
         <ul>
           <li><strong>Behavioral Data Products:</strong> Licensed datasets derived from anonymized commerce interactions</li>
           <li><strong>Prediction APIs:</strong> Demand forecasting and intelligence APIs for enterprise use</li>
@@ -200,7 +200,7 @@
         <p class="contact-block">
           <strong>Up Go Corp.</strong><br>
           Toronto, Ontario, Canada<br>
-          <a href="mailto:partners@oraklex.com">partners@oraklex.com</a><br>
+          <a href="mailto:partners@miozu.com">partners@miozu.com</a><br>
           <a href="https://upgo.ca" target="_blank" rel="noopener">upgo.ca</a>
         </p>
       </section>

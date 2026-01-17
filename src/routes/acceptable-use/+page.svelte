@@ -12,8 +12,8 @@
 </script>
 
 <Metadata
-  title="Acceptable Use Policy - Oraklex"
-  description="Guidelines for acceptable use of Oraklex data products, APIs, and services. What you can and cannot do with our data."
+  title="Acceptable Use Policy - Miozu"
+  description="Guidelines for acceptable use of Miozu data products, APIs, and services. What you can and cannot do with our data."
 />
 
 <div class="legal-page">
@@ -25,7 +25,7 @@
         </svg>
         Back
       </button>
-      <a href="/" class="logo">Oraklex</a>
+      <a href="/" class="logo">Miozu</a>
     </div>
   </header>
 
@@ -37,11 +37,11 @@
       <section>
         <h2>Purpose</h2>
         <p>
-          This Acceptable Use Policy ("AUP") defines how you may use Oraklex data products, APIs, and
+          This Acceptable Use Policy ("AUP") defines how you may use Miozu data products, APIs, and
           related services. This policy supplements your enterprise agreement and our <a href="/terms">Terms of Service</a>.
         </p>
         <p>
-          Oraklex is operated by <strong>Up Go Corp.</strong> (<a href="https://upgo.ca" target="_blank" rel="noopener">upgo.ca</a>).
+          Miozu is operated by <strong>Up Go Corp.</strong> (<a href="https://upgo.ca" target="_blank" rel="noopener">upgo.ca</a>).
           Our data originates from J'ko AI (<a href="https://jko.ai" target="_blank" rel="noopener">jko.ai</a>), a virtual try-on platform
           we built and operate. This gives us direct control over data quality, privacy practices, and compliance.
         </p>
@@ -53,7 +53,7 @@
 
       <section>
         <h2>Permitted Uses</h2>
-        <p>You may use Oraklex data and services for:</p>
+        <p>You may use Miozu data and services for:</p>
 
         <h3>AI and Machine Learning</h3>
         <ul>
@@ -81,7 +81,7 @@
 
       <section>
         <h2>Prohibited Uses</h2>
-        <p><strong>You may NOT use Oraklex data or services to:</strong></p>
+        <p><strong>You may NOT use Miozu data or services to:</strong></p>
 
         <h3>Re-identification and Privacy Violations</h3>
         <ul>
@@ -187,7 +187,7 @@
         <p class="contact-block">
           <strong>Up Go Corp.</strong><br>
           Toronto, Ontario, Canada<br>
-          <a href="mailto:partners@oraklex.com">partners@oraklex.com</a><br>
+          <a href="mailto:partners@miozu.com">partners@miozu.com</a><br>
           <a href="https://upgo.ca" target="_blank" rel="noopener">upgo.ca</a>
         </p>
       </section>

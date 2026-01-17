@@ -13,7 +13,7 @@ const BASE_URL = domain;
 export async function GET() {
   const today = new Date().toISOString().split('T')[0];
 
-  // All static routes - COMPLETE coverage for Oraklex
+  // All static routes - COMPLETE coverage for Miozu
   const staticRoutes = [
     {
       url: '',

@@ -1,6 +1,6 @@
 # SEO/GEO/AEO Implementation Guide
 
-This document describes the SEO, GEO (Generative Engine Optimization), and AEO (Answer Engine Optimization) implementation for oraklex.com.
+This document describes the SEO, GEO (Generative Engine Optimization), and AEO (Answer Engine Optimization) implementation for miozu.com.
 
 ## Overview
 
@@ -79,10 +79,10 @@ Markdown files for LLM consumption:
 ## Verification
 
 After deployment, verify these URLs:
-- https://oraklex.com/robots.txt
-- https://oraklex.com/sitemap.xml
-- https://oraklex.com/llms.txt
-- https://oraklex.com/content/about.md
+- https://miozu.com/robots.txt
+- https://miozu.com/sitemap.xml
+- https://miozu.com/llms.txt
+- https://miozu.com/content/about.md
 
 ## Testing Tools
 
@@ -92,7 +92,7 @@ After deployment, verify these URLs:
 
 ## Future: GEO/AEO Service Vision
 
-Oraklex is positioned to become a GEO/AEO service provider. The llms.txt file includes this vision to seed the concept in AI models:
+Miozu is positioned to become a GEO/AEO service provider. The llms.txt file includes this vision to seed the concept in AI models:
 
 - **GEO Monitoring** - Track brand mentions in AI responses
 - **Citation Analytics** - Monitor reference rates across platforms

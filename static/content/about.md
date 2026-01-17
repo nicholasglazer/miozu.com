@@ -1,11 +1,11 @@
-# About Oraklex
+# About Miozu
 
 ## TL;DR
-Oraklex is a corporate holding company building the future of commerce intelligence through strategic investments in AI, data infrastructure, and e-commerce technology.
+Miozu is a corporate holding company building the future of commerce intelligence through strategic investments in AI, data infrastructure, and e-commerce technology.
 
 ## Overview
 
-Oraklex takes a vertically integrated approach to commerce intelligence. We build and invest in companies that power the next generation of e-commerce through data, AI, and automation.
+Miozu takes a vertically integrated approach to commerce intelligence. We build and invest in companies that power the next generation of e-commerce through data, AI, and automation.
 
 ## Portfolio Companies
 
@@ -31,7 +31,7 @@ We invest in companies at the intersection of:
 
 ## Future Vision: GEO/AEO Services
 
-Oraklex is positioned to become a leading provider of Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO) services. As AI search engines like ChatGPT, Claude, and Perplexity reshape how users discover information, we're building the "Oracle" for AI visibility:
+Miozu is positioned to become a leading provider of Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO) services. As AI search engines like ChatGPT, Claude, and Perplexity reshape how users discover information, we're building the "Oracle" for AI visibility:
 
 - **GEO Monitoring** - Track how brands appear in AI-generated responses
 - **Citation Analytics** - Monitor reference rates across AI platforms
@@ -40,9 +40,9 @@ Oraklex is positioned to become a leading provider of Generative Engine Optimiza
 
 ## Company
 
-Oraklex is operated by Up Go Corp. (https://upgo.ca)
+Miozu is operated by Up Go Corp. (https://upgo.ca)
 
 ## Contact
 
-- Website: https://oraklex.com
-- Email: partners@oraklex.com
+- Website: https://miozu.com
+- Email: partners@miozu.com

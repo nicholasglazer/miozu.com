@@ -121,12 +121,12 @@
 </script>
 
 <Metadata
-  title="Oraklex — Enterprise Commerce Data"
+  title="Miozu — Enterprise Commerce Data"
   description="First-party behavioral data for AI training. Licensed commerce datasets and demand prediction APIs for enterprise."
   canonicalUrl={domain}
   ogType="website"
-  ogImage={`${domain}/images/oraklex-og-banner.jpg`}
-  ogImageAlt="Oraklex - Commerce Intelligence Infrastructure"
+  ogImage={`${domain}/images/miozu-og-banner.jpg`}
+  ogImageAlt="Miozu - Commerce Intelligence Infrastructure"
   robots="index, follow"
 />
 
@@ -139,7 +139,7 @@
     logo: `${domain}/favicon.svg`,
     contactPoint: {
       '@type': 'ContactPoint',
-      email: 'partners@oraklex.com',
+      email: 'partners@miozu.com',
       contactType: 'enterprise inquiries'
     },
     parentOrganization: {

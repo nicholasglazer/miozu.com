@@ -69,7 +69,7 @@
         name: formData.name,
         email: formData.email,
         message: formData.message,
-        source: 'oraklex.com',
+        source: 'miozu.com',
         company: formData.company || undefined
       };
 
@@ -101,7 +101,7 @@
       console.error('Contact form error:', error);
       formState.success = false;
       formState.error = error;
-      formState.message = 'Submission failed. Please email partners@oraklex.com directly.';
+      formState.message = 'Submission failed. Please email partners@miozu.com directly.';
     } finally {
       formState.submitting = false;
     }
@@ -231,7 +231,7 @@
     <div class="contact-sidebar">
       <div class="email-card">
         <span class="card-label">Enterprise Inquiries</span>
-        <a href="mailto:partners@oraklex.com" class="email-address">partners@oraklex.com</a>
+        <a href="mailto:partners@miozu.com" class="email-address">partners@miozu.com</a>
       </div>
 
       <div class="info-card">

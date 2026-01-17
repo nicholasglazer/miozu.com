@@ -41,8 +41,8 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <Metadata
-  title="About - Oraklex | Commerce Intelligence Infrastructure"
-  description="Oraklex owns J'ko AI—a virtual try-on platform generating 10M+ monthly behavioral events. We transform this data into enterprise products: licensed datasets, prediction APIs, and AI visibility services."
+  title="About - Miozu | Commerce Intelligence Infrastructure"
+  description="Miozu owns J'ko AI—a virtual try-on platform generating 10M+ monthly behavioral events. We transform this data into enterprise products: licensed datasets, prediction APIs, and AI visibility services."
 />
 
 <div class="expanded-page">

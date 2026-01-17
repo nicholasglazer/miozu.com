@@ -41,7 +41,7 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <Metadata
-  title="Contact - Oraklex | Enterprise Data Partnerships"
+  title="Contact - Miozu | Enterprise Data Partnerships"
   description="Enterprise data licensing, API access, and strategic partnerships. Contact us about behavioral datasets, prediction APIs, and commerce intelligence solutions."
 />
 

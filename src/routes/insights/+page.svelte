@@ -13,8 +13,8 @@
 </script>
 
 <Metadata
-  title="Research - Oraklex | Commerce Behavioral Data Analysis"
-  description="Research and analysis from Oraklex's commerce behavioral data platform. Insights on shopping behavior, demand patterns, and AI training data methodology."
+  title="Research - Miozu | Commerce Behavioral Data Analysis"
+  description="Research and analysis from Miozu's commerce behavioral data platform. Insights on shopping behavior, demand patterns, and AI training data methodology."
 />
 
 <div class="app-container insights-page">
@@ -30,7 +30,7 @@
       <span class="page-label">Research</span>
       <h1>Commerce Data Insights</h1>
       <p class="page-desc">
-        Analysis and methodology from Oraklex's behavioral data platform
+        Analysis and methodology from Miozu's behavioral data platform
       </p>
     </header>
 

@@ -62,8 +62,8 @@
 </script>
 
 <Metadata
-  title="Data Schema - Oraklex | Behavioral Event Documentation"
-  description="Technical documentation for Oraklex behavioral data schema. Event types, field specifications, and data format documentation for enterprise integrations."
+  title="Data Schema - Miozu | Behavioral Event Documentation"
+  description="Technical documentation for Miozu behavioral data schema. Event types, field specifications, and data format documentation for enterprise integrations."
 />
 
 <div class="app-container data-page">

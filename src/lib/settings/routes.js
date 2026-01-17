@@ -1,5 +1,5 @@
 /**
- * Central routes configuration for Oraklex
+ * Central routes configuration for Miozu
  * This file defines all navigation items for consistent use across the application
  */
 

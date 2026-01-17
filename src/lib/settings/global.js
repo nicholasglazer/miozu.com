@@ -1,8 +1,8 @@
-export const author = 'Oraklex Team';
-export const contact = 'partners@oraklex.com';
+export const author = 'Miozu';
+export const contact = 'hello@miozu.com';
 
-export const appName = 'Oraklex';
-export const domain = 'https://oraklex.com';
+export const appName = 'Miozu';
+export const domain = 'https://miozu.com';
 
 // Company information (Legal Entity)
 export const companyName = 'Up Go Corp.';

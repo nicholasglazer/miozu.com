@@ -41,7 +41,7 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <Metadata
-  title="Platform - Oraklex | Commerce Intelligence & Data Products"
+  title="Platform - Miozu | Commerce Intelligence & Data Products"
   description="Enterprise data products: Commerce Behavior Index, Demand Prediction API, GEO/AEO Intelligence. First-party behavioral data for fashion, retail, and AI companies."
 />
 

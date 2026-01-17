@@ -1,7 +1,7 @@
 {
-  "name": "Oraklex - AI Data Intelligence & Commerce Optimization",
-  "short_name": "Oraklex",
-  "description": "The Data Oracle for e-commerce. Building the intelligence layer that powers the next generation of commerce.",
+  "name": "Miozu - Design System & Component Library",
+  "short_name": "Miozu",
+  "description": "A cohesive design system and component library for building beautiful, consistent interfaces.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#232733",

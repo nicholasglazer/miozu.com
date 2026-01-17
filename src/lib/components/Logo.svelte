@@ -1,5 +1,5 @@
 <script>
-  // Oraklex text logo component
+  // Miozu text logo component
   let {size = 28, class: className = '', variant = 'default'} = $props();
 
   // Calculate font size based on size prop
@@ -18,7 +18,7 @@
 <span
   class="logo-text {className}"
   style="font-size: {fontSize}px; color: {fillColor}; height: {size}px;"
-  aria-label="orakleX Logo"
+  aria-label="Miozu Logo"
 >
   <span class="logo-main">orakle</span><span class="logo-x">X</span>
 </span>

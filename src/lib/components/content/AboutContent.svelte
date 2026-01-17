@@ -96,7 +96,7 @@
         <span class="section-label">Company</span>
         <h2>Commerce Data Infrastructure</h2>
         <p class="lead">
-          Oraklex provides enterprise behavioral data products for AI training and demand intelligence.
+          Miozu provides enterprise behavioral data products for AI training and demand intelligence.
           We generate first-party commerce data through J'ko AI, our production virtual try-on platform.
         </p>
         <div class="key-facts">
