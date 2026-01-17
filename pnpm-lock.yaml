@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@miozu/jera':
+        specifier: link:../jera
+        version: link:../jera
       '@miozu/js-theme':
         specifier: ^0.0.2
         version: 0.0.2
