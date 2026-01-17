@@ -39,8 +39,8 @@ export default {
         exclude: ['<all>']
       },
       prerender: {
-        // Prerender blog index and all posts at build time
-        entries: ['/', '/blog', ...getBlogPosts()],
+        // Prerender blog index, docs, and all posts at build time
+        entries: ['/', '/blog', '/design-system/docs', ...getBlogPosts()],
         handleMissingId: 'warn',
         handleEntryGeneratorMismatch: 'warn',
         handleHttpError: ({path, message}) => {
