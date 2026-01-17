@@ -21,6 +21,25 @@
   --color-base0E: #5a67d8; /* Purple */
   --color-base0F: #1a365d; /* Corporate Navy */
 
+  /* Semantic colors for jera components */
+  --color-primary: #1a365d;
+  --color-secondary: #17a2b8;
+  --color-accent: #5a67d8;
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-error: #dc3545;
+  --color-info: #17a2b8;
+
+  /* Semantic surface/text for jera */
+  --color-bg: #ffffff;
+  --color-surface: #f8f9fa;
+  --color-surface-alt: #f1f3f5;
+  --color-hover: #e9ecef;
+  --color-text: #343a40;
+  --color-text-strong: #0d0f10;
+  --color-text-muted: #6c757d;
+  --color-muted: #adb5bd;
+
   /* Legacy mappings */
   --color-base0: var(--color-base00);
   --color-base1: var(--color-base01);
@@ -276,6 +295,25 @@
   /* Dark borders */
   --color-border: #2d3748;
   --color-border-light: #1a202c;
+
+  /* Semantic colors for jera components (dark) */
+  --color-primary: #63b3ed;
+  --color-secondary: #63b3ed;
+  --color-accent: #b794f4;
+  --color-success: #68d391;
+  --color-warning: #faf089;
+  --color-error: #fc8181;
+  --color-info: #63b3ed;
+
+  /* Semantic surface/text for jera (dark) */
+  --color-bg: #0f1419;
+  --color-surface: #1a1f26;
+  --color-surface-alt: #242a33;
+  --color-hover: #2d3748;
+  --color-text: #e2e8f0;
+  --color-text-strong: #ffffff;
+  --color-text-muted: #a0aec0;
+  --color-muted: #4a5568;
 }
 
 /* Animation keyframes */

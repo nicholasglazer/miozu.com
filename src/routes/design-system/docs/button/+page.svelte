@@ -158,7 +158,7 @@
 
 <CodeBlock code={statesCode} lang="svelte" />
 
-<h3>As Link</h3>
+<h3 id="link-example">As Link</h3>
 
 <p>When <code>href</code> is provided, Button renders as an anchor element:</p>
 
