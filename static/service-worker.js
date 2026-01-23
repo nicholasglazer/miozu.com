@@ -1,9 +1,17 @@
-// Service Worker for Dagaz Blog PWA
-const CACHE_NAME = 'dagaz-cache-v1.2';
+// Service Worker for Miozu PWA
+const CACHE_NAME = 'miozu-cache-v1.3';
 const OFFLINE_URL = '/offline.html';
 
-// Simplified assets to pre-cache - make sure all these files exist
-const PRECACHE_ASSETS = ['/', '/offline.html', '/manifest.json', '/favicon.png'];
+// Pre-cache critical assets for instant loading
+const PRECACHE_ASSETS = [
+  '/',
+  '/offline.html',
+  '/manifest.json',
+  '/favicon.svg',
+  '/about',
+  '/solutions',
+  '/contact'
+];
 
 // Logging helper - disable in production
 const DEBUG = false;

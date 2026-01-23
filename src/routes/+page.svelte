@@ -436,6 +436,7 @@
     overflow: hidden;
     text-decoration: none;
     transition: all 0.3s ease;
+    contain: layout style paint;
   }
 
   .block:hover {

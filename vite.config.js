@@ -18,17 +18,12 @@ export default defineConfig({
     }
   },
   plugins: [
+    // Brotli compression only - Cloudflare serves this preferentially
     viteCompression({
       algorithm: 'brotliCompress',
       ext: '.br',
       deleteOriginFile: false,
-      threshold: 1024
-    }),
-
-    viteCompression({
-      algorithm: 'gzip',
-      ext: '.gz',
-      threshold: 1024
+      threshold: 512 // Compress smaller files too
     }),
 
     enhancedImages({

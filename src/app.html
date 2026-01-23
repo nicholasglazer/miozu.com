@@ -96,6 +96,35 @@
     <meta name="twitter:title" content="Miozu - AI Data Intelligence & Commerce Optimization" />
     <meta name="twitter:description" content="The Data Oracle for e-commerce. Building the intelligence layer that powers the next generation of commerce." />
 
+    <!-- DNS Prefetch: Resolve external domains early -->
+    <link rel="dns-prefetch" href="https://api.miozu.com" />
+    <link rel="dns-prefetch" href="https://js.stripe.com" />
+
+    <!-- Speculation Rules: Prerender likely navigation targets (Chrome 109+) -->
+    <script type="speculationrules">
+      {
+        "prerender": [
+          {
+            "source": "document",
+            "where": {
+              "and": [
+                {"href_matches": "/*"},
+                {"not": {"href_matches": "/api/*"}}
+              ]
+            },
+            "eagerness": "moderate"
+          }
+        ],
+        "prefetch": [
+          {
+            "source": "document",
+            "where": {"href_matches": "/*"},
+            "eagerness": "moderate"
+          }
+        ]
+      }
+    </script>
+
     <!-- Optimized font loading: reduced weights, latin subset only -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
