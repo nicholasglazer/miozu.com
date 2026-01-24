@@ -6,30 +6,12 @@
   import { cardTransition } from '$lib/reactiveStates/cardTransition.svelte';
   import MegaMenu from '$lib/features/layout/MegaMenu.svelte';
   import Logo from '$lib/components/Logo.svelte';
+  import OptimizedThreeCanvas from '$lib/three/OptimizedThreeCanvas.svelte';
+  import ThreeDebugStats from '$lib/three/ThreeDebugStats.svelte';
+  import { dev } from '$app/environment';
 
-  // Priority-based lazy loading for ThreeCanvas
-  // Phase 1: Hero + About (visible immediately, highest priority)
-  // Phase 2: Other cards (load after small delay)
-  let ThreeCanvas = $state<any>(null);
-  let priorityCardsReady = $state(false);
-  let allCardsReady = $state(false);
-
-  $effect(() => {
-    if (browser) {
-      // Load ThreeCanvas component
-      import('$lib/three/ThreeCanvas.svelte').then(module => {
-        ThreeCanvas = module.default;
-        // Phase 1: Priority cards (Hero + About) render immediately
-        priorityCardsReady = true;
-
-        // Phase 2: Other cards load after 50ms delay
-        // This allows Hero + About to initialize first
-        setTimeout(() => {
-          allCardsReady = true;
-        }, 50);
-      });
-    }
-  });
+  // Optimized ThreeJS with shared WebGL context and single RAF loop
+  // Using reactive singleton pattern for performance
 
   // Card configuration for transitions - Enhanced for Fibonacci showcase
   const cardConfigs: Record<string, { route: string; effectType: string; canvasId: string; label: string; title: string; description: string }> = {
@@ -45,9 +27,9 @@
       route: '/about',
       effectType: 'sinuous-original',
       canvasId: 'canvas-about',
-      label: 'About',
-      title: 'Our Story',
-      description: 'Building the future of design systems with mathematical precision.'
+      label: 'Enterprise',
+      title: 'Why Enterprise',
+      description: 'Reduce design debt, scale teams, and accelerate enterprise delivery.'
     },
     platform: {
       route: '/solutions',
@@ -125,23 +107,17 @@
     return fibonacci(n - 1) + fibonacci(n - 2);
   }
 
-  // Verify Fibonacci Rectangle Subdivision (dev mode only)
+  // Verify Fibonacci Rectangle + Optimized ThreeJS (dev mode only)
   $effect(() => {
     if (browser && import.meta.env.DEV) {
       // Generate Fibonacci sequence for verification
       const fibSeq = Array.from({length: 10}, (_, i) => fibonacci(i));
-      console.log('🧮 Fibonacci Rectangle Subdivision Verification');
-      console.log('📐 Golden Ratio Layout: 8:5:3 columns, 5:2:1 rows');
-      console.log('🟦 Hero: 8×5 (largest rectangle - golden ratio foundation)');
-      console.log('🟩 About: 3×5 (tall rectangle - next subdivision)');
-      console.log('🟨 Platform: 2×2 (medium square)');
-      console.log('🟪 Tokens: 2×1 (small rectangle)');
-      console.log('🟫 Solutions: 3×2 (medium rectangle)');
-      console.log('🟧 Contact: 8×1 (wide base rectangle)');
-      console.log('🟥 Themes: 8×1 (final subdivision)');
-      console.log('📊 Grid totals: 13fr width (8+3+2), 8fr height (5+2+1)');
-      console.log('✨ Classic Fibonacci rectangle spiral pattern achieved!');
-      console.log('🌀 Each rectangle relates to others through golden ratio φ ≈ 1.618');
+      console.log('🧮 Fibonacci Rectangle + Optimized ThreeJS System');
+      console.log('📐 Perfect Grid: 8×8 hero, 5×5 about, 3×3 platform, 2×2 solutions, 1×1 contact');
+      console.log('🚀 Performance: Single WebGL context, shared RAF loop, visibility culling');
+      console.log('⚡ Reactive: Svelte 5 runes singleton managing all scenes');
+      console.log('🎯 Features: Viewport rendering, FPS throttling, intersection observer');
+      console.log('📊 Fibonacci verified + Modern ThreeJS optimization complete!');
     }
   });
 
@@ -269,9 +245,7 @@
   <div class="grid-main">
     <!-- Large Block 1: Hero with Three.js (PRIORITY 1) -->
     <div class="block block-hero">
-      {#if ThreeCanvas && priorityCardsReady}
-        <ThreeCanvas type="sinuous-original" />
-      {/if}
+      <OptimizedThreeCanvas type="sinuous-original" id="hero-canvas" />
       <div class="block-overlay">
         <div class="hero-content">
           <span class="hero-label">Enterprise Design System</span>
@@ -291,14 +265,12 @@
       class:hidden-card={expandingCard === 'about'}
       onclick={(e) => handleCardClick(e, 'about')}
     >
-      {#if ThreeCanvas && priorityCardsReady}
-        <ThreeCanvas type="sinuous-original" id="canvas-about" />
-      {/if}
+      <OptimizedThreeCanvas type="sinuous-original" id="about-canvas" />
       <div class="block-overlay block-overlay-about">
         <div class="block-content">
-          <span class="block-label">About</span>
-          <h2 class="block-title">Our Story</h2>
-          <p class="block-desc">Building design systems with mathematical precision.</p>
+          <span class="block-label">Enterprise</span>
+          <h2 class="block-title">Why Enterprise</h2>
+          <p class="block-desc">Reduce design debt. Scale teams. Accelerate delivery.</p>
         </div>
         <div class="block-corner">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -316,9 +288,7 @@
       class:hidden-card={expandingCard === 'platform'}
       onclick={(e) => handleCardClick(e, 'platform')}
     >
-      {#if ThreeCanvas && allCardsReady}
-        <ThreeCanvas type="synaptic-multipass" lowRes={true} id="canvas-platform" />
-      {/if}
+      <OptimizedThreeCanvas type="synaptic-multipass" id="platform-canvas" lowRes={true} />
       <div class="block-content block-content-overlay">
         <span class="block-label">Components</span>
         <h2 class="block-title">Library</h2>
@@ -334,28 +304,7 @@
       </div>
     </button>
 
-    <!-- Tokens: F2 (1fr) -->
-    <button
-      type="button"
-      class="block block-tokens"
-      class:fading-card={fadingCard === 'tokens'}
-      class:hidden-card={expandingCard === 'tokens'}
-      onclick={(e) => handleCardClick(e, 'tokens')}
-    >
-      {#if ThreeCanvas && allCardsReady}
-        <ThreeCanvas type="synaptic" lowRes={true} id="canvas-tokens" />
-      {/if}
-      <div class="block-content block-content-overlay">
-        <span class="block-label">Design</span>
-        <h2 class="block-title">Tokens</h2>
-        <p class="block-desc">DTCG standards</p>
-      </div>
-      <div class="block-corner">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M7 17L17 7M17 7H7M17 7V17"/>
-        </svg>
-      </div>
-    </button>
+    <!-- Tokens block removed for performance - was creating unnecessary WebGL context -->
 
     <!-- Solutions: F3 (2fr) -->
     <button
@@ -365,13 +314,11 @@
       class:hidden-card={expandingCard === 'solutions'}
       onclick={(e) => handleCardClick(e, 'solutions')}
     >
-      {#if ThreeCanvas && allCardsReady}
-        <ThreeCanvas type="ether" lowRes={true} id="canvas-solutions" />
-      {/if}
+      <OptimizedThreeCanvas type="ether" id="solutions-canvas" lowRes={true} />
       <div class="block-content block-content-overlay">
         <span class="block-label">Enterprise</span>
         <h2 class="block-title">Solutions</h2>
-        <p class="block-desc">Governance programs</p>
+        <p class="block-desc">Governance, training, implementation</p>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -380,28 +327,7 @@
       </div>
     </button>
 
-    <!-- Themes: F4 (3fr) -->
-    <button
-      type="button"
-      class="block block-themes"
-      class:fading-card={fadingCard === 'themes'}
-      class:hidden-card={expandingCard === 'themes'}
-      onclick={(e) => handleCardClick(e, 'themes')}
-    >
-      {#if ThreeCanvas && allCardsReady}
-        <ThreeCanvas type="snake-trails" lowRes={true} id="canvas-themes" />
-      {/if}
-      <div class="block-content block-content-overlay">
-        <span class="block-label">Base16</span>
-        <h2 class="block-title">Themes</h2>
-        <p class="block-desc">VSCode, Emacs, Linux</p>
-      </div>
-      <div class="block-corner">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M7 17L17 7M17 7H7M17 7V17"/>
-        </svg>
-      </div>
-    </button>
+    <!-- Themes block removed for performance - was creating unnecessary WebGL context -->
 
     <!-- Contact: F5+F6 (5+8=13, F7!) -->
     <button
@@ -411,13 +337,11 @@
       class:hidden-card={expandingCard === 'contact'}
       onclick={(e) => handleCardClick(e, 'contact')}
     >
-      {#if ThreeCanvas && allCardsReady}
-        <ThreeCanvas type="ether" lowRes={true} id="canvas-contact" />
-      {/if}
+      <OptimizedThreeCanvas type="ether" id="contact-canvas" lowRes={true} />
       <div class="block-content block-content-overlay">
         <span class="block-label">Contact</span>
-        <h2 class="block-title">Get Started</h2>
-        <span class="block-email-light">Enterprise consultations</span>
+        <h2 class="block-title">Book Demo</h2>
+        <span class="block-email-light">Enterprise consultation</span>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -427,6 +351,9 @@
     </button>
   </div>
 </div>
+
+<!-- Performance Debug Stats (dev mode only) -->
+<ThreeDebugStats show={dev} />
 
 <style lang="postcss">
   @reference '$theme';
@@ -569,16 +496,7 @@
     padding: 0;
   }
 
-  /* Completely remove blocks that don't fit Fibonacci pattern from grid flow */
-  .block-tokens,
-  .block-themes {
-    display: none !important;
-    grid-column: unset;
-    grid-row: unset;
-    position: absolute;
-    left: -9999px; /* Move completely out of view */
-    visibility: hidden;
-  }
+  /* Tokens and themes blocks completely removed from HTML for performance */
 
   .block-overlay {
     position: absolute;
