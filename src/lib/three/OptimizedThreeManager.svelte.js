@@ -92,8 +92,14 @@ export class OptimizedThreeManager {
   }
 
   // Register a new Three.js scene with viewport management
-  registerScene(canvasElement, config) {
-    if (!canvasElement || !this.sharedRenderer) return null;
+  async registerScene(canvasElement, config) {
+    if (!canvasElement) return null;
+
+    // Ensure shared renderer is initialized
+    if (!this.sharedRenderer) {
+      await this.initSharedRenderer();
+      if (!this.sharedRenderer) return null;
+    }
 
     const canvasId = config.id || `canvas-${Date.now()}`;
     canvasElement.dataset.canvasId = canvasId;
@@ -312,9 +318,9 @@ export function getThreeStats() {
   return manager.getStats();
 }
 
-export function registerScene(canvasElement, config) {
+export async function registerScene(canvasElement, config) {
   const manager = getThreeManager();
-  return manager.registerScene(canvasElement, config);
+  return await manager.registerScene(canvasElement, config);
 }
 
 export function unregisterScene(canvasId) {

@@ -6,6 +6,7 @@
 <script>
   import { onMount, onDestroy } from 'svelte';
   import { registerScene, unregisterScene } from './OptimizedThreeManager.svelte.js';
+  import { canvasRegistry } from '$lib/reactiveStates/canvasRegistry.svelte';
 
   // Props using Svelte 5 runes
   const { type = 'sinuous-original', id = `canvas-${Date.now()}`, lowRes = false } = $props();
@@ -39,13 +40,31 @@
       await createEffect(THREE);
 
       // Register with shared manager
-      sceneId = registerScene(canvasElement, {
+      sceneId = await registerScene(canvasElement, {
         id,
         scene,
         camera,
         effectType: type,
         lowRes
       });
+
+      // Register with canvas registry for animation compatibility
+      if (sceneId && canvasElement) {
+        // Create a virtual canvas for animation system compatibility
+        const virtualCanvas = document.createElement('canvas');
+        virtualCanvas.style.width = '100%';
+        virtualCanvas.style.height = '100%';
+
+        canvasRegistry.register(id, {
+          container: canvasElement,
+          canvas: virtualCanvas,
+          sceneManager: null, // Not needed for our optimization
+          effectInstance: {
+            forceResize: () => {}, // No-op since we handle resizing centrally
+            destroy: () => {} // No-op since cleanup is handled by unregisterScene
+          }
+        });
+      }
 
       isInitialized = true;
       console.log(`✅ Scene initialized: ${type} (${sceneId})`);
@@ -182,6 +201,9 @@
     if (sceneId) {
       unregisterScene(sceneId);
     }
+
+    // Unregister from canvas registry
+    canvasRegistry.unregister(id);
 
     // Cleanup Three.js resources
     if (scene) {
