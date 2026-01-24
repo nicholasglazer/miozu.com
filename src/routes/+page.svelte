@@ -37,33 +37,33 @@
       route: '/about',
       effectType: 'sinuous-original',
       canvasId: 'canvas-about',
-      label: 'Rapid Development',
-      title: 'AI-First System',
-      description: 'Comprehensive enterprise components for rapid prototyping and production.'
+      label: 'Enterprise',
+      title: 'Design System',
+      description: 'AI-first components for scalable enterprise applications and teams.'
     },
     platform: {
       route: '/solutions',
       effectType: 'synaptic-multipass',
       canvasId: 'canvas-platform',
-      label: 'Enterprise',
-      title: 'Components',
-      description: 'Form builders, canvas tools, and full-featured enterprise blocks.'
+      label: 'Components',
+      title: 'Library',
+      description: 'Production-ready Svelte 5 components with enterprise features.'
     },
     data: {
       route: '/data',
       effectType: 'synaptic',
       canvasId: 'canvas-data',
-      label: 'Developer',
-      title: 'Tooling',
-      description: 'Base16 themes, design tokens, and development environment.'
+      label: 'Design',
+      title: 'Tokens',
+      description: 'Comprehensive design tokens and Base16 theme system.'
     },
     contact: {
       route: '/contact',
       effectType: 'ether',
       canvasId: 'canvas-contact',
-      label: 'Comprehensive',
-      title: 'Enterprise',
-      description: 'Full-scale implementation, support, and custom development.'
+      label: 'Enterprise',
+      title: 'Solutions',
+      description: 'Custom implementation and enterprise support programs.'
     }
   };
 
@@ -122,12 +122,12 @@
 </script>
 
 <Metadata
-  title="Miozu — Rapid Enterprise Development with AI-First Components"
-  description="AI-first enterprise design system for rapid prototyping and production apps. Comprehensive Svelte components, form builders, and enterprise features."
+  title="Miozu — Enterprise Design System with AI-First Components"
+  description="Enterprise design system built for scalable teams. AI-first Svelte 5 components, design tokens, and comprehensive enterprise features for production applications."
   canonicalUrl={domain}
   ogType="website"
   ogImage={`${domain}/images/miozu-og-banner.jpg`}
-  ogImageAlt="Miozu - Rapid Enterprise Development Platform"
+  ogImageAlt="Miozu - Enterprise Design System"
   robots="index, follow"
 />
 
@@ -135,13 +135,13 @@
   type="Organization"
   data={{
     name: appName,
-    description: 'AI-first platform for rapid enterprise development and prototyping. Comprehensive Svelte components, enterprise security, and production-ready design systems.',
+    description: 'Enterprise design system provider specializing in AI-first Svelte 5 components and scalable design tokens for enterprise teams and applications.',
     url: domain,
     logo: `${domain}/favicon.svg`,
     contactPoint: {
       '@type': 'ContactPoint',
       email: 'hello@miozu.com',
-      contactType: 'rapid development inquiries'
+      contactType: 'enterprise design system inquiries'
     },
     parentOrganization: {
       '@type': 'Organization',
@@ -157,7 +157,7 @@
   data={{
     name: appName,
     url: domain,
-    description: 'Rapid enterprise development platform with AI-first components for prototyping and production. Comprehensive Svelte tools, enterprise security, and accelerated development workflows.',
+    description: 'Enterprise design system built for scalable teams. AI-first Svelte 5 components, comprehensive design tokens, and enterprise features for production applications.',
     publisher: {
       '@type': 'Organization',
       name: appName,
@@ -172,7 +172,7 @@
   data={{
     name: appName,
     url: domain,
-    description: 'Rapid enterprise development platform providing comprehensive AI-first tools for prototyping to production. Accelerates enterprise application development with comprehensive features.',
+    description: 'Enterprise design system company providing AI-first Svelte 5 components and scalable design solutions for enterprise teams building at scale.',
     numberOfEmployees: {
       '@type': 'QuantitativeValue',
       value: '10-50'
@@ -181,19 +181,19 @@
       {
         '@type': 'Organization',
         name: '.miozu',
-        description: 'Developer tooling ecosystem including Linux themes and development environment configurations'
+        description: 'Base16 theme system and development environment configurations for VSCode, Emacs, and Linux'
       }
     ],
     knowsAbout: [
-      'Rapid Enterprise Development',
-      'AI-First Prototyping',
-      'Comprehensive Enterprise Features',
-      'Production-Ready Components',
-      'Svelte 5 Architecture',
-      'Enterprise Security',
-      'Design System Acceleration',
-      'Development Workflow Optimization',
-      'Base16 Developer Tooling'
+      'Enterprise Design Systems',
+      'AI-First Components',
+      'Scalable Design Tokens',
+      'Svelte 5 Component Library',
+      'Enterprise Security Features',
+      'Design System Governance',
+      'Component Library Architecture',
+      'Base16 Theme System',
+      'Enterprise Development Tools'
     ]
   }}
 />
@@ -224,11 +224,11 @@
       {/if}
       <div class="block-overlay">
         <div class="hero-content">
-          <span class="hero-label">Rapid Enterprise Development</span>
+          <span class="hero-label">Enterprise Design System</span>
           <div class="hero-title">
             <Logo type="full" size={64} variant="default" />
           </div>
-          <p class="hero-tagline">AI-first components for rapid prototyping and enterprise-grade production apps</p>
+          <p class="hero-tagline">AI-first design system for enterprise teams building at scale</p>
         </div>
       </div>
     </div>
@@ -246,9 +246,9 @@
       {/if}
       <div class="block-overlay block-overlay-about">
         <div class="block-content">
-          <span class="block-label">Rapid Development</span>
-          <h2 class="block-title">AI-First System</h2>
-          <p class="block-desc">Comprehensive enterprise components. Production-ready.</p>
+          <span class="block-label">Enterprise</span>
+          <h2 class="block-title">Design System</h2>
+          <p class="block-desc">AI-first components for scalable teams. Production-ready.</p>
         </div>
         <div class="block-corner">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -270,11 +270,11 @@
         <ThreeCanvas type="synaptic-multipass" lowRes={true} id="canvas-platform" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Enterprise</span>
-        <h2 class="block-title">Components</h2>
+        <span class="block-label">Components</span>
+        <h2 class="block-title">Library</h2>
         <ul class="block-list">
-          <li>Rapid Prototyping Tools</li>
-          <li>Production-Grade Blocks</li>
+          <li>Svelte 5 Components</li>
+          <li>Enterprise Features</li>
         </ul>
       </div>
       <div class="block-corner">
@@ -296,9 +296,9 @@
         <ThreeCanvas type="synaptic" lowRes={true} id="canvas-data" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Developer</span>
-        <h2 class="block-title">Tooling</h2>
-        <p class="block-desc">Comprehensive development environment setup.</p>
+        <span class="block-label">Design</span>
+        <h2 class="block-title">Tokens</h2>
+        <p class="block-desc">Comprehensive design tokens and Base16 themes.</p>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -319,9 +319,9 @@
         <ThreeCanvas type="ether" lowRes={true} id="canvas-contact" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Comprehensive</span>
-        <h2 class="block-title">Enterprise</h2>
-        <span class="block-email-light">Full-scale implementation</span>
+        <span class="block-label">Enterprise</span>
+        <h2 class="block-title">Solutions</h2>
+        <span class="block-email-light">Custom implementation</span>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

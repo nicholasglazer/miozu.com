@@ -26,23 +26,23 @@
 
   const capabilities = [
     {
-      title: 'Rapid Prototyping',
-      description: 'AI-powered components that accelerate development from concept to production. Build enterprise UIs in hours, not months.',
+      title: 'Design System Governance',
+      description: 'AI-powered system that eliminates design debt and component proliferation. Maintains consistency across distributed teams.',
       icon: 'ai'
     },
     {
-      title: 'Comprehensive Enterprise Features',
-      description: 'Complete security suite: enterprise SSO, audit trails, RBAC, compliance frameworks, and data governance.',
+      title: 'Enterprise-Scale Components',
+      description: 'Production-ready Svelte 5 components with enterprise security, accessibility, and compliance built-in.',
       icon: 'shield'
     },
     {
-      title: 'Production-Grade Performance',
-      description: 'Svelte 5 runes architecture with zero runtime overhead. Enterprise-scale optimization and monitoring.',
+      title: 'Scalable Architecture',
+      description: 'Built for teams that scale from 10 to 1000+ developers. Zero runtime overhead with compile-time optimization.',
       icon: 'performance'
     },
     {
-      title: 'Full Development Ecosystem',
-      description: 'Complete toolchain: design tokens, Base16 themes, development environment, and deployment pipelines.',
+      title: 'Comprehensive Token System',
+      description: 'Multi-brand design tokens, Base16 themes, and DTCG standards for tool interoperability.',
       icon: 'design'
     }
   ];
@@ -112,10 +112,10 @@
     <div class="overview-grid">
       <div class="overview-main">
         <span class="section-label">Company</span>
-        <h2>Rapid Enterprise Development Platform</h2>
+        <h2>Enterprise Design System Platform</h2>
         <p class="lead">
-          Miozu provides AI-first design components for rapid prototyping and comprehensive enterprise applications.
-          Our platform accelerates development from concept to production, eliminating months of custom design system work.
+          Miozu provides enterprise design systems with AI-first components for scalable teams building at enterprise scale.
+          Our platform eliminates design debt and accelerates development, providing comprehensive design governance and consistency.
         </p>
         <div class="key-facts">
           <div class="fact">
@@ -127,27 +127,27 @@
             <span class="fact-value">Toronto, Canada</span>
           </div>
           <div class="fact">
-            <span class="fact-label">Primary Framework</span>
-            <span class="fact-value">Svelte 5</span>
+            <span class="fact-label">Focus Area</span>
+            <span class="fact-value">Enterprise Design Systems</span>
           </div>
         </div>
       </div>
       <div class="overview-stats">
         <div class="stat-card primary">
+          <span class="stat-value">Design</span>
+          <span class="stat-label">System</span>
+        </div>
+        <div class="stat-card">
           <span class="stat-value">AI-First</span>
           <span class="stat-label">Components</span>
         </div>
         <div class="stat-card">
           <span class="stat-value">Enterprise</span>
+          <span class="stat-label">Scale</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">Svelte 5</span>
           <span class="stat-label">Ready</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-value">Base16</span>
-          <span class="stat-label">Themes</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-value">Open Core</span>
-          <span class="stat-label">Model</span>
         </div>
       </div>
     </div>
@@ -260,13 +260,13 @@
   <!-- CTA -->
   <section class="cta-section" data-animate="cta" class:visible={visibleSections.has('cta')}>
     <div class="cta-content">
-      <h2>Accelerate Your Enterprise Development</h2>
+      <h2>Build Your Enterprise Design System</h2>
       <p>
-        Skip months of design system work. Get rapid prototyping tools, comprehensive enterprise features, and production-ready components.
+        Eliminate design debt and scale your team with AI-first components. Get enterprise-grade governance and comprehensive design solutions.
       </p>
       <div class="cta-actions">
-        <Button variant="primary" href="/contact">Start Rapid Development</Button>
-        <Button variant="secondary" href="/design-system">View Components</Button>
+        <Button variant="primary" href="/contact">Enterprise Solutions</Button>
+        <Button variant="secondary" href="/design-system">View Design System</Button>
       </div>
     </div>
   </section>

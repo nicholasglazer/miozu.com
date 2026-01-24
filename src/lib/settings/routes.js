@@ -6,40 +6,40 @@
 // Solutions for the mega menu and mobile menu
 export const solutions = [
   {
-    category: 'Enterprise Components',
+    category: 'Enterprise Design System',
     items: [
       {
         path: '/design-system',
         label: 'Component Library',
-        tagline: 'Svelte Components',
-        description: 'AI-first components for enterprise applications',
-        status: 'stable'
+        tagline: 'Scalable Components',
+        description: 'AI-first Svelte 5 components for enterprise teams',
+        status: 'production'
       },
       {
-        path: '/solutions#form-builder',
-        label: 'Form Builder',
-        tagline: 'Enterprise Forms',
-        description: 'Advanced form building components and tools',
-        status: 'stable'
+        path: '/solutions#design-governance',
+        label: 'Design Governance',
+        tagline: 'System Management',
+        description: 'Eliminate design debt and maintain consistency',
+        status: 'enterprise'
       }
     ]
   },
   {
-    category: 'Design System',
+    category: 'Design Foundations',
     items: [
       {
         path: '/solutions#design-tokens',
         label: 'Design Tokens',
-        tagline: 'Free Usage',
-        description: 'Standardized design tokens and variables',
-        status: 'free'
+        tagline: 'DTCG Standards',
+        description: 'Scalable design tokens with multi-brand support',
+        status: 'production'
       },
       {
         path: '/solutions#base16-themes',
-        label: 'Base16 Themes',
-        tagline: 'Editor Themes',
-        description: 'VSCode, Emacs, and Linux system themes',
-        status: 'free'
+        label: 'Base16 Ecosystem',
+        tagline: 'Developer Tools',
+        description: 'VSCode, Emacs, and Linux development themes',
+        status: 'open-source'
       }
     ]
   }
