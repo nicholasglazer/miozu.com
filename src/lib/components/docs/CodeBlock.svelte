@@ -86,7 +86,7 @@
     position: relative;
     border-radius: var(--radius-md, 0.5rem);
     overflow: hidden;
-    background: var(--color-base1, #1a1f26);
+    background: var(--color-base01, #1a1f26);
     border: 1px solid var(--color-border, #2d3748);
   }
 
@@ -95,18 +95,18 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 1rem;
-    background: var(--color-base0, #0f1419);
+    background: var(--color-base00, #0f1419);
     border-bottom: 1px solid var(--color-border, #2d3748);
     font-size: 0.75rem;
   }
 
   .code-filename {
-    color: var(--color-base5, #e2e8f0);
+    color: var(--color-base05, #e2e8f0);
     font-family: var(--font-mono);
   }
 
   .code-lang {
-    color: var(--color-base4, #a0aec0);
+    color: var(--color-base04, #a0aec0);
     text-transform: uppercase;
     font-size: 0.625rem;
     letter-spacing: 0.05em;
@@ -124,8 +124,8 @@
     padding: 0.5rem;
     border: none;
     border-radius: var(--radius-sm, 0.25rem);
-    background: var(--color-base2, #242a33);
-    color: var(--color-base4, #a0aec0);
+    background: var(--color-base02, #242a33);
+    color: var(--color-base04, #a0aec0);
     cursor: pointer;
     opacity: 0;
     transition: opacity 0.15s, background 0.15s, color 0.15s;
@@ -136,8 +136,8 @@
   }
 
   .copy-btn:hover {
-    background: var(--color-base3, #4a5568);
-    color: var(--color-base6, #f7fafc);
+    background: var(--color-base03, #4a5568);
+    color: var(--color-base06, #f7fafc);
   }
 
   .copy-btn :global(svg) {
@@ -164,7 +164,7 @@
 
   /* Shiki CSS variables theme */
   .code-content {
-    --shiki-color-text: var(--color-base5);
+    --shiki-color-text: var(--color-base05);
     --shiki-color-background: transparent;
     --shiki-token-constant: #83d2fc;
     --shiki-token-string: #6dd672;
@@ -173,7 +173,7 @@
     --shiki-token-parameter: #ff9982;
     --shiki-token-function: #83d2fc;
     --shiki-token-string-expression: #6dd672;
-    --shiki-token-punctuation: var(--color-base4);
+    --shiki-token-punctuation: var(--color-base04);
     --shiki-token-link: #83d2fc;
   }
 </style>

@@ -174,7 +174,7 @@ code {
     gap: 1.5rem;
     margin: 1.5rem 0;
     padding: 1.5rem;
-    background: var(--color-base1);
+    background: var(--color-base01);
     border-radius: 0.5rem;
   }
 
@@ -189,7 +189,7 @@ code {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--color-base4);
+    color: var(--color-base04);
   }
 
   .demo-sans {
@@ -217,7 +217,7 @@ code {
     gap: 1rem;
     margin: 1.5rem 0;
     padding: 1.5rem;
-    background: var(--color-base1);
+    background: var(--color-base01);
     border-radius: 0.5rem;
   }
 
@@ -230,7 +230,7 @@ code {
   .size-sample {
     min-width: 4rem;
     font-weight: 500;
-    color: var(--color-base6);
+    color: var(--color-base06);
   }
 
   .size-info {
@@ -240,7 +240,7 @@ code {
   }
 
   .size-value {
-    color: var(--color-base4);
+    color: var(--color-base04);
     font-size: 0.875rem;
   }
 
@@ -250,7 +250,7 @@ code {
     gap: 1rem;
     margin: 1.5rem 0;
     padding: 1.5rem;
-    background: var(--color-base1);
+    background: var(--color-base01);
     border-radius: 0.5rem;
   }
 
@@ -270,7 +270,7 @@ code {
     gap: 0.75rem;
     margin: 1.5rem 0;
     padding: 1.5rem;
-    background: var(--color-base1);
+    background: var(--color-base01);
     border-radius: 0.5rem;
   }
 
@@ -282,12 +282,12 @@ code {
 
   .leading-value {
     min-width: 3rem;
-    color: var(--color-base4);
+    color: var(--color-base04);
     font-size: 0.875rem;
   }
 
   .leading-desc {
-    color: var(--color-base4);
+    color: var(--color-base04);
     font-size: 0.875rem;
   }
 
@@ -297,7 +297,7 @@ code {
     gap: 0.75rem;
     margin: 1.5rem 0;
     padding: 1.5rem;
-    background: var(--color-base1);
+    background: var(--color-base01);
     border-radius: 0.5rem;
   }
 
@@ -312,6 +312,6 @@ code {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--color-base4);
+    color: var(--color-base04);
   }
 </style>

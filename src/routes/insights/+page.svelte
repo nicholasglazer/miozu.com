@@ -151,7 +151,7 @@
   @reference '$theme';
 
   .insights-page {
-    @apply min-h-screen bg-base0;
+    @apply min-h-screen bg-base00;
   }
 
   .insights-content {
@@ -172,21 +172,21 @@
   }
 
   .back-link {
-    @apply inline-flex items-center gap-1.5 text-sm text-base4 no-underline mb-6;
-    @apply hover:text-base6 transition-colors;
+    @apply inline-flex items-center gap-1.5 text-sm text-base04 no-underline mb-6;
+    @apply hover:text-base06 transition-colors;
   }
 
   .page-label {
-    @apply block text-xs font-semibold uppercase tracking-[0.2em] text-base4 mb-2;
+    @apply block text-xs font-semibold uppercase tracking-[0.2em] text-base04 mb-2;
   }
 
   .page-header h1 {
-    @apply text-3xl font-semibold text-base6 mb-3;
+    @apply text-3xl font-semibold text-base06 mb-3;
     letter-spacing: -0.02em;
   }
 
   .page-desc {
-    @apply text-base text-base4 max-w-xl;
+    @apply text-base text-base04 max-w-xl;
   }
 
   /* Coming Section */
@@ -195,31 +195,31 @@
   }
 
   .coming-card {
-    @apply p-8 rounded-xl border border-base3 bg-base1 text-center;
+    @apply p-8 rounded-xl border border-base03 bg-base01 text-center;
   }
 
   .coming-icon {
-    @apply w-16 h-16 mx-auto mb-4 rounded-xl bg-base2 flex items-center justify-center text-base14;
+    @apply w-16 h-16 mx-auto mb-4 rounded-xl bg-base02 flex items-center justify-center text-base0E;
   }
 
   .coming-card h2 {
-    @apply text-xl font-semibold text-base6 mb-3;
+    @apply text-xl font-semibold text-base06 mb-3;
   }
 
   .coming-card p {
-    @apply text-sm text-base4 max-w-lg mx-auto leading-relaxed;
+    @apply text-sm text-base04 max-w-lg mx-auto leading-relaxed;
   }
 
   .coming-timeline {
-    @apply mt-6 inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-base2;
+    @apply mt-6 inline-flex items-center gap-3 px-4 py-2 rounded-lg bg-base02;
   }
 
   .timeline-label {
-    @apply text-xs text-base4;
+    @apply text-xs text-base04;
   }
 
   .timeline-value {
-    @apply text-sm font-medium text-base6;
+    @apply text-sm font-medium text-base06;
   }
 
   /* Coverage Section */
@@ -228,11 +228,11 @@
   }
 
   .coverage-section h2 {
-    @apply text-lg font-semibold text-base6 mb-2;
+    @apply text-lg font-semibold text-base06 mb-2;
   }
 
   .section-desc {
-    @apply text-sm text-base4 mb-6;
+    @apply text-sm text-base04 mb-6;
   }
 
   .coverage-grid {
@@ -240,11 +240,11 @@
   }
 
   .coverage-item {
-    @apply p-5 rounded-xl border border-base3 bg-base0;
+    @apply p-5 rounded-xl border border-base03 bg-base00;
   }
 
   .coverage-item h3 {
-    @apply text-sm font-semibold text-base6 mb-3;
+    @apply text-sm font-semibold text-base06 mb-3;
   }
 
   .coverage-item ul {
@@ -255,12 +255,12 @@
   }
 
   .coverage-item li {
-    @apply text-xs text-base4 pl-4 relative;
+    @apply text-xs text-base04 pl-4 relative;
   }
 
   .coverage-item li::before {
     content: '';
-    @apply absolute left-0 top-1.5 w-1.5 h-1.5 rounded-full bg-base14/50;
+    @apply absolute left-0 top-1.5 w-1.5 h-1.5 rounded-full bg-base0E/50;
   }
 
   /* Methodology Section */
@@ -269,7 +269,7 @@
   }
 
   .methodology-section h2 {
-    @apply text-lg font-semibold text-base6 mb-2;
+    @apply text-lg font-semibold text-base06 mb-2;
   }
 
   .methodology-steps {
@@ -277,19 +277,19 @@
   }
 
   .method-step {
-    @apply p-5 rounded-xl border border-base3 bg-base0;
+    @apply p-5 rounded-xl border border-base03 bg-base00;
   }
 
   .step-num {
-    @apply text-lg font-bold text-base14 mb-2 block;
+    @apply text-lg font-bold text-base0E mb-2 block;
   }
 
   .method-step h3 {
-    @apply text-sm font-semibold text-base6 mb-2;
+    @apply text-sm font-semibold text-base06 mb-2;
   }
 
   .method-step p {
-    @apply text-xs text-base4 leading-relaxed;
+    @apply text-xs text-base04 leading-relaxed;
   }
 
   /* Access Section */
@@ -298,15 +298,15 @@
   }
 
   .access-card {
-    @apply p-8 rounded-xl bg-base1 border border-base3 text-center;
+    @apply p-8 rounded-xl bg-base01 border border-base03 text-center;
   }
 
   .access-card h2 {
-    @apply text-lg font-semibold text-base6 mb-2;
+    @apply text-lg font-semibold text-base06 mb-2;
   }
 
   .access-card p {
-    @apply text-sm text-base4 max-w-md mx-auto mb-6;
+    @apply text-sm text-base04 max-w-md mx-auto mb-6;
   }
 
   .access-actions {
@@ -319,7 +319,7 @@
   }
 
   .access-btn.primary {
-    @apply bg-base14 text-base0;
+    @apply bg-base0E text-base00;
   }
 
   .access-btn.primary:hover {
@@ -327,11 +327,11 @@
   }
 
   .access-btn.secondary {
-    @apply bg-transparent text-base6 border border-base3;
+    @apply bg-transparent text-base06 border border-base03;
   }
 
   .access-btn.secondary:hover {
-    @apply bg-base2;
+    @apply bg-base02;
   }
 
   @media (max-width: 768px) {

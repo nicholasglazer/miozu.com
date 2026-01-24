@@ -69,8 +69,8 @@
 
   .locale-button {
     @apply flex items-center gap-2 py-1.5 px-2;
-    @apply bg-base2/70 hover:bg-base2 transition-colors;
-    @apply text-base5 hover:text-base14;
+    @apply bg-base02/70 hover:bg-base02 transition-colors;
+    @apply text-base05 hover:text-base0E;
   }
 
   .locale-label {
@@ -79,8 +79,8 @@
 
   .locale-dropdown {
     @apply absolute right-0 mt-1 z-20;
-    @apply w-40 bg-base0;
-    @apply border border-base3/20;
+    @apply w-40 bg-base00;
+    @apply border border-base03/20;
   }
 
   .locale-options {
@@ -89,13 +89,13 @@
 
   .locale-option {
     @apply flex items-center gap-2 px-3 py-2;
-    @apply text-left text-sm text-base5 hover:text-base14;
-    @apply hover:bg-base1;
+    @apply text-left text-sm text-base05 hover:text-base0E;
+    @apply hover:bg-base01;
     @apply transition-colors;
   }
 
   .locale-option.active {
-    @apply bg-base1/80 text-base14 font-medium;
+    @apply bg-base01/80 text-base0E font-medium;
   }
 
   .locale-flag {

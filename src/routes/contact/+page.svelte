@@ -239,7 +239,7 @@
 
   .content-container {
     position: relative;
-    @apply bg-base0;
+    @apply bg-base00;
     min-height: 50vh;
     opacity: 0;
     transform: translateY(20px);

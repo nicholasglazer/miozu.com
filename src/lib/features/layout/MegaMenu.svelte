@@ -40,6 +40,7 @@
     {name: 'About', href: '/about'},
     {name: 'Research', href: '/insights'},
     {name: 'Schema', href: '/data'},
+    {name: 'Theme Ports', href: '/ports'},
     {name: 'Contact', href: '/contact'}
   ];
 
@@ -242,7 +243,7 @@
   }
 
   .trigger-btn {
-    @apply flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-base4;
+    @apply flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-base04;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -252,7 +253,7 @@
 
   .trigger-btn:hover,
   .trigger-btn.active {
-    @apply text-base6;
+    @apply text-base06;
   }
 
   .chevron {
@@ -265,7 +266,7 @@
   }
 
   .mega-menu-panel {
-    @apply absolute top-full mt-3 bg-base1 border border-base3;
+    @apply absolute top-full mt-3 bg-base01 border border-base03;
     border-radius: 16px;
     width: 860px;
     max-width: calc(100vw - 32px);
@@ -293,11 +294,11 @@
   }
 
   .solution-card:hover {
-    @apply bg-base2/50 border-base3;
+    @apply bg-base02/50 border-base03;
   }
 
   .solution-card.early:hover {
-    @apply bg-base14/5 border-base14/20;
+    @apply bg-base0E/5 border-base0E/20;
   }
 
   .card-top {
@@ -305,30 +306,30 @@
   }
 
   .card-icon {
-    @apply w-9 h-9 flex items-center justify-center bg-base2 text-base5;
+    @apply w-9 h-9 flex items-center justify-center bg-base02 text-base05;
     border-radius: 10px;
     transition: all 0.15s ease;
   }
 
   .card-icon.live {
-    @apply bg-base3 text-base6;
+    @apply bg-base03 text-base06;
   }
 
   .card-icon.early {
-    @apply bg-base14/15 text-base14;
+    @apply bg-base0E/15 text-base0E;
   }
 
   .solution-card:hover .card-icon {
-    @apply bg-base3 text-base6;
+    @apply bg-base03 text-base06;
   }
 
   .status-badge {
-    @apply px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider bg-base2 text-base4;
+    @apply px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider bg-base02 text-base04;
     border-radius: 6px;
   }
 
   .status-badge.early {
-    @apply bg-base14 text-white;
+    @apply bg-base0E text-white;
   }
 
   .card-body {
@@ -336,16 +337,16 @@
   }
 
   .card-body h3 {
-    @apply text-sm font-semibold text-base6;
+    @apply text-sm font-semibold text-base06;
     letter-spacing: -0.01em;
   }
 
   .card-tagline {
-    @apply text-xs text-base4 font-medium;
+    @apply text-xs text-base04 font-medium;
   }
 
   .card-description {
-    @apply text-xs text-base4 leading-relaxed mt-1;
+    @apply text-xs text-base04 leading-relaxed mt-1;
   }
 
   .card-footer {
@@ -353,7 +354,7 @@
   }
 
   .learn-more {
-    @apply flex items-center gap-1 text-xs font-medium text-base4;
+    @apply flex items-center gap-1 text-xs font-medium text-base04;
     @apply transition-colors duration-150;
   }
 
@@ -364,7 +365,7 @@
   }
 
   .solution-card:hover .learn-more {
-    @apply text-base6;
+    @apply text-base06;
   }
 
   .solution-card:hover .learn-more svg {
@@ -373,7 +374,7 @@
   }
 
   .sidebar {
-    @apply w-52 p-5 flex flex-col gap-6 bg-base2/50 border-l border-base3;
+    @apply w-52 p-5 flex flex-col gap-6 bg-base02/50 border-l border-base03;
   }
 
   .sidebar-section {
@@ -381,7 +382,7 @@
   }
 
   .sidebar-label {
-    @apply text-[10px] font-semibold uppercase tracking-[0.15em] text-base4 px-2;
+    @apply text-[10px] font-semibold uppercase tracking-[0.15em] text-base04 px-2;
   }
 
   .quick-links {
@@ -389,18 +390,18 @@
   }
 
   .quick-link {
-    @apply px-3 py-2 text-sm text-base5 no-underline;
+    @apply px-3 py-2 text-sm text-base05 no-underline;
     border-radius: 8px;
     @apply transition-colors duration-150;
     font-weight: 450;
   }
 
   .quick-link:hover {
-    @apply text-base6 bg-base2;
+    @apply text-base06 bg-base02;
   }
 
   .link-badge {
-    @apply ml-2 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider bg-base14 text-white;
+    @apply ml-2 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider bg-base0E text-white;
     border-radius: 4px;
   }
 
@@ -409,12 +410,12 @@
   }
 
   .cta-label {
-    @apply text-[10px] font-semibold uppercase tracking-[0.15em] text-base4 px-2;
+    @apply text-[10px] font-semibold uppercase tracking-[0.15em] text-base04 px-2;
   }
 
   .cta-button {
     @apply flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium no-underline;
-    @apply transition-all duration-150 bg-base14 text-white;
+    @apply transition-all duration-150 bg-base0E text-white;
     border-radius: 10px;
   }
 

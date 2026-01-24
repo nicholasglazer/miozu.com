@@ -206,8 +206,8 @@
   }
 
   .carousel-item {
-    @apply flex flex-col items-center bg-base1/30 p-4 rounded-xs;
-    @apply min-w-32 transition-all hover:bg-base1/60;
+    @apply flex flex-col items-center bg-base01/30 p-4 rounded-xs;
+    @apply min-w-32 transition-all hover:bg-base01/60;
     @apply flex-shrink-0;
     /* Allow custom color through CSS variable */
     border-left: 3px solid var(--card-color, transparent);
@@ -215,7 +215,7 @@
 
   .item-icon,
   .item-emoji {
-    @apply mb-2 text-base14;
+    @apply mb-2 text-base0E;
   }
 
   .item-emoji {
@@ -223,6 +223,6 @@
   }
 
   .item-name {
-    @apply text-sm font-medium text-base6;
+    @apply text-sm font-medium text-base06;
   }
 </style>

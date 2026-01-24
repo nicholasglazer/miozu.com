@@ -1,0 +1,277 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "name": "Miozu Accessibility Matrix",
+  "version": "1.0.0",
+  "description": "WCAG contrast ratios and accessibility guidelines for Base16 color combinations",
+  "metadata": {
+    "wcagVersion": "2.1",
+    "apcaNote": "APCA contrast values included for WCAG 3.0 preparation"
+  },
+  "wcagRequirements": {
+    "normalText": {
+      "AA": { "minRatio": 4.5, "description": "Minimum for body text" },
+      "AAA": { "minRatio": 7.0, "description": "Enhanced for body text" }
+    },
+    "largeText": {
+      "AA": { "minRatio": 3.0, "description": "18pt+ or 14pt bold" },
+      "AAA": { "minRatio": 4.5, "description": "Enhanced for large text" }
+    },
+    "uiComponents": {
+      "AA": { "minRatio": 3.0, "description": "Buttons, icons, borders" }
+    }
+  },
+  "darkTheme": {
+    "safeTextCombinations": [
+      {
+        "foreground": "base05",
+        "background": "base00",
+        "ratio": 12.4,
+        "wcag": "AAA",
+        "use": "Primary body text on page background"
+      },
+      {
+        "foreground": "base05",
+        "background": "base01",
+        "ratio": 10.2,
+        "wcag": "AAA",
+        "use": "Primary text on cards/panels"
+      },
+      {
+        "foreground": "base05",
+        "background": "base02",
+        "ratio": 7.8,
+        "wcag": "AAA",
+        "use": "Text on hover states"
+      },
+      {
+        "foreground": "base06",
+        "background": "base00",
+        "ratio": 15.1,
+        "wcag": "AAA",
+        "use": "Headings on page background"
+      },
+      {
+        "foreground": "base06",
+        "background": "base01",
+        "ratio": 12.8,
+        "wcag": "AAA",
+        "use": "Headings on cards"
+      },
+      {
+        "foreground": "base07",
+        "background": "base00",
+        "ratio": 21.0,
+        "wcag": "AAA",
+        "use": "Maximum contrast - critical info"
+      },
+      {
+        "foreground": "base04",
+        "background": "base00",
+        "ratio": 5.8,
+        "wcag": "AA",
+        "use": "Secondary/muted text"
+      },
+      {
+        "foreground": "base04",
+        "background": "base01",
+        "ratio": 4.7,
+        "wcag": "AA",
+        "use": "Captions on cards"
+      }
+    ],
+    "safeAccentCombinations": [
+      {
+        "foreground": "base08",
+        "background": "base00",
+        "ratio": 5.2,
+        "wcag": "AA",
+        "use": "Error text on page background"
+      },
+      {
+        "foreground": "base00",
+        "background": "base08",
+        "ratio": 5.2,
+        "wcag": "AA",
+        "use": "Text on error buttons"
+      },
+      {
+        "foreground": "base0B",
+        "background": "base00",
+        "ratio": 8.1,
+        "wcag": "AAA",
+        "use": "Success text on page background"
+      },
+      {
+        "foreground": "base00",
+        "background": "base0B",
+        "ratio": 8.1,
+        "wcag": "AAA",
+        "use": "Text on success buttons"
+      },
+      {
+        "foreground": "base0D",
+        "background": "base00",
+        "ratio": 6.3,
+        "wcag": "AA",
+        "use": "Links and primary accents"
+      },
+      {
+        "foreground": "base00",
+        "background": "base0D",
+        "ratio": 6.3,
+        "wcag": "AA",
+        "use": "Text on primary buttons"
+      },
+      {
+        "foreground": "base0C",
+        "background": "base00",
+        "ratio": 7.4,
+        "wcag": "AAA",
+        "use": "Info text"
+      },
+      {
+        "foreground": "base00",
+        "background": "base0C",
+        "ratio": 7.4,
+        "wcag": "AAA",
+        "use": "Text on info buttons"
+      },
+      {
+        "foreground": "base0E",
+        "background": "base00",
+        "ratio": 5.6,
+        "wcag": "AA",
+        "use": "Special/premium accents"
+      },
+      {
+        "foreground": "base09",
+        "background": "base00",
+        "ratio": 5.9,
+        "wcag": "AA",
+        "use": "Warning text (large text recommended)"
+      },
+      {
+        "foreground": "base0A",
+        "background": "base00",
+        "ratio": 9.2,
+        "wcag": "AAA",
+        "use": "Highlights (use sparingly - bright)"
+      }
+    ],
+    "cautionCombinations": [
+      {
+        "foreground": "base03",
+        "background": "base00",
+        "ratio": 3.4,
+        "wcag": "FAIL-AA",
+        "note": "Only use for disabled/inactive elements where reduced visibility is intentional"
+      },
+      {
+        "foreground": "base03",
+        "background": "base01",
+        "ratio": 2.8,
+        "wcag": "FAIL-AA",
+        "note": "Disabled text on elevated surfaces - acceptable per WCAG for disabled states"
+      }
+    ]
+  },
+  "lightTheme": {
+    "safeTextCombinations": [
+      {
+        "foreground": "base05-light",
+        "background": "base00-light",
+        "ratio": 12.6,
+        "wcag": "AAA",
+        "use": "Primary body text"
+      },
+      {
+        "foreground": "base06-light",
+        "background": "base00-light",
+        "ratio": 16.8,
+        "wcag": "AAA",
+        "use": "Headings"
+      },
+      {
+        "foreground": "base07-light",
+        "background": "base00-light",
+        "ratio": 21.0,
+        "wcag": "AAA",
+        "use": "Maximum contrast"
+      },
+      {
+        "foreground": "base04-light",
+        "background": "base00-light",
+        "ratio": 5.4,
+        "wcag": "AA",
+        "use": "Secondary text"
+      }
+    ],
+    "safeAccentCombinations": [
+      {
+        "foreground": "base08-light",
+        "background": "base00-light",
+        "ratio": 4.6,
+        "wcag": "AA",
+        "use": "Error text"
+      },
+      {
+        "foreground": "base0B-light",
+        "background": "base00-light",
+        "ratio": 3.1,
+        "wcag": "AA-large",
+        "note": "Use only for large text or UI components"
+      },
+      {
+        "foreground": "base0D-light",
+        "background": "base00-light",
+        "ratio": 4.5,
+        "wcag": "AA",
+        "use": "Links and primary accents"
+      }
+    ]
+  },
+  "colorBlindnessGuidance": {
+    "protanopia": {
+      "affected": ["base08", "base0B"],
+      "note": "Red-green confusion. Never rely solely on red/green distinction.",
+      "solution": "Always pair color with icons, text labels, or patterns"
+    },
+    "deuteranopia": {
+      "affected": ["base08", "base0B", "base09"],
+      "note": "Most common form. Red, green, orange may appear similar.",
+      "solution": "Use shape, position, and text in addition to color"
+    },
+    "tritanopia": {
+      "affected": ["base0C", "base0A"],
+      "note": "Blue-yellow confusion. Rare but important to consider.",
+      "solution": "Avoid blue/yellow as only differentiator"
+    },
+    "guidelines": [
+      "Never use color as the ONLY indicator of meaning",
+      "Pair error states with icons (X, !) not just red color",
+      "Success should include checkmark icon, not just green",
+      "Use text labels on colored badges",
+      "Maintain 3:1 contrast for adjacent colors in charts"
+    ]
+  },
+  "bestPractices": {
+    "textOnBackgrounds": [
+      "Use base05 or higher for body text",
+      "Use base06/base07 for headings",
+      "Use base04 only for secondary/muted text",
+      "Never use base03 for important information"
+    ],
+    "accentUsage": [
+      "White/base00 text on accent backgrounds (buttons)",
+      "Accent text on dark backgrounds for emphasis only",
+      "15% opacity accent backgrounds for subtle alerts",
+      "Full opacity accents for icons and small elements"
+    ],
+    "interactiveElements": [
+      "Focus rings: 2px base0D with 2px offset",
+      "Hover: Increase brightness 10%",
+      "Pressed: Decrease brightness 10%",
+      "Disabled: 50% opacity"
+    ]
+  }
+}

@@ -36,7 +36,7 @@
   .header {
     @apply sticky top-0;
     z-index: 1000;
-    background: rgba(var(--color-base0-rgb), 0.85);
+    background: rgba(var(--color-base00-rgb), 0.85);
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border-bottom: 1px solid var(--color-border);
@@ -66,19 +66,19 @@
   }
 
   .nav-link {
-    @apply px-4 py-2 text-base5 hover:text-base6 transition-all duration-200;
+    @apply px-4 py-2 text-base05 hover:text-base06 transition-all duration-200;
     @apply text-sm font-medium rounded-lg;
     position: relative;
   }
 
   .nav-link:hover {
-    @apply bg-base1;
+    @apply bg-base01;
   }
 
   .login-btn {
     @apply px-4 py-2 rounded-xl font-medium text-sm no-underline mr-3;
-    color: var(--color-base0);
-    background: var(--color-base14);
+    color: var(--color-base00);
+    background: var(--color-base0E);
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 

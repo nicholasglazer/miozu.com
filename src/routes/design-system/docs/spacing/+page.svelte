@@ -130,7 +130,7 @@ gap: var(--space-16);                     /* 64px */`}
     gap: 0.75rem;
     margin: 1.5rem 0;
     padding: 1.5rem;
-    background: var(--color-base1);
+    background: var(--color-base01);
     border-radius: 0.5rem;
   }
 
@@ -153,7 +153,7 @@ gap: var(--space-16);                     /* 64px */`}
   }
 
   .spacing-px {
-    color: var(--color-base4);
+    color: var(--color-base04);
     font-size: 0.875rem;
   }
 
@@ -176,13 +176,13 @@ gap: var(--space-16);                     /* 64px */`}
 
   th {
     font-weight: 600;
-    color: var(--color-base6);
-    background: var(--color-base1);
+    color: var(--color-base06);
+    background: var(--color-base01);
   }
 
   td code {
     font-size: 0.8125rem;
-    background: var(--color-base1);
+    background: var(--color-base01);
     padding: 0.125rem 0.375rem;
     border-radius: 0.25rem;
   }

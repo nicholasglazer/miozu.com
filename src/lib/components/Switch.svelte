@@ -78,49 +78,49 @@
 
   .switcher-track {
     @apply relative w-[40px] h-[20px] rounded-full;
-    @apply bg-base3/35 ring-1 ring-base3/35;
+    @apply bg-base03/35 ring-1 ring-base03/35;
     @apply transition-colors duration-300;
 
     &.checked {
-      @apply bg-base10/60 ring-base10/60;
+      @apply bg-base0A/60 ring-base0A/60;
     }
   }
 
   :global(.dark) .switcher-track {
-    @apply bg-base5/20 ring-base5/20;
+    @apply bg-base05/20 ring-base05/20;
 
     &.checked {
-      @apply bg-base10/70 ring-base10/70;
+      @apply bg-base0A/70 ring-base0A/70;
     }
   }
 
   .switcher-thumb {
     @apply absolute top-[2px] left-[2px];
     @apply w-[16px] h-[16px] rounded-full;
-    @apply bg-base5 shadow-sm;
+    @apply bg-base05 shadow-sm;
     @apply transition-all duration-300;
 
     .switcher-track.checked & {
-      @apply bg-base7;
+      @apply bg-base07;
     }
   }
 
   :global(.dark) .switcher-thumb {
-    @apply bg-base7;
+    @apply bg-base07;
 
     .switcher-track.checked & {
-      @apply bg-base0;
+      @apply bg-base00;
     }
   }
 
   /* Focus styles */
   input:focus + .switcher-track {
-    @apply ring-2 ring-base14;
+    @apply ring-2 ring-base0E;
     @apply shadow-[0_0_0_2px_rgba(255,153,130,0.25)];
   }
 
   :global(.dark) input:focus + .switcher-track {
-    @apply ring-base10/40;
+    @apply ring-base0A/40;
     @apply shadow-[0_0_0_2px_rgba(109,214,114,0.3)];
   }
 </style>

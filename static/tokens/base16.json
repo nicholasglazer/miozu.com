@@ -1,0 +1,186 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "name": "Miozu Base16 Design Tokens",
+  "version": "1.0.0",
+  "description": "Base16 semantic color system for enterprise applications",
+  "metadata": {
+    "lastUpdated": "2026-01-24",
+    "aiCompatible": true,
+    "llmsUrl": "https://miozu.com/llms.txt"
+  },
+  "color": {
+    "base": {
+      "00": {
+        "$value": "#0a0f19",
+        "$type": "color",
+        "dark": "#0a0f19",
+        "light": "#ffffff",
+        "semantic": "background-default",
+        "responsibility": "Page canvas, primary surface",
+        "wcagRole": "background"
+      },
+      "01": {
+        "$value": "#161d2d",
+        "$type": "color",
+        "dark": "#161d2d",
+        "light": "#f7f8fa",
+        "semantic": "background-elevated",
+        "responsibility": "Cards, panels, elevated surfaces",
+        "wcagRole": "background"
+      },
+      "02": {
+        "$value": "#273244",
+        "$type": "color",
+        "dark": "#273244",
+        "light": "#eef1f5",
+        "semantic": "background-interactive",
+        "responsibility": "Hover states, active selections",
+        "wcagRole": "background"
+      },
+      "03": {
+        "$value": "#5a6884",
+        "$type": "color",
+        "dark": "#5a6884",
+        "light": "#97a3b7",
+        "semantic": "foreground-disabled",
+        "responsibility": "Disabled text, inactive elements",
+        "wcagRole": "foreground-muted"
+      },
+      "04": {
+        "$value": "#8896b3",
+        "$type": "color",
+        "dark": "#8896b3",
+        "light": "#5e6b81",
+        "semantic": "foreground-secondary",
+        "responsibility": "Secondary text, supporting information",
+        "wcagRole": "foreground"
+      },
+      "05": {
+        "$value": "#d4dce8",
+        "$type": "color",
+        "dark": "#d4dce8",
+        "light": "#1a2332",
+        "semantic": "foreground-default",
+        "responsibility": "Primary text, main content",
+        "wcagRole": "foreground"
+      },
+      "06": {
+        "$value": "#e8eef6",
+        "$type": "color",
+        "dark": "#e8eef6",
+        "light": "#0d1520",
+        "semantic": "foreground-emphasis",
+        "responsibility": "Emphasized text, headings",
+        "wcagRole": "foreground"
+      },
+      "07": {
+        "$value": "#ffffff",
+        "$type": "color",
+        "dark": "#ffffff",
+        "light": "#000000",
+        "semantic": "foreground-maximum",
+        "responsibility": "Maximum emphasis, critical information",
+        "wcagRole": "foreground"
+      },
+      "08": {
+        "$value": "#ff5757",
+        "$type": "color",
+        "dark": "#ff5757",
+        "light": "#dc2626",
+        "semantic": "functional-error",
+        "responsibility": "Errors, critical warnings, destructive actions",
+        "wcagRole": "accent",
+        "uiMapping": ["delete-button", "error-alert", "critical-badge", "form-error"]
+      },
+      "09": {
+        "$value": "#ff8c42",
+        "$type": "color",
+        "dark": "#ff8c42",
+        "light": "#ea580c",
+        "semantic": "functional-warning",
+        "responsibility": "Warnings, caution states, modified content",
+        "wcagRole": "accent",
+        "uiMapping": ["warning-alert", "pending-badge", "unsaved-indicator", "caution-button"]
+      },
+      "0A": {
+        "$value": "#ffc73d",
+        "$type": "color",
+        "dark": "#ffc73d",
+        "light": "#ca8a04",
+        "semantic": "functional-highlight",
+        "responsibility": "Search highlights, important notes, special attention",
+        "wcagRole": "accent",
+        "uiMapping": ["search-highlight", "featured-badge", "attention-banner", "new-indicator"]
+      },
+      "0B": {
+        "$value": "#52d681",
+        "$type": "color",
+        "dark": "#52d681",
+        "light": "#16a34a",
+        "semantic": "functional-success",
+        "responsibility": "Success states, positive feedback, approved actions",
+        "wcagRole": "accent",
+        "uiMapping": ["success-alert", "confirm-button", "active-badge", "completed-indicator"]
+      },
+      "0C": {
+        "$value": "#42c7dd",
+        "$type": "color",
+        "dark": "#42c7dd",
+        "light": "#0891b2",
+        "semantic": "functional-info",
+        "responsibility": "Information, secondary actions, neutral states",
+        "wcagRole": "accent",
+        "uiMapping": ["info-alert", "secondary-button", "info-badge", "tooltip"]
+      },
+      "0D": {
+        "$value": "#5e9eff",
+        "$type": "color",
+        "dark": "#5e9eff",
+        "light": "#2563eb",
+        "semantic": "functional-primary",
+        "responsibility": "Primary actions, brand elements, links",
+        "wcagRole": "accent",
+        "uiMapping": ["primary-button", "link", "focus-ring", "brand-accent"]
+      },
+      "0E": {
+        "$value": "#b47efc",
+        "$type": "color",
+        "dark": "#b47efc",
+        "light": "#7c3aed",
+        "semantic": "functional-special",
+        "responsibility": "Special states, premium features, magical elements",
+        "wcagRole": "accent",
+        "uiMapping": ["premium-badge", "ai-indicator", "special-feature", "magic-element"]
+      },
+      "0F": {
+        "$value": "#ffb157",
+        "$type": "color",
+        "dark": "#ffb157",
+        "light": "#d97706",
+        "semantic": "functional-alternative",
+        "responsibility": "Deprecated features, alternative actions, special cases",
+        "wcagRole": "accent",
+        "uiMapping": ["deprecated-badge", "legacy-indicator", "alternative-path", "edge-case"]
+      }
+    }
+  },
+  "states": {
+    "hover": {
+      "brightness": { "$value": 1.1, "$type": "number" },
+      "description": "Increase brightness by 10% on hover"
+    },
+    "pressed": {
+      "brightness": { "$value": 0.9, "$type": "number" },
+      "description": "Decrease brightness by 10% on press"
+    },
+    "disabled": {
+      "opacity": { "$value": 0.5, "$type": "number" },
+      "description": "50% opacity for disabled states"
+    },
+    "focus": {
+      "ringWidth": { "$value": "2px", "$type": "dimension" },
+      "ringOffset": { "$value": "2px", "$type": "dimension" },
+      "ringColor": { "$value": "{color.base.0D}", "$type": "color" }
+    }
+  }
+}

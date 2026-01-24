@@ -221,13 +221,13 @@ const customButton = (props) => buttonStyles({ ...props, class: 'custom' });`}
   .config-item .type {
     font-size: 0.8125rem;
     font-family: var(--font-mono);
-    color: var(--color-base4);
+    color: var(--color-base04);
   }
 
   .config-item p {
     width: 100%;
     margin: 0.25rem 0 0;
     font-size: 0.875rem;
-    color: var(--color-base5);
+    color: var(--color-base05);
   }
 </style>

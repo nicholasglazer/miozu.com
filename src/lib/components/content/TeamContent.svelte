@@ -181,7 +181,7 @@
   @reference '$theme';
 
   .team-content {
-    @apply text-base5;
+    @apply text-base05;
   }
 
   .section-header {
@@ -189,16 +189,16 @@
   }
 
   .section-eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base4;
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base04;
   }
 
   .section-header h2 {
-    @apply text-2xl font-semibold text-base6 mt-2 mb-0;
+    @apply text-2xl font-semibold text-base06 mt-2 mb-0;
     letter-spacing: -0.02em;
   }
 
   .section-header p {
-    @apply text-base4 mt-2;
+    @apply text-base04 mt-2;
   }
 
   .leadership-section,
@@ -222,7 +222,7 @@
   }
 
   .person-card {
-    @apply max-w-xl flex flex-col gap-6 p-8 bg-base1 border border-base3;
+    @apply max-w-xl flex flex-col gap-6 p-8 bg-base01 border border-base03;
     border-radius: 12px;
     opacity: 0;
     transform: translateY(20px);
@@ -242,20 +242,20 @@
   }
 
   .avatar-placeholder {
-    @apply w-20 h-20 flex items-center justify-center bg-base2 text-base4;
+    @apply w-20 h-20 flex items-center justify-center bg-base02 text-base04;
     border-radius: 12px;
   }
 
   .person-info h3 {
-    @apply text-xl font-semibold text-base6 m-0;
+    @apply text-xl font-semibold text-base06 m-0;
   }
 
   .person-role {
-    @apply text-xs font-semibold uppercase tracking-[0.15em] text-base14;
+    @apply text-xs font-semibold uppercase tracking-[0.15em] text-base0E;
   }
 
   .person-bio {
-    @apply text-sm text-base5 leading-relaxed my-2;
+    @apply text-sm text-base05 leading-relaxed my-2;
   }
 
   .expertise-tags {
@@ -263,7 +263,7 @@
   }
 
   .tag {
-    @apply px-3 py-1 text-xs font-medium bg-base2 text-base5;
+    @apply px-3 py-1 text-xs font-medium bg-base02 text-base05;
     border-radius: 999px;
   }
 
@@ -272,7 +272,7 @@
   }
 
   .advisor-card {
-    @apply p-6 bg-base1 border border-base3;
+    @apply p-6 bg-base01 border border-base03;
     border-radius: 12px;
     opacity: 0;
     transform: translateY(20px);
@@ -290,7 +290,7 @@
   }
 
   .advisor-avatar {
-    @apply w-12 h-12 flex items-center justify-center bg-base14;
+    @apply w-12 h-12 flex items-center justify-center bg-base0E;
     border-radius: 12px;
   }
 
@@ -299,15 +299,15 @@
   }
 
   .advisor-title h3 {
-    @apply text-lg font-semibold text-base6 m-0;
+    @apply text-lg font-semibold text-base06 m-0;
   }
 
   .advisor-role {
-    @apply text-sm text-base4;
+    @apply text-sm text-base04;
   }
 
   .advisor-company {
-    @apply text-sm text-base14 no-underline;
+    @apply text-sm text-base0E no-underline;
   }
 
   .advisor-company:hover {
@@ -315,7 +315,7 @@
   }
 
   .advisor-bio {
-    @apply text-sm text-base5 leading-relaxed mb-4;
+    @apply text-sm text-base05 leading-relaxed mb-4;
   }
 
   .partners-grid {
@@ -324,7 +324,7 @@
   }
 
   .partner-card {
-    @apply p-6 bg-base1 border border-base3;
+    @apply p-6 bg-base01 border border-base03;
     border-radius: 12px;
     opacity: 0;
     transform: translateY(20px);
@@ -342,22 +342,22 @@
   }
 
   .partner-header h3 {
-    @apply text-lg font-semibold text-base6 m-0;
+    @apply text-lg font-semibold text-base06 m-0;
   }
 
   .partner-type {
-    @apply text-xs font-semibold uppercase tracking-[0.15em] text-base14;
+    @apply text-xs font-semibold uppercase tracking-[0.15em] text-base0E;
   }
 
   .partner-description {
-    @apply text-sm text-base5 mb-4;
+    @apply text-sm text-base05 mb-4;
   }
 
   .partner-contribution {
-    @apply text-sm text-base4 pt-3 border-t border-base3;
+    @apply text-sm text-base04 pt-3 border-t border-base03;
   }
 
   .partner-contribution strong {
-    @apply text-base14;
+    @apply text-base0E;
   }
 </style>

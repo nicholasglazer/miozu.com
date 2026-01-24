@@ -255,7 +255,7 @@
   @reference '$theme';
 
   .footer {
-    @apply w-full mt-auto bg-base0;
+    @apply w-full mt-auto bg-base00;
   }
 
   .footer-container {
@@ -271,7 +271,7 @@
   }
 
   .footer-logo {
-    @apply flex items-center gap-2 no-underline text-base14;
+    @apply flex items-center gap-2 no-underline text-base0E;
 
     .logo-text {
       @apply text-xl;
@@ -287,7 +287,7 @@
   }
 
   .company-link {
-    @apply text-base14 hover:text-base13 transition-colors;
+    @apply text-base0E hover:text-base0D transition-colors;
     text-decoration: none;
   }
 
@@ -296,7 +296,7 @@
   }
 
   .footer-legal {
-    @apply flex flex-wrap justify-between items-center text-xs text-base3 gap-4;
+    @apply flex flex-wrap justify-between items-center text-xs text-base03 gap-4;
   }
 
   .footer-trust {
@@ -308,7 +308,7 @@
   }
 
   .trust-badge {
-    @apply flex items-center gap-1 px-2 py-1 rounded bg-base1 text-base4;
+    @apply flex items-center gap-1 px-2 py-1 rounded bg-base01 text-base04;
     font-size: 0.65rem;
     font-weight: 500;
   }
@@ -318,11 +318,11 @@
   }
 
   .location {
-    @apply flex items-center gap-1.5 text-base4;
+    @apply flex items-center gap-1.5 text-base04;
   }
 
   .location svg {
-    @apply text-base4;
+    @apply text-base04;
   }
 
   .legal-links {
@@ -330,7 +330,7 @@
   }
 
   .legal-link {
-    @apply text-base3 hover:text-base5 transition-colors no-underline;
+    @apply text-base03 hover:text-base05 transition-colors no-underline;
   }
 
   .footer-tools {
@@ -345,8 +345,8 @@
   /* Status Indicator Styles */
   .status-indicator {
     @apply flex items-center justify-center h-8 w-8 rounded-full;
-    @apply bg-base1 hover:bg-base2 transition-colors;
-    @apply focus:outline-none focus:ring-2 focus:ring-base14/50;
+    @apply bg-base01 hover:bg-base02 transition-colors;
+    @apply focus:outline-none focus:ring-2 focus:ring-base0E/50;
   }
 
   .status-dot {
@@ -358,8 +358,8 @@
   /* Status Panel Styles */
   .status-panel {
     @apply my-5 p-2.5;
-    @apply bg-base0;
-    @apply border border-base4/10;
+    @apply bg-base00;
+    @apply border border-base04/10;
   }
 
   .status-items {
@@ -370,15 +370,15 @@
   .status-item {
     @apply flex flex-col items-start;
     @apply px-2.5 py-0.5;
-    @apply border-l-1 border-base2;
+    @apply border-l-1 border-base02;
   }
 
   .item-label {
-    @apply text-base3 mb-1 text-xs;
+    @apply text-base03 mb-1 text-xs;
   }
 
   .item-value {
-    @apply flex text-base10 text-sm;
+    @apply flex text-base0A text-sm;
   }
 
   /* Removed locale select styles as language selection was removed */

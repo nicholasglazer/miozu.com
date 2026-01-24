@@ -151,7 +151,7 @@
   }
 
   .app-container {
-    @apply bg-base0 text-base6;
+    @apply bg-base00 text-base06;
     @apply flex flex-col min-h-screen;
   }
 

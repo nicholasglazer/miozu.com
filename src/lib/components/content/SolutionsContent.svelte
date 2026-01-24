@@ -180,7 +180,7 @@
   @reference '$theme';
 
   .solutions-content {
-    @apply text-base5;
+    @apply text-base05;
   }
 
   .section-header {
@@ -188,11 +188,11 @@
   }
 
   .section-label {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base4;
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base04;
   }
 
   .section-header h2 {
-    @apply mt-2 text-2xl font-semibold text-base6;
+    @apply mt-2 text-2xl font-semibold text-base06;
     letter-spacing: -0.02em;
   }
 
@@ -214,7 +214,7 @@
   }
 
   .pipeline-step {
-    @apply flex flex-col items-center gap-2 p-5 rounded-xl border border-base3 bg-base0 text-center;
+    @apply flex flex-col items-center gap-2 p-5 rounded-xl border border-base03 bg-base00 text-center;
     flex: 1;
     max-width: 200px;
     opacity: 0;
@@ -229,25 +229,25 @@
   }
 
   .step-number {
-    @apply text-xl font-bold text-base14;
+    @apply text-xl font-bold text-base0E;
   }
 
   .pipeline-step h3 {
-    @apply text-sm font-semibold text-base6;
+    @apply text-sm font-semibold text-base06;
   }
 
   .pipeline-step p {
-    @apply text-xs text-base4;
+    @apply text-xs text-base04;
   }
 
   .pipeline-connector {
-    @apply text-base3 hidden md:flex;
+    @apply text-base03 hidden md:flex;
   }
 
   /* Product Section */
   .product-section {
     @apply mx-auto max-w-4xl px-8 py-12 my-4;
-    @apply rounded-2xl border border-base3 bg-base0;
+    @apply rounded-2xl border border-base03 bg-base00;
     opacity: 0;
     transform: translateY(24px);
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
@@ -264,20 +264,20 @@
   }
 
   .product-category {
-    @apply text-xs font-semibold uppercase tracking-[0.15em] text-base14;
+    @apply text-xs font-semibold uppercase tracking-[0.15em] text-base0E;
   }
 
   .product-header h2 {
-    @apply mt-2 text-2xl font-semibold text-base6;
+    @apply mt-2 text-2xl font-semibold text-base06;
     letter-spacing: -0.02em;
   }
 
   .product-headline {
-    @apply mt-2 text-base font-medium text-base5;
+    @apply mt-2 text-base font-medium text-base05;
   }
 
   .product-description {
-    @apply mt-3 text-sm text-base4 leading-relaxed max-w-2xl;
+    @apply mt-3 text-sm text-base04 leading-relaxed max-w-2xl;
   }
 
   .product-details {
@@ -286,7 +286,7 @@
 
   .specs-section h3,
   .use-cases-section h3 {
-    @apply text-xs font-semibold uppercase tracking-[0.15em] text-base4 mb-4;
+    @apply text-xs font-semibold uppercase tracking-[0.15em] text-base04 mb-4;
   }
 
   .specs-grid {
@@ -294,15 +294,15 @@
   }
 
   .spec-item {
-    @apply flex flex-col gap-1 p-3 rounded-lg bg-base1;
+    @apply flex flex-col gap-1 p-3 rounded-lg bg-base01;
   }
 
   .spec-label {
-    @apply text-xs text-base4;
+    @apply text-xs text-base04;
   }
 
   .spec-value {
-    @apply text-sm font-medium text-base6;
+    @apply text-sm font-medium text-base06;
   }
 
   .use-cases-list {
@@ -313,27 +313,27 @@
   }
 
   .use-cases-list li {
-    @apply text-sm text-base5 pl-5 relative;
+    @apply text-sm text-base05 pl-5 relative;
   }
 
   .use-cases-list li::before {
     content: '';
-    @apply absolute left-0 top-2 w-2 h-2 rounded-full bg-base14/50;
+    @apply absolute left-0 top-2 w-2 h-2 rounded-full bg-base0E/50;
   }
 
   .product-cta {
-    @apply flex items-center justify-between pt-6 border-t border-base2;
+    @apply flex items-center justify-between pt-6 border-t border-base02;
   }
 
   .access-label {
-    @apply text-sm text-base4;
+    @apply text-sm text-base04;
   }
 
   .cta-btn {
     @apply inline-flex items-center justify-center px-6 py-2.5 rounded-lg text-sm font-medium no-underline;
     @apply transition-all duration-200;
-    background: var(--color-base14);
-    color: var(--color-base0);
+    background: var(--color-base0E);
+    color: var(--color-base00);
   }
 
   .cta-btn:hover {
@@ -342,12 +342,12 @@
 
   .cta-btn.secondary {
     background: transparent;
-    color: var(--color-base6);
-    border: 1px solid var(--color-base3);
+    color: var(--color-base06);
+    border: 1px solid var(--color-base03);
   }
 
   .cta-btn.secondary:hover {
-    background: var(--color-base1);
+    background: var(--color-base01);
   }
 
   /* Enterprise Section */
@@ -364,15 +364,15 @@
   }
 
   .enterprise-content {
-    @apply flex flex-col items-center gap-4 rounded-2xl bg-base1 border border-base3 px-8 py-10 text-center;
+    @apply flex flex-col items-center gap-4 rounded-2xl bg-base01 border border-base03 px-8 py-10 text-center;
   }
 
   .enterprise-content h2 {
-    @apply text-xl font-semibold text-base6;
+    @apply text-xl font-semibold text-base06;
   }
 
   .enterprise-content p {
-    @apply text-sm text-base4 max-w-lg;
+    @apply text-sm text-base04 max-w-lg;
   }
 
   .enterprise-actions {

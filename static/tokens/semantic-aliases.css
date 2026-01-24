@@ -1,0 +1,191 @@
+/**
+ * Miozu Semantic Aliases
+ *
+ * ALWAYS use these semantic aliases in your code instead of raw base tokens.
+ * This ensures intent is clear and makes refactoring easier.
+ *
+ * Usage:
+ *   @import 'https://miozu.com/tokens/semantic-aliases.css';
+ *
+ *   .button-delete {
+ *     background: var(--color-error);  // NOT var(--base08)
+ *   }
+ *
+ * AI Agent Instruction: When implementing UI with Miozu, ALWAYS use these
+ * semantic aliases. Never use raw base tokens like --base08 directly.
+ */
+
+:root {
+  /* ========================================
+   * BACKGROUND COLORS
+   * ======================================== */
+  --color-bg: var(--base00);
+  --color-bg-default: var(--base00);
+  --color-surface: var(--base01);
+  --color-surface-elevated: var(--base02);
+  --color-bg-interactive: var(--base02);
+  --color-bg-hover: var(--base02);
+  --color-bg-active: var(--base02);
+
+  /* ========================================
+   * TEXT COLORS
+   * ======================================== */
+  --color-text: var(--base05);
+  --color-text-default: var(--base05);
+  --color-text-muted: var(--base04);
+  --color-text-disabled: var(--base03);
+  --color-text-emphasis: var(--base06);
+  --color-text-strong: var(--base07);
+  --color-text-inverse: var(--base00);
+
+  /* ========================================
+   * BORDER COLORS
+   * ======================================== */
+  --color-border: var(--base02);
+  --color-border-default: var(--base02);
+  --color-border-muted: var(--base01);
+  --color-border-emphasis: var(--base03);
+
+  /* ========================================
+   * FUNCTIONAL COLORS (Semantic Intent)
+   * These map directly to UI purposes
+   * ======================================== */
+
+  /* Error/Destructive - base08
+   * Use for: Delete buttons, error alerts, form validation errors */
+  --color-error: var(--base08);
+  --color-destructive: var(--base08);
+  --color-danger: var(--base08);
+
+  /* Warning/Caution - base09
+   * Use for: Warning alerts, pending states, unsaved indicators */
+  --color-warning: var(--base09);
+  --color-caution: var(--base09);
+  --color-pending: var(--base09);
+
+  /* Highlight/Attention - base0A
+   * Use for: Search highlights, featured content, new badges */
+  --color-highlight: var(--base0A);
+  --color-attention: var(--base0A);
+  --color-featured: var(--base0A);
+
+  /* Success/Positive - base0B
+   * Use for: Success alerts, confirm buttons, completed states */
+  --color-success: var(--base0B);
+  --color-positive: var(--base0B);
+  --color-complete: var(--base0B);
+
+  /* Info/Secondary - base0C
+   * Use for: Info alerts, secondary buttons, tooltips */
+  --color-info: var(--base0C);
+  --color-secondary: var(--base0C);
+  --color-neutral: var(--base0C);
+
+  /* Primary/Brand - base0D
+   * Use for: Primary buttons, links, focus rings, brand accents */
+  --color-primary: var(--base0D);
+  --color-brand: var(--base0D);
+  --color-link: var(--base0D);
+  --color-focus: var(--base0D);
+
+  /* Special/Premium - base0E
+   * Use for: Premium badges, AI features, magical elements */
+  --color-special: var(--base0E);
+  --color-premium: var(--base0E);
+  --color-magic: var(--base0E);
+  --color-ai: var(--base0E);
+
+  /* Alternative/Deprecated - base0F
+   * Use for: Deprecated features, legacy paths, edge cases */
+  --color-alternative: var(--base0F);
+  --color-deprecated: var(--base0F);
+  --color-legacy: var(--base0F);
+
+  /* ========================================
+   * ACTION COLORS (Button Intent)
+   * ======================================== */
+  --color-action-primary: var(--base0D);
+  --color-action-secondary: var(--base0C);
+  --color-action-destructive: var(--base08);
+  --color-action-success: var(--base0B);
+  --color-action-warning: var(--base09);
+
+  /* ========================================
+   * STATUS COLORS
+   * ======================================== */
+  --color-status-online: var(--base0B);
+  --color-status-offline: var(--base03);
+  --color-status-busy: var(--base08);
+  --color-status-away: var(--base09);
+  --color-status-active: var(--base0B);
+  --color-status-inactive: var(--base03);
+  --color-status-pending: var(--base09);
+
+  /* ========================================
+   * FORM COLORS
+   * ======================================== */
+  --color-input-bg: var(--base01);
+  --color-input-border: var(--base02);
+  --color-input-border-focus: var(--base0D);
+  --color-input-border-error: var(--base08);
+  --color-input-border-success: var(--base0B);
+  --color-input-text: var(--base05);
+  --color-input-placeholder: var(--base04);
+
+  /* ========================================
+   * INTERACTIVE STATES
+   * ======================================== */
+  --state-hover-brightness: 1.1;
+  --state-pressed-brightness: 0.9;
+  --state-disabled-opacity: 0.5;
+  --state-focus-ring-width: 2px;
+  --state-focus-ring-offset: 2px;
+}
+
+/* ========================================
+ * COMPONENT-SPECIFIC MAPPINGS
+ * Copy these patterns into your components
+ * ======================================== */
+
+/*
+ * BUTTONS
+ *
+ * .btn-primary {
+ *   background: var(--color-primary);
+ *   color: var(--color-text-inverse);
+ * }
+ * .btn-secondary { background: var(--color-secondary); }
+ * .btn-destructive { background: var(--color-destructive); }
+ * .btn-success { background: var(--color-success); }
+ */
+
+/*
+ * ALERTS
+ *
+ * .alert-error {
+ *   background: color-mix(in srgb, var(--color-error) 15%, transparent);
+ *   border-left: 4px solid var(--color-error);
+ * }
+ * .alert-warning { ... var(--color-warning) ... }
+ * .alert-success { ... var(--color-success) ... }
+ * .alert-info { ... var(--color-info) ... }
+ */
+
+/*
+ * BADGES
+ *
+ * .badge-success { background: var(--color-success); }
+ * .badge-warning { background: var(--color-warning); }
+ * .badge-error { background: var(--color-error); }
+ * .badge-premium { background: var(--color-premium); }
+ * .badge-new { background: var(--color-highlight); }
+ * .badge-deprecated { background: var(--color-deprecated); }
+ */
+
+/*
+ * FORM VALIDATION
+ *
+ * .input:focus { border-color: var(--color-input-border-focus); }
+ * .input.error { border-color: var(--color-input-border-error); }
+ * .input.success { border-color: var(--color-input-border-success); }
+ */

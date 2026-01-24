@@ -244,9 +244,9 @@
   .toast {
     @apply relative flex items-start p-4;
     @apply min-w-[356px] max-w-[400px];
-    @apply bg-base7 text-base1 backdrop-blur-md;
-    @apply border border-base4 border-y;
-    @apply dark:bg-base1/65 dark:text-base7;
+    @apply bg-base07 text-base01 backdrop-blur-md;
+    @apply border border-base04 border-y;
+    @apply dark:bg-base01/65 dark:text-base07;
   }
 
   .toast-content {
@@ -258,7 +258,7 @@
   }
 
   .toast-message {
-    @apply text-sm text-base2 dark:text-base5/90 font-medium;
+    @apply text-sm text-base02 dark:text-base05/90 font-medium;
   }
 
   .toast-actions {
@@ -270,24 +270,24 @@
   }
 
   .primary-action {
-    @apply text-base10 bg-base10/10 hover:bg-base10/20;
-    @apply dark:text-base10 dark:hover:bg-base10/20;
+    @apply text-base0A bg-base0A/10 hover:bg-base0A/20;
+    @apply dark:text-base0A dark:hover:bg-base0A/20;
   }
 
   .secondary-action {
-    @apply text-base4 hover:bg-base4/10;
-    @apply dark:text-base5 dark:hover:bg-base5/10;
+    @apply text-base04 hover:bg-base04/10;
+    @apply dark:text-base05 dark:hover:bg-base05/10;
   }
 
   .progress-wrapper {
     @apply cursor-pointer absolute right-2 top-4;
-    @apply hover:stroke-base5 transition-all;
+    @apply hover:stroke-base05 transition-all;
   }
 
   .progress-ring-circle,
   .progress-ring-circle-bg,
   .close-icon {
-    @apply transition-colors duration-200 ease-in-out stroke-current group-hover:stroke-base5/70;
+    @apply transition-colors duration-200 ease-in-out stroke-current group-hover:stroke-base05/70;
   }
 
   .progress-ring {
@@ -299,7 +299,7 @@
   }
 
   .progress-ring-circle-bg {
-    @apply stroke-base4 fill-none;
+    @apply stroke-base04 fill-none;
     stroke-width: 1;
   }
 
@@ -309,56 +309,56 @@
   }
 
   .close-icon {
-    @apply stroke-base4 cursor-pointer;
+    @apply stroke-base04 cursor-pointer;
     pointer-events: all;
   }
 
   /* Variants */
   .toast.info {
     .toast-title {
-      @apply text-base15;
+      @apply text-base0F;
     }
     .progress-ring-circle {
-      @apply stroke-base12;
+      @apply stroke-base0C;
     }
     .primary-action {
-      @apply text-base12 bg-base12/10 hover:bg-base12/20;
+      @apply text-base0C bg-base0C/10 hover:bg-base0C/20;
     }
   }
 
   .toast.success {
     .toast-title {
-      @apply text-base10;
+      @apply text-base0A;
     }
     .progress-ring-circle {
-      @apply stroke-base10;
+      @apply stroke-base0A;
     }
     .primary-action {
-      @apply text-base10 bg-base10/10 hover:bg-base10/20;
+      @apply text-base0A bg-base0A/10 hover:bg-base0A/20;
     }
   }
 
   .toast.error {
     .toast-title {
-      @apply text-base8;
+      @apply text-base08;
     }
     .progress-ring-circle {
-      @apply stroke-base8;
+      @apply stroke-base08;
     }
     .primary-action {
-      @apply text-base8 bg-base8/10 hover:bg-base8/20;
+      @apply text-base08 bg-base08/10 hover:bg-base08/20;
     }
   }
 
   .toast.warning {
     .toast-title {
-      @apply text-base11;
+      @apply text-base0B;
     }
     .progress-ring-circle {
-      @apply stroke-base11;
+      @apply stroke-base0B;
     }
     .primary-action {
-      @apply text-base11 bg-base11/10 hover:bg-base11/20;
+      @apply text-base0B bg-base0B/10 hover:bg-base0B/20;
     }
   }
 </style>

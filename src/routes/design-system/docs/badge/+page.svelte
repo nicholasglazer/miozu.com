@@ -123,7 +123,7 @@
     gap: 0.75rem;
     margin: 1.5rem 0;
     padding: 1.5rem;
-    background: var(--color-base1);
+    background: var(--color-base01);
     border-radius: var(--radius-md, 0.5rem);
     align-items: center;
   }
@@ -137,7 +137,7 @@
   .control label {
     font-size: 0.75rem;
     font-weight: 500;
-    color: var(--color-base4);
+    color: var(--color-base04);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -146,8 +146,8 @@
     padding: 0.5rem 0.75rem;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm, 0.25rem);
-    background: var(--color-base0);
-    color: var(--color-base5);
+    background: var(--color-base00);
+    color: var(--color-base05);
     font-size: 0.875rem;
   }
 </style>

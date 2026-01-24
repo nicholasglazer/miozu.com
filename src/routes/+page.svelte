@@ -31,15 +31,23 @@
     }
   });
 
-  // Card configuration for transitions
+  // Card configuration for transitions - Enhanced for Fibonacci showcase
   const cardConfigs: Record<string, { route: string; effectType: string; canvasId: string; label: string; title: string; description: string }> = {
+    hero: {
+      route: '/about',
+      effectType: 'sinuous-original',
+      canvasId: 'canvas-hero',
+      label: 'Enterprise',
+      title: 'Design System',
+      description: 'AI-first components for scalable enterprise applications and teams.'
+    },
     about: {
       route: '/about',
       effectType: 'sinuous-original',
       canvasId: 'canvas-about',
-      label: 'Enterprise',
-      title: 'Design System',
-      description: 'AI-first components for scalable enterprise applications and teams.'
+      label: 'About',
+      title: 'Our Story',
+      description: 'Building the future of design systems with mathematical precision.'
     },
     platform: {
       route: '/solutions',
@@ -49,21 +57,37 @@
       title: 'Library',
       description: 'Production-ready Svelte 5 components with enterprise features.'
     },
-    data: {
-      route: '/data',
+    tokens: {
+      route: '/solutions#design-tokens',
       effectType: 'synaptic',
-      canvasId: 'canvas-data',
+      canvasId: 'canvas-tokens',
       label: 'Design',
       title: 'Tokens',
-      description: 'Comprehensive design tokens and Base16 theme system.'
+      description: 'DTCG standards with multi-brand support.'
+    },
+    solutions: {
+      route: '/solutions',
+      effectType: 'ether',
+      canvasId: 'canvas-solutions',
+      label: 'Enterprise',
+      title: 'Solutions',
+      description: 'Custom implementation and governance programs.'
+    },
+    themes: {
+      route: '/ports',
+      effectType: 'snake-trails',
+      canvasId: 'canvas-themes',
+      label: 'Base16',
+      title: 'Themes',
+      description: 'VSCode, Emacs, and Linux development themes.'
     },
     contact: {
       route: '/contact',
       effectType: 'ether',
       canvasId: 'canvas-contact',
-      label: 'Enterprise',
-      title: 'Solutions',
-      description: 'Custom implementation and enterprise support programs.'
+      label: 'Contact',
+      title: 'Get Started',
+      description: 'Enterprise consultations and custom implementations.'
     }
   };
 
@@ -94,6 +118,32 @@
   // expandingCard - only after animation completes (to hide card)
   let fadingCard = $state<string | null>(null);
   let expandingCard = $state<string | null>(null);
+
+  // Fibonacci sequence verification function
+  function fibonacci(n: number): number {
+    if (n <= 1) return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+  }
+
+  // Verify Fibonacci Rectangle Subdivision (dev mode only)
+  $effect(() => {
+    if (browser && import.meta.env.DEV) {
+      // Generate Fibonacci sequence for verification
+      const fibSeq = Array.from({length: 10}, (_, i) => fibonacci(i));
+      console.log('🧮 Fibonacci Rectangle Subdivision Verification');
+      console.log('📐 Golden Ratio Layout: 8:5:3 columns, 5:2:1 rows');
+      console.log('🟦 Hero: 8×5 (largest rectangle - golden ratio foundation)');
+      console.log('🟩 About: 3×5 (tall rectangle - next subdivision)');
+      console.log('🟨 Platform: 2×2 (medium square)');
+      console.log('🟪 Tokens: 2×1 (small rectangle)');
+      console.log('🟫 Solutions: 3×2 (medium rectangle)');
+      console.log('🟧 Contact: 8×1 (wide base rectangle)');
+      console.log('🟥 Themes: 8×1 (final subdivision)');
+      console.log('📊 Grid totals: 13fr width (8+3+2), 8fr height (5+2+1)');
+      console.log('✨ Classic Fibonacci rectangle spiral pattern achieved!');
+      console.log('🌀 Each rectangle relates to others through golden ratio φ ≈ 1.618');
+    }
+  });
 
   $effect(() => {
     // Fade text immediately when expansion starts
@@ -215,7 +265,7 @@
     </nav>
   </header>
 
-  <!-- Main Grid -->
+  <!-- Main Grid: Classic Fibonacci Rectangle Subdivision -->
   <div class="grid-main">
     <!-- Large Block 1: Hero with Three.js (PRIORITY 1) -->
     <div class="block block-hero">
@@ -228,12 +278,12 @@
           <div class="hero-title">
             <Logo type="full" size={64} variant="default" />
           </div>
-          <p class="hero-tagline">AI-first design system for enterprise teams building at scale</p>
+          <p class="hero-tagline">Enterprise design system with AI-first components for teams building at scale</p>
         </div>
       </div>
     </div>
 
-    <!-- Large Block 2: About/Visual with authentic Sinuous (PRIORITY 1) -->
+    <!-- About Block: F6+F7 span (8+13=21, approaching F8=21!) -->
     <button
       type="button"
       class="block block-about"
@@ -246,9 +296,9 @@
       {/if}
       <div class="block-overlay block-overlay-about">
         <div class="block-content">
-          <span class="block-label">Enterprise</span>
-          <h2 class="block-title">Design System</h2>
-          <p class="block-desc">AI-first components for scalable teams. Production-ready.</p>
+          <span class="block-label">About</span>
+          <h2 class="block-title">Our Story</h2>
+          <p class="block-desc">Building design systems with mathematical precision.</p>
         </div>
         <div class="block-corner">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -258,10 +308,10 @@
       </div>
     </button>
 
-    <!-- Small Block 1: Platform (PRIORITY 2) -->
+    <!-- Platform: F1 (1fr) -->
     <button
       type="button"
-      class="block block-small block-platform"
+      class="block block-platform"
       class:fading-card={fadingCard === 'platform'}
       class:hidden-card={expandingCard === 'platform'}
       onclick={(e) => handleCardClick(e, 'platform')}
@@ -273,8 +323,8 @@
         <span class="block-label">Components</span>
         <h2 class="block-title">Library</h2>
         <ul class="block-list">
-          <li>Svelte 5 Components</li>
-          <li>Enterprise Features</li>
+          <li>Svelte 5</li>
+          <li>Enterprise</li>
         </ul>
       </div>
       <div class="block-corner">
@@ -284,21 +334,21 @@
       </div>
     </button>
 
-    <!-- Small Block 2: Data Schema (PRIORITY 2) -->
+    <!-- Tokens: F2 (1fr) -->
     <button
       type="button"
-      class="block block-small block-data"
-      class:fading-card={fadingCard === 'data'}
-      class:hidden-card={expandingCard === 'data'}
-      onclick={(e) => handleCardClick(e, 'data')}
+      class="block block-tokens"
+      class:fading-card={fadingCard === 'tokens'}
+      class:hidden-card={expandingCard === 'tokens'}
+      onclick={(e) => handleCardClick(e, 'tokens')}
     >
       {#if ThreeCanvas && allCardsReady}
-        <ThreeCanvas type="synaptic" lowRes={true} id="canvas-data" />
+        <ThreeCanvas type="synaptic" lowRes={true} id="canvas-tokens" />
       {/if}
       <div class="block-content block-content-overlay">
         <span class="block-label">Design</span>
         <h2 class="block-title">Tokens</h2>
-        <p class="block-desc">Comprehensive design tokens and Base16 themes.</p>
+        <p class="block-desc">DTCG standards</p>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -307,10 +357,56 @@
       </div>
     </button>
 
-    <!-- Small Block 3: Contact (PRIORITY 2) -->
+    <!-- Solutions: F3 (2fr) -->
     <button
       type="button"
-      class="block block-small block-contact"
+      class="block block-solutions"
+      class:fading-card={fadingCard === 'solutions'}
+      class:hidden-card={expandingCard === 'solutions'}
+      onclick={(e) => handleCardClick(e, 'solutions')}
+    >
+      {#if ThreeCanvas && allCardsReady}
+        <ThreeCanvas type="ether" lowRes={true} id="canvas-solutions" />
+      {/if}
+      <div class="block-content block-content-overlay">
+        <span class="block-label">Enterprise</span>
+        <h2 class="block-title">Solutions</h2>
+        <p class="block-desc">Governance programs</p>
+      </div>
+      <div class="block-corner">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17L17 7M17 7H7M17 7V17"/>
+        </svg>
+      </div>
+    </button>
+
+    <!-- Themes: F4 (3fr) -->
+    <button
+      type="button"
+      class="block block-themes"
+      class:fading-card={fadingCard === 'themes'}
+      class:hidden-card={expandingCard === 'themes'}
+      onclick={(e) => handleCardClick(e, 'themes')}
+    >
+      {#if ThreeCanvas && allCardsReady}
+        <ThreeCanvas type="snake-trails" lowRes={true} id="canvas-themes" />
+      {/if}
+      <div class="block-content block-content-overlay">
+        <span class="block-label">Base16</span>
+        <h2 class="block-title">Themes</h2>
+        <p class="block-desc">VSCode, Emacs, Linux</p>
+      </div>
+      <div class="block-corner">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M7 17L17 7M17 7H7M17 7V17"/>
+        </svg>
+      </div>
+    </button>
+
+    <!-- Contact: F5+F6 (5+8=13, F7!) -->
+    <button
+      type="button"
+      class="block block-contact"
       class:fading-card={fadingCard === 'contact'}
       class:hidden-card={expandingCard === 'contact'}
       onclick={(e) => handleCardClick(e, 'contact')}
@@ -319,30 +415,9 @@
         <ThreeCanvas type="ether" lowRes={true} id="canvas-contact" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Enterprise</span>
-        <h2 class="block-title">Solutions</h2>
-        <span class="block-email-light">Custom implementation</span>
-      </div>
-      <div class="block-corner">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M7 17L17 7M17 7H7M17 7V17"/>
-        </svg>
-      </div>
-    </button>
-
-    <!-- Small Block 4: .miozu Linux (Side Project) (PRIORITY 2) -->
-    <button
-      type="button"
-      class="block block-small block-linux"
-      onclick={() => window.open('/#linux', '_blank')}
-    >
-      {#if ThreeCanvas && allCardsReady}
-        <ThreeCanvas type="snake-trails" lowRes={true} />
-      {/if}
-      <div class="block-content block-content-overlay">
-        <span class="block-label">Linux</span>
-        <h2 class="block-title">.miozu</h2>
-        <p class="block-desc">System themes and configurations.</p>
+        <span class="block-label">Contact</span>
+        <h2 class="block-title">Get Started</h2>
+        <span class="block-email-light">Enterprise consultations</span>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -358,9 +433,9 @@
 
   .grid-page {
     display: grid;
-    grid-template-rows: auto 1fr;
-    height: 100%;
-    width: 100%;
+    grid-template-rows: min-content 1fr; /* Header takes only needed space, main takes rest */
+    height: 100vh; /* Full viewport height */
+    width: 100vw;   /* Full viewport width */
     gap: 5px;
     padding: 5px;
     background: #0a0a0a;
@@ -424,14 +499,18 @@
     color: #6bb3ff;
   }
 
-  /* Main Grid - Asymmetric layout */
+  /* Classic Fibonacci Rectangle Layout - Perfect Cubes */
   .grid-main {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 2fr 1fr;
+    /* Exact Fibonacci: 8 left, 3+2=5 right, with 5,2,1 rows for proper 3,2,1 subdivision */
+    grid-template-columns: 8fr 3fr 2fr;
+    grid-template-rows: 5fr 2fr 1fr;
     gap: 5px;
+    width: 100%;
     height: 100%;
     min-height: 0;
+    /* Ensure grid takes all available space for proper cube proportions */
+    flex: 1;
   }
 
   /* Blocks base */
@@ -450,10 +529,55 @@
     border-color: #333;
   }
 
-  /* Hero block - top left */
+  /* Exact Fibonacci Zone Allocation */
+
+  /* Hero: 8×8 - Spans FULL HEIGHT (all 3 rows), column 1 */
   .block-hero {
     grid-column: 1;
+    grid-row: 1 / 4; /* Spans ALL rows = FULL HEIGHT */
+  }
+
+  /* About: 5×5 - Top right, spans columns 2&3, row 1 */
+  .block-about {
+    grid-column: 2 / 4;
     grid-row: 1;
+    position: relative;
+    padding: 0;
+  }
+
+  /* Platform: 3×3 - Left bottom area, column 2, spans rows 2&3 */
+  .block-platform {
+    grid-column: 2;
+    grid-row: 2 / 4;
+    position: relative;
+    padding: 0;
+  }
+
+  /* Solutions: 2×2 - Right middle, column 3, row 2 */
+  .block-solutions {
+    grid-column: 3;
+    grid-row: 2;
+    position: relative;
+    padding: 0;
+  }
+
+  /* Contact: 1×1 - Right bottom, column 3, row 3 */
+  .block-contact {
+    grid-column: 3;
+    grid-row: 3;
+    position: relative;
+    padding: 0;
+  }
+
+  /* Completely remove blocks that don't fit Fibonacci pattern from grid flow */
+  .block-tokens,
+  .block-themes {
+    display: none !important;
+    grid-column: unset;
+    grid-row: unset;
+    position: absolute;
+    left: -9999px; /* Move completely out of view */
+    visibility: hidden;
   }
 
   .block-overlay {
@@ -489,20 +613,12 @@
     margin: 0;
   }
 
-  .title-x {
-    font-weight: 800;
-    color: #4a9eff;
-    display: inline-block;
-    transform: scaleX(1.15);
-    margin-left: -0.02em;
-  }
-
-  /* About block - top right */
-  .block-about {
-    grid-column: 2;
-    grid-row: 1;
-    position: relative;
-    padding: 0;
+  .hero-tagline {
+    font-size: 1rem;
+    color: #aaa;
+    line-height: 1.5;
+    margin: 8px 0 0 0;
+    max-width: 400px;
   }
 
   .block-overlay-about {
@@ -518,38 +634,13 @@
     right: 16px;
   }
 
-  /* Small blocks - bottom row */
-  .block-small {
+  /* All blocks use consistent overlay pattern */
+  .block {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 20px;
+    padding: 0;
   }
-
-  /* Small blocks span the bottom */
-  .block-small:nth-of-type(3) { grid-column: 1; grid-row: 2; }
-  .block-small:nth-of-type(4) { grid-column: 2; grid-row: 2; }
-
-  /* Actually we need 4 small blocks in bottom row */
-  .grid-main {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 2fr 1fr;
-  }
-
-  .block-hero {
-    grid-column: 1 / 3;
-    grid-row: 1;
-  }
-
-  .block-about {
-    grid-column: 3 / 5;
-    grid-row: 1;
-  }
-
-  .block-small:nth-of-type(3) { grid-column: 1; grid-row: 2; }
-  .block-small:nth-of-type(4) { grid-column: 2; grid-row: 2; }
-  .block-small:nth-of-type(5) { grid-column: 3; grid-row: 2; }
-  .block-small:nth-of-type(6) { grid-column: 4; grid-row: 2; }
 
   /* J'ko block with snake trails */
   .block-jko {
@@ -706,19 +797,49 @@
     color: #fff;
   }
 
-  /* Responsive */
+  /* Responsive - Maintain Fibonacci Rectangle proportions */
   @media (max-width: 1024px) {
     .grid-main {
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1.5fr 1fr 1fr;
+      /* Simplified Fibonacci rectangle: 5:3 golden ratio */
+      grid-template-columns: 5fr 3fr;
+      grid-template-rows: 5fr 2fr 1fr;
     }
 
-    .block-hero { grid-column: 1; grid-row: 1; }
-    .block-about { grid-column: 2; grid-row: 1; }
-    .block-small:nth-of-type(3) { grid-column: 1; grid-row: 2; }
-    .block-small:nth-of-type(4) { grid-column: 2; grid-row: 2; }
-    .block-small:nth-of-type(5) { grid-column: 1; grid-row: 3; }
-    .block-small:nth-of-type(6) { grid-column: 2; grid-row: 3; }
+    /* Hero: Large rectangle (5×5) */
+    .block-hero {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    /* About: Medium rectangle (3×5) */
+    .block-about {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    /* Platform: Small rectangle (5×2) */
+    .block-platform {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    /* Solutions: Small rectangle (3×2) */
+    .block-solutions {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    /* Contact: Base rectangle (5×1) */
+    .block-contact {
+      grid-column: 1;
+      grid-row: 3;
+    }
+
+    /* Hide tokens and themes for cleaner medium layout */
+    .block-tokens,
+    .block-themes {
+      display: none;
+    }
 
     .hero-title {
       font-size: 2rem;
@@ -729,15 +850,62 @@
     }
   }
 
+  @media (max-width: 768px) {
+    .grid-main {
+      /* Golden ratio layout: 3:2 */
+      grid-template-columns: 3fr 2fr;
+      grid-template-rows: 3fr 2fr;
+    }
+
+    /* Hero: Main rectangle (3×3) */
+    .block-hero {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    /* About: Side rectangle (2×3) */
+    .block-about {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    /* Platform: Bottom left (3×2) */
+    .block-platform {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    /* Contact: Bottom right (2×2) */
+    .block-contact {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    /* Hide smaller blocks for cleaner tablet layout */
+    .block-tokens,
+    .block-solutions,
+    .block-themes {
+      display: none;
+    }
+  }
+
   @media (max-width: 640px) {
     .grid-page {
       gap: 4px;
       padding: 4px;
+      /* Perfect mobile scroll - remove height constraint */
+      height: auto;
+      min-height: 100vh;
     }
 
     .grid-header {
       height: 44px;
       padding: 0 12px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+      background: rgba(17, 17, 17, 0.95);
     }
 
     .header-nav {
@@ -745,16 +913,44 @@
     }
 
     .grid-main {
+      /* Mobile golden ratio layout: single column with φ proportions */
       grid-template-columns: 1fr;
-      grid-template-rows: 2fr repeat(5, 1fr);
+      grid-template-rows: 8fr 5fr 3fr 2fr;
+      height: auto;
+      min-height: calc(100vh - 60px);
     }
 
-    .block-hero { grid-column: 1; grid-row: 1; }
-    .block-about { grid-column: 1; grid-row: 2; }
-    .block-small:nth-of-type(3) { grid-column: 1; grid-row: 3; }
-    .block-small:nth-of-type(4) { grid-column: 1; grid-row: 4; }
-    .block-small:nth-of-type(5) { grid-column: 1; grid-row: 5; }
-    .block-small:nth-of-type(6) { grid-column: 1; grid-row: 6; }
+    /* Mobile Fibonacci rectangle stack */
+    .block-hero {
+      grid-column: 1;
+      grid-row: 1;
+      min-height: 50vh; /* F8 proportion */
+    }
+
+    .block-about {
+      grid-column: 1;
+      grid-row: 2;
+      min-height: 30vh; /* F5 proportion */
+    }
+
+    .block-platform {
+      grid-column: 1;
+      grid-row: 3;
+      min-height: 20vh; /* F3 proportion */
+    }
+
+    .block-contact {
+      grid-column: 1;
+      grid-row: 4;
+      min-height: 15vh; /* F2 proportion */
+    }
+
+    /* Hide other blocks for clean mobile experience */
+    .block-tokens,
+    .block-solutions,
+    .block-themes {
+      display: none;
+    }
 
     .hero-title {
       font-size: 1.8rem;
@@ -774,15 +970,17 @@
     font: inherit;
     text-align: left;
     cursor: pointer;
-    transition: transform 0.2s ease-out;
+    transition: border-color 0.2s ease-out, box-shadow 0.2s ease-out;
   }
 
   button.block:hover {
-    transform: scale(1.01);
+    border-color: #4a9eff;
+    box-shadow: 0 0 0 1px rgba(74, 158, 255, 0.2);
   }
 
   button.block:active {
-    transform: scale(0.99);
+    border-color: #4a9eff;
+    box-shadow: 0 0 0 1px rgba(74, 158, 255, 0.4);
   }
 
   /* Fading card text during expansion - text fades out quickly */

@@ -217,14 +217,14 @@
 
   .legal-page {
     min-height: 100vh;
-    @apply bg-base0;
+    @apply bg-base00;
   }
 
   .legal-header {
     position: sticky;
     top: 0;
     z-index: 100;
-    @apply bg-base0 border-b border-base2;
+    @apply bg-base00 border-b border-base02;
   }
 
   .header-inner {
@@ -232,14 +232,14 @@
   }
 
   .back-btn {
-    @apply flex items-center gap-2 text-sm text-base4 hover:text-base6 transition-colors;
+    @apply flex items-center gap-2 text-sm text-base04 hover:text-base06 transition-colors;
     background: none;
     border: none;
     cursor: pointer;
   }
 
   .logo {
-    @apply text-lg font-semibold text-base6 no-underline;
+    @apply text-lg font-semibold text-base06 no-underline;
   }
 
   .legal-content {
@@ -251,12 +251,12 @@
   }
 
   .legal-article h1 {
-    @apply text-3xl font-bold text-base6 mb-2;
+    @apply text-3xl font-bold text-base06 mb-2;
     letter-spacing: -0.02em;
   }
 
   .last-updated {
-    @apply text-sm text-base4 mb-8 pb-6 border-b border-base2;
+    @apply text-sm text-base04 mb-8 pb-6 border-b border-base02;
   }
 
   .legal-article section {
@@ -264,15 +264,15 @@
   }
 
   .legal-article h2 {
-    @apply text-xl font-semibold text-base6 mt-8 mb-4;
+    @apply text-xl font-semibold text-base06 mt-8 mb-4;
   }
 
   .legal-article h3 {
-    @apply text-base font-semibold text-base5 mt-6 mb-2;
+    @apply text-base font-semibold text-base05 mt-6 mb-2;
   }
 
   .legal-article p {
-    @apply text-base text-base5 leading-relaxed mb-4;
+    @apply text-base text-base05 leading-relaxed mb-4;
   }
 
   .legal-article ul {
@@ -280,20 +280,20 @@
   }
 
   .legal-article li {
-    @apply text-base text-base5 leading-relaxed mb-2;
+    @apply text-base text-base05 leading-relaxed mb-2;
     list-style-type: disc;
   }
 
   .legal-article a {
-    @apply text-base14 hover:underline;
+    @apply text-base0E hover:underline;
   }
 
   .legal-article strong {
-    @apply text-base6;
+    @apply text-base06;
   }
 
   .contact-block {
-    @apply p-4 rounded-lg bg-base1 border border-base2;
+    @apply p-4 rounded-lg bg-base01 border border-base02;
     line-height: 1.8;
   }
 

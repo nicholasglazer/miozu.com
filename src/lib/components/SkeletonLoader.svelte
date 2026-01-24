@@ -51,9 +51,9 @@
   .pulse {
     background: linear-gradient(
       90deg,
-      var(--color-base1) 25%,
-      var(--color-base2) 50%,
-      var(--color-base1) 75%
+      var(--color-base01) 25%,
+      var(--color-base02) 50%,
+      var(--color-base01) 75%
     );
     background-size: 200% 100%;
     animation: pulse 1.5s ease-in-out infinite;

@@ -146,7 +146,7 @@
       <div class="footer-divider"></div>
       <div class="footer-content">
         <span class="theme-label">Appearance</span>
-        <ThemeSwitcher {theme} />
+        <ThemeSwitcher {theme} variant="switch" />
       </div>
     </div>
   </div>
@@ -175,7 +175,7 @@
   .hamburger-btn::before {
     content: '';
     @apply absolute inset-0 rounded-lg opacity-0;
-    background: var(--color-base2);
+    background: var(--color-base02);
     transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -188,14 +188,14 @@
   }
 
   .hamburger-btn:focus-visible {
-    box-shadow: 0 0 0 2px var(--color-base14-rgb, 233, 140, 70);
+    box-shadow: 0 0 0 2px var(--color-base0E-rgb, 233, 140, 70);
   }
 
   /* Refined Hamburger Lines with Gold Accent */
   .hamburger-line {
     width: 20px;
     height: 2px;
-    background: var(--color-base10);
+    background: var(--color-base0A);
     border-radius: 2px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform-origin: center;
@@ -204,12 +204,12 @@
   }
 
   .hamburger-btn:hover .hamburger-line {
-    background: var(--color-base14);
+    background: var(--color-base0E);
   }
 
   .hamburger-btn.active .hamburger-line:nth-child(1) {
     transform: rotate(45deg) translateY(6px);
-    background: var(--color-base14);
+    background: var(--color-base0E);
   }
 
   .hamburger-btn.active .hamburger-line:nth-child(2) {
@@ -219,7 +219,7 @@
 
   .hamburger-btn.active .hamburger-line:nth-child(3) {
     transform: rotate(-45deg) translateY(-6px);
-    background: var(--color-base14);
+    background: var(--color-base0E);
   }
 
   /* Elegant Overlay with Blur */
@@ -235,7 +235,7 @@
   .mobile-menu-panel {
     @apply fixed top-0 right-0 h-full flex flex-col;
     width: min(85vw, 320px);
-    background: var(--color-base0);
+    background: var(--color-base00);
     box-shadow: -8px 0 32px rgba(0, 0, 0, 0.2);
     z-index: 9999;
   }
@@ -243,7 +243,7 @@
   /* Refined Menu Header */
   .menu-header {
     @apply flex items-center justify-between px-6 py-5;
-    border-bottom: 1px solid var(--color-base2);
+    border-bottom: 1px solid var(--color-base02);
   }
 
   .menu-logo {
@@ -252,7 +252,7 @@
 
   .logo-text {
     @apply text-xl font-bold tracking-tight;
-    background: linear-gradient(135deg, var(--color-base14) 0%, var(--color-base13) 100%);
+    background: linear-gradient(135deg, var(--color-base0E) 0%, var(--color-base0D) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -260,7 +260,7 @@
 
   .close-btn {
     @apply relative p-2 rounded-lg;
-    color: var(--color-base8);
+    color: var(--color-base08);
     border: none;
     background: transparent;
     cursor: pointer;
@@ -270,7 +270,7 @@
   .close-btn::before {
     content: '';
     @apply absolute inset-0 rounded-lg opacity-0;
-    background: var(--color-base2);
+    background: var(--color-base02);
     transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
@@ -279,7 +279,7 @@
   }
 
   .close-btn:hover {
-    color: var(--color-base14);
+    color: var(--color-base0E);
   }
 
   .close-btn svg {
@@ -297,7 +297,7 @@
 
   .nav-link {
     @apply relative flex items-center justify-between px-5 py-4 rounded-xl no-underline;
-    color: var(--color-base9);
+    color: var(--color-base09);
     font-size: 17px;
     font-weight: 500;
     letter-spacing: -0.01em;
@@ -307,7 +307,7 @@
   .nav-link::before {
     content: '';
     @apply absolute left-0 top-1/2 w-1 h-0 rounded-r-full opacity-0;
-    background: linear-gradient(180deg, var(--color-base14) 0%, var(--color-base13) 100%);
+    background: linear-gradient(180deg, var(--color-base0E) 0%, var(--color-base0D) 100%);
     transform: translateY(-50%);
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -318,8 +318,8 @@
   }
 
   .nav-link:hover {
-    background: var(--color-base1);
-    color: var(--color-base14);
+    background: var(--color-base01);
+    color: var(--color-base0E);
     padding-left: 1.75rem;
   }
 
@@ -338,7 +338,7 @@
   }
 
   .nav-arrow {
-    color: var(--color-base14);
+    color: var(--color-base0E);
     opacity: 0;
     transform: translateX(-8px) scale(0.8);
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -359,21 +359,21 @@
     background: linear-gradient(
       90deg,
       transparent 0%,
-      var(--color-base3) 20%,
-      var(--color-base3) 80%,
+      var(--color-base03) 20%,
+      var(--color-base03) 80%,
       transparent 100%
     );
   }
 
   .footer-content {
     @apply flex items-center justify-between px-4 py-3 rounded-xl;
-    background: var(--color-base1);
-    border: 1px solid var(--color-base2);
+    background: var(--color-base01);
+    border: 1px solid var(--color-base02);
   }
 
   .theme-label {
     @apply text-sm font-medium tracking-wide;
-    color: var(--color-base8);
+    color: var(--color-base08);
     letter-spacing: 0.02em;
   }
 
@@ -400,7 +400,7 @@
   /* Smooth Scrolling for Menu */
   .menu-nav {
     scrollbar-width: thin;
-    scrollbar-color: var(--color-base3) transparent;
+    scrollbar-color: var(--color-base03) transparent;
   }
 
   .menu-nav::-webkit-scrollbar {
@@ -412,12 +412,12 @@
   }
 
   .menu-nav::-webkit-scrollbar-thumb {
-    background: var(--color-base3);
+    background: var(--color-base03);
     border-radius: 2px;
   }
 
   .menu-nav::-webkit-scrollbar-thumb:hover {
-    background: var(--color-base4);
+    background: var(--color-base04);
   }
 
   /* Prevent body scroll when menu is open */

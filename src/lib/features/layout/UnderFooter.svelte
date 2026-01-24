@@ -63,7 +63,7 @@
   @reference '$theme';
 
   .under-footer {
-    @apply w-full bg-base0 border-t border-base3;
+    @apply w-full bg-base00 border-t border-base03;
   }
 
   .under-footer-container {
@@ -75,7 +75,7 @@
   }
 
   .pledge-title {
-    @apply text-3xl lg:text-4xl font-light mb-12 lg:mb-16 text-base6;
+    @apply text-3xl lg:text-4xl font-light mb-12 lg:mb-16 text-base06;
     letter-spacing: 0.05em;
   }
 
@@ -89,12 +89,12 @@
   }
 
   .pledge-subtitle {
-    @apply text-xl lg:text-2xl font-semibold mb-6 text-base6;
+    @apply text-xl lg:text-2xl font-semibold mb-6 text-base06;
     line-height: 1.3;
   }
 
   .pledge-description {
-    @apply text-base lg:text-lg leading-relaxed text-base4;
+    @apply text-base lg:text-lg leading-relaxed text-base04;
     max-width: 400px;
     margin: 0 auto;
   }
@@ -125,11 +125,11 @@
 
   .guarantee-icon {
     @apply flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold;
-    @apply bg-base14 text-white;
+    @apply bg-base0E text-white;
   }
 
   .guarantee-text {
-    @apply text-base lg:text-lg font-medium text-base6;
+    @apply text-base lg:text-lg font-medium text-base06;
   }
 
   /* Mobile responsive adjustments */

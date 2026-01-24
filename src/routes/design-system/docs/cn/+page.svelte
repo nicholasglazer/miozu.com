@@ -152,7 +152,7 @@ match(variant, {
     gap: 1rem;
     margin: 1.5rem 0;
     padding: 1rem;
-    background: var(--color-base1);
+    background: var(--color-base01);
     border-radius: 0.5rem;
   }
 
@@ -165,6 +165,6 @@ match(variant, {
   .comp-item p {
     margin: 0;
     font-size: 0.875rem;
-    color: var(--color-base4);
+    color: var(--color-base04);
   }
 </style>

@@ -97,24 +97,24 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.875rem;
-    color: var(--color-base5);
+    color: var(--color-base05);
     cursor: pointer;
   }
 
   .control-row input[type="checkbox"] {
     width: 1rem;
     height: 1rem;
-    accent-color: var(--color-base14);
+    accent-color: var(--color-base0E);
   }
 
   .value-display {
     padding-top: 0.75rem;
     font-size: 0.75rem;
-    color: var(--color-base4);
+    color: var(--color-base04);
     border-top: 1px solid var(--color-border);
   }
 
   .value-display code {
-    color: var(--color-base14);
+    color: var(--color-base0E);
   }
 </style>

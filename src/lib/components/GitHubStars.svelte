@@ -125,7 +125,7 @@
 
   .star-count {
     @apply flex items-center gap-0.5 ml-2.5;
-    @apply text-base5/90 whitespace-nowrap;
+    @apply text-base05/90 whitespace-nowrap;
   }
 
   .count-container {

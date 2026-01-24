@@ -190,9 +190,9 @@ toast.position = 'top-right';  // Position`}
   }
 
   .toast-info {
-    background: var(--color-base1);
+    background: var(--color-base01);
     border: 1px solid var(--color-border);
-    color: var(--color-base5);
+    color: var(--color-base05);
   }
 
   .toast-success {
@@ -219,14 +219,14 @@ toast.position = 'top-right';  // Position`}
     gap: 0.5rem;
     margin: 1.5rem 0;
     padding: 1rem;
-    background: var(--color-base1);
+    background: var(--color-base01);
     border-radius: 0.5rem;
   }
 
   .position-item {
     padding: 0.5rem;
     text-align: center;
-    background: var(--color-base2);
+    background: var(--color-base02);
     border-radius: 0.25rem;
     font-size: 0.75rem;
   }

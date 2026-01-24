@@ -1,0 +1,140 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "name": "Miozu Semantic Aliases",
+  "version": "1.0.0",
+  "description": "Human-friendly semantic aliases for Base16 tokens. Use these in code instead of raw base tokens.",
+  "metadata": {
+    "aiInstruction": "ALWAYS use semantic aliases in code, not raw base tokens. This ensures intent is clear and maintainable."
+  },
+  "color": {
+    "background": {
+      "default": { "$value": "{color.base.00}", "cssVar": "--color-bg" },
+      "surface": { "$value": "{color.base.01}", "cssVar": "--color-surface" },
+      "elevated": { "$value": "{color.base.02}", "cssVar": "--color-surface-elevated" },
+      "interactive": { "$value": "{color.base.02}", "cssVar": "--color-bg-interactive" }
+    },
+    "text": {
+      "disabled": { "$value": "{color.base.03}", "cssVar": "--color-text-disabled" },
+      "muted": { "$value": "{color.base.04}", "cssVar": "--color-text-muted" },
+      "default": { "$value": "{color.base.05}", "cssVar": "--color-text" },
+      "emphasis": { "$value": "{color.base.06}", "cssVar": "--color-text-emphasis" },
+      "strong": { "$value": "{color.base.07}", "cssVar": "--color-text-strong" }
+    },
+    "border": {
+      "default": { "$value": "{color.base.02}", "cssVar": "--color-border" },
+      "muted": { "$value": "{color.base.01}", "cssVar": "--color-border-muted" },
+      "emphasis": { "$value": "{color.base.03}", "cssVar": "--color-border-emphasis" }
+    },
+    "functional": {
+      "error": {
+        "$value": "{color.base.08}",
+        "cssVar": "--color-error",
+        "usage": "Delete buttons, error alerts, form validation errors, critical warnings"
+      },
+      "warning": {
+        "$value": "{color.base.09}",
+        "cssVar": "--color-warning",
+        "usage": "Warning alerts, pending states, unsaved changes, caution indicators"
+      },
+      "highlight": {
+        "$value": "{color.base.0A}",
+        "cssVar": "--color-highlight",
+        "usage": "Search highlights, featured content, attention banners, new indicators"
+      },
+      "success": {
+        "$value": "{color.base.0B}",
+        "cssVar": "--color-success",
+        "usage": "Success alerts, confirmation buttons, active states, completed tasks"
+      },
+      "info": {
+        "$value": "{color.base.0C}",
+        "cssVar": "--color-info",
+        "usage": "Info alerts, secondary buttons, tooltips, neutral badges"
+      },
+      "primary": {
+        "$value": "{color.base.0D}",
+        "cssVar": "--color-primary",
+        "usage": "Primary buttons, links, focus rings, brand accents"
+      },
+      "special": {
+        "$value": "{color.base.0E}",
+        "cssVar": "--color-special",
+        "usage": "Premium badges, AI indicators, special features, unique elements"
+      },
+      "alternative": {
+        "$value": "{color.base.0F}",
+        "cssVar": "--color-alternative",
+        "usage": "Deprecated badges, legacy indicators, alternative paths"
+      }
+    },
+    "action": {
+      "primary": { "$value": "{color.base.0D}", "cssVar": "--color-action-primary" },
+      "secondary": { "$value": "{color.base.0C}", "cssVar": "--color-action-secondary" },
+      "destructive": { "$value": "{color.base.08}", "cssVar": "--color-action-destructive" },
+      "success": { "$value": "{color.base.0B}", "cssVar": "--color-action-success" }
+    }
+  },
+  "componentMapping": {
+    "button": {
+      "primary": { "background": "{color.functional.primary}", "text": "{color.base.00}" },
+      "secondary": { "background": "{color.functional.info}", "text": "{color.base.00}" },
+      "destructive": { "background": "{color.functional.error}", "text": "{color.base.00}" },
+      "success": { "background": "{color.functional.success}", "text": "{color.base.00}" },
+      "warning": { "background": "{color.functional.warning}", "text": "{color.base.00}" },
+      "ghost": { "background": "transparent", "text": "{color.text.default}" }
+    },
+    "alert": {
+      "error": {
+        "background": "color-mix(in srgb, {color.functional.error} 15%, transparent)",
+        "border": "{color.functional.error}",
+        "icon": "{color.functional.error}"
+      },
+      "warning": {
+        "background": "color-mix(in srgb, {color.functional.warning} 15%, transparent)",
+        "border": "{color.functional.warning}",
+        "icon": "{color.functional.warning}"
+      },
+      "success": {
+        "background": "color-mix(in srgb, {color.functional.success} 15%, transparent)",
+        "border": "{color.functional.success}",
+        "icon": "{color.functional.success}"
+      },
+      "info": {
+        "background": "color-mix(in srgb, {color.functional.info} 15%, transparent)",
+        "border": "{color.functional.info}",
+        "icon": "{color.functional.info}"
+      }
+    },
+    "badge": {
+      "default": { "background": "{color.background.elevated}", "text": "{color.text.default}" },
+      "primary": { "background": "{color.functional.primary}", "text": "{color.base.00}" },
+      "success": { "background": "{color.functional.success}", "text": "{color.base.00}" },
+      "warning": { "background": "{color.functional.warning}", "text": "{color.base.00}" },
+      "error": { "background": "{color.functional.error}", "text": "{color.base.00}" },
+      "info": { "background": "{color.functional.info}", "text": "{color.base.00}" },
+      "premium": { "background": "{color.functional.special}", "text": "{color.base.00}" },
+      "new": { "background": "{color.functional.highlight}", "text": "{color.base.00}" },
+      "deprecated": { "background": "{color.functional.alternative}", "text": "{color.base.00}" }
+    },
+    "form": {
+      "input": {
+        "background": "{color.background.surface}",
+        "border": "{color.border.default}",
+        "borderFocus": "{color.functional.primary}",
+        "borderError": "{color.functional.error}",
+        "borderSuccess": "{color.functional.success}",
+        "text": "{color.text.default}",
+        "placeholder": "{color.text.muted}"
+      }
+    },
+    "status": {
+      "online": "{color.functional.success}",
+      "offline": "{color.text.disabled}",
+      "busy": "{color.functional.error}",
+      "away": "{color.functional.warning}",
+      "pending": "{color.functional.warning}",
+      "active": "{color.functional.success}",
+      "inactive": "{color.text.disabled}"
+    }
+  }
+}

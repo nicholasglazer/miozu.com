@@ -91,7 +91,7 @@
     @apply inline-flex items-center justify-center;
     @apply cursor-pointer select-none;
     @apply font-medium whitespace-nowrap;
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-base14/50 focus-visible:ring-offset-2;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-base0E/50 focus-visible:ring-offset-2;
     @apply no-underline;
     background: transparent;
     border: none;
@@ -143,7 +143,7 @@
 
   /* Primary Button - Solid accent with depth */
   .primary {
-    @apply bg-base14 text-white;
+    @apply bg-base0E text-white;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
   }
 
@@ -160,31 +160,31 @@
 
   /* Secondary Button - Subtle surface with border */
   .secondary {
-    @apply bg-base1 text-base6;
-    @apply border border-base3;
+    @apply bg-base01 text-base06;
+    @apply border border-base03;
   }
 
   .secondary:hover {
-    @apply bg-base2 border-base4/50;
+    @apply bg-base02 border-base04/50;
   }
 
   /* Minimal Button - Ghost style */
   .minimal {
-    @apply bg-transparent text-base5;
+    @apply bg-transparent text-base05;
   }
 
   .minimal:hover {
-    @apply bg-base1 text-base6;
+    @apply bg-base01 text-base06;
   }
 
   /* Accent Button - Outlined accent */
   .accent {
-    @apply bg-base14/10 text-base14;
-    @apply border border-base14/30;
+    @apply bg-base0E/10 text-base0E;
+    @apply border border-base0E/30;
   }
 
   .accent:hover {
-    @apply bg-base14/20 border-base14/50;
+    @apply bg-base0E/20 border-base0E/50;
   }
 
   /* Disabled state */

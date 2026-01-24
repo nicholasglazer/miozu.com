@@ -72,7 +72,7 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg, 0.75rem);
     overflow: hidden;
-    background: var(--color-base0);
+    background: var(--color-base00);
   }
 
   .playground-header {
@@ -84,13 +84,13 @@
     margin: 0;
     font-size: 1rem;
     font-weight: 600;
-    color: var(--color-base6);
+    color: var(--color-base06);
   }
 
   .playground-desc {
     margin: 0.5rem 0 0;
     font-size: 0.875rem;
-    color: var(--color-base4);
+    color: var(--color-base04);
   }
 
   .playground-content {
@@ -119,10 +119,10 @@
     padding: 2rem;
     background: repeating-linear-gradient(
       45deg,
-      var(--color-base1) 0,
-      var(--color-base1) 10px,
-      var(--color-base0) 10px,
-      var(--color-base0) 20px
+      var(--color-base01) 0,
+      var(--color-base01) 10px,
+      var(--color-base00) 10px,
+      var(--color-base00) 20px
     );
     background-size: 28px 28px;
   }
@@ -133,7 +133,7 @@
     gap: 1rem;
     padding: 1.5rem;
     min-width: 14rem;
-    background: var(--color-base1);
+    background: var(--color-base01);
     border-left: 1px solid var(--color-border);
   }
 
@@ -149,20 +149,20 @@
     width: 100%;
     padding: 0.75rem 1.5rem;
     border: none;
-    background: var(--color-base1);
-    color: var(--color-base4);
+    background: var(--color-base01);
+    color: var(--color-base04);
     font-size: 0.875rem;
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
   }
 
   .toggle-btn:hover {
-    background: var(--color-base2);
-    color: var(--color-base5);
+    background: var(--color-base02);
+    color: var(--color-base05);
   }
 
   .toggle-btn.active {
-    color: var(--color-base14);
+    color: var(--color-base0E);
   }
 
   .code-icon {

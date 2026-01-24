@@ -2,14 +2,14 @@
   import {CodeBlock} from '$lib/components/docs';
 
   const baseColors = [
-    {name: 'base0', hex: '#232733', desc: 'Darkest background'},
-    {name: 'base1', hex: '#2C3040', desc: 'Default dark bg'},
-    {name: 'base2', hex: '#3E4359', desc: 'Selection, hover'},
-    {name: 'base3', hex: '#565E78', desc: 'Comments, subtle'},
-    {name: 'base4', hex: '#737E99', desc: 'Muted text'},
-    {name: 'base5', hex: '#D0D2DB', desc: 'Default text'},
-    {name: 'base6', hex: '#F3F4F7', desc: 'Light text'},
-    {name: 'base7', hex: '#FAFDFB', desc: 'Lightest/white'}
+    {name: 'base00', hex: '#232733', desc: 'Darkest background'},
+    {name: 'base01', hex: '#2C3040', desc: 'Default dark bg'},
+    {name: 'base02', hex: '#3E4359', desc: 'Selection, hover'},
+    {name: 'base03', hex: '#565E78', desc: 'Comments, subtle'},
+    {name: 'base04', hex: '#737E99', desc: 'Muted text'},
+    {name: 'base05', hex: '#D0D2DB', desc: 'Default text'},
+    {name: 'base06', hex: '#F3F4F7', desc: 'Light text'},
+    {name: 'base07', hex: '#FAFDFB', desc: 'Lightest/white'}
   ];
 
   const accentColors = [
@@ -24,11 +24,11 @@
   ];
 
   const semanticCode = `/* Semantic color mappings */
---color-bg: var(--base0);
---color-surface: var(--base1);
---color-border: var(--base2);
---color-text: var(--base5);
---color-text-strong: var(--base7);
+--color-bg: var(--base00);
+--color-surface: var(--base01);
+--color-border: var(--base02);
+--color-text: var(--base05);
+--color-text-strong: var(--base07);
 --color-primary: var(--magenta);
 --color-success: var(--green);
 --color-warning: var(--yellow);
@@ -141,7 +141,7 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md, 0.5rem);
     overflow: hidden;
-    background: var(--color-base1);
+    background: var(--color-base01);
   }
 
   .color-swatch {
@@ -158,18 +158,18 @@
   .color-name {
     font-family: var(--font-mono);
     font-size: 0.8125rem;
-    color: var(--color-base6);
+    color: var(--color-base06);
   }
 
   .color-hex {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--color-base4);
+    color: var(--color-base04);
   }
 
   .color-desc {
     font-size: 0.75rem;
-    color: var(--color-base4);
+    color: var(--color-base04);
     margin-top: 0.25rem;
   }
 </style>

@@ -185,7 +185,7 @@
   @reference '$theme';
 
   .data-page {
-    @apply min-h-screen bg-base0;
+    @apply min-h-screen bg-base00;
   }
 
   .data-content {
@@ -206,21 +206,21 @@
   }
 
   .back-link {
-    @apply inline-flex items-center gap-1.5 text-sm text-base4 no-underline mb-6;
-    @apply hover:text-base6 transition-colors;
+    @apply inline-flex items-center gap-1.5 text-sm text-base04 no-underline mb-6;
+    @apply hover:text-base06 transition-colors;
   }
 
   .page-label {
-    @apply block text-xs font-semibold uppercase tracking-[0.2em] text-base4 mb-2;
+    @apply block text-xs font-semibold uppercase tracking-[0.2em] text-base04 mb-2;
   }
 
   .page-header h1 {
-    @apply text-3xl font-semibold text-base6 mb-3;
+    @apply text-3xl font-semibold text-base06 mb-3;
     letter-spacing: -0.02em;
   }
 
   .page-desc {
-    @apply text-base text-base4;
+    @apply text-base text-base04;
   }
 
   /* Overview Section */
@@ -229,7 +229,7 @@
   }
 
   .overview-section h2 {
-    @apply text-lg font-semibold text-base6 mb-4;
+    @apply text-lg font-semibold text-base06 mb-4;
   }
 
   .overview-grid {
@@ -237,15 +237,15 @@
   }
 
   .overview-item {
-    @apply p-4 rounded-lg border border-base3 bg-base1;
+    @apply p-4 rounded-lg border border-base03 bg-base01;
   }
 
   .overview-label {
-    @apply block text-xs text-base4 mb-1;
+    @apply block text-xs text-base04 mb-1;
   }
 
   .overview-value {
-    @apply block text-sm font-medium text-base6;
+    @apply block text-sm font-medium text-base06;
   }
 
   /* Events Section */
@@ -254,11 +254,11 @@
   }
 
   .events-section h2 {
-    @apply text-lg font-semibold text-base6 mb-2;
+    @apply text-lg font-semibold text-base06 mb-2;
   }
 
   .section-desc {
-    @apply text-sm text-base4 mb-6;
+    @apply text-sm text-base04 mb-6;
   }
 
   .events-list {
@@ -266,27 +266,27 @@
   }
 
   .event-card {
-    @apply rounded-xl border border-base3 bg-base0 overflow-hidden;
+    @apply rounded-xl border border-base03 bg-base00 overflow-hidden;
   }
 
   .event-header {
-    @apply p-4 bg-base1 border-b border-base3 flex items-center gap-4;
+    @apply p-4 bg-base01 border-b border-base03 flex items-center gap-4;
   }
 
   .event-name {
-    @apply px-2 py-1 rounded bg-base14/10 text-base14 text-sm font-mono font-medium;
+    @apply px-2 py-1 rounded bg-base0E/10 text-base0E text-sm font-mono font-medium;
   }
 
   .event-desc {
-    @apply text-sm text-base4;
+    @apply text-sm text-base04;
   }
 
   .fields-table {
-    @apply divide-y divide-base2;
+    @apply divide-y divide-base02;
   }
 
   .table-header {
-    @apply grid grid-cols-3 gap-4 px-4 py-2 bg-base1/50 text-xs font-semibold text-base4 uppercase tracking-wider;
+    @apply grid grid-cols-3 gap-4 px-4 py-2 bg-base01/50 text-xs font-semibold text-base04 uppercase tracking-wider;
   }
 
   .table-row {
@@ -294,15 +294,15 @@
   }
 
   .field-name {
-    @apply text-sm font-mono text-base6;
+    @apply text-sm font-mono text-base06;
   }
 
   .field-type {
-    @apply text-xs text-base14 font-medium;
+    @apply text-xs text-base0E font-medium;
   }
 
   .field-desc {
-    @apply text-xs text-base4;
+    @apply text-xs text-base04;
   }
 
   /* Quality Section */
@@ -311,7 +311,7 @@
   }
 
   .quality-section h2 {
-    @apply text-lg font-semibold text-base6 mb-4;
+    @apply text-lg font-semibold text-base06 mb-4;
   }
 
   .quality-grid {
@@ -319,15 +319,15 @@
   }
 
   .quality-item {
-    @apply p-4 rounded-xl border border-base3 bg-base0;
+    @apply p-4 rounded-xl border border-base03 bg-base00;
   }
 
   .quality-item h3 {
-    @apply text-sm font-semibold text-base6 mb-2;
+    @apply text-sm font-semibold text-base06 mb-2;
   }
 
   .quality-item p {
-    @apply text-xs text-base4 leading-relaxed;
+    @apply text-xs text-base04 leading-relaxed;
   }
 
   /* Access Section */
@@ -336,15 +336,15 @@
   }
 
   .access-card {
-    @apply p-8 rounded-xl bg-base1 border border-base3 text-center;
+    @apply p-8 rounded-xl bg-base01 border border-base03 text-center;
   }
 
   .access-card h2 {
-    @apply text-lg font-semibold text-base6 mb-2;
+    @apply text-lg font-semibold text-base06 mb-2;
   }
 
   .access-card p {
-    @apply text-sm text-base4 max-w-md mx-auto mb-6;
+    @apply text-sm text-base04 max-w-md mx-auto mb-6;
   }
 
   .access-actions {
@@ -357,7 +357,7 @@
   }
 
   .access-btn.primary {
-    @apply bg-base14 text-base0;
+    @apply bg-base0E text-base00;
   }
 
   .access-btn.primary:hover {
@@ -365,11 +365,11 @@
   }
 
   .access-btn.secondary {
-    @apply bg-transparent text-base6 border border-base3;
+    @apply bg-transparent text-base06 border border-base03;
   }
 
   .access-btn.secondary:hover {
-    @apply bg-base2;
+    @apply bg-base02;
   }
 
   @media (max-width: 768px) {

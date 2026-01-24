@@ -99,7 +99,7 @@
       />
     </div>
     {#if value}
-      <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--color-base4);">
+      <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--color-base04);">
         Selected: <strong>{value}</strong>
       </p>
     {/if}
@@ -207,7 +207,7 @@
     gap: 0.5rem;
     margin: 1.5rem 0;
     padding: 1rem;
-    background: var(--color-base1);
+    background: var(--color-base01);
     border-radius: 0.5rem;
   }
 
@@ -229,7 +229,7 @@
     padding: 0.25rem 0.5rem;
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    background: var(--color-base2);
+    background: var(--color-base02);
     border: 1px solid var(--color-border);
     border-radius: 0.25rem;
   }

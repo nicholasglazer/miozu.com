@@ -67,7 +67,7 @@
 
   .typewriter-text {
     font-weight: inherit;
-    background: linear-gradient(135deg, var(--color-base14) 0%, var(--color-base13) 50%, var(--color-base14) 100%);
+    background: linear-gradient(135deg, var(--color-base0E) 0%, var(--color-base0D) 50%, var(--color-base0E) 100%);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -80,7 +80,7 @@
   .cursor {
     display: inline-block;
     margin-left: 2px;
-    @apply text-base14;
+    @apply text-base0E;
     opacity: 0;
     animation: blink 1s infinite;
   }

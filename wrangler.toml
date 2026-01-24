@@ -1,15 +1,5 @@
 name = "miozu-com"
-account_id = "b69fee1ee702f3514535b233aa6fdc8d"
-
-main = "./.svelte-kit/cloudflare/_worker.js"
-
-[build]
-command = "pnpm build"
+pages_build_output_dir = ".svelte-kit/cloudflare"
 
 compatibility_date = "2025-04-14"
 compatibility_flags = ["nodejs_compat"]
-workers_dev = true
-
-[assets]
-directory = "./.svelte-kit/cloudflare"
-binding = "ASSETS"

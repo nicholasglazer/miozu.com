@@ -1,50 +1,60 @@
 <script>
+  import {Switch} from '@miozu/jera';
   import {Sun, Moon} from '$components/icons';
 
-  let {theme} = $props();
+  let {theme, variant = 'default'} = $props();
 
-  // Get current theme state
+  // Get current theme state - checked = dark mode
   let isDarkMode = $derived(theme?.isDark ?? false);
-  let size = 16;
 
-  // Toggle between light and dark themes
-  function toggleTheme() {
+  // Handle switch toggle
+  function handleChange() {
     if (theme && typeof theme.toggle === 'function') {
       theme.toggle();
     }
   }
-
-  // Get accessible label for current theme
-  function getThemeLabel(isDark) {
-    return isDark ? 'Switch to light theme' : 'Switch to dark theme';
-  }
 </script>
 
-<button
-  type="button"
-  class="theme-toggle"
-  onclick={toggleTheme}
-  aria-pressed={isDarkMode}
-  aria-label={getThemeLabel(isDarkMode)}
-  title={`Current: ${isDarkMode ? 'dark' : 'light'} theme`}
->
-  <div class="icon-container">
-    {#if isDarkMode}
-      <Moon {size} />
-    {:else}
-      <Sun {size} />
-    {/if}
+{#if variant === 'switch'}
+  <!-- Switch variant using Jera Switch component -->
+  <div class="theme-switch-wrapper">
+    <Sun size={14} class="theme-icon sun" />
+    <Switch
+      checked={isDarkMode}
+      onchange={handleChange}
+      size="sm"
+      aria-label={isDarkMode ? 'Switch to light theme' : 'Switch to dark theme'}
+    />
+    <Moon size={14} class="theme-icon moon" />
   </div>
-</button>
+{:else}
+  <!-- Default button variant -->
+  <button
+    type="button"
+    class="theme-toggle"
+    onclick={handleChange}
+    aria-pressed={isDarkMode}
+    aria-label={isDarkMode ? 'Switch to light theme' : 'Switch to dark theme'}
+    title={`Current: ${isDarkMode ? 'dark' : 'light'} theme`}
+  >
+    <div class="icon-container">
+      {#if isDarkMode}
+        <Moon size={16} />
+      {:else}
+        <Sun size={16} />
+      {/if}
+    </div>
+  </button>
+{/if}
 
 <style lang="postcss">
   @reference '$theme';
 
   .theme-toggle {
     @apply flex items-center justify-center h-10 w-10 rounded-full;
-    @apply bg-base2 hover:bg-base3 transition-all duration-200;
-    @apply focus:outline-none focus:ring-2 focus:ring-base14/50;
-    @apply border border-base3;
+    @apply bg-base02 hover:bg-base03 transition-all duration-200;
+    @apply focus:outline-none focus:ring-2 focus:ring-base0E/50;
+    @apply border border-base03;
 
     &:hover {
       @apply scale-105;
@@ -56,6 +66,23 @@
   }
 
   .icon-container {
-    @apply flex items-center justify-center text-base5 hover:text-base14 transition-colors;
+    @apply flex items-center justify-center text-base05 hover:text-base0E transition-colors;
+  }
+
+  /* Switch variant styles */
+  .theme-switch-wrapper {
+    @apply flex items-center gap-2;
+  }
+
+  .theme-switch-wrapper :global(.theme-icon) {
+    @apply text-base04 transition-colors;
+  }
+
+  .theme-switch-wrapper :global(.theme-icon.sun) {
+    color: var(--color-base0A);
+  }
+
+  .theme-switch-wrapper :global(.theme-icon.moon) {
+    color: var(--color-base0D);
   }
 </style>

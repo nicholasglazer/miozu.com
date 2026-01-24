@@ -276,7 +276,7 @@
   @reference '$theme';
 
   .about-content {
-    @apply text-base4;
+    @apply text-base04;
   }
 
   .section-header {
@@ -284,11 +284,11 @@
   }
 
   .section-label {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base4;
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base04;
   }
 
   .section-header h2 {
-    @apply mt-2 text-2xl font-semibold text-base6;
+    @apply mt-2 text-2xl font-semibold text-base06;
     letter-spacing: -0.02em;
   }
 
@@ -314,12 +314,12 @@
   }
 
   .overview-main h2 {
-    @apply mt-2 text-2xl font-semibold text-base6;
+    @apply mt-2 text-2xl font-semibold text-base06;
     letter-spacing: -0.02em;
   }
 
   .lead {
-    @apply mt-4 text-base text-base5 leading-relaxed;
+    @apply mt-4 text-base text-base05 leading-relaxed;
   }
 
   .key-facts {
@@ -331,11 +331,11 @@
   }
 
   .fact-label {
-    @apply text-xs text-base4 uppercase tracking-wider;
+    @apply text-xs text-base04 uppercase tracking-wider;
   }
 
   .fact-value {
-    @apply text-sm font-medium text-base6;
+    @apply text-sm font-medium text-base06;
   }
 
   .overview-stats {
@@ -343,7 +343,7 @@
   }
 
   .stat-card {
-    @apply flex flex-col items-center justify-center p-4 rounded-xl border border-base3 bg-base0 text-center;
+    @apply flex flex-col items-center justify-center p-4 rounded-xl border border-base03 bg-base00 text-center;
   }
 
   .stat-card.primary {
@@ -351,7 +351,7 @@
   }
 
   .stat-value {
-    @apply text-lg font-bold text-base6;
+    @apply text-lg font-bold text-base06;
   }
 
   .stat-card.primary .stat-value {
@@ -359,7 +359,7 @@
   }
 
   .stat-label {
-    @apply text-xs text-base4 mt-1;
+    @apply text-xs text-base04 mt-1;
   }
 
   /* Capabilities Section */
@@ -380,7 +380,7 @@
   }
 
   .capability-card {
-    @apply flex flex-col gap-3 rounded-xl border border-base3 bg-base0 p-5;
+    @apply flex flex-col gap-3 rounded-xl border border-base03 bg-base00 p-5;
     opacity: 0;
     transform: translateY(16px);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -393,15 +393,15 @@
   }
 
   .capability-icon {
-    @apply w-10 h-10 rounded-lg flex items-center justify-center bg-base2 text-base6;
+    @apply w-10 h-10 rounded-lg flex items-center justify-center bg-base02 text-base06;
   }
 
   .capability-card h3 {
-    @apply text-sm font-semibold text-base6;
+    @apply text-sm font-semibold text-base06;
   }
 
   .capability-card p {
-    @apply text-xs text-base4 leading-relaxed;
+    @apply text-xs text-base04 leading-relaxed;
   }
 
   /* Products Section */
@@ -422,7 +422,7 @@
   }
 
   .product-card {
-    @apply flex flex-col gap-3 rounded-xl border border-base3 bg-base0 p-6;
+    @apply flex flex-col gap-3 rounded-xl border border-base03 bg-base00 p-6;
     opacity: 0;
     transform: translateY(16px);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -435,15 +435,15 @@
   }
 
   .product-card h3 {
-    @apply text-lg font-semibold text-base6;
+    @apply text-lg font-semibold text-base06;
   }
 
   .product-desc {
-    @apply text-sm text-base4;
+    @apply text-sm text-base04;
   }
 
   .product-specs {
-    @apply flex flex-col gap-2 py-3 border-y border-base2;
+    @apply flex flex-col gap-2 py-3 border-y border-base02;
   }
 
   .spec {
@@ -451,11 +451,11 @@
   }
 
   .spec-label {
-    @apply text-base4;
+    @apply text-base04;
   }
 
   .spec-value {
-    @apply text-base6 font-medium;
+    @apply text-base06 font-medium;
   }
 
   .product-status {
@@ -488,7 +488,7 @@
   }
 
   .integration-card {
-    @apply flex flex-col gap-2 rounded-xl border border-base3 bg-base0 p-5;
+    @apply flex flex-col gap-2 rounded-xl border border-base03 bg-base00 p-5;
     opacity: 0;
     transform: translateY(16px);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -501,11 +501,11 @@
   }
 
   .integration-card h3 {
-    @apply text-sm font-semibold text-base6;
+    @apply text-sm font-semibold text-base06;
   }
 
   .integration-card p {
-    @apply text-xs text-base4;
+    @apply text-xs text-base04;
   }
 
   .compliance-row {
@@ -544,15 +544,15 @@
   }
 
   .cta-content {
-    @apply mx-auto max-w-2xl flex flex-col items-center gap-4 rounded-2xl border border-base3 bg-base1 px-8 py-10 text-center;
+    @apply mx-auto max-w-2xl flex flex-col items-center gap-4 rounded-2xl border border-base03 bg-base01 px-8 py-10 text-center;
   }
 
   .cta-content h2 {
-    @apply text-xl font-semibold text-base6;
+    @apply text-xl font-semibold text-base06;
   }
 
   .cta-content p {
-    @apply text-sm text-base4;
+    @apply text-sm text-base04;
   }
 
   .cta-actions {

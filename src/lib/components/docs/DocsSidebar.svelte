@@ -19,20 +19,51 @@
       title: 'Design Tokens',
       items: [
         {label: 'Colors', href: '/design-system/docs/colors'},
+        {label: 'Color Philosophy', href: '/design-system/docs/color-philosophy'},
+        {label: 'Color Playground', href: '/design-system/docs/color-playground'},
         {label: 'Spacing', href: '/design-system/docs/spacing'},
         {label: 'Typography', href: '/design-system/docs/typography'}
       ]
     },
     {
-      title: 'Components',
+      title: 'Primitives',
       items: [
         {label: 'Button', href: '/design-system/docs/button'},
         {label: 'Badge', href: '/design-system/docs/badge'},
+        {label: 'Divider', href: '/design-system/docs/divider'},
+        {label: 'Avatar', href: '/design-system/docs/avatar'}
+      ]
+    },
+    {
+      title: 'Forms',
+      items: [
         {label: 'Input', href: '/design-system/docs/input'},
         {label: 'Select', href: '/design-system/docs/select'},
         {label: 'Checkbox', href: '/design-system/docs/checkbox'},
-        {label: 'Switch', href: '/design-system/docs/switch'},
-        {label: 'Toast', href: '/design-system/docs/toast'}
+        {label: 'Switch', href: '/design-system/docs/switch'}
+      ]
+    },
+    {
+      title: 'Feedback',
+      items: [
+        {label: 'Toast', href: '/design-system/docs/toast'},
+        {label: 'Skeleton', href: '/design-system/docs/skeleton'},
+        {label: 'ProgressBar', href: '/design-system/docs/progress-bar'},
+        {label: 'Spinner', href: '/design-system/docs/spinner'}
+      ]
+    },
+    {
+      title: 'Overlays',
+      items: [
+        {label: 'Modal', href: '/design-system/docs/modal'},
+        {label: 'Popover', href: '/design-system/docs/popover'}
+      ]
+    },
+    {
+      title: 'Navigation',
+      items: [
+        {label: 'Tabs', href: '/design-system/docs/tabs'},
+        {label: 'Accordion', href: '/design-system/docs/accordion'}
       ]
     },
     {
@@ -48,6 +79,14 @@
         {label: 'clickOutside', href: '/design-system/docs/click-outside'},
         {label: 'focusTrap', href: '/design-system/docs/focus-trap'},
         {label: 'portal', href: '/design-system/docs/portal'}
+      ]
+    },
+    {
+      title: 'Resources',
+      items: [
+        {label: 'Overview', href: '/design-system'},
+        {label: 'Design Tokens', href: '/tokens/base16.json'},
+        {label: 'AI Docs', href: '/llms.txt'}
       ]
     }
   ];
@@ -65,7 +104,7 @@
       <span class="brand-rune">&#5765;</span>
       <span class="brand-text">jera</span>
     </a>
-    <span class="version">v0.1.0</span>
+    <span class="version">v0.3.0</span>
   </div>
 
   <div class="sidebar-content">
@@ -97,7 +136,7 @@
     flex-direction: column;
     width: 16rem;
     height: 100%;
-    background: var(--color-base0);
+    background: var(--color-base00);
     border-right: 1px solid var(--color-border);
     overflow-y: auto;
   }
@@ -115,13 +154,13 @@
     align-items: center;
     gap: 0.5rem;
     text-decoration: none;
-    color: var(--color-base6);
+    color: var(--color-base06);
     font-weight: 600;
   }
 
   .brand-rune {
     font-size: 1.25rem;
-    color: var(--color-base14);
+    color: var(--color-base0E);
   }
 
   .brand-text {
@@ -131,8 +170,8 @@
 
   .version {
     font-size: 0.75rem;
-    color: var(--color-base4);
-    background: var(--color-base2);
+    color: var(--color-base04);
+    background: var(--color-base02);
     padding: 0.125rem 0.5rem;
     border-radius: 9999px;
   }
@@ -153,7 +192,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--color-base4);
+    color: var(--color-base04);
   }
 
   .nav-list {
@@ -166,19 +205,19 @@
     display: block;
     padding: 0.5rem 1.5rem;
     font-size: 0.875rem;
-    color: var(--color-base5);
+    color: var(--color-base05);
     text-decoration: none;
     transition: background 0.1s, color 0.1s;
   }
 
   .nav-link:hover {
-    background: var(--color-base1);
-    color: var(--color-base6);
+    background: var(--color-base01);
+    color: var(--color-base06);
   }
 
   .nav-link.active {
-    background: var(--color-base1);
-    color: var(--color-base14);
+    background: var(--color-base01);
+    color: var(--color-base0E);
     font-weight: 500;
   }
 </style>

@@ -9,7 +9,7 @@
 
   // Color variants for different contexts
   const variants = {
-    default: 'var(--color-base6)',
+    default: 'var(--color-base06)',
     light: '#FFFFFF',
     accent: 'var(--color-base0D)'
   };

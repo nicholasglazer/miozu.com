@@ -5,14 +5,14 @@
 @layer base {
   html {
     @apply overflow-hidden;
-    @apply text-base5 bg-base0;
+    @apply text-base05 bg-base00;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    @apply bg-base0 text-base5;
+    @apply bg-base00 text-base05;
     line-height: 1.6;
     letter-spacing: -0.011em;
   }
@@ -23,7 +23,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-base3/40 rounded-full;
+    @apply bg-base03/40 rounded-full;
     background-clip: padding-box;
   }
 
@@ -32,12 +32,12 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-base4/50;
+    @apply bg-base04/50;
   }
 
   /* Selection highlighting */
   *::selection {
-    @apply text-base0 bg-base14/80;
+    @apply text-base00 bg-base0E/80;
   }
 
   /* Ensure full height for grid layout */

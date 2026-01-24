@@ -174,7 +174,7 @@
     gap: 0.5rem;
     margin: 1.5rem 0;
     padding: 1rem;
-    background: var(--color-base1);
+    background: var(--color-base01);
     border-radius: 0.5rem;
   }
 
@@ -199,13 +199,13 @@
   .type {
     font-size: 0.8125rem;
     font-family: var(--font-mono);
-    color: var(--color-base4);
+    color: var(--color-base04);
     min-width: 5rem;
   }
 
   .default {
     font-size: 0.8125rem;
-    color: var(--color-base4);
+    color: var(--color-base04);
     min-width: 5rem;
   }
 </style>

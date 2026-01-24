@@ -1,125 +1,103 @@
+/**
+ * Miozu Theme - Base16 Color System
+ *
+ * Standard Base16 naming: base00-base0F (hex digits only)
+ * Components use these tokens and work in both themes automatically.
+ *
+ * @see /home/ng/prod/CLAUDE.md for full Base16 specification
+ */
+
 @import 'tailwindcss';
 
 @theme {
-  /* Elite Corporate Light Theme - Clean & Expensive */
-  --color-base00: #ffffff; /* Pure white background */
-  --color-base01: #f8f9fa; /* Subtle off-white surface */
-  --color-base02: #f1f3f5; /* Elevated surface */
-  --color-base03: #adb5bd; /* Muted/disabled */
-  --color-base04: #6c757d; /* Secondary text */
-  --color-base05: #212529; /* Primary text */
-  --color-base06: #1a1d20; /* High emphasis */
-  --color-base07: #0d0f10; /* Maximum contrast */
+  /* ========================================
+   * BASE16 COLORS - Light Theme (Default)
+   * Proper Base16 hex naming: base00-base0F
+   * ======================================== */
 
-  /* Accent - Deep corporate blue */
+  /* Grayscale (base00-base07) - Light theme values */
+  --color-base00: #ffffff; /* Primary background - white */
+  --color-base01: #f8f9fa; /* Surface/card - off-white */
+  --color-base02: #f1f3f5; /* Selection/hover - light gray */
+  --color-base03: #adb5bd; /* Muted/disabled - medium gray */
+  --color-base04: #6c757d; /* Secondary text - dark gray */
+  --color-base05: #212529; /* Primary text - dark */
+  --color-base06: #1a1d20; /* High emphasis - darker */
+  --color-base07: #0d0f10; /* Maximum contrast - near black */
+
+  /* Accents (base08-base0F) - Same in both themes, adjusted for contrast */
   --color-base08: #dc3545; /* Error Red */
   --color-base09: #fd7e14; /* Warning Orange */
   --color-base0A: #ffc107; /* Highlight Yellow */
   --color-base0B: #28a745; /* Success Green */
   --color-base0C: #17a2b8; /* Info Cyan */
-  --color-base0D: #1a365d; /* Primary Deep Blue */
+  --color-base0D: #1a365d; /* Primary Blue (corporate) */
   --color-base0E: #5a67d8; /* Purple */
-  --color-base0F: #1a365d; /* Corporate Navy */
+  --color-base0F: #1a365d; /* Secondary Accent (corporate navy) */
 
-  /* Semantic colors for jera components */
-  --color-primary: #1a365d;
-  --color-secondary: #17a2b8;
-  --color-accent: #5a67d8;
-  --color-success: #28a745;
-  --color-warning: #ffc107;
-  --color-error: #dc3545;
-  --color-info: #17a2b8;
+  /* ========================================
+   * SEMANTIC TOKENS (Jera compatible)
+   * Maps Base16 to semantic meanings
+   * ======================================== */
 
-  /* Semantic surface/text for jera */
-  --color-bg: #ffffff;
-  --color-surface: #f8f9fa;
-  --color-surface-alt: #f1f3f5;
-  --color-hover: #e9ecef;
-  --color-text: #343a40;
-  --color-text-strong: #0d0f10;
-  --color-text-muted: #6c757d;
-  --color-muted: #adb5bd;
+  /* Backgrounds */
+  --color-bg: var(--color-base00);
+  --color-surface: var(--color-base01);
+  --color-surface-alt: var(--color-base02);
+  --color-hover: var(--color-base02);
 
-  /* Legacy mappings */
-  --color-base0: var(--color-base00);
-  --color-base1: var(--color-base01);
-  --color-base2: var(--color-base02);
-  --color-base3: var(--color-base03);
-  --color-base4: var(--color-base04);
-  --color-base5: var(--color-base05);
-  --color-base6: var(--color-base06);
-  --color-base7: var(--color-base07);
-  --color-base8: var(--color-base08);
-  --color-base9: var(--color-base09);
-  --color-base10: var(--color-base0B);
-  --color-base11: var(--color-base0A);
-  --color-base12: var(--color-base0C);
-  --color-base13: var(--color-base09);
-  --color-base14: var(--color-base0F);
-  --color-base15: var(--color-base0C);
+  /* Foregrounds */
+  --color-text: var(--color-base05);
+  --color-text-strong: var(--color-base07);
+  --color-text-muted: var(--color-base04);
+  --color-muted: var(--color-base03);
+
+  /* Brand/States */
+  --color-primary: var(--color-base0D);
+  --color-secondary: var(--color-base0C);
+  --color-accent: var(--color-base0E);
+  --color-success: var(--color-base0B);
+  --color-warning: var(--color-base0A);
+  --color-error: var(--color-base08);
+  --color-info: var(--color-base0C);
 
   /* Border utilities */
   --color-border: #e9ecef;
   --color-border-light: #f1f3f5;
 
-  --color-black: #000;
-  --color-white: #fff;
-
-  --font-sans:
-    'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-mono:
-    'SF Mono', 'Fira Code', monospace;
-}
-
-/* Elite Corporate Light - Default Theme */
-:root,
-:root[data-theme='miozu-light'] {
-  /* Pure, clean backgrounds */
-  --color-base0: #ffffff;
-  --color-base1: #f8f9fa;
-  --color-base2: #f1f3f5;
-  --color-base3: #dee2e6;
-  --color-base4: #868e96;
-  --color-base5: #343a40;
-  --color-base6: #212529;
-  --color-base7: #0d0f10;
-
-  /* RGB versions */
-  --color-base0-rgb: 255, 255, 255;
-  --color-base1-rgb: 248, 249, 250;
-  --color-base2-rgb: 241, 243, 245;
-  --color-base3-rgb: 222, 226, 230;
-  --color-base4-rgb: 134, 142, 150;
-  --color-base5-rgb: 52, 58, 64;
-  --color-base6-rgb: 33, 37, 41;
-  --color-base7-rgb: 13, 15, 16;
-
-  /* Corporate accent colors */
-  --color-base8: #dc3545;
-  --color-base9: #fd7e14;
-  --color-base10: #28a745;
-  --color-base11: #ffc107;
-  --color-base12: #17a2b8;
-  --color-base13: #495057;
-  --color-base14: #1a365d; /* Corporate navy - primary accent */
-  --color-base15: #6c757d;
-
-  /* RGB for accent */
-  --color-base14-rgb: 26, 54, 93;
-
-  /* Clean borders */
-  --color-border: #e9ecef;
-  --color-border-light: #f1f3f5;
+  /* Canonical tokens (no prefix - Jera compatible) */
+  --base00: var(--color-base00);
+  --base01: var(--color-base01);
+  --base02: var(--color-base02);
+  --base03: var(--color-base03);
+  --base04: var(--color-base04);
+  --base05: var(--color-base05);
+  --base06: var(--color-base06);
+  --base07: var(--color-base07);
+  --base08: var(--color-base08);
+  --base09: var(--color-base09);
+  --base0A: var(--color-base0A);
+  --base0B: var(--color-base0B);
+  --base0C: var(--color-base0C);
+  --base0D: var(--color-base0D);
+  --base0E: var(--color-base0E);
+  --base0F: var(--color-base0F);
 
   --color-black: #000;
   --color-white: #fff;
 
+  /* ========================================
+   * TYPOGRAPHY
+   * ======================================== */
+
   --font-sans:
     'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
-  --font-mono:
-    'SF Mono', 'Fira Code', monospace;
+  --font-mono: 'SF Mono', 'Fira Code', monospace;
+
+  /* ========================================
+   * SPACING & LAYOUT
+   * ======================================== */
 
   --spacing: 0.25rem;
 
@@ -143,6 +121,10 @@
   --container-6xl: 72rem;
   --container-7xl: 80rem;
   --container-prose: 65ch;
+
+  /* ========================================
+   * TYPOGRAPHY SCALE
+   * ======================================== */
 
   --text-xs: 0.75rem;
   --text-xs--line-height: calc(1 / 0.75);
@@ -194,6 +176,10 @@
   --leading-relaxed: 1.625;
   --leading-loose: 2;
 
+  /* ========================================
+   * EFFECTS
+   * ======================================== */
+
   --radius-xs: 0.5rem;
   --radius-sm: 0.75rem;
   --radius-md: 1rem;
@@ -222,6 +208,18 @@
   --drop-shadow-xl: 0 9px 7px rgb(0 0 0 / 0.1);
   --drop-shadow-2xl: 0 25px 25px rgb(0 0 0 / 0.15);
 
+  --blur-xs: 4px;
+  --blur-sm: 8px;
+  --blur-md: 12px;
+  --blur-lg: 16px;
+  --blur-xl: 24px;
+  --blur-2xl: 40px;
+  --blur-3xl: 64px;
+
+  /* ========================================
+   * ANIMATION
+   * ======================================== */
+
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
@@ -230,14 +228,6 @@
   --animate-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
   --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-bounce: bounce 1s infinite;
-
-  --blur-xs: 4px;
-  --blur-sm: 8px;
-  --blur-md: 12px;
-  --blur-lg: 16px;
-  --blur-xl: 24px;
-  --blur-2xl: 40px;
-  --blur-3xl: 64px;
 
   --perspective-dramatic: 100px;
   --perspective-near: 300px;
@@ -257,66 +247,61 @@
   --default-mono-font-variation-settings: var(--font-mono--font-variation-settings);
 }
 
-/* Elite Corporate Dark Theme */
-:root[data-theme='miozu-dark'] {
-  /* Deep, sophisticated dark backgrounds */
-  --color-base0: #0f1419;
-  --color-base1: #1a1f26;
-  --color-base2: #242a33;
-  --color-base3: #4a5568;
-  --color-base4: #a0aec0;
-  --color-base5: #e2e8f0;
-  --color-base6: #f7fafc;
-  --color-base7: #ffffff;
+/* ========================================
+ * DARK THEME
+ * Only overrides color values - grayscale inverts
+ * Supports: [data-theme="miozu-dark"] and [data-theme="dark"]
+ * ======================================== */
 
-  /* RGB versions */
-  --color-base0-rgb: 15, 20, 25;
-  --color-base1-rgb: 26, 31, 38;
-  --color-base2-rgb: 36, 42, 51;
-  --color-base3-rgb: 74, 85, 104;
-  --color-base4-rgb: 160, 174, 192;
-  --color-base5-rgb: 226, 232, 240;
-  --color-base6-rgb: 247, 250, 252;
-  --color-base7-rgb: 255, 255, 255;
+[data-theme='miozu-dark'],
+[data-theme='dark'] {
+  /* Grayscale inverted for dark theme */
+  --color-base00: #0f1419; /* Primary background - dark */
+  --color-base01: #1a1f26; /* Surface/card - darker */
+  --color-base02: #242a33; /* Selection/hover - elevated */
+  --color-base03: #4a5568; /* Muted/disabled */
+  --color-base04: #a0aec0; /* Secondary text - lighter */
+  --color-base05: #e2e8f0; /* Primary text - light */
+  --color-base06: #f7fafc; /* High emphasis - lighter */
+  --color-base07: #ffffff; /* Maximum contrast - white */
 
-  /* Corporate accent colors for dark */
-  --color-base8: #fc8181;
-  --color-base9: #f6ad55;
-  --color-base10: #68d391;
-  --color-base11: #faf089;
-  --color-base12: #63b3ed;
-  --color-base13: #a0aec0;
-  --color-base14: #63b3ed; /* Lighter blue for dark theme */
-  --color-base15: #a0aec0;
+  /* Accents adjusted for dark backgrounds (higher luminance) */
+  --color-base08: #fc8181; /* Error Red */
+  --color-base09: #f6ad55; /* Warning Orange */
+  --color-base0A: #faf089; /* Highlight Yellow */
+  --color-base0B: #68d391; /* Success Green */
+  --color-base0C: #63b3ed; /* Info Cyan */
+  --color-base0D: #63b3ed; /* Primary Blue */
+  --color-base0E: #b794f4; /* Purple */
+  --color-base0F: #f6ad55; /* Secondary Accent */
 
-  /* RGB for accent */
-  --color-base14-rgb: 99, 179, 237;
+  /* Update canonical tokens */
+  --base00: var(--color-base00);
+  --base01: var(--color-base01);
+  --base02: var(--color-base02);
+  --base03: var(--color-base03);
+  --base04: var(--color-base04);
+  --base05: var(--color-base05);
+  --base06: var(--color-base06);
+  --base07: var(--color-base07);
+  --base08: var(--color-base08);
+  --base09: var(--color-base09);
+  --base0A: var(--color-base0A);
+  --base0B: var(--color-base0B);
+  --base0C: var(--color-base0C);
+  --base0D: var(--color-base0D);
+  --base0E: var(--color-base0E);
+  --base0F: var(--color-base0F);
 
   /* Dark borders */
   --color-border: #2d3748;
   --color-border-light: #1a202c;
-
-  /* Semantic colors for jera components (dark) */
-  --color-primary: #63b3ed;
-  --color-secondary: #63b3ed;
-  --color-accent: #b794f4;
-  --color-success: #68d391;
-  --color-warning: #faf089;
-  --color-error: #fc8181;
-  --color-info: #63b3ed;
-
-  /* Semantic surface/text for jera (dark) */
-  --color-bg: #0f1419;
-  --color-surface: #1a1f26;
-  --color-surface-alt: #242a33;
-  --color-hover: #2d3748;
-  --color-text: #e2e8f0;
-  --color-text-strong: #ffffff;
-  --color-text-muted: #a0aec0;
-  --color-muted: #4a5568;
 }
 
-/* Animation keyframes */
+/* ========================================
+ * ANIMATION KEYFRAMES
+ * ======================================== */
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
@@ -350,7 +335,7 @@
   }
 }
 
-/* Deprecated */
+/* Deprecated - for backwards compatibility only */
 @theme default inline reference {
   --blur: 8px;
   --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);

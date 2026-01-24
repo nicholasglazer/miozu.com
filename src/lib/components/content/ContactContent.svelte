@@ -283,7 +283,7 @@
   @reference '$theme';
 
   .contact-content {
-    @apply text-base5;
+    @apply text-base05;
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -314,17 +314,17 @@
   }
 
   .contact-intro h2 {
-    @apply text-2xl font-semibold text-base6 mb-2;
+    @apply text-2xl font-semibold text-base06 mb-2;
     letter-spacing: -0.02em;
   }
 
   .contact-intro p {
-    @apply text-base text-base4;
+    @apply text-base text-base04;
   }
 
   /* Form styles - Theme aware */
   .contact-form {
-    @apply bg-base1 border border-base3 p-6;
+    @apply bg-base01 border border-base03 p-6;
     border-radius: 12px;
   }
 
@@ -344,29 +344,29 @@
   }
 
   .form-group label {
-    @apply block text-sm font-medium text-base5 mb-1.5;
+    @apply block text-sm font-medium text-base05 mb-1.5;
   }
 
   .required {
-    @apply text-base8;
+    @apply text-base08;
   }
 
   .contact-form input,
   .contact-form textarea {
-    @apply w-full py-3 px-4 text-sm bg-base0 text-base6 border border-base3;
+    @apply w-full py-3 px-4 text-sm bg-base00 text-base06 border border-base03;
     border-radius: 10px;
     transition: all 0.2s ease;
   }
 
   .contact-form input:focus,
   .contact-form textarea:focus {
-    @apply outline-none border-base14 bg-base0;
-    box-shadow: 0 0 0 3px rgba(var(--color-base14-rgb), 0.1);
+    @apply outline-none border-base0E bg-base00;
+    box-shadow: 0 0 0 3px rgba(var(--color-base0E-rgb), 0.1);
   }
 
   .contact-form input::placeholder,
   .contact-form textarea::placeholder {
-    @apply text-base4;
+    @apply text-base04;
   }
 
   .contact-form textarea {
@@ -376,20 +376,20 @@
 
   .contact-form input.input-error,
   .contact-form textarea.input-error {
-    @apply border-base8 bg-base8/5;
+    @apply border-base08 bg-base08/5;
   }
 
   .error-message {
-    @apply text-xs text-base8 mt-1;
+    @apply text-xs text-base08 mt-1;
   }
 
   .form-error {
-    @apply bg-base8/10 border border-base8/30 p-3 mb-4;
+    @apply bg-base08/10 border border-base08/30 p-3 mb-4;
     border-radius: 10px;
   }
 
   .form-error p {
-    @apply text-sm text-base8;
+    @apply text-sm text-base08;
   }
 
   .honeypot {
@@ -397,16 +397,16 @@
   }
 
   .success-message {
-    @apply bg-base10/10 border border-base10/30 p-8 text-center;
+    @apply bg-base0A/10 border border-base0A/30 p-8 text-center;
     border-radius: 12px;
   }
 
   .success-message h3 {
-    @apply text-xl font-semibold text-base10 mb-2;
+    @apply text-xl font-semibold text-base0A mb-2;
   }
 
   .success-message p {
-    @apply text-sm text-base5;
+    @apply text-sm text-base05;
   }
 
   /* Sidebar styles - Theme aware */
@@ -415,16 +415,16 @@
   }
 
   .email-card {
-    @apply text-center bg-base14/10 border border-base14/20 p-5;
+    @apply text-center bg-base0E/10 border border-base0E/20 p-5;
     border-radius: 12px;
   }
 
   .card-label {
-    @apply block text-xs font-semibold uppercase tracking-wider text-base4 mb-2;
+    @apply block text-xs font-semibold uppercase tracking-wider text-base04 mb-2;
   }
 
   .email-address {
-    @apply text-sm font-medium text-base14 no-underline;
+    @apply text-sm font-medium text-base0E no-underline;
   }
 
   .email-address:hover {
@@ -433,17 +433,17 @@
 
   .info-card,
   .links-card {
-    @apply p-4 bg-base1 border border-base3;
+    @apply p-4 bg-base01 border border-base03;
     border-radius: 12px;
   }
 
   .info-card h3,
   .links-card h3 {
-    @apply text-sm font-semibold text-base6 mb-3;
+    @apply text-sm font-semibold text-base06 mb-3;
   }
 
   .info-card p {
-    @apply text-xs text-base4 leading-relaxed;
+    @apply text-xs text-base04 leading-relaxed;
   }
 
   .engagement-list {
@@ -454,7 +454,7 @@
   }
 
   .engagement-list li {
-    @apply flex justify-between items-center py-2.5 border-b border-base2;
+    @apply flex justify-between items-center py-2.5 border-b border-base02;
   }
 
   .engagement-list li:last-child {
@@ -462,11 +462,11 @@
   }
 
   .engagement-type {
-    @apply text-xs font-medium text-base6;
+    @apply text-xs font-medium text-base06;
   }
 
   .engagement-desc {
-    @apply text-xs text-base4;
+    @apply text-xs text-base04;
   }
 
   .resource-links {
@@ -474,21 +474,21 @@
   }
 
   .resource-link {
-    @apply flex justify-between items-center py-2.5 px-3 bg-base2 no-underline;
+    @apply flex justify-between items-center py-2.5 px-3 bg-base02 no-underline;
     border-radius: 8px;
     transition: all 0.2s ease;
   }
 
   .resource-link:hover {
-    @apply bg-base3/50;
+    @apply bg-base03/50;
   }
 
   .resource-name {
-    @apply text-xs font-medium text-base6;
+    @apply text-xs font-medium text-base06;
   }
 
   .resource-desc {
-    @apply text-xs text-base4;
+    @apply text-xs text-base04;
   }
 
   @media (max-width: 768px) {

@@ -329,8 +329,8 @@
 
   .system-status {
     @apply fixed bottom-0 left-0 right-0 z-40;
-    @apply bg-base1/95 dark:bg-base1/95 backdrop-blur-sm;
-    @apply border-t border-base3/20 dark:border-base3/10;
+    @apply bg-base01/95 dark:bg-base01/95 backdrop-blur-sm;
+    @apply border-t border-base03/20 dark:border-base03/10;
     @apply text-xs font-mono;
     @apply transform transition-transform duration-300;
     @apply shadow-md;
@@ -346,7 +346,7 @@
 
   .status-toggle {
     @apply w-full flex items-center justify-center py-1 px-4;
-    @apply text-base3 hover:text-base14 transition-colors;
+    @apply text-base03 hover:text-base0E transition-colors;
     @apply cursor-pointer bg-transparent border-none;
   }
 
@@ -355,7 +355,7 @@
   }
 
   .status-content {
-    @apply p-2 border-t border-base3/10;
+    @apply p-2 border-t border-base03/10;
   }
 
   .status-items {
@@ -371,23 +371,23 @@
   .status-item {
     @apply flex flex-col items-center;
     @apply px-3 py-1 rounded-xs;
-    @apply bg-base2/30 dark:bg-base2/30;
+    @apply bg-base02/30 dark:bg-base02/30;
     @apply border-l-2 border-[var(--status-color)];
   }
 
   .item-label {
-    @apply text-base3 mb-1;
+    @apply text-base03 mb-1;
   }
 
   .item-value {
-    @apply flex items-center gap-1 text-base5;
+    @apply flex items-center gap-1 text-base05;
   }
 
   .status-indicator {
     @apply w-8 h-8 rounded-full;
     @apply flex items-center justify-center;
     @apply border-2 border-[var(--status-color)];
-    @apply bg-base2/30 dark:bg-base2/30 text-[var(--status-color)];
+    @apply bg-base02/30 dark:bg-base02/30 text-[var(--status-color)];
   }
 
   .indicator-dot {
@@ -397,7 +397,7 @@
 
   .perf-details {
     @apply flex justify-center gap-4 mt-1 pt-1;
-    @apply text-xs text-base3 border-t border-base3/10;
+    @apply text-xs text-base03 border-t border-base03/10;
   }
 
   /* Responsive adjustments */

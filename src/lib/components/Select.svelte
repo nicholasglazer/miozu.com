@@ -125,8 +125,8 @@
   }
 
   .select-content {
-    @apply absolute z-50 w-full mt-1 rounded-xs border bg-base1 dark:bg-base2;
-    @apply border-base3/40 dark:border-base3/60;
+    @apply absolute z-50 w-full mt-1 rounded-xs border bg-base01 dark:bg-base02;
+    @apply border-base03/40 dark:border-base03/60;
     @apply shadow-lg;
     @apply flex flex-col;
     @apply overflow-y-auto max-h-[200px];
@@ -136,22 +136,22 @@
   .select-item {
     @apply relative w-full cursor-default select-none py-1.5 pl-2 pr-8 text-sm outline-none;
     @apply flex items-center justify-between;
-    @apply text-base5 dark:text-base6;
-    @apply transition-colors hover:bg-base2/50 dark:hover:bg-base3/50;
+    @apply text-base05 dark:text-base06;
+    @apply transition-colors hover:bg-base02/50 dark:hover:bg-base03/50;
   }
 
   .select-item-indicator {
     @apply absolute right-2 flex h-4 w-4 items-center justify-center;
-    @apply text-base14;
+    @apply text-base0E;
   }
 
   :global(.dark) .select-content {
-    @apply bg-base2/95 border-base4/60;
+    @apply bg-base02/95 border-base04/60;
     @apply shadow-lg shadow-base0/30;
   }
 
   :global(.dark) .select-item {
-    @apply text-base7;
-    @apply hover:bg-base3/50;
+    @apply text-base07;
+    @apply hover:bg-base03/50;
   }
 </style>

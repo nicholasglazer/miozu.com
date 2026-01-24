@@ -117,7 +117,7 @@
 
   /* @apply animate-in fade-in-0 zoom-in-95; */
   .select-content {
-    @apply absolute z-50 w-full mt-1 rounded-xs border border-base4 bg-base0 shadow-lg;
+    @apply absolute z-50 w-full mt-1 rounded-xs border border-base04 bg-base00 shadow-lg;
     @apply flex flex-col;
     @apply overflow-y-auto max-h-[200px];
     scrollbar-gutter: stable;
@@ -126,7 +126,7 @@
   .select-item {
     @apply relative w-full cursor-default select-none py-1.5 pl-2 pr-8 text-sm outline-none;
     @apply flex items-center justify-between;
-    @apply transition-colors hover:bg-base2/50;
+    @apply transition-colors hover:bg-base02/50;
   }
 
   .select-item-indicator {

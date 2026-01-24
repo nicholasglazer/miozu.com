@@ -1,0 +1,148 @@
+# Miozu Design System - AI Documentation Index
+# https://miozu.com/llms.txt
+# Last updated: 2026-01-24
+
+> Miozu is a Base16 semantic color system and component library for building consistent, accessible, AI-friendly interfaces. Write once, theme everywhere.
+
+## Quick Start
+- [Design System Overview](/design-system): Component library and theming
+- [Color Philosophy](/design-system/docs/color-philosophy): Base16 semantic patterns
+- [Color Playground](/design-system/docs/color-playground): Interactive theme editor
+- [Theming Guide](/design-system/docs/theming): Implementation patterns
+
+## Design Tokens (Machine-Readable)
+- [/tokens/base16.json](/tokens/base16.json): Complete Base16 token definitions
+- [/tokens/semantic.json](/tokens/semantic.json): Semantic alias mappings
+- [/tokens/accessibility.json](/tokens/accessibility.json): WCAG contrast matrix
+
+## Base16 Semantic System
+
+### Foundation Colors (base00-07)
+| Token | Responsibility | Usage |
+|-------|---------------|-------|
+| base00 | Default background | Page canvas, app base |
+| base01 | Elevated surface | Cards, modals, panels |
+| base02 | Selection/hover | Interactive states |
+| base03 | Disabled | Inactive elements |
+| base04 | Secondary text | Captions, helper text |
+| base05 | Primary text | Body content |
+| base06 | Emphasized text | Headings |
+| base07 | Maximum emphasis | Critical information |
+
+### Functional Colors (base08-0F)
+| Token | Semantic Role | UI Usage |
+|-------|--------------|----------|
+| base08 | DESTRUCTIVE | Delete buttons, error states, critical alerts |
+| base09 | WARNING | Warning alerts, pending states, caution |
+| base0A | HIGHLIGHT | Search results, featured content, attention |
+| base0B | SUCCESS | Success messages, completed tasks, positive |
+| base0C | INFO | Information, secondary actions, neutral |
+| base0D | PRIMARY | Primary buttons, links, brand actions |
+| base0E | SPECIAL | Premium features, AI, unique elements |
+| base0F | ALTERNATIVE | Deprecated, legacy, edge cases |
+
+## Semantic Aliases (Recommended for Code)
+```
+--color-error: var(--base08)
+--color-warning: var(--base09)
+--color-highlight: var(--base0A)
+--color-success: var(--base0B)
+--color-info: var(--base0C)
+--color-primary: var(--base0D)
+--color-special: var(--base0E)
+--color-alternative: var(--base0F)
+```
+
+## Component-to-Color Quick Reference
+
+### Buttons
+- Primary action: base0D (--color-primary)
+- Secondary action: base0C (--color-info)
+- Destructive action: base08 (--color-error)
+- Success confirmation: base0B (--color-success)
+- Warning action: base09 (--color-warning)
+
+### Alerts/Notifications
+- Error alert: base08 background at 15% opacity, base08 border
+- Warning alert: base09 background at 15% opacity, base09 border
+- Success alert: base0B background at 15% opacity, base0B border
+- Info alert: base0C background at 15% opacity, base0C border
+
+### Badges/Status
+- Active/Online: base0B
+- Pending/Review: base09
+- Error/Blocked: base08
+- Info/Default: base0C
+- Premium/Special: base0E
+- New/Featured: base0A
+- Deprecated: base0F
+
+### Form States
+- Focus ring: base0D
+- Error state: base08
+- Success validation: base0B
+- Warning validation: base09
+
+## WCAG Accessibility
+
+### Minimum Contrast Ratios
+- Normal text: 4.5:1 (AA) / 7:1 (AAA)
+- Large text (18pt+): 3:1 (AA) / 4.5:1 (AAA)
+- UI components: 3:1 (AA)
+
+### Safe Combinations (Dark Theme)
+| Foreground | Background | Ratio | WCAG |
+|------------|------------|-------|------|
+| base05 | base00 | 12.4:1 | AAA |
+| base05 | base01 | 10.2:1 | AAA |
+| base06 | base00 | 15.1:1 | AAA |
+| base07 | base00 | 21:1 | AAA |
+| base08 | base00 | 5.2:1 | AA |
+| base0B | base00 | 8.1:1 | AAA |
+| base0D | base00 | 6.3:1 | AA |
+
+## Integration Patterns
+
+### CSS Custom Properties
+```css
+:root {
+  --color-bg: var(--base00);
+  --color-surface: var(--base01);
+  --color-text: var(--base05);
+  --color-primary: var(--base0D);
+  --color-error: var(--base08);
+  --color-success: var(--base0B);
+}
+```
+
+### Theme Switching
+```javascript
+// Toggle between dark and light
+document.documentElement.setAttribute('data-theme', 'light');
+// Colors automatically invert via CSS variable reassignment
+```
+
+### Framework Agnostic
+The Base16 system works identically in:
+- Svelte/SvelteKit
+- React/Next.js
+- Vue/Nuxt
+- Vanilla CSS/JS
+- Native iOS/Android (via design tokens)
+
+## AI Agent Instructions
+
+When implementing UI with Miozu colors:
+1. ALWAYS use semantic aliases (--color-error) not raw tokens (--base08)
+2. NEVER mix semantic meanings (don't use base08 for non-destructive actions)
+3. For dark/light themes, the same CSS works - colors auto-invert
+4. Check /tokens/accessibility.json before combining colors
+5. Use the Component-to-Color reference above for consistency
+
+## Related Resources
+- [Jera Component Library](https://github.com/miozu/jera): Svelte 5 components using this system
+- [Theme Ports](/ports): VS Code, terminals, and editor themes
+- [Contact](/contact): Enterprise licensing and support
+
+## Optional: llms-full.txt
+For complete documentation dump, see /llms-full.txt

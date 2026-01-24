@@ -163,7 +163,7 @@
   .api-section {
     margin: 1.5rem 0;
     padding: 1rem;
-    background: var(--color-base1);
+    background: var(--color-base01);
     border-radius: 0.5rem;
   }
 
@@ -191,7 +191,7 @@
   .param span {
     font-size: 0.8125rem;
     font-family: var(--font-mono);
-    color: var(--color-base4);
+    color: var(--color-base04);
   }
 
   .param p {

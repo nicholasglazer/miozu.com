@@ -22,7 +22,7 @@
   @reference '$theme';
   .switch-container {
     @apply relative w-10 h-5 rounded-full cursor-pointer transition-colors duration-300;
-    @apply border border-base1;
+    @apply border border-base01;
     @apply bg-transparent appearance-none;
     @apply focus:outline-none focus:ring-0 focus:ring-offset-0;
   }
@@ -30,6 +30,6 @@
     @apply absolute top-0.5 left-1 w-7 h-7 rounded-full transition-transform duration-200;
   }
   :global(.dark) .switch-container {
-    @apply border-base7;
+    @apply border-base07;
   }
 </style>

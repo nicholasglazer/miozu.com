@@ -179,7 +179,7 @@
   @reference '$theme';
 
   .products-content {
-    @apply text-base5;
+    @apply text-base05;
   }
 
   .section-header {
@@ -187,11 +187,11 @@
   }
 
   .section-eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base4;
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base04;
   }
 
   .section-header h2 {
-    @apply text-2xl font-semibold text-base6 mt-2 mb-0;
+    @apply text-2xl font-semibold text-base06 mt-2 mb-0;
     letter-spacing: -0.02em;
   }
 
@@ -218,7 +218,7 @@
   }
 
   .ecosystem-step {
-    @apply min-w-[200px] p-6 text-center bg-base1 border border-base3;
+    @apply min-w-[200px] p-6 text-center bg-base01 border border-base03;
     border-radius: 12px;
     opacity: 0;
     transform: translateY(20px);
@@ -232,23 +232,23 @@
   }
 
   .step-number {
-    @apply text-2xl font-bold text-base14;
+    @apply text-2xl font-bold text-base0E;
   }
 
   .ecosystem-step h3 {
-    @apply text-base font-semibold text-base6 mt-2 mb-1;
+    @apply text-base font-semibold text-base06 mt-2 mb-1;
   }
 
   .step-product {
-    @apply text-sm font-medium text-base14;
+    @apply text-sm font-medium text-base0E;
   }
 
   .ecosystem-step p {
-    @apply text-sm text-base4 mt-2;
+    @apply text-sm text-base04 mt-2;
   }
 
   .ecosystem-arrow {
-    @apply text-2xl font-bold text-base14;
+    @apply text-2xl font-bold text-base0E;
   }
 
   @media (max-width: 767px) {
@@ -258,7 +258,7 @@
   }
 
   .product-section {
-    @apply py-12 border-t border-base3;
+    @apply py-12 border-t border-base03;
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -270,7 +270,7 @@
   }
 
   .product-section.featured {
-    @apply bg-base14/5 my-4 px-8;
+    @apply bg-base0E/5 my-4 px-8;
     border-radius: 16px;
   }
 
@@ -279,29 +279,29 @@
   }
 
   .product-status {
-    @apply inline-block px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] mb-4 bg-base2 text-base4;
+    @apply inline-block px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.1em] mb-4 bg-base02 text-base04;
     border-radius: 999px;
   }
 
   .product-status.live {
-    @apply bg-base14/15 text-base14;
+    @apply bg-base0E/15 text-base0E;
   }
 
   .product-status.soon {
-    @apply bg-base2 text-base4;
+    @apply bg-base02 text-base04;
   }
 
   .product-header h2 {
-    @apply text-4xl font-semibold text-base6 m-0;
+    @apply text-4xl font-semibold text-base06 m-0;
     letter-spacing: -0.02em;
   }
 
   .product-tagline {
-    @apply block text-lg font-medium text-base14 mt-2;
+    @apply block text-lg font-medium text-base0E mt-2;
   }
 
   .product-description {
-    @apply max-w-lg mx-auto mt-4 text-base5;
+    @apply max-w-lg mx-auto mt-4 text-base05;
   }
 
   .product-metrics {
@@ -315,16 +315,16 @@
   }
 
   .metric-card {
-    @apply p-4 text-center bg-base1 border border-base3;
+    @apply p-4 text-center bg-base01 border border-base03;
     border-radius: 12px;
   }
 
   .metric-value {
-    @apply block text-xl font-bold text-base6;
+    @apply block text-xl font-bold text-base06;
   }
 
   .metric-label {
-    @apply block text-xs font-semibold uppercase tracking-[0.1em] text-base4 mt-1;
+    @apply block text-xs font-semibold uppercase tracking-[0.1em] text-base04 mt-1;
   }
 
   .product-actions {
@@ -338,7 +338,7 @@
   }
 
   .btn-primary {
-    @apply bg-base14 text-white;
+    @apply bg-base0E text-white;
   }
 
   .btn-primary:hover {
@@ -347,15 +347,15 @@
   }
 
   .btn-secondary {
-    @apply bg-base1 text-base6 border border-base3;
+    @apply bg-base01 text-base06 border border-base03;
   }
 
   .btn-secondary:hover {
-    @apply bg-base2;
+    @apply bg-base02;
   }
 
   .product-features h3 {
-    @apply text-center text-xl font-semibold text-base6 mb-6;
+    @apply text-center text-xl font-semibold text-base06 mb-6;
   }
 
   .features-grid {
@@ -369,7 +369,7 @@
   }
 
   .feature-card {
-    @apply p-6 bg-base1 border border-base3;
+    @apply p-6 bg-base01 border border-base03;
     border-radius: 12px;
     opacity: 0;
     transform: translateY(16px);
@@ -383,10 +383,10 @@
   }
 
   .feature-card h4 {
-    @apply text-base font-semibold text-base6 mb-2;
+    @apply text-base font-semibold text-base06 mb-2;
   }
 
   .feature-card p {
-    @apply text-sm text-base5 m-0;
+    @apply text-sm text-base05 m-0;
   }
 </style>

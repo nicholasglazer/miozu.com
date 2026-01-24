@@ -130,7 +130,7 @@
   .control label {
     font-size: 0.75rem;
     font-weight: 500;
-    color: var(--color-base4);
+    color: var(--color-base04);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -139,8 +139,8 @@
     padding: 0.5rem 0.75rem;
     border: 1px solid var(--color-border);
     border-radius: var(--radius-sm, 0.25rem);
-    background: var(--color-base0);
-    color: var(--color-base5);
+    background: var(--color-base00);
+    color: var(--color-base05);
     font-size: 0.875rem;
   }
 
@@ -154,24 +154,24 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.875rem;
-    color: var(--color-base5);
+    color: var(--color-base05);
     cursor: pointer;
   }
 
   .control-row input[type="checkbox"] {
     width: 1rem;
     height: 1rem;
-    accent-color: var(--color-base14);
+    accent-color: var(--color-base0E);
   }
 
   .value-display {
     padding-top: 0.75rem;
     font-size: 0.75rem;
-    color: var(--color-base4);
+    color: var(--color-base04);
     border-top: 1px solid var(--color-border);
   }
 
   .value-display code {
-    color: var(--color-base14);
+    color: var(--color-base0E);
   }
 </style>

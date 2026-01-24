@@ -189,7 +189,7 @@
   @reference '$theme';
 
   .data-content {
-    @apply text-base4;
+    @apply text-base04;
   }
 
   .section-header {
@@ -197,20 +197,20 @@
   }
 
   .section-label {
-    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base4;
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-base04;
   }
 
   .section-header h2 {
-    @apply mt-2 text-2xl font-semibold text-base6;
+    @apply mt-2 text-2xl font-semibold text-base06;
     letter-spacing: -0.02em;
   }
 
   .lead {
-    @apply mt-3 text-base text-base5 leading-relaxed;
+    @apply mt-3 text-base text-base05 leading-relaxed;
   }
 
   .section-desc {
-    @apply mt-2 text-sm text-base4;
+    @apply mt-2 text-sm text-base04;
   }
 
   /* Overview Section */
@@ -231,15 +231,15 @@
   }
 
   .overview-item {
-    @apply p-4 rounded-xl border border-base3 bg-base0;
+    @apply p-4 rounded-xl border border-base03 bg-base00;
   }
 
   .overview-label {
-    @apply block text-xs text-base4 mb-1;
+    @apply block text-xs text-base04 mb-1;
   }
 
   .overview-value {
-    @apply block text-sm font-medium text-base6;
+    @apply block text-sm font-medium text-base06;
   }
 
   /* Events Section */
@@ -260,7 +260,7 @@
   }
 
   .event-card {
-    @apply rounded-xl border border-base3 bg-base0 overflow-hidden;
+    @apply rounded-xl border border-base03 bg-base00 overflow-hidden;
     opacity: 0;
     transform: translateY(16px);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
@@ -273,23 +273,23 @@
   }
 
   .event-header {
-    @apply p-4 bg-base1 border-b border-base3 flex items-center gap-4;
+    @apply p-4 bg-base01 border-b border-base03 flex items-center gap-4;
   }
 
   .event-name {
-    @apply px-2 py-1 rounded bg-base14/10 text-base14 text-sm font-mono font-medium;
+    @apply px-2 py-1 rounded bg-base0E/10 text-base0E text-sm font-mono font-medium;
   }
 
   .event-desc {
-    @apply text-sm text-base4;
+    @apply text-sm text-base04;
   }
 
   .fields-table {
-    @apply divide-y divide-base2;
+    @apply divide-y divide-base02;
   }
 
   .table-header {
-    @apply grid grid-cols-3 gap-4 px-4 py-2 bg-base1/50 text-xs font-semibold text-base4 uppercase tracking-wider;
+    @apply grid grid-cols-3 gap-4 px-4 py-2 bg-base01/50 text-xs font-semibold text-base04 uppercase tracking-wider;
   }
 
   .table-row {
@@ -297,15 +297,15 @@
   }
 
   .field-name {
-    @apply text-sm font-mono text-base6;
+    @apply text-sm font-mono text-base06;
   }
 
   .field-type {
-    @apply text-xs text-base14 font-medium;
+    @apply text-xs text-base0E font-medium;
   }
 
   .field-desc {
-    @apply text-xs text-base4;
+    @apply text-xs text-base04;
   }
 
   /* Quality Section */
@@ -326,15 +326,15 @@
   }
 
   .quality-item {
-    @apply p-5 rounded-xl border border-base3 bg-base0;
+    @apply p-5 rounded-xl border border-base03 bg-base00;
   }
 
   .quality-item h3 {
-    @apply text-sm font-semibold text-base6 mb-2;
+    @apply text-sm font-semibold text-base06 mb-2;
   }
 
   .quality-item p {
-    @apply text-xs text-base4 leading-relaxed;
+    @apply text-xs text-base04 leading-relaxed;
   }
 
   /* CTA Section */
@@ -351,15 +351,15 @@
   }
 
   .cta-content {
-    @apply mx-auto max-w-2xl flex flex-col items-center gap-4 rounded-2xl border border-base3 bg-base1 px-8 py-10 text-center;
+    @apply mx-auto max-w-2xl flex flex-col items-center gap-4 rounded-2xl border border-base03 bg-base01 px-8 py-10 text-center;
   }
 
   .cta-content h2 {
-    @apply text-xl font-semibold text-base6;
+    @apply text-xl font-semibold text-base06;
   }
 
   .cta-content p {
-    @apply text-sm text-base4;
+    @apply text-sm text-base04;
   }
 
   .cta-actions {
