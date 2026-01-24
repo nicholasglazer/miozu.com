@@ -5,6 +5,7 @@
   import {appName, domain} from '$settings/global';
   import { cardTransition } from '$lib/reactiveStates/cardTransition.svelte';
   import MegaMenu from '$lib/features/layout/MegaMenu.svelte';
+  import Logo from '$lib/components/Logo.svelte';
 
   // Priority-based lazy loading for ThreeCanvas
   // Phase 1: Hero + About (visible immediately, highest priority)
@@ -36,33 +37,33 @@
       route: '/about',
       effectType: 'sinuous-original',
       canvasId: 'canvas-about',
-      label: 'Company',
-      title: 'About',
-      description: 'The behavioral data layer powering next-gen AI.'
+      label: 'Rapid Development',
+      title: 'AI-First System',
+      description: 'Comprehensive enterprise components for rapid prototyping and production.'
     },
     platform: {
       route: '/solutions',
       effectType: 'synaptic-multipass',
       canvasId: 'canvas-platform',
-      label: 'Products',
-      title: 'Platform',
-      description: 'Commerce Behavior Index & Demand Prediction APIs.'
+      label: 'Enterprise',
+      title: 'Components',
+      description: 'Form builders, canvas tools, and full-featured enterprise blocks.'
     },
     data: {
       route: '/data',
       effectType: 'synaptic',
       canvasId: 'canvas-data',
-      label: 'Documentation',
-      title: 'Schema',
-      description: 'Event types, field specs, and delivery formats.'
+      label: 'Developer',
+      title: 'Tooling',
+      description: 'Base16 themes, design tokens, and development environment.'
     },
     contact: {
       route: '/contact',
       effectType: 'ether',
       canvasId: 'canvas-contact',
-      label: 'Inquiries',
-      title: 'Contact',
-      description: 'Request data access for your organization.'
+      label: 'Comprehensive',
+      title: 'Enterprise',
+      description: 'Full-scale implementation, support, and custom development.'
     }
   };
 
@@ -121,12 +122,12 @@
 </script>
 
 <Metadata
-  title="Miozu — Enterprise Commerce Data"
-  description="First-party behavioral data for AI training. Licensed commerce datasets and demand prediction APIs for enterprise."
+  title="Miozu — Rapid Enterprise Development with AI-First Components"
+  description="AI-first enterprise design system for rapid prototyping and production apps. Comprehensive Svelte components, form builders, and enterprise features."
   canonicalUrl={domain}
   ogType="website"
   ogImage={`${domain}/images/miozu-og-banner.jpg`}
-  ogImageAlt="Miozu - Commerce Intelligence Infrastructure"
+  ogImageAlt="Miozu - Rapid Enterprise Development Platform"
   robots="index, follow"
 />
 
@@ -134,13 +135,13 @@
   type="Organization"
   data={{
     name: appName,
-    description: 'Commerce intelligence infrastructure company providing enterprise data products, demand prediction APIs, and AI training datasets.',
+    description: 'AI-first platform for rapid enterprise development and prototyping. Comprehensive Svelte components, enterprise security, and production-ready design systems.',
     url: domain,
     logo: `${domain}/favicon.svg`,
     contactPoint: {
       '@type': 'ContactPoint',
-      email: 'partners@miozu.com',
-      contactType: 'enterprise inquiries'
+      email: 'hello@miozu.com',
+      contactType: 'rapid development inquiries'
     },
     parentOrganization: {
       '@type': 'Organization',
@@ -150,13 +151,13 @@
   }}
 />
 
-<!-- WebSite Schema for GEO -->
+<!-- WebSite Schema for SEO -->
 <JsonLd
   type="WebSite"
   data={{
     name: appName,
     url: domain,
-    description: 'Enterprise commerce intelligence platform providing behavioral data, demand prediction, and AI training datasets for fashion, retail, and AI companies.',
+    description: 'Rapid enterprise development platform with AI-first components for prototyping and production. Comprehensive Svelte tools, enterprise security, and accelerated development workflows.',
     publisher: {
       '@type': 'Organization',
       name: appName,
@@ -171,7 +172,7 @@
   data={{
     name: appName,
     url: domain,
-    description: 'Commerce intelligence infrastructure for enterprise brands and AI systems. Data collection, processing, and prediction at scale.',
+    description: 'Rapid enterprise development platform providing comprehensive AI-first tools for prototyping to production. Accelerates enterprise application development with comprehensive features.',
     numberOfEmployees: {
       '@type': 'QuantitativeValue',
       value: '10-50'
@@ -179,18 +180,20 @@
     subOrganization: [
       {
         '@type': 'Organization',
-        name: "J'ko AI",
-        url: 'https://jko.ai',
-        description: 'AI virtual try-on platform - primary data collection layer for commerce behavioral signals'
+        name: '.miozu',
+        description: 'Developer tooling ecosystem including Linux themes and development environment configurations'
       }
     ],
     knowsAbout: [
-      'Commerce Intelligence',
-      'AI Training Data',
-      'Demand Prediction',
-      'Fashion Analytics',
-      'Behavioral Data',
-      'Enterprise Data Products'
+      'Rapid Enterprise Development',
+      'AI-First Prototyping',
+      'Comprehensive Enterprise Features',
+      'Production-Ready Components',
+      'Svelte 5 Architecture',
+      'Enterprise Security',
+      'Design System Acceleration',
+      'Development Workflow Optimization',
+      'Base16 Developer Tooling'
     ]
   }}
 />
@@ -199,11 +202,14 @@
   <!-- Header Row -->
   <header class="grid-header">
     <div class="header-left">
-      <a href="/" class="logo">orakle<span class="logo-x">X</span></a>
+      <a href="/" class="logo">
+        <Logo type="full" size={32} variant="default" />
+      </a>
     </div>
     <nav class="header-nav">
       <MegaMenu />
-      <a href="/data" class="nav-link">Schema</a>
+      <a href="/design-system" class="nav-link">Components</a>
+      <a href="/solutions" class="nav-link">Solutions</a>
       <a href="/about" class="nav-link">About</a>
       <a href="/contact" class="nav-link">Contact</a>
     </nav>
@@ -218,9 +224,11 @@
       {/if}
       <div class="block-overlay">
         <div class="hero-content">
-          <span class="hero-label">AI Commerce Intelligence</span>
-          <h1 class="hero-title">orakle<span class="title-x">X</span></h1>
-          <p class="hero-tagline">Transform shopping behavior into AI training data</p>
+          <span class="hero-label">Rapid Enterprise Development</span>
+          <div class="hero-title">
+            <Logo type="full" size={64} variant="default" />
+          </div>
+          <p class="hero-tagline">AI-first components for rapid prototyping and enterprise-grade production apps</p>
         </div>
       </div>
     </div>
@@ -238,9 +246,9 @@
       {/if}
       <div class="block-overlay block-overlay-about">
         <div class="block-content">
-          <span class="block-label">Company</span>
-          <h2 class="block-title">About</h2>
-          <p class="block-desc">Commerce data infrastructure. Enterprise-ready.</p>
+          <span class="block-label">Rapid Development</span>
+          <h2 class="block-title">AI-First System</h2>
+          <p class="block-desc">Comprehensive enterprise components. Production-ready.</p>
         </div>
         <div class="block-corner">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -262,11 +270,11 @@
         <ThreeCanvas type="synaptic-multipass" lowRes={true} id="canvas-platform" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Products</span>
-        <h2 class="block-title">Platform</h2>
+        <span class="block-label">Enterprise</span>
+        <h2 class="block-title">Components</h2>
         <ul class="block-list">
-          <li>Commerce Behavior Index</li>
-          <li>Demand Prediction API</li>
+          <li>Rapid Prototyping Tools</li>
+          <li>Production-Grade Blocks</li>
         </ul>
       </div>
       <div class="block-corner">
@@ -288,9 +296,9 @@
         <ThreeCanvas type="synaptic" lowRes={true} id="canvas-data" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Documentation</span>
-        <h2 class="block-title">Schema</h2>
-        <p class="block-desc">Event types, field specs, delivery formats.</p>
+        <span class="block-label">Developer</span>
+        <h2 class="block-title">Tooling</h2>
+        <p class="block-desc">Comprehensive development environment setup.</p>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -311,9 +319,9 @@
         <ThreeCanvas type="ether" lowRes={true} id="canvas-contact" />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Inquiries</span>
-        <h2 class="block-title">Contact</h2>
-        <span class="block-email-light">Request data access</span>
+        <span class="block-label">Comprehensive</span>
+        <h2 class="block-title">Enterprise</h2>
+        <span class="block-email-light">Full-scale implementation</span>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -322,27 +330,26 @@
       </div>
     </button>
 
-    <!-- Small Block 4: J'ko (Data Source) (PRIORITY 2) -->
-    <a
-      href="https://jko.ai"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="block block-small block-jko"
+    <!-- Small Block 4: .miozu Linux (Side Project) (PRIORITY 2) -->
+    <button
+      type="button"
+      class="block block-small block-linux"
+      onclick={() => window.open('/#linux', '_blank')}
     >
       {#if ThreeCanvas && allCardsReady}
         <ThreeCanvas type="snake-trails" lowRes={true} />
       {/if}
       <div class="block-content block-content-overlay">
-        <span class="block-label">Data Source</span>
-        <h2 class="block-title">J'ko AI</h2>
-        <p class="block-desc">Production virtual try-on platform.</p>
+        <span class="block-label">Linux</span>
+        <h2 class="block-title">.miozu</h2>
+        <p class="block-desc">System themes and configurations.</p>
       </div>
       <div class="block-corner">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M7 17L17 7M17 7H7M17 7V17"/>
         </svg>
       </div>
-    </a>
+    </button>
   </div>
 </div>
 

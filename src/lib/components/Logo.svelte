@@ -1,52 +1,90 @@
 <script>
-  // Miozu text logo component
-  let {size = 28, class: className = '', variant = 'default'} = $props();
-
-  // Calculate font size based on size prop
-  let fontSize = $derived(Math.round(size * 0.85));
+  // Miozu SVG logo component - supports icon and full name variants
+  let {
+    size = 28,
+    class: className = '',
+    variant = 'default',
+    type = 'icon' // 'icon' for m symbol, 'full' for miozu text
+  } = $props();
 
   // Color variants for different contexts
   const variants = {
     default: 'var(--color-base6)',
     light: '#FFFFFF',
-    accent: 'var(--color-base14)'
+    accent: 'var(--color-base0D)'
   };
 
   let fillColor = $derived(variants[variant] || variants.default);
+
+  // Calculate dimensions based on type
+  let width = $derived(type === 'full' ? Math.round(size * 3.9) : size);
+  let height = $derived(size);
 </script>
 
-<span
-  class="logo-text {className}"
-  style="font-size: {fontSize}px; color: {fillColor}; height: {size}px;"
-  aria-label="Miozu Logo"
->
-  <span class="logo-main">orakle</span><span class="logo-x">X</span>
-</span>
+{#if type === 'icon'}
+  <!-- Miozu Icon (m symbol) -->
+  <svg
+    class="logo-icon {className}"
+    width={width}
+    height={height}
+    viewBox="0 0 564 564"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    aria-label="Miozu"
+    style="color: {fillColor};"
+  >
+    <rect x="42" y="141" width="481" height="282" fill="url(#pattern0_202_5)"/>
+    <defs>
+      <pattern id="pattern0_202_5" patternContentUnits="objectBoundingBox" width="1" height="1">
+        <use xlink:href="#image0_202_5" transform="matrix(0.00342853 0 0 0.00584795 -0.0074224 0)"/>
+      </pattern>
+      <image id="image0_202_5" width="296" height="171" preserveAspectRatio="none"
+        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASgAAACrCAYAAADVVAHbAAAABHNCSVQICAgIfAhkiAAAD9FJREFUeJzt3XmQXFUVx/FvZpIJWQjZQENCQogRBASVUiEgUmyWigJSgGDAshQp1HIDF0oULFYFRbREyw3LvSh3KBUjYCFqFBEXREAMJCELkAiEJWCSGf84M0Uz9nS/1/3uO+e9/n2qTiV/zPS799ye816/vve+cfSmBcBK70YUYBawaPjf6cAOwGxgfMPPDAFPAA8PxwbgNuCxUlvaeyYB84F52LiMjM9U4ElsTB5v+Hc9cA+w2aOxUY3zbkBJFgCHDsfh2BtisWuL8tkFeNFw7IcVpUXYH0EnhoB/AbcAfxiO24AtXbe098wB9mmIPbD3244dvt5abGzuAf4J3DocOqHUyHOANwJfwgZ6aFT8y69pmSwG3g58B1jH/7c/RfwXuBk4B9g3fRcrazx2orscuI9yxmYQuAt7P7wD2Cl5L6VQ04GjgSuA22k/4BEL1HOAs4A7KedN3y5WAhdhVwO9rg84AisQj+I/Ntuwk8n7sI+QEsxk4FXAJ7CPKdvIN8BRClQ/8AbgJ8BW/N/4Y529lwGvTZSDyPYCLgUewH8cWsW1wMGJciAZDGADcB5wE/ZxpJsB9S5QzwcuIf4bf3T8kfoXqj7gGOB6/POdN34PHEvv3Ft20w+8FPgQcB32rUeRA+lVoPYGfpixjZFjOXBgwbnxNgk4E1iFf367jVuAFxebHtkbeDfwY+AR0g5g2QVqMfBt7OOS95u3yLgGmFtgnjxMAT4AbMQ/n0XGFuCTdP5Nb89bBJwGfA94kHIHr6wCNQE4F3uzeL9hU8VG4NVFJaxEA8CHqV9hGh33Aa8sKGe1tjOwFLgKWI3voJVRoF4E3OHUP4+4mOrc+zieenyUyxpbgbOpzviUYhZwHHAlcb46H4mUBWoA+3o+7zeLdYhfANO6T2EyL8buz3jnySuWATO7zmJFbY99w/MpbFZy5PstqQrUfsQrxmXHPcCu3SayYP3AR4k7laPMWAk8r7t0VsN22IzaC4DfUa3BL7pATcSmDfTiVVOzWE2cIrUbNj3COyeRYh01LFLjgQOAjwA3AE/hn+hOo8gCNQ/4S4A+RYvVwMIu8lqEU7HFuN65iBiVL1LjsBu978dmqj6Gf1KLiqIK1Cuw3QG8+xM1VuGzbmwA+EIH7e21WIf/SSSX3bHFiN8H/oN/AlNFEQXqnVTrY61X3I6tlSzLXODPCfpR17gb2wImrGOAb1PeqvkI0U2BGg98I0AfqhS/6CjT+R1E/ec1pRqfvg7yXYpp2H2lh/FPVFnRaYGaha138m5/FeOtHeQ7jzcATwfoZ1Xj0/lTXq6RKf9lz+r2iE4K1L74TzCtcjyObbyXwtkB+leHOCJv4j1MAt6DbUHqnbBUkbdALaFeXxJ4xc9y5r2dPuDLAfpVl7if4PejGk0EzqCeVw15CtQhFL+bQi/H0Tly38p4bGG5d3/qFp/NMwgRTMDuH6zEP3lFxc0Z+34E1Z7vFTFWYtMAujEBuxrz7ksdYxB4efahiKMfOAW7+vBOYjexGdswrp2j6H5jPEXzOD1D/scyCfhVgD7UOX6beTQS62R1cx9wMra75aJim1OKM4AvtvmZg7GFld2e6ZvZiq1V/C12JbeGZz9+6HFse5bp2MLOxpiFzfPZHzvLpWhfGUbWg23N+XsD2JXTYYW36Nk2Yd/WLseesrK+IR7AruBGxmQGNi4zsSe57I29f3ZO3MbUDgVu9G5EN/qBk4C/4V/xs8a1Gfq1P8Uvj/gTNpXjEGwNYxEGsHk/l1HN+4Sn5uxvP7ZBXoq2bML2JXsXtnqiiDlBC7D9zpZRzQm91xeQgzBeDfwb/6S2inXY2a6VfSjm27pB7Ax8FvbwxjIsAb5Ldf4YbsrRt3HYE1WKPP4g9ke4lPS7Ts7EnsBStRPJkhTJ8DIRuJCYN5UHaf/UiwV0PwdsM/YUEM9HAc3DHr9VhUKVdR1Ykevq1mK7nKaak9VKP1YQo5/MR+KaNGnwtQD4Kf7JbYwL2rR5Bs0f8Jk1tmDzcebkS1VSewC/xj/3reLcDP34YEHHegrbSHByluQlNoA9EORx/MegVQwS6z1dqKXYZ3vvJC+n9T2FATpfvjIIXE3sbStOJ+ZV7RbaP37+KIrZ+PDHxHwA6Xzi71V1frLeB7AQ35vom2h9KT8O+FGHr/1v7IZ6FbyQ7q4QU8TH2rR5H7qfIPtP4j8wYDz2GHXv8Rgr1hJ4IXERtgd+g09yj2vTtvM7eM2t2ON8JnaYDy+zgL/i/4YfwrZgGd+irc+lu901BoHPUK1pGO/Ff1zGimMT9juEqcCtlJvUq9q06Ujyf3y4A/sauqqm4f+RYhB7eMFYJtLdfk7rqO5jwE/Dvxg1i2+l7HQUu1DegtsV2O4MY5lL/u1lLsMm6FXdDHwfuXR5m/Z9r4vX/gHlbo6Xwrn4F6TR8UDSHgfycdIncwutz9ATsImTWV9vG3Zmq5M98dmd4X5azzl6f4evuxV4Sxf5iOZq/IvS6Ng3aY+DmEL6x5qf2aYNV+R4rceAV3Xb6aBOofw3eav9hg6js6fiPAEc3lUm4pmEPRHYuyg1xllJexzI10iXxGVtjn10jtdag11p1FmZi26/3qIdM+hskuyDVPueYCsH4V+UGuO6tN2NI9WZ+1FgdovjtkvneVl3Y98k1d1cypksuAHYoUU7OtnX6U5izm0qUqTN+J5M3Ncw9iFNAu9occwJZH923b3UePZsEx8l/Zv7hBbHf3MHr/cHWhe8utiJWLPNd0/b3RimUX6BynrfaRU+a7Q8bYd9S5PqTb26xbHnYFe+eV7vLqr/TV0eH8G/MI3EiYn7GkaKs8JYBeqojL+/loo9xLBAZ5LuTb2ixXGvz/laa6j+Pkt5TSHOVdTFifsaxv2UU6BmAw9l+N0Hab8urM52JN3uoWMVqLflfJ0NZNsJtY6+in9xGgJ+nrqjUaRYF9asQC3L8HvbgAOL72Ll/JDyClTem/NP0CPzcMawBP/iNIR9yugJd5O+QL074++1W7TaK06ivAKVZ3rDNiryvLbEUt4nzBqD1GM1RVupC9TeZHvK7I10ti97HU2nmK1N2hWopTl//7wEfa2iKB/zdk3d0QhSFqgB7Fuedj+/Hlv5L89IsZC4sUDtRL6VBDdT860+cjgB/+I0hE0gLU0dB/9S2t9MHcS2kNiYvjmVckPi17+K7POXNmLb5Qyma06lpB6brErdzrpuBepw7N5TOyuwXTTl2W5N+Nr3A6/J+LNDwz/fM6voM9iAzdPzpgLVoWnYU02kc6kK1EzaP4uw0cVU/JlsiaQ8gWRV6iqLOhWoubReiyftrcB2cCja57AilZVujDd3m3cDKPmhE3UqUFKMXANelyR+baW22GqKfj2RCpQu4kMIcX3RdwO8bsRqGIQCJeNS8KsJLwlrLKog5fhqsaM1KLKiKl2iRZI7iOd1oGjkuKkc7/mwQr5S8BVh71sLXmSFzJH0Gj0I6MvJFVsrKrrN3gYmVhRB8sKUWpFTlE9GVkH5RaEWlKKE1N2uA3xE12OIcKJJJH1S6w5qcjyDJBOXlaDi1LDhBZOW3Kw5Y96+8WZG0hPK16l6Q6D8Ju+rOdUOEjOmqVQCfwX+ckI+iRPvF3mN6NxMDPZJDkbVKHLy8q9T5V6FLVgn0djdYt0kSgVKN5ZEJFo8q5oa+7m7BLyv0XT5o1xFQQUqN0UbVF3vWkYjcl9iYh9VqDEQSRkKZUOhEhFLJ5+c1AqSpMKpG9ksw4EqfKhVIqtj4z8qfSSV8gj9lB8AjFZCfaTX5Wy2U/6ILUaU2V1/FqTKfJaBB8UtNZP3RhKjadRb3JtyONAx7P5YOyTFXxzIwY+u+WEE7G1OFvLUGbNLsQFM7d7VT5qvOx5JOfJKCo2TCJQKDrx9Ah7rKqwj3zqRfk/VoQF9WRN7PTFYwZvj3VDo8ijuKJVRJcQ8L9UqINJdcvpJfBzHlqTcqiQwHoswTOJaWJ6gp/OhYvF9Wc2QMRhKh3k1mD9SiSAFJnFNgRMTHE+JlNt4WwNebJP+b7jI3FZgkv61ZF10s="/>
+    </defs>
+  </svg>
+{:else}
+  <!-- Miozu Full Name -->
+  <svg
+    class="logo-full {className}"
+    width={width}
+    height={height}
+    viewBox="0 0 344 88"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-label="Miozu"
+    style="color: {fillColor};"
+  >
+    <path d="M0.384012 86.272V82.944L3.07201 82.688C8.06401 82.176 10.496 79.36 10.496 74.112V39.68C10.496 36.224 9.60001 35.2 4.60801 32.768L1.19209e-05 30.592L22.272 24.832V32.256L18.304 37.76V41.728L20.48 38.656C26.88 29.568 34.304 24.704 42.112 24.704C49.664 24.704 55.296 28.288 57.472 34.56L55.04 38.272V42.24L57.344 38.784C63.104 29.952 71.424 24.704 79.36 24.704C90.368 24.704 96.768 31.744 96.768 43.776V74.112C96.768 79.36 99.2 82.176 104.192 82.688L106.88 82.944V86.272H75.904V82.944L78.208 82.688C82.816 82.176 84.992 79.36 84.992 74.112V44.672C84.992 37.12 80.896 32.768 73.728 32.768C68.608 32.768 63.36 36.096 59.392 41.856C59.52 42.368 59.52 43.392 59.52 44.416V74.112C59.52 79.36 61.952 82.176 66.944 82.688L69.632 82.944V86.272H38.656V82.944L40.96 82.688C45.568 82.176 47.744 79.36 47.744 74.112V44.672C47.744 37.12 43.648 32.768 36.48 32.768C31.232 32.768 25.856 35.84 22.272 41.088V74.112C22.272 79.36 24.448 82.176 29.056 82.688L31.36 82.944V86.272H0.384012ZM121.609 12.672V-3.05176e-05H134.153V12.672H121.609ZM111.625 30.592L133.897 24.832V74.112C133.897 79.36 136.329 82.176 141.321 82.688L144.009 82.944V86.272H112.009V82.944L114.697 82.688C119.689 82.176 122.121 79.36 122.121 74.112V39.68C122.121 36.224 121.225 35.2 116.233 32.768L111.625 30.592ZM179.586 24.704C196.354 24.704 208.77 38.016 208.77 55.808C208.77 73.728 195.97 87.68 179.586 87.68C162.818 87.68 150.402 74.368 150.402 56.576C150.402 38.528 163.074 24.704 179.586 24.704ZM178.818 30.08C169.09 30.08 163.202 39.296 163.202 54.272C163.202 71.296 169.858 82.304 180.098 82.304C189.954 82.304 195.97 73.088 195.97 58.112C195.97 41.088 189.186 30.08 178.818 30.08ZM250.45 33.28H254.29L255.826 30.976H239.954C230.482 30.976 225.362 34.688 222.93 43.008L221.01 49.664H217.17L217.938 26.112H269.01L233.042 79.104H229.202L227.666 81.408H245.33C254.93 81.408 260.69 76.8 263.378 67.2L264.786 62.08H268.754L266.194 86.272H214.482L250.45 33.28ZM295.248 24.832V67.584C295.248 74.496 298.832 79.488 306.768 79.488C313.168 79.488 318.288 75.392 321.232 71.168V39.68C321.232 36.224 320.336 35.2 315.344 32.768L310.736 30.592L333.008 24.832V73.728C333.008 78.208 334.672 80 338.768 81.792L343.632 83.968L321.232 87.04V79.872L325.2 74.368V70.4L322.768 73.856C318.416 80.128 311.376 87.552 301.136 87.552C289.744 87.552 283.472 80.128 283.472 68.48V39.68C283.472 36.224 282.576 35.2 277.584 32.768L272.976 30.592L295.248 24.832Z" fill={fillColor}/>
+  </svg>
+{/if}
 
 <style lang="postcss">
   @reference '$theme';
 
-  .logo-text {
-    @apply inline-flex items-center font-semibold tracking-tight;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    letter-spacing: -0.02em;
+  .logo-icon,
+  .logo-full {
+    @apply inline-flex items-center;
     transition: all 0.2s ease;
-    text-decoration: none;
+    cursor: pointer;
+    fill: currentColor;
   }
 
-  .logo-text:hover {
-    @apply opacity-90;
+  .logo-icon:hover,
+  .logo-full:hover {
+    @apply opacity-80;
+    transform: scale(1.02);
   }
 
-  .logo-main {
-    color: inherit;
+  /* Ensure SVG paths inherit the color */
+  .logo-icon path,
+  .logo-full path,
+  .logo-icon rect {
+    fill: currentColor;
   }
 
-  .logo-x {
-    @apply font-bold;
-    color: var(--color-base14);
-    display: inline-block;
-    transform: scaleX(1.1) translateY(-0.5px);
-    margin-left: -0.02em;
+  /* Special handling for the pattern-filled elements in the icon */
+  .logo-icon rect[fill*="url"] {
+    /* Pattern-filled elements use the embedded PNG, don't override */
   }
 </style>

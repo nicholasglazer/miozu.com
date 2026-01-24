@@ -6,21 +6,40 @@
 // Solutions for the mega menu and mobile menu
 export const solutions = [
   {
-    category: 'Data Products',
+    category: 'Enterprise Components',
     items: [
       {
-        path: '/solutions#behavioral-data',
-        label: 'Commerce Behavior Index',
-        tagline: 'Data Licensing',
-        description: 'First-party behavioral datasets for AI training',
-        status: 'early'
+        path: '/design-system',
+        label: 'Component Library',
+        tagline: 'Svelte Components',
+        description: 'AI-first components for enterprise applications',
+        status: 'stable'
       },
       {
-        path: '/solutions#demand-api',
-        label: 'Demand Prediction API',
-        tagline: 'Prediction Infrastructure',
-        description: 'SKU-level demand forecasting',
-        status: 'early'
+        path: '/solutions#form-builder',
+        label: 'Form Builder',
+        tagline: 'Enterprise Forms',
+        description: 'Advanced form building components and tools',
+        status: 'stable'
+      }
+    ]
+  },
+  {
+    category: 'Design System',
+    items: [
+      {
+        path: '/solutions#design-tokens',
+        label: 'Design Tokens',
+        tagline: 'Free Usage',
+        description: 'Standardized design tokens and variables',
+        status: 'free'
+      },
+      {
+        path: '/solutions#base16-themes',
+        label: 'Base16 Themes',
+        tagline: 'Editor Themes',
+        description: 'VSCode, Emacs, and Linux system themes',
+        status: 'free'
       }
     ]
   }
@@ -28,17 +47,19 @@ export const solutions = [
 
 // Main navigation routes (for mobile menu and footer)
 export const mainRoutes = [
-  {path: '/solutions', label: 'Products', translate: false},
-  {path: '/data', label: 'Schema', translate: false},
+  {path: '/design-system', label: 'Components', translate: false},
+  {path: '/solutions', label: 'Solutions', translate: false},
+  {path: '/ports', label: 'Theme Ports', translate: false},
   {path: '/about', label: 'About', translate: false},
   {path: '/contact', label: 'Contact', translate: true}
 ];
 
 // Footer-specific additional links
 export const footerRoutes = [
-  {path: '/solutions', label: 'Products', translate: false},
-  {path: '/data', label: 'Data Schema', translate: false},
-  {path: '/insights', label: 'Research', translate: false},
+  {path: '/design-system', label: 'Components', translate: false},
+  {path: '/solutions', label: 'Solutions', translate: false},
+  {path: '/ports', label: 'Theme Ports', translate: false},
+  {path: '/insights', label: 'Documentation', translate: false},
   {path: '/about', label: 'About', translate: false},
   {path: '/contact', label: 'Contact', translate: true}
 ];

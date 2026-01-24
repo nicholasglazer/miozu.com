@@ -26,52 +26,70 @@
 
   const capabilities = [
     {
-      title: 'First-Party Data Generation',
-      description: 'We own J\'ko AI—a production virtual try-on platform. The data is ours, not scraped or licensed.',
-      icon: 'source'
+      title: 'Rapid Prototyping',
+      description: 'AI-powered components that accelerate development from concept to production. Build enterprise UIs in hours, not months.',
+      icon: 'ai'
     },
     {
-      title: 'Enterprise-Grade Compliance',
-      description: 'GDPR and CCPA compliant. Differential privacy implemented. SOC 2 Type II in progress.',
+      title: 'Comprehensive Enterprise Features',
+      description: 'Complete security suite: enterprise SSO, audit trails, RBAC, compliance frameworks, and data governance.',
       icon: 'shield'
     },
     {
-      title: 'Production Infrastructure',
-      description: 'Sub-100ms API latency. 99.9% uptime SLA. Batch exports or real-time streams.',
-      icon: 'infra'
+      title: 'Production-Grade Performance',
+      description: 'Svelte 5 runes architecture with zero runtime overhead. Enterprise-scale optimization and monitoring.',
+      icon: 'performance'
     },
     {
-      title: 'ML-Ready Format',
-      description: 'Structured for training pipelines. JSON, Parquet, or custom schema. Intent-labeled.',
-      icon: 'data'
+      title: 'Full Development Ecosystem',
+      description: 'Complete toolchain: design tokens, Base16 themes, development environment, and deployment pipelines.',
+      icon: 'design'
     }
   ];
 
-  const dataProducts = [
+  const designProducts = [
     {
-      name: 'Commerce Behavior Index',
-      description: 'Licensed behavioral datasets for AI training',
-      volume: 'Monthly event streams',
-      format: 'JSON / Parquet',
-      status: 'Accepting enterprise partners'
+      name: 'Component Library',
+      description: 'AI-first Svelte 5 components for enterprise applications',
+      framework: 'Svelte 5',
+      license: 'Enterprise License',
+      status: 'Production Ready'
     },
     {
-      name: 'Demand Prediction API',
-      description: 'SKU-level demand forecasting',
-      latency: '<100ms response',
-      accuracy: 'Validated on held-out data',
-      status: 'Enterprise pilot program'
+      name: 'Form Builder',
+      description: 'Advanced form building tools with canvas and drawing capabilities',
+      features: 'Drag & Drop',
+      license: 'Enterprise License',
+      status: 'Production Ready'
+    },
+    {
+      name: 'Design Tokens',
+      description: 'Standardized design variables and tokens',
+      format: 'JSON / CSS Variables',
+      license: 'Free Usage',
+      status: 'Open Source'
+    },
+    {
+      name: 'Base16 Themes',
+      description: 'Editor themes for VSCode, Emacs, and Linux systems',
+      platforms: 'Multi-platform',
+      license: 'Free Usage',
+      status: 'Open Source'
     }
   ];
 
-  const integrations = [
+  const frameworks = [
     {
-      name: 'Meta Tech Provider',
-      description: 'Official Meta technology partner for commerce integrations'
+      name: 'Svelte 5',
+      description: 'Primary framework with full component library and design system support'
     },
     {
-      name: 'Shopify Partner',
-      description: 'Native integration with Shopify commerce ecosystem'
+      name: 'React (Planned)',
+      description: 'React components planned for future releases based on enterprise demand'
+    },
+    {
+      name: 'Vanilla JS',
+      description: 'Framework-agnostic web components for maximum compatibility'
     }
   ];
 
@@ -79,10 +97,10 @@
 
   function getIcon(iconName) {
     const icons = {
-      source: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>`,
+      ai: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6"/><path d="m15.5 3.5-1.1 1.1m0 11.8 1.1 1.1M21 12h-6m-6 0H3m15.5 8.5-1.1-1.1M5.6 5.6 4.5 4.5"/></svg>`,
       shield: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>`,
-      infra: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg>`,
-      data: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`
+      performance: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>`,
+      design: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`
     };
     return icons[iconName] || '';
   }
@@ -94,10 +112,10 @@
     <div class="overview-grid">
       <div class="overview-main">
         <span class="section-label">Company</span>
-        <h2>Commerce Data Infrastructure</h2>
+        <h2>Rapid Enterprise Development Platform</h2>
         <p class="lead">
-          Miozu provides enterprise behavioral data products for AI training and demand intelligence.
-          We generate first-party commerce data through J'ko AI, our production virtual try-on platform.
+          Miozu provides AI-first design components for rapid prototyping and comprehensive enterprise applications.
+          Our platform accelerates development from concept to production, eliminating months of custom design system work.
         </p>
         <div class="key-facts">
           <div class="fact">
@@ -109,27 +127,27 @@
             <span class="fact-value">Toronto, Canada</span>
           </div>
           <div class="fact">
-            <span class="fact-label">Data Source</span>
-            <span class="fact-value">J'ko AI Platform</span>
+            <span class="fact-label">Primary Framework</span>
+            <span class="fact-value">Svelte 5</span>
           </div>
         </div>
       </div>
       <div class="overview-stats">
         <div class="stat-card primary">
-          <span class="stat-value">First-Party</span>
-          <span class="stat-label">Data Generation</span>
+          <span class="stat-value">AI-First</span>
+          <span class="stat-label">Components</span>
         </div>
         <div class="stat-card">
-          <span class="stat-value">GDPR/CCPA</span>
-          <span class="stat-label">Compliant</span>
+          <span class="stat-value">Enterprise</span>
+          <span class="stat-label">Ready</span>
         </div>
         <div class="stat-card">
-          <span class="stat-value">99.9%</span>
-          <span class="stat-label">Uptime SLA</span>
+          <span class="stat-value">Base16</span>
+          <span class="stat-label">Themes</span>
         </div>
         <div class="stat-card">
-          <span class="stat-value">&lt;100ms</span>
-          <span class="stat-label">API Latency</span>
+          <span class="stat-value">Open Core</span>
+          <span class="stat-label">Model</span>
         </div>
       </div>
     </div>
@@ -160,15 +178,15 @@
     </div>
   </section>
 
-  <!-- Data Products -->
+  <!-- Design Products -->
   <section class="products-section" data-animate="products" class:visible={visibleSections.has('products')}>
     <div class="section-header">
       <span class="section-label">Products</span>
-      <h2>Data Products</h2>
+      <h2>Design System Products</h2>
     </div>
 
     <div class="products-grid">
-      {#each dataProducts as product, i}
+      {#each designProducts as product, i}
         <article
           class="product-card"
           data-animate={`product-${i}`}
@@ -185,55 +203,56 @@
               </div>
             {/each}
           </div>
-          <div class="product-status">{product.status}</div>
+          <div class="product-status {product.status.includes('Free') ? 'free' : 'enterprise'}">{product.status}</div>
         </article>
       {/each}
     </div>
   </section>
 
-  <!-- Integrations -->
+  <!-- Framework Support -->
   <section class="integrations-section" data-animate="integrations" class:visible={visibleSections.has('integrations')}>
     <div class="section-header">
-      <span class="section-label">Ecosystem</span>
-      <h2>Technology Partners</h2>
+      <span class="section-label">Technology</span>
+      <h2>Framework Support</h2>
     </div>
 
     <div class="integrations-grid">
-      {#each integrations as integration, i}
+      {#each frameworks as framework, i}
         <article
           class="integration-card"
           data-animate={`integration-${i}`}
           class:visible={visibleSections.has(`integration-${i}`)}
           style={`--delay: ${getDelay(i, 0.1)}s`}
         >
-          <h3>{integration.name}</h3>
-          <p>{integration.description}</p>
+          <h3>{framework.name}</h3>
+          <p>{framework.description}</p>
         </article>
       {/each}
     </div>
 
-    <!-- Compliance -->
+    <!-- Open Source + Enterprise -->
     <div class="compliance-row">
-      <div class="compliance-badge">
+      <div class="compliance-badge free">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           <path d="M9 12l2 2 4-4"/>
         </svg>
-        <span>GDPR Compliant</span>
+        <span>Open Source Components</span>
       </div>
       <div class="compliance-badge">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           <path d="M9 12l2 2 4-4"/>
         </svg>
-        <span>CCPA Compliant</span>
+        <span>Enterprise License</span>
       </div>
-      <div class="compliance-badge pending">
+      <div class="compliance-badge">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M12 6v6l4 2"/>
+          <rect x="2" y="2" width="20" height="8" rx="2"/>
+          <rect x="2" y="14" width="20" height="8" rx="2"/>
+          <path d="M6 6h.01M6 18h.01"/>
         </svg>
-        <span>SOC 2 Type II (In Progress)</span>
+        <span>Linux Themes (.miozu)</span>
       </div>
     </div>
   </section>
@@ -241,13 +260,13 @@
   <!-- CTA -->
   <section class="cta-section" data-animate="cta" class:visible={visibleSections.has('cta')}>
     <div class="cta-content">
-      <h2>Request Data Access</h2>
+      <h2>Accelerate Your Enterprise Development</h2>
       <p>
-        Enterprise data partnerships for AI training, demand forecasting, and commerce intelligence.
+        Skip months of design system work. Get rapid prototyping tools, comprehensive enterprise features, and production-ready components.
       </p>
       <div class="cta-actions">
-        <Button variant="primary" href="/contact">Schedule Consultation</Button>
-        <Button variant="secondary" href="/data">View Data Schema</Button>
+        <Button variant="primary" href="/contact">Start Rapid Development</Button>
+        <Button variant="secondary" href="/design-system">View Components</Button>
       </div>
     </div>
   </section>
@@ -328,7 +347,7 @@
   }
 
   .stat-card.primary {
-    @apply border-base14/30 bg-base14/5;
+    @apply border-base0D/30 bg-base0D/5;
   }
 
   .stat-value {
@@ -336,7 +355,7 @@
   }
 
   .stat-card.primary .stat-value {
-    @apply text-base14;
+    @apply text-base0D;
   }
 
   .stat-label {
@@ -440,7 +459,15 @@
   }
 
   .product-status {
-    @apply text-xs text-base14 font-medium;
+    @apply text-xs font-medium;
+  }
+
+  .product-status.enterprise {
+    @apply text-base0D;
+  }
+
+  .product-status.free {
+    @apply text-base0B;
   }
 
   /* Integrations Section */
@@ -457,7 +484,7 @@
   }
 
   .integrations-grid {
-    @apply grid gap-4 md:grid-cols-2 max-w-2xl;
+    @apply grid gap-4 md:grid-cols-3 max-w-4xl;
   }
 
   .integration-card {
@@ -487,20 +514,20 @@
 
   .compliance-badge {
     @apply flex items-center gap-2 px-4 py-2 rounded-lg;
-    @apply bg-base10/10 border border-base10/30;
-    @apply text-xs font-medium text-base10;
+    @apply bg-base0D/10 border border-base0D/30;
+    @apply text-xs font-medium text-base0D;
   }
 
   .compliance-badge svg {
-    @apply text-base10;
+    @apply text-base0D;
   }
 
-  .compliance-badge.pending {
-    @apply bg-base13/10 border-base13/30 text-base13;
+  .compliance-badge.free {
+    @apply bg-base0B/10 border-base0B/30 text-base0B;
   }
 
-  .compliance-badge.pending svg {
-    @apply text-base13;
+  .compliance-badge.free svg {
+    @apply text-base0B;
   }
 
   /* CTA Section */
