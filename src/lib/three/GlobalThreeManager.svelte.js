@@ -9,7 +9,7 @@ import { browser } from '$app/environment';
 export class GlobalThreeManager {
   // Reactive state using Svelte 5 runes
   activeInstances = $state(new Map());
-  globalFPS = $state(15); // EMERGENCY: Start with very low FPS
+  globalFPS = $state(25); // EMERGENCY: Start with very low FPS
   thermalThrottling = $state(false);
   totalInstances = $derived(this.activeInstances.size);
 
@@ -58,16 +58,16 @@ export class GlobalThreeManager {
     const instanceCount = this.totalInstances;
 
     if (instanceCount === 0) {
-      this.globalFPS = 15;
+      this.globalFPS = 25;
       this.thermalThrottling = false;
     } else if (instanceCount === 1) {
-      this.globalFPS = 15; // Still conservative for single instance
+      this.globalFPS = 25; // Still conservative for single instance
       this.thermalThrottling = false;
     } else if (instanceCount <= 3) {
-      this.globalFPS = 10; // Multiple instances = even lower FPS
+      this.globalFPS = 20; // Multiple instances = even lower FPS
       this.thermalThrottling = true;
     } else {
-      this.globalFPS = 5; // Emergency mode for many instances
+      this.globalFPS = 15; // Emergency mode for many instances
       this.thermalThrottling = true;
       this.pauseAllButOne(); // Only keep one instance running
     }

@@ -30,7 +30,7 @@ export class SceneManager {
 	private lastHeight = 0;
 	private onFrameCallback: ((delta: number) => void) | null = null;
 	private currentPixelRatio: number;
-	targetFPS = 15; // EMERGENCY: Very low FPS for temperature control (public for GlobalManager)
+	targetFPS = 25; // EMERGENCY: Very low FPS for temperature control (public for GlobalManager)
 	private lastFrameTime = 0;
 	private windowFocused = true;
 
