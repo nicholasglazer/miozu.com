@@ -257,12 +257,8 @@
     }
   });
 
-  // Execute animation function in render loop
-  $effect(() => {
-    if (scene && scene.userData.animate) {
-      scene.userData.animate();
-    }
-  });
+  // Animation is now handled by the centralized render loop in OptimizedThreeManager
+  // No need to call animate() here - it's called before each render
 </script>
 
 <!-- Canvas element that will be managed by the shared renderer -->

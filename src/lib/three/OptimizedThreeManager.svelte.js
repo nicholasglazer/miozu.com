@@ -226,6 +226,15 @@ export class OptimizedThreeManager {
     camera.aspect = rect.width / rect.height;
     camera.updateProjectionMatrix();
 
+    // CRITICAL FIX: Execute animation updates before rendering
+    if (scene.userData.animate && typeof scene.userData.animate === 'function') {
+      try {
+        scene.userData.animate();
+      } catch (err) {
+        console.error('❌ Animation update failed for scene:', sceneData.id, err);
+      }
+    }
+
     // Set viewport for this canvas area
     const pixelRatio = this.sharedRenderer.getPixelRatio();
     const canvasElement = this.sharedRenderer.domElement;
