@@ -149,8 +149,8 @@ export class SceneManager {
 
 			this.animationId = requestAnimationFrame(animate);
 
-			// EMERGENCY: Skip rendering when paused OR window not focused (temperature control)
-			if (this.isPaused || !this.windowFocused) return;
+			// EMERGENCY: Skip rendering when paused (removed aggressive window focus check for visibility)
+			if (this.isPaused) return;
 
 			const currentTime = performance.now();
 

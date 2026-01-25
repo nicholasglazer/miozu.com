@@ -143,8 +143,8 @@ uniform float iSeed;
 
 varying vec2 vUv;
 
-// EMERGENCY: Reduced from 200 to 30 for temperature control
-#define NUM_PARTICLES 75
+// BALANCED: 100 particles for visible effects with temperature control (was 200 originally)
+#define NUM_PARTICLES 100
 
 float mag(vec2 p) { return dot(p, p); }
 
