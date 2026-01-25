@@ -12,8 +12,10 @@
   // Props using Svelte 5 runes
   const { type = 'sinuous-original', id = `canvas-${Date.now()}`, lowRes = false } = $props();
 
-  // Reactive state
+  // Reactive state (following oraklex.com pattern)
   let canvasElement = $state(null);
+  let containerWidth = $state(0);
+  let containerHeight = $state(0);
   let sceneManager = $state(null);
   let isInitialized = $state(false);
   let error = $state(null);
@@ -30,7 +32,14 @@
       return;
     }
 
-    console.log(`🚀 Initializing scene: ${type} (${id})`);
+    // Log current state for debugging
+    console.log(`🚀 Initializing scene: ${type} (${id})`, {
+      containerWidth,
+      containerHeight,
+      canvasElement: !!canvasElement,
+      isInitialized,
+      error
+    });
 
     try {
       // Create individual SceneManager for this canvas (proven working pattern)
@@ -223,15 +232,32 @@
     intersectionObserver.observe(canvasElement);
   }
 
-  // Lifecycle management
-  onMount(() => {
-    // Don't call initializeScene here - canvasElement might not be bound yet
+  // Lifecycle management (proper oraklex.com pattern)
+  onMount(async () => {
+    // Wait for next tick to ensure DOM is fully ready
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    // Only initialize if we have valid dimensions (oraklex pattern)
+    if (canvasElement && containerWidth > 0 && containerHeight > 0) {
+      initializeScene();
+    } else if (canvasElement) {
+      console.warn(`⏳ Waiting for dimensions: ${containerWidth}x${containerHeight}`);
+    }
   });
 
-  // Reactive initialization when canvasElement becomes available
+  // Reactive initialization fallback - retry when dimensions become available
   $effect(() => {
-    if (canvasElement && !isInitialized && !error) {
+    if (canvasElement && containerWidth > 0 && containerHeight > 0 && !isInitialized && !error) {
+      console.log(`✨ Dimensions ready, initializing: ${containerWidth}x${containerHeight}`);
       initializeScene();
+    }
+  });
+
+  // Reactive resize effect (oraklex.com pattern) - NOT initialization
+  $effect(() => {
+    if (sceneManager && containerWidth > 0 && containerHeight > 0) {
+      sceneManager.resize(containerWidth, containerHeight);
+      console.log(`📐 Reactive resize: ${containerWidth}x${containerHeight}`);
     }
   });
 
@@ -257,32 +283,15 @@
     meshes = [];
   });
 
-  // Handle resize using SceneManager
-  $effect(() => {
-    if (typeof window !== 'undefined' && sceneManager && canvasElement) {
-      const handleResize = () => {
-        const rect = canvasElement.getBoundingClientRect();
-        sceneManager.resize(rect.width, rect.height);
-      };
-
-      // Initial size setup
-      handleResize();
-
-      window.addEventListener('resize', handleResize);
-
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }
-  });
-
   // Animation is now handled by individual SceneManager render loop
-  // Each canvas has its own optimized animation cycle with frame throttling
+  // Reactive resizing is handled by the $effect above watching containerWidth/Height
 </script>
 
-<!-- Canvas container for individual WebGL renderer -->
+<!-- Canvas container for individual WebGL renderer (oraklex.com pattern) -->
 <div
   bind:this={canvasElement}
+  bind:clientWidth={containerWidth}
+  bind:clientHeight={containerHeight}
   class="three-canvas"
   class:initialized={isInitialized}
   class:error={error}

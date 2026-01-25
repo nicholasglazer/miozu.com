@@ -50,9 +50,19 @@ export class OptimizedSceneManager {
       // Create scene
       this.scene = new Scene();
 
-      // Create camera (following oraklex pattern)
+      // Get dimensions and validate (following oraklex pattern)
       const rect = this.container.getBoundingClientRect();
-      const aspect = rect.width / rect.height || 1;
+      const width = Math.floor(rect.width) || 1;
+      const height = Math.floor(rect.height) || 1;
+
+      // Validate dimensions like oraklex.com does
+      if (width <= 0 || height <= 0) {
+        console.warn(`⚠️  Invalid container dimensions: ${width}x${height}`);
+        return false;
+      }
+
+      // Create camera with proper aspect
+      const aspect = width / height;
       this.camera = new PerspectiveCamera(75, aspect, 0.1, 1000);
       this.camera.position.z = 5; // Standard position like oraklex
 
@@ -70,9 +80,7 @@ export class OptimizedSceneManager {
       // Set pixel ratio with limit
       this.renderer.setPixelRatio(this.config.pixelRatio);
 
-      // Set initial size
-      const width = Math.floor(rect.width) || 1;
-      const height = Math.floor(rect.height) || 1;
+      // Set initial size with validated dimensions
       this.renderer.setSize(width, height);
       this.lastWidth = width;
       this.lastHeight = height;
@@ -104,16 +112,15 @@ export class OptimizedSceneManager {
     const animate = (currentTime) => {
       if (this.isDestroyed) return;
 
-      // OPTIMIZATION: Frame rate throttling
-      if (currentTime - lastFrameTime < this.targetFrameTime) {
-        this.animationId = requestAnimationFrame(animate);
-        return;
-      }
-
       this.animationId = requestAnimationFrame(animate);
 
       // Skip rendering when paused (saves GPU cycles)
       if (this.isPaused) return;
+
+      // FIXED: Proper frame throttling without early return bug
+      if (currentTime - lastFrameTime < this.targetFrameTime) {
+        return; // Skip rendering but continue RAF loop
+      }
 
       // Calculate delta time for smooth animations
       const deltaTime = (currentTime - this.lastTime) / 1000;
