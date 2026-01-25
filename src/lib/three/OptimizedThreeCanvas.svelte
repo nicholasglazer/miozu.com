@@ -109,6 +109,7 @@
     } catch (err) {
       error = `Failed to initialize ${type}: ${err.message}`;
       console.error('❌', error);
+      console.error('❌ FULL ERROR DETAILS:', err);
     }
   }
 
@@ -163,14 +164,18 @@
     const THREE = sceneManager.getTHREE();
     const scene = sceneManager.getScene();
 
-    // Simple rotating cube as placeholder
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    console.log('🔄 Creating placeholder effect - this should be visible');
+
+    // Simple rotating cube as placeholder - MADE MORE VISIBLE
+    const geometry = new THREE.BoxGeometry(2, 2, 2); // Larger cube
     const material = new THREE.MeshBasicMaterial({
-      color: 0x4a9eff,
-      wireframe: true
+      color: 0xff4444, // Bright red for visibility
+      wireframe: false // Solid for better visibility
     });
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
+
+    console.log('✅ Placeholder cube added to scene');
 
     // Create minimal effect interface
     effectInstance = {
@@ -318,9 +323,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 0, 0, 0.1);
-    color: #ff4444;
-    font-size: 0.8rem;
+    background: rgba(255, 0, 0, 0.8); /* More visible background */
+    color: #ffffff; /* White text for contrast */
+    font-size: 1.2rem; /* Larger font */
+    font-weight: bold;
     text-align: center;
     padding: 1rem;
     z-index: 1;
