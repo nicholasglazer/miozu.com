@@ -39,8 +39,8 @@ export default {
         exclude: ['<all>']
       },
       prerender: {
-        // Prerender blog index, docs, ports, color philosophy pages, and all posts at build time
-        entries: ['/', '/blog', '/design-system', '/design-system/docs', '/ports', '/design-system/docs/color-philosophy', '/design-system/docs/color-playground', ...getBlogPosts()],
+        // Prerender blog index, docs, ports, color philosophy pages, debug page, and all posts at build time
+        entries: ['/', '/blog', '/design-system', '/design-system/docs', '/ports', '/design-system/docs/color-philosophy', '/design-system/docs/color-playground', '/debug', ...getBlogPosts()],
         handleMissingId: 'warn',
         handleEntryGeneratorMismatch: 'warn',
         handleHttpError: ({path, message}) => {
