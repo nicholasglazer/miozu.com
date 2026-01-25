@@ -12,8 +12,8 @@ importers:
         specifier: ^0.563.1
         version: 0.563.1(svelte@5.48.2)
       '@miozu/jera':
-        specifier: link:../jera
-        version: link:../jera
+        specifier: 0.4.4
+        version: 0.4.4(shiki@3.21.0)(svelte@5.48.2)
       '@miozu/js-theme':
         specifier: ^0.0.2
         version: 0.0.2
@@ -702,6 +702,24 @@ packages:
     resolution: {integrity: sha512-Kt+MbnE5D9RsuI/csmf7M+HWxALe57x3A0DhQ8pPnnUpneh7zuldrYjlT+veWtk+tVnp5doQtaAAxLujzIlhBw==}
     peerDependencies:
       svelte: ^5
+
+  '@miozu/jera@0.4.3':
+    resolution: {integrity: sha512-6QZ4HFYK7Uiw23RvzGaRlVaRApL8cEEEcez3KglUt2NTpfgQr19PUxq2CWXJWNImQAbg6kYbtN4v7aw1xcnXzg==}
+    peerDependencies:
+      shiki: ^3.0.0
+      svelte: ^5.0.0
+    peerDependenciesMeta:
+      shiki:
+        optional: true
+
+  '@miozu/jera@0.4.4':
+    resolution: {integrity: sha512-7L/ryQFNLt8CZxd4Z6wAvLVnqz1UEpoJmnNgtuW+X2s/hZ+TZ20/ZmQ2Ov1v88Qd47uola69uvDNI+zpZr1Vmg==}
+    peerDependencies:
+      shiki: ^3.0.0
+      svelte: ^5.0.0
+    peerDependenciesMeta:
+      shiki:
+        optional: true
 
   '@miozu/js-theme@0.0.2':
     resolution: {integrity: sha512-2xIdZX+RCkUq1qzhQ2X3EGlBPTy8H+PLMrHMmxSjEQgNajR7kEiZXRYbyBj6jHmKgrDVc4n9rAq4UDSgPGs++A==}
@@ -2454,6 +2472,19 @@ snapshots:
   '@lucide/svelte@0.563.1(svelte@5.48.2)':
     dependencies:
       svelte: 5.48.2
+
+  '@miozu/jera@0.4.3(shiki@3.21.0)(svelte@5.48.2)':
+    dependencies:
+      svelte: 5.48.2
+    optionalDependencies:
+      shiki: 3.21.0
+
+  '@miozu/jera@0.4.4(shiki@3.21.0)(svelte@5.48.2)':
+    dependencies:
+      '@miozu/jera': 0.4.3(shiki@3.21.0)(svelte@5.48.2)
+      svelte: 5.48.2
+    optionalDependencies:
+      shiki: 3.21.0
 
   '@miozu/js-theme@0.0.2': {}
 
