@@ -24,7 +24,12 @@
 
   // Initialize Three.js scene based on effect type
   async function initializeScene() {
-    if (!canvasElement) return;
+    if (!canvasElement) {
+      console.warn('❌ Cannot initialize scene: canvasElement is null');
+      return;
+    }
+
+    console.log(`🚀 Initializing scene: ${type} (${id})`);
 
     try {
       const THREE = await import('three');
@@ -47,6 +52,10 @@
         effectType: type,
         lowRes
       });
+
+      if (!sceneId) {
+        throw new Error('Failed to register scene with shared manager');
+      }
 
       // Register with canvas registry for animation compatibility
       if (sceneId && canvasElement) {
@@ -192,7 +201,12 @@
 
   // Lifecycle management
   onMount(() => {
-    if (canvasElement) {
+    // Don't call initializeScene here - canvasElement might not be bound yet
+  });
+
+  // Reactive initialization when canvasElement becomes available
+  $effect(() => {
+    if (canvasElement && !isInitialized && !error) {
       initializeScene();
     }
   });

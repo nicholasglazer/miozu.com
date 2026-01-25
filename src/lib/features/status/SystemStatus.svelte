@@ -5,7 +5,7 @@
   // Import icons
   import {Check, ServerOff} from '$components/icons';
 
-  // Props with defaults
+  // Props with defaults - themeState passed from layout (single source of truth)
   let {
     showPerformance = true,
     showSW = true,
@@ -14,7 +14,7 @@
     showBuild = true,
     compact = false,
     l10n,
-    theme
+    themeState
   } = $props();
 
   // State
@@ -127,10 +127,10 @@
       statusItems.push({
         id: 'theme',
         label: 'Theme',
-        value: theme.isDark ? 'Dark' : 'Light',
+        value: themeState?.isDark ? 'Dark' : 'Light',
         icon: null,
         status: 'info',
-        color: theme.isDark ? '#2c3040' : '#f8f9fc'
+        color: themeState?.isDark ? '#2c3040' : '#f8f9fc'
       });
     }
 

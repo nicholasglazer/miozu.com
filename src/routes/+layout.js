@@ -1,7 +1,6 @@
 import {browser} from '$app/environment';
 import {SettingsReactiveState} from '$lib/reactiveStates/settings.svelte.js';
 import {LocalizationReactiveState} from '$lib/reactiveStates/localization.svelte.js';
-import {ThemeReactiveState} from '$lib/reactiveStates/theme.svelte.js';
 import translations from '$lib/data/translations';
 
 export const load = async () => {
@@ -21,10 +20,10 @@ export const load = async () => {
     translations: translations
   });
 
-  // Create the theme instance (it handles localStorage internally)
-  const theme = new ThemeReactiveState();
+  // NOTE: Theme is now initialized in +layout.svelte using Jera's singleton pattern
+  // This follows the correct reactivity pattern: singletons in .svelte, not .js
 
-  return {s, l10n, theme};
+  return {s, l10n};
 };
 
 // +layout.js with "prerender = true" to make all routes static

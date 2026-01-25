@@ -4,6 +4,7 @@
   import {page} from '$app/stores';
   import {afterNavigate, disableScrollHandling} from '$app/navigation';
   import {appName} from '$lib/settings/global';
+  import {getTheme} from '@miozu/jera';
   import Header from '$features/layout/Header.svelte';
   import Footer from '$features/layout/Footer.svelte';
   import ExpandedView from '$lib/components/ExpandedView.svelte';
@@ -11,6 +12,9 @@
   import '../app.css';
 
   let {children, data} = $props();
+
+  // Theme singleton from Jera - call ONCE here, pass via props
+  const themeState = getTheme();
 
   // Check if we're on a fullscreen page (custom layout, no scroll)
   // Home page and expanded pages have their own fullscreen layouts
@@ -75,9 +79,9 @@
     }
     setupResizeObserver();
 
-    if (data.theme && typeof data.theme.sync === 'function') {
-      data.theme.sync();
-    }
+    // Initialize theme (Jera singleton pattern)
+    themeState.sync();   // Hydrate from DOM (set by app.html)
+    themeState.init();   // Setup media query listener
 
     const handlePageShow = (event) => {
       if (event.persisted) {
@@ -136,7 +140,7 @@
         <div class="content">
           {@render children()}
         </div>
-        <Footer l10n={data.l10n} theme={data.theme} />
+        <Footer l10n={data.l10n} {themeState} />
       </div>
     </main>
   </div>

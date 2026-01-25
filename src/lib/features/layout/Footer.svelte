@@ -6,7 +6,7 @@
   import {author, appName, companyName, companyNameShort, companyUrl, legalLinks} from '$lib/settings/global';
   import {mainRoutes} from '$lib/settings/routes';
 
-  let {footerEl = $bindable(), l10n, theme} = $props();
+  let {footerEl = $bindable(), l10n, themeState} = $props();
   const year = new Date().getFullYear();
 
   // Logo styling
@@ -179,7 +179,7 @@
       </div>
 
       <div class="footer-tools">
-        <ThemeSwitcher {theme} />
+        <ThemeSwitcher {themeState} />
 
         <!-- Status Indicator Button -->
         <button

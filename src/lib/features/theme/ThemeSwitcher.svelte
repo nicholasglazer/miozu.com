@@ -2,15 +2,16 @@
   import {Switch} from '@miozu/jera';
   import {Sun, Moon} from '$components/icons';
 
-  let {theme, variant = 'default'} = $props();
+  // Receive themeState as prop (passed from layout via props pattern)
+  let {themeState, variant = 'default'} = $props();
 
   // Get current theme state - checked = dark mode
-  let isDarkMode = $derived(theme?.isDark ?? false);
+  let isDarkMode = $derived(themeState?.isDark ?? false);
 
   // Handle switch toggle
   function handleChange() {
-    if (theme && typeof theme.toggle === 'function') {
-      theme.toggle();
+    if (themeState && typeof themeState.toggle === 'function') {
+      themeState.toggle();
     }
   }
 </script>
