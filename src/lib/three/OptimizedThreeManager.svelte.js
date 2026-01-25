@@ -159,15 +159,21 @@ export class OptimizedThreeManager {
     console.log(`♻️  Scene unregistered: ${canvasId}`);
   }
 
-  // Single RAF loop managing all scenes
+  // Single RAF loop managing all scenes (following oraklex.com timing pattern)
   startRenderLoop() {
     if (this.isRunning) return;
+
+    let lastAnimationTime = performance.now();
 
     const renderFrame = (currentTime) => {
       if (this.activeScenes.size === 0) {
         this.stopRenderLoop();
         return;
       }
+
+      // Calculate delta time for animations (like oraklex.com)
+      const deltaTime = (currentTime - lastAnimationTime) / 1000;
+      lastAnimationTime = currentTime;
 
       // Update FPS stats
       frameCount++;
@@ -188,7 +194,7 @@ export class OptimizedThreeManager {
         const targetInterval = 1000 / sceneData.targetFps;
         if (currentTime - sceneData.lastRender < targetInterval) continue;
 
-        this.renderScene(sceneData);
+        this.renderScene(sceneData, deltaTime); // Pass delta timing
         sceneData.lastRender = currentTime;
         totalDrawCalls++;
       }
@@ -212,8 +218,8 @@ export class OptimizedThreeManager {
     }
   }
 
-  // Render individual scene with viewport management
-  renderScene(sceneData) {
+  // Render individual scene with viewport management (following oraklex.com pattern)
+  renderScene(sceneData, deltaTime) {
     if (!this.sharedRenderer || !sceneData.scene || !sceneData.camera) return;
 
     const { element, scene, camera } = sceneData;
@@ -226,10 +232,10 @@ export class OptimizedThreeManager {
     camera.aspect = rect.width / rect.height;
     camera.updateProjectionMatrix();
 
-    // CRITICAL FIX: Execute animation updates before rendering
+    // CRITICAL FIX: Execute animation updates with delta timing (like oraklex.com)
     if (scene.userData.animate && typeof scene.userData.animate === 'function') {
       try {
-        scene.userData.animate();
+        scene.userData.animate(deltaTime); // Pass delta timing like oraklex.com
       } catch (err) {
         console.error('❌ Animation update failed for scene:', sceneData.id, err);
       }

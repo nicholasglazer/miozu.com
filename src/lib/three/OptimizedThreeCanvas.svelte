@@ -147,17 +147,21 @@
     });
   }
 
-  // Setup animation for meshes
+  // Setup animation for meshes (following oraklex.com pattern)
   function setupAnimation(THREE) {
-    // Animation is handled by the shared render loop
-    // We just need to update mesh properties
-    const animate = () => {
+    // Track accumulated time like oraklex.com does
+    let accumulatedTime = 0;
+
+    // Animation update function that accepts delta timing
+    const animate = (delta) => {
       if (!meshes.length) return;
 
-      const time = performance.now() * 0.001;
+      // Accumulate time for smooth animations
+      accumulatedTime += delta;
 
       meshes.forEach((mesh, index) => {
         const speed = mesh.userData.speed || 0.01;
+        const time = accumulatedTime;
 
         switch (type) {
           case 'sinuous-original':
@@ -195,7 +199,7 @@
       });
     };
 
-    // Store animation function for the render loop
+    // Store animation function for the render loop (expects delta parameter)
     scene.userData.animate = animate;
   }
 
@@ -274,10 +278,6 @@
     <div class="error-overlay">
       <p>WebGL Error: {error}</p>
     </div>
-  {:else if !isInitialized}
-    <div class="loading-overlay">
-      <div class="loading-spinner"></div>
-    </div>
   {/if}
 </div>
 
@@ -292,37 +292,18 @@
     z-index: 0;
   }
 
-  .loading-overlay,
   .error-overlay {
     position: absolute;
     inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.1);
-    z-index: 1;
-  }
-
-  .error-overlay {
     background: rgba(255, 0, 0, 0.1);
     color: #ff4444;
     font-size: 0.8rem;
     text-align: center;
     padding: 1rem;
-  }
-
-  .loading-spinner {
-    width: 20px;
-    height: 20px;
-    border: 2px solid rgba(74, 158, 255, 0.3);
-    border-top: 2px solid #4a9eff;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    z-index: 1;
   }
 
   .three-canvas.initialized {
