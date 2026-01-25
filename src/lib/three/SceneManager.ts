@@ -29,10 +29,13 @@ export class SceneManager {
 	private lastHeight = 0;
 	private onFrameCallback: ((delta: number) => void) | null = null;
 	private currentPixelRatio: number;
+	private targetFPS = 15; // EMERGENCY: Very low FPS for temperature control
+	private lastFrameTime = 0;
+	private windowFocused = true;
 
 	constructor(private config: SceneConfig) {
 		this.container = config.container;
-		this.currentPixelRatio = Math.min(config.pixelRatio ?? window.devicePixelRatio, 1.5); // Temperature optimization
+		this.currentPixelRatio = Math.min(config.pixelRatio ?? window.devicePixelRatio, 1.0); // EMERGENCY: Max 1.0 for temperature
 	}
 
 	async init(): Promise<void> {
@@ -77,7 +80,10 @@ export class SceneManager {
 		this.renderer.setSize(width, height);
 		this.container.appendChild(this.renderer.domElement);
 
-		console.info(`[SceneManager] Initialized with WebGL renderer (${width}x${height})`);
+		// EMERGENCY: Add window focus detection for temperature control
+		this.setupFocusDetection();
+
+		console.info(`[SceneManager] Initialized with WebGL renderer (${width}x${height}) - EMERGENCY temp mode: ${this.targetFPS}fps`);
 	}
 
 	/** Resize renderer and camera - call from Svelte's bind:clientWidth/Height */
@@ -128,18 +134,27 @@ export class SceneManager {
 	startRenderLoop(onFrame?: (delta: number) => void): void {
 		this.onFrameCallback = onFrame || null;
 		let lastTime = performance.now();
+		this.lastFrameTime = lastTime;
 
 		const animate = (): void => {
 			if (this.isDestroyed) return;
 
 			this.animationId = requestAnimationFrame(animate);
 
-			// Skip rendering when paused (saves GPU cycles)
-			if (this.isPaused) return;
+			// EMERGENCY: Skip rendering when paused OR window not focused (temperature control)
+			if (this.isPaused || !this.windowFocused) return;
 
 			const currentTime = performance.now();
+
+			// EMERGENCY: Frame rate limiting for temperature control
+			const targetFrameTime = 1000 / this.targetFPS;
+			if (currentTime - this.lastFrameTime < targetFrameTime) {
+				return; // Skip this frame
+			}
+
 			const delta = (currentTime - lastTime) / 1000;
 			lastTime = currentTime;
+			this.lastFrameTime = currentTime;
 
 			// Call effect update callback (this is where real effects get updated)
 			this.onFrameCallback?.(delta);
@@ -164,6 +179,29 @@ export class SceneManager {
 	/** Check if rendering is paused */
 	get paused(): boolean {
 		return this.isPaused;
+	}
+
+	/** EMERGENCY: Setup window focus detection for temperature control */
+	private setupFocusDetection(): void {
+		const handleFocus = () => {
+			this.windowFocused = true;
+			console.log('🔥 Window focused - animations resumed');
+		};
+
+		const handleBlur = () => {
+			this.windowFocused = false;
+			console.log('❄️  Window blurred - animations paused for temperature control');
+		};
+
+		window.addEventListener('focus', handleFocus);
+		window.addEventListener('blur', handleBlur);
+		window.addEventListener('visibilitychange', () => {
+			this.windowFocused = !document.hidden;
+			console.log(`👁️  Visibility changed: ${this.windowFocused ? 'visible' : 'hidden'}`);
+		});
+
+		// Initial state
+		this.windowFocused = !document.hidden && document.hasFocus();
 	}
 
 	destroy(): void {

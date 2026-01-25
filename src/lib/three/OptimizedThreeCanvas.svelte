@@ -47,12 +47,12 @@
     });
 
     try {
-      // Create SceneManager (same pattern as oraklex.com)
+      // Create SceneManager with EMERGENCY temperature optimizations
       sceneManager = new SceneManager({
         container: canvasElement,
         alpha: true,
-        antialias: !lowRes, // Disable antialias for low-res to save performance
-        pixelRatio: lowRes ? 1 : Math.min(window.devicePixelRatio, 1.5), // Temperature control
+        antialias: false, // EMERGENCY: Always disabled for temperature control
+        pixelRatio: 1.0, // EMERGENCY: Always 1.0, no retina scaling
         noDepth: true, // Most shader effects don't need depth
         forceWebGL: false
       });

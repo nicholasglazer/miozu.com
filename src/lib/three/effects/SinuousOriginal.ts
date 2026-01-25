@@ -63,8 +63,8 @@ float fbm(vec2 p, float tm) {
   p *= 2.0; p -= tm;
   float z = 2.0, rz = 0.0;
   p += iTime * 0.001 + 0.1;
-  // Reduced from 5 to 4 iterations for performance (barely noticeable difference)
-  for (float i = 1.0; i < 5.0; i++) {
+  // EMERGENCY: Reduced from 5 to 3 iterations for temperature control
+  for (float i = 1.0; i < 4.0; i++) {
     rz += abs((noise(p) - 0.5) * 2.0) / z;
     z *= 1.93; p = m2 * p * 2.0;
   }
@@ -143,8 +143,8 @@ uniform float iSeed;
 
 varying vec2 vUv;
 
-// Reduced from 200 to 150 for better performance
-#define NUM_PARTICLES 150
+// EMERGENCY: Reduced from 200 to 30 for temperature control
+#define NUM_PARTICLES 30
 
 float mag(vec2 p) { return dot(p, p); }
 
@@ -213,10 +213,10 @@ export class SinuousOriginalEffect {
   private manager: SceneManager;
   private THREE!: typeof THREE;
 
-  // Simulation resolution (small for performance)
-  // Reduced from 256x64 to 200x64 - still has more than enough particles
-  private simWidth = 200;
-  private simHeight = 64;
+  // EMERGENCY: Simulation resolution reduced for temperature control
+  // Reduced from 200x64 to 64x32 - minimal resolution for 30 particles
+  private simWidth = 64;
+  private simHeight = 32;
 
   // Render targets
   private bufferA: THREE.WebGLRenderTarget[] = [];
