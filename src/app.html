@@ -11,52 +11,65 @@
     </style>
     <script>
       // CRITICAL: Prevent FOUC/FART by setting theme before CSS loads
-      // This runs synchronously and immediately to prevent theme flash
+      // Uses unified 'miozu-theme' key (consistent across all Miozu apps)
+      // Storage values: 'light', 'dark', 'system'
+      // DOM values: 'miozu-light', 'miozu-dark'
       (function () {
         try {
-          // Priority: localStorage is source of truth
-          const saved = localStorage.getItem('theme');
-          if (saved && (saved === 'miozu-light' || saved === 'miozu-dark')) {
-            document.documentElement.setAttribute('data-theme', saved);
-            // Sync cookie for next SSR
-            document.cookie = 'theme=' + saved + '; path=/; max-age=31536000; SameSite=Lax';
-            return;
+          // Read preference from storage (check unified key)
+          let pref = localStorage.getItem('miozu-theme');
+
+          // Migrate from old 'theme' key if needed
+          if (!pref || !['light', 'dark', 'system'].includes(pref)) {
+            const oldTheme = localStorage.getItem('theme');
+            if (oldTheme === 'miozu-dark') pref = 'dark';
+            else if (oldTheme === 'miozu-light') pref = 'light';
           }
 
-          // Migration from old theme system
-          const oldTheme = localStorage.getItem('app-theme');
-          if (oldTheme) {
-            try {
-              const parsed = JSON.parse(oldTheme);
-              let newTheme = 'miozu-light';
-              if (parsed === 'dark' || parsed === true) {
-                newTheme = 'miozu-dark';
-              }
-              document.documentElement.setAttribute('data-theme', newTheme);
-              localStorage.setItem('theme', newTheme);
-              localStorage.removeItem('app-theme'); // Clean up old key
-              document.cookie = 'theme=' + newTheme + '; path=/; max-age=31536000; SameSite=Lax';
-              return;
-            } catch (e) {
-              // Ignore parse errors
+          // Migrate from legacy 'app-theme' key
+          if (!pref || !['light', 'dark', 'system'].includes(pref)) {
+            const appTheme = localStorage.getItem('app-theme');
+            if (appTheme) {
+              try {
+                const parsed = JSON.parse(appTheme);
+                if (parsed === 'dark' || parsed === true) pref = 'dark';
+                else pref = 'light';
+              } catch (e) {}
             }
           }
 
-          // Fallback: Check cookie (from SSR)
-          const match = document.cookie.match(/theme=([^;]+)/);
-          const cookieTheme = match && match[1];
-          if (cookieTheme && (cookieTheme === 'miozu-light' || cookieTheme === 'miozu-dark')) {
-            document.documentElement.setAttribute('data-theme', cookieTheme);
-            localStorage.setItem('theme', cookieTheme);
-            return;
+          // Fallback to cookie
+          if (!pref || !['light', 'dark', 'system'].includes(pref)) {
+            const match = document.cookie.match(/miozu-theme=([^;]+)/);
+            pref = match ? match[1] : null;
           }
 
-          // Final fallback: System preference
-          const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-          const systemTheme = prefersDark ? 'miozu-dark' : 'miozu-light';
-          document.documentElement.setAttribute('data-theme', systemTheme);
-          localStorage.setItem('theme', systemTheme);
-          document.cookie = 'theme=' + systemTheme + '; path=/; max-age=31536000; SameSite=Lax';
+          // Resolve preference to actual theme
+          let theme;
+          if (pref === 'light') {
+            theme = 'miozu-light';
+          } else if (pref === 'dark') {
+            theme = 'miozu-dark';
+          } else {
+            // 'system' or undefined - check system preference
+            theme = window.matchMedia?.('(prefers-color-scheme: dark)').matches
+              ? 'miozu-dark'
+              : 'miozu-light';
+            pref = 'system';
+          }
+
+          // Apply immediately to prevent flash
+          document.documentElement.setAttribute('data-theme', theme);
+          document.documentElement.style.colorScheme = theme === 'miozu-dark' ? 'dark' : 'light';
+
+          // Persist to unified key
+          localStorage.setItem('miozu-theme', pref);
+          document.cookie = 'miozu-theme=' + pref + '; path=/; max-age=31536000; SameSite=Lax';
+
+          // Clean up old keys
+          localStorage.removeItem('theme');
+          localStorage.removeItem('app-theme');
+          document.cookie = 'theme=; path=/; max-age=0';
         } catch (e) {
           // Emergency fallback
           document.documentElement.setAttribute('data-theme', 'miozu-light');
