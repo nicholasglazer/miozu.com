@@ -1,11 +1,10 @@
 <!--
-  Optimized ThreeJS Canvas Component
-  Uses individual WebGL context per canvas (proven working pattern from oraklex.com)
-  Implements temperature-reducing optimizations
+  ThreeJS Canvas Component - Uses REAL effect system (oraklex.com pattern)
+  NOW CORRECTLY implements dynamic effect loading with actual effect classes
 -->
 <script>
   import { onMount, onDestroy } from 'svelte';
-  import { OptimizedSceneManager } from './OptimizedSceneManager.js';
+  import { SceneManager } from './SceneManager';
   import { canvasRegistry } from '$lib/reactiveStates/canvasRegistry.svelte';
   import { browser } from '$app/environment';
 
@@ -17,18 +16,24 @@
   let containerWidth = $state(0);
   let containerHeight = $state(0);
   let sceneManager = $state(null);
+  let effectInstance = $state(null);
   let isInitialized = $state(false);
   let error = $state(null);
   let isVisible = $state(true);
 
-  // Scene resources
-  let meshes = [];
+  // Intersection observer
   let intersectionObserver = null;
 
-  // Initialize Three.js scene using individual SceneManager (oraklex pattern)
+  // Initialize Three.js scene using REAL effect system (oraklex pattern)
   async function initializeScene() {
     if (!canvasElement || !browser) {
       console.warn('❌ Cannot initialize scene: canvasElement is null or not in browser');
+      return;
+    }
+
+    // Validate dimensions like oraklex.com does
+    if (containerWidth <= 0 || containerHeight <= 0) {
+      console.warn(`⏳ Invalid dimensions: ${containerWidth}x${containerHeight}, skipping init`);
       return;
     }
 
@@ -42,49 +47,42 @@
     });
 
     try {
-      // Create individual SceneManager for this canvas (proven working pattern)
-      sceneManager = new OptimizedSceneManager({
+      // Create SceneManager (same pattern as oraklex.com)
+      sceneManager = new SceneManager({
         container: canvasElement,
         alpha: true,
         antialias: !lowRes, // Disable antialias for low-res to save performance
-        powerPreference: lowRes ? 'default' : 'default', // Always use 'default' for temperature control
-        pixelRatio: lowRes ? 1 : Math.min(window.devicePixelRatio, 1.5),
-        maxFPS: lowRes ? 20 : 30 // Lower FPS for better temperature control
+        pixelRatio: lowRes ? 1 : Math.min(window.devicePixelRatio, 1.5), // Temperature control
+        noDepth: true, // Most shader effects don't need depth
+        forceWebGL: false
       });
 
       // Initialize WebGL context
-      const success = await sceneManager.init();
-      if (!success) {
-        throw new Error('Failed to initialize SceneManager');
-      }
+      await sceneManager.init();
 
-      // Create effect using the manager's Three.js objects
-      await createEffect(sceneManager.getThree(), sceneManager.getScene());
+      // CRITICAL: Load REAL effect class based on type (oraklex pattern)
+      await loadEffect();
 
-      // Start render loop with animation update (oraklex pattern)
+      // CRITICAL: Start render loop with REAL effect update (oraklex pattern)
       sceneManager.startRenderLoop((delta) => {
-        updateAnimation(delta);
+        if (effectInstance) {
+          effectInstance.update(delta); // Call REAL effect's update method
+        }
       });
 
       // Setup intersection observer for visibility optimization
       setupVisibilityObserver();
 
-      // Register with canvas registry for compatibility
+      // Register with canvas registry (same as oraklex pattern)
       canvasRegistry.register(id, {
         container: canvasElement,
         canvas: sceneManager.getRenderer().domElement,
         sceneManager: sceneManager,
-        effectInstance: {
-          forceResize: () => {
-            const rect = canvasElement.getBoundingClientRect();
-            sceneManager.resize(rect.width, rect.height);
-          },
-          destroy: () => sceneManager.destroy()
-        }
+        effectInstance: effectInstance
       });
 
       isInitialized = true;
-      console.log(`✅ Scene initialized: ${type} (individual renderer)`);
+      console.log(`✅ Scene initialized: ${type} with REAL effect system`);
 
     } catch (err) {
       error = `Failed to initialize ${type}: ${err.message}`;
@@ -92,118 +90,63 @@
     }
   }
 
-  // Create different effects based on type
-  async function createEffect(THREE, scene) {
-    const geometry = getGeometry(THREE);
-    const material = getMaterial(THREE);
+  // CRITICAL: Load REAL effect classes (oraklex.com pattern)
+  async function loadEffect() {
+    console.log(`🎨 Loading REAL effect: ${type}`);
 
-    if (type.includes('multipass')) {
-      // Create multiple instances for multipass effects
-      for (let i = 0; i < 3; i++) {
-        const mesh = new THREE.Mesh(geometry, material.clone());
-        mesh.position.x = (i - 1) * 2;
-        mesh.userData.speed = 0.01 + i * 0.005;
-        scene.add(mesh);
-        meshes.push(mesh);
-      }
-    } else {
-      // Single mesh
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.userData.speed = 0.01;
-      scene.add(mesh);
-      meshes.push(mesh);
-    }
-
-    // Add lighting for certain effects
-    if (['ether', 'synaptic'].includes(type)) {
-      const light = new THREE.PointLight(0x4a9eff, 1, 100);
-      light.position.set(10, 10, 10);
-      scene.add(light);
-    }
-
-    console.log(`🎨 Created ${meshes.length} meshes for ${type}`);
-  }
-
-  // Get geometry based on effect type
-  function getGeometry(THREE) {
     switch (type) {
       case 'sinuous-original':
-        return new THREE.PlaneGeometry(3, 3, 32, 32);
-      case 'synaptic-multipass':
-        return new THREE.SphereGeometry(0.5, 16, 16);
+        const { SinuousOriginalEffect } = await import('./effects/SinuousOriginal');
+        effectInstance = new SinuousOriginalEffect(sceneManager);
+        await effectInstance.init();
+        break;
+
+      // TODO: Add other effects as needed
       case 'synaptic':
-        return new THREE.TorusGeometry(0.7, 0.3, 8, 16);
       case 'ether':
-        return new THREE.BoxGeometry(1, 1, 1);
       case 'snake-trails':
-        return new THREE.CylinderGeometry(0.1, 0.1, 2, 8);
+        // For now, fall back to basic effect until other effects are ported
+        console.warn(`⚠️  Effect ${type} not yet ported, using placeholder`);
+        createPlaceholderEffect();
+        break;
+
       default:
-        return new THREE.SphereGeometry(1, 16, 16);
+        console.warn(`⚠️  Unknown effect type: ${type}, using placeholder`);
+        createPlaceholderEffect();
     }
+
+    console.log(`✅ Effect loaded: ${type}`, effectInstance);
   }
 
-  // Get material based on effect type
-  function getMaterial(THREE) {
-    const baseColor = type.includes('sinuous') ? 0x4a9eff : 0x6bb3ff;
+  // Temporary placeholder for effects not yet ported
+  function createPlaceholderEffect() {
+    const THREE = sceneManager.getTHREE();
+    const scene = sceneManager.getScene();
 
-    return new THREE.MeshBasicMaterial({
-      color: baseColor,
-      transparent: true,
-      opacity: 0.7,
-      wireframe: type.includes('snake')
+    // Simple rotating cube as placeholder
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({
+      color: 0x4a9eff,
+      wireframe: true
     });
-  }
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
 
-  // Animation update function called every frame (oraklex pattern)
-  let accumulatedTime = 0;
-
-  function updateAnimation(delta) {
-    if (!meshes.length) return;
-
-    // Accumulate time for smooth animations
-    accumulatedTime += delta;
-
-    meshes.forEach((mesh, index) => {
-      const speed = mesh.userData.speed || 0.01;
-      const time = accumulatedTime;
-
-      switch (type) {
-        case 'sinuous-original':
-          mesh.rotation.z = time * speed;
-          // Vertex displacement for wave effect
-          if (mesh.geometry.attributes.position) {
-            const positions = mesh.geometry.attributes.position.array;
-            for (let i = 0; i < positions.length; i += 3) {
-              positions[i + 2] = Math.sin(positions[i] * 0.5 + time) * 0.1;
-            }
-            mesh.geometry.attributes.position.needsUpdate = true;
-          }
-          break;
-
-        case 'synaptic-multipass':
-        case 'synaptic':
-          mesh.rotation.x = time * speed;
-          mesh.rotation.y = time * speed * 0.7;
-          mesh.position.y = Math.sin(time + index) * 0.5;
-          break;
-
-        case 'ether':
-          mesh.rotation.x = time * speed;
-          mesh.rotation.y = time * speed;
-          mesh.rotation.z = time * speed;
-          mesh.scale.setScalar(1 + Math.sin(time * 2) * 0.1);
-          break;
-
-        case 'snake-trails':
-          mesh.rotation.y = time * speed;
-          mesh.position.x = Math.cos(time + index) * 1;
-          mesh.position.z = Math.sin(time + index) * 1;
-          break;
+    // Create minimal effect interface
+    effectInstance = {
+      update: (delta) => {
+        cube.rotation.x += delta;
+        cube.rotation.y += delta * 0.7;
+      },
+      destroy: () => {
+        scene.remove(cube);
+        geometry.dispose();
+        material.dispose();
       }
-    });
+    };
   }
 
-  // Setup visibility observer for temperature optimization
+  // Setup visibility observer for temperature optimization (same as oraklex)
   function setupVisibilityObserver() {
     if (!browser || !canvasElement || !sceneManager) return;
 
@@ -219,7 +162,7 @@
             console.log(`👁️  ${type} visible - resumed`);
           } else {
             sceneManager.pause();
-            console.log(`🙈 ${type} hidden - paused (RAF cancelled)`);
+            console.log(`🙈 ${type} hidden - paused`);
           }
         }
       },
@@ -232,7 +175,7 @@
     intersectionObserver.observe(canvasElement);
   }
 
-  // Lifecycle management (proper oraklex.com pattern)
+  // Lifecycle management (exact oraklex.com pattern)
   onMount(async () => {
     // Wait for next tick to ensure DOM is fully ready
     await new Promise(resolve => setTimeout(resolve, 0));
@@ -257,6 +200,12 @@
   $effect(() => {
     if (sceneManager && containerWidth > 0 && containerHeight > 0) {
       sceneManager.resize(containerWidth, containerHeight);
+
+      // CRITICAL: Tell effect about resize (some effects like SinuousOriginal need this)
+      if (effectInstance && effectInstance.forceResize) {
+        effectInstance.forceResize(containerWidth, containerHeight);
+      }
+
       console.log(`📐 Reactive resize: ${containerWidth}x${containerHeight}`);
     }
   });
@@ -273,21 +222,24 @@
     // Unregister from canvas registry
     canvasRegistry.unregister(id);
 
-    // Destroy SceneManager (handles all Three.js cleanup)
+    // CRITICAL: Cleanup effect first
+    if (effectInstance && effectInstance.destroy) {
+      effectInstance.destroy();
+      effectInstance = null;
+    }
+
+    // Then cleanup SceneManager
     if (sceneManager) {
       sceneManager.destroy();
       sceneManager = null;
     }
-
-    // Clear mesh references
-    meshes = [];
   });
 
-  // Animation is now handled by individual SceneManager render loop
-  // Reactive resizing is handled by the $effect above watching containerWidth/Height
+  // Animation is now handled by REAL effect classes via effectInstance.update(delta)
+  // This is the exact pattern that makes oraklex.com work!
 </script>
 
-<!-- Canvas container for individual WebGL renderer (oraklex.com pattern) -->
+<!-- Canvas container (exact oraklex.com pattern) -->
 <div
   bind:this={canvasElement}
   bind:clientWidth={containerWidth}
