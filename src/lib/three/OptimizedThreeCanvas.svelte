@@ -1,82 +1,81 @@
 <!--
   Optimized ThreeJS Canvas Component
-  Uses shared WebGL context and centralized render loop
-  Implements viewport-based rendering for Fibonacci layout
+  Uses individual WebGL context per canvas (proven working pattern from oraklex.com)
+  Implements temperature-reducing optimizations
 -->
 <script>
   import { onMount, onDestroy } from 'svelte';
-  import { registerScene, unregisterScene } from './OptimizedThreeManager.svelte.js';
+  import { OptimizedSceneManager } from './OptimizedSceneManager.js';
   import { canvasRegistry } from '$lib/reactiveStates/canvasRegistry.svelte';
+  import { browser } from '$app/environment';
 
   // Props using Svelte 5 runes
   const { type = 'sinuous-original', id = `canvas-${Date.now()}`, lowRes = false } = $props();
 
   // Reactive state
   let canvasElement = $state(null);
-  let sceneId = $state(null);
+  let sceneManager = $state(null);
   let isInitialized = $state(false);
   let error = $state(null);
+  let isVisible = $state(true);
 
   // Scene resources
-  let scene = null;
-  let camera = null;
   let meshes = [];
+  let intersectionObserver = null;
 
-  // Initialize Three.js scene based on effect type
+  // Initialize Three.js scene using individual SceneManager (oraklex pattern)
   async function initializeScene() {
-    if (!canvasElement) {
-      console.warn('❌ Cannot initialize scene: canvasElement is null');
+    if (!canvasElement || !browser) {
+      console.warn('❌ Cannot initialize scene: canvasElement is null or not in browser');
       return;
     }
 
     console.log(`🚀 Initializing scene: ${type} (${id})`);
 
     try {
-      const THREE = await import('three');
-
-      // Create scene
-      scene = new THREE.Scene();
-
-      // Create camera
-      camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-      camera.position.z = 5;
-
-      // Create geometry based on effect type
-      await createEffect(THREE);
-
-      // Register with shared manager
-      sceneId = await registerScene(canvasElement, {
-        id,
-        scene,
-        camera,
-        effectType: type,
-        lowRes
+      // Create individual SceneManager for this canvas (proven working pattern)
+      sceneManager = new OptimizedSceneManager({
+        container: canvasElement,
+        alpha: true,
+        antialias: !lowRes, // Disable antialias for low-res to save performance
+        powerPreference: lowRes ? 'default' : 'default', // Always use 'default' for temperature control
+        pixelRatio: lowRes ? 1 : Math.min(window.devicePixelRatio, 1.5),
+        maxFPS: lowRes ? 20 : 30 // Lower FPS for better temperature control
       });
 
-      if (!sceneId) {
-        throw new Error('Failed to register scene with shared manager');
+      // Initialize WebGL context
+      const success = await sceneManager.init();
+      if (!success) {
+        throw new Error('Failed to initialize SceneManager');
       }
 
-      // Register with canvas registry for animation compatibility
-      if (sceneId && canvasElement) {
-        // Create a virtual canvas for animation system compatibility
-        const virtualCanvas = document.createElement('canvas');
-        virtualCanvas.style.width = '100%';
-        virtualCanvas.style.height = '100%';
+      // Create effect using the manager's Three.js objects
+      await createEffect(sceneManager.getThree(), sceneManager.getScene());
 
-        canvasRegistry.register(id, {
-          container: canvasElement,
-          canvas: virtualCanvas,
-          sceneManager: null, // Not needed for our optimization
-          effectInstance: {
-            forceResize: () => {}, // No-op since we handle resizing centrally
-            destroy: () => {} // No-op since cleanup is handled by unregisterScene
-          }
-        });
-      }
+      // Start render loop with animation update (oraklex pattern)
+      sceneManager.startRenderLoop((delta) => {
+        updateAnimation(delta);
+      });
+
+      // Setup intersection observer for visibility optimization
+      setupVisibilityObserver();
+
+      // Register with canvas registry for compatibility
+      canvasRegistry.register(id, {
+        container: canvasElement,
+        canvas: sceneManager.getRenderer().domElement,
+        sceneManager: sceneManager,
+        effectInstance: {
+          forceResize: () => {
+            const rect = canvasElement.getBoundingClientRect();
+            sceneManager.resize(rect.width, rect.height);
+          },
+          destroy: () => sceneManager.destroy()
+        }
+      });
 
       isInitialized = true;
-      console.log(`✅ Scene initialized: ${type} (${sceneId})`);
+      console.log(`✅ Scene initialized: ${type} (individual renderer)`);
 
     } catch (err) {
       error = `Failed to initialize ${type}: ${err.message}`;
@@ -85,7 +84,7 @@
   }
 
   // Create different effects based on type
-  async function createEffect(THREE) {
+  async function createEffect(THREE, scene) {
     const geometry = getGeometry(THREE);
     const material = getMaterial(THREE);
 
@@ -113,8 +112,7 @@
       scene.add(light);
     }
 
-    // Setup animation
-    setupAnimation(THREE);
+    console.log(`🎨 Created ${meshes.length} meshes for ${type}`);
   }
 
   // Get geometry based on effect type
@@ -147,60 +145,82 @@
     });
   }
 
-  // Setup animation for meshes (following oraklex.com pattern)
-  function setupAnimation(THREE) {
-    // Track accumulated time like oraklex.com does
-    let accumulatedTime = 0;
+  // Animation update function called every frame (oraklex pattern)
+  let accumulatedTime = 0;
 
-    // Animation update function that accepts delta timing
-    const animate = (delta) => {
-      if (!meshes.length) return;
+  function updateAnimation(delta) {
+    if (!meshes.length) return;
 
-      // Accumulate time for smooth animations
-      accumulatedTime += delta;
+    // Accumulate time for smooth animations
+    accumulatedTime += delta;
 
-      meshes.forEach((mesh, index) => {
-        const speed = mesh.userData.speed || 0.01;
-        const time = accumulatedTime;
+    meshes.forEach((mesh, index) => {
+      const speed = mesh.userData.speed || 0.01;
+      const time = accumulatedTime;
 
-        switch (type) {
-          case 'sinuous-original':
-            mesh.rotation.z = time * speed;
-            // Vertex displacement for wave effect
-            if (mesh.geometry.attributes.position) {
-              const positions = mesh.geometry.attributes.position.array;
-              for (let i = 0; i < positions.length; i += 3) {
-                positions[i + 2] = Math.sin(positions[i] * 0.5 + time) * 0.1;
-              }
-              mesh.geometry.attributes.position.needsUpdate = true;
+      switch (type) {
+        case 'sinuous-original':
+          mesh.rotation.z = time * speed;
+          // Vertex displacement for wave effect
+          if (mesh.geometry.attributes.position) {
+            const positions = mesh.geometry.attributes.position.array;
+            for (let i = 0; i < positions.length; i += 3) {
+              positions[i + 2] = Math.sin(positions[i] * 0.5 + time) * 0.1;
             }
-            break;
+            mesh.geometry.attributes.position.needsUpdate = true;
+          }
+          break;
 
-          case 'synaptic-multipass':
-          case 'synaptic':
-            mesh.rotation.x = time * speed;
-            mesh.rotation.y = time * speed * 0.7;
-            mesh.position.y = Math.sin(time + index) * 0.5;
-            break;
+        case 'synaptic-multipass':
+        case 'synaptic':
+          mesh.rotation.x = time * speed;
+          mesh.rotation.y = time * speed * 0.7;
+          mesh.position.y = Math.sin(time + index) * 0.5;
+          break;
 
-          case 'ether':
-            mesh.rotation.x = time * speed;
-            mesh.rotation.y = time * speed;
-            mesh.rotation.z = time * speed;
-            mesh.scale.setScalar(1 + Math.sin(time * 2) * 0.1);
-            break;
+        case 'ether':
+          mesh.rotation.x = time * speed;
+          mesh.rotation.y = time * speed;
+          mesh.rotation.z = time * speed;
+          mesh.scale.setScalar(1 + Math.sin(time * 2) * 0.1);
+          break;
 
-          case 'snake-trails':
-            mesh.rotation.y = time * speed;
-            mesh.position.x = Math.cos(time + index) * 1;
-            mesh.position.z = Math.sin(time + index) * 1;
-            break;
+        case 'snake-trails':
+          mesh.rotation.y = time * speed;
+          mesh.position.x = Math.cos(time + index) * 1;
+          mesh.position.z = Math.sin(time + index) * 1;
+          break;
+      }
+    });
+  }
+
+  // Setup visibility observer for temperature optimization
+  function setupVisibilityObserver() {
+    if (!browser || !canvasElement || !sceneManager) return;
+
+    intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        const wasVisible = isVisible;
+        isVisible = entry.isIntersecting;
+
+        if (wasVisible !== isVisible) {
+          if (isVisible) {
+            sceneManager.resume();
+            console.log(`👁️  ${type} visible - resumed`);
+          } else {
+            sceneManager.pause();
+            console.log(`🙈 ${type} hidden - paused (RAF cancelled)`);
+          }
         }
-      });
-    };
+      },
+      {
+        threshold: 0.05, // Pause when less than 5% visible
+        rootMargin: '50px' // Start rendering 50px before visible
+      }
+    );
 
-    // Store animation function for the render loop (expects delta parameter)
-    scene.userData.animate = animate;
+    intersectionObserver.observe(canvasElement);
   }
 
   // Lifecycle management
@@ -216,42 +236,37 @@
   });
 
   onDestroy(() => {
-    if (sceneId) {
-      unregisterScene(sceneId);
+    console.log(`♻️  Cleaning up ${type} (${id})`);
+
+    // Stop intersection observer
+    if (intersectionObserver) {
+      intersectionObserver.disconnect();
+      intersectionObserver = null;
     }
 
     // Unregister from canvas registry
     canvasRegistry.unregister(id);
 
-    // Cleanup Three.js resources
-    if (scene) {
-      scene.traverse((child) => {
-        if (child.geometry) child.geometry.dispose();
-        if (child.material) {
-          if (Array.isArray(child.material)) {
-            child.material.forEach(material => material.dispose());
-          } else {
-            child.material.dispose();
-          }
-        }
-      });
+    // Destroy SceneManager (handles all Three.js cleanup)
+    if (sceneManager) {
+      sceneManager.destroy();
+      sceneManager = null;
     }
 
+    // Clear mesh references
     meshes = [];
-    scene = null;
-    camera = null;
   });
 
-  // Handle resize
+  // Handle resize using SceneManager
   $effect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && sceneManager && canvasElement) {
       const handleResize = () => {
-        if (camera && canvasElement) {
-          const rect = canvasElement.getBoundingClientRect();
-          camera.aspect = rect.width / rect.height;
-          camera.updateProjectionMatrix();
-        }
+        const rect = canvasElement.getBoundingClientRect();
+        sceneManager.resize(rect.width, rect.height);
       };
+
+      // Initial size setup
+      handleResize();
 
       window.addEventListener('resize', handleResize);
 
@@ -261,16 +276,17 @@
     }
   });
 
-  // Animation is now handled by the centralized render loop in OptimizedThreeManager
-  // No need to call animate() here - it's called before each render
+  // Animation is now handled by individual SceneManager render loop
+  // Each canvas has its own optimized animation cycle with frame throttling
 </script>
 
-<!-- Canvas element that will be managed by the shared renderer -->
+<!-- Canvas container for individual WebGL renderer -->
 <div
   bind:this={canvasElement}
   class="three-canvas"
   class:initialized={isInitialized}
   class:error={error}
+  class:paused={!isVisible}
   data-effect-type={type}
   data-low-res={lowRes}
 >
@@ -310,9 +326,22 @@
     background: transparent;
   }
 
+  .three-canvas.paused {
+    opacity: 0.5; /* Visual feedback when paused for performance */
+  }
+
   /* Performance hint for browser */
   .three-canvas {
     contain: layout style paint;
     will-change: transform;
+  }
+
+  /* Ensure canvas fills container correctly */
+  .three-canvas :global(canvas) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 </style>
