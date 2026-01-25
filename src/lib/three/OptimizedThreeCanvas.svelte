@@ -6,6 +6,7 @@
   import { onMount, onDestroy } from 'svelte';
   import { SceneManager } from './SceneManager';
   import { canvasRegistry } from '$lib/reactiveStates/canvasRegistry.svelte';
+  import { registerGlobalInstance, unregisterGlobalInstance } from './GlobalThreeManager.svelte.js';
   import { browser } from '$app/environment';
 
   // Props using Svelte 5 runes
@@ -59,6 +60,9 @@
 
       // Initialize WebGL context
       await sceneManager.init();
+
+      // CRITICAL: Register with global thermal management system
+      registerGlobalInstance(id, sceneManager, type);
 
       // CRITICAL: Load REAL effect class based on type (oraklex pattern)
       await loadEffect();
@@ -212,6 +216,9 @@
 
   onDestroy(() => {
     console.log(`♻️  Cleaning up ${type} (${id})`);
+
+    // CRITICAL: Unregister from global thermal management system
+    unregisterGlobalInstance(id);
 
     // Stop intersection observer
     if (intersectionObserver) {

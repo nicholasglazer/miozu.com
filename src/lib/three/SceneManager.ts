@@ -4,6 +4,7 @@
  */
 
 import type * as THREE from 'three';
+import { getGlobalThreeManager } from './GlobalThreeManager.svelte.js';
 
 export interface SceneConfig {
 	container: HTMLElement;
@@ -29,7 +30,7 @@ export class SceneManager {
 	private lastHeight = 0;
 	private onFrameCallback: ((delta: number) => void) | null = null;
 	private currentPixelRatio: number;
-	private targetFPS = 15; // EMERGENCY: Very low FPS for temperature control
+	targetFPS = 15; // EMERGENCY: Very low FPS for temperature control (public for GlobalManager)
 	private lastFrameTime = 0;
 	private windowFocused = true;
 
@@ -161,6 +162,13 @@ export class SceneManager {
 
 			// Render scene to canvas
 			this.renderer.render(this.scene, this.camera);
+
+			// EMERGENCY: Report frame to global manager for performance monitoring
+			try {
+				getGlobalThreeManager()?.countFrame();
+			} catch (e) {
+				// Ignore errors from global manager
+			}
 		};
 
 		animate();
