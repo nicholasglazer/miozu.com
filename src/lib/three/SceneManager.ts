@@ -84,7 +84,14 @@ export class SceneManager {
 		// EMERGENCY: Add window focus detection for temperature control
 		this.setupFocusDetection();
 
-		console.info(`[SceneManager] Initialized with WebGL renderer (${width}x${height}) - EMERGENCY temp mode: ${this.targetFPS}fps`);
+		console.info(`[SceneManager] Initialized with WebGL renderer (${width}x${height}) - temp mode: ${this.targetFPS}fps`);
+		console.log('[SceneManager] WebGL context info:', {
+			renderer: !!this.renderer,
+			scene: !!this.scene,
+			camera: !!this.camera,
+			domElement: !!this.renderer.domElement,
+			contextLost: this.renderer.getContext().isContextLost()
+		});
 	}
 
 	/** Resize renderer and camera - call from Svelte's bind:clientWidth/Height */

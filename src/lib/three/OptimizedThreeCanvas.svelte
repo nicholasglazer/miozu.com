@@ -68,11 +68,29 @@
       await loadEffect();
 
       // CRITICAL: Start render loop with REAL effect update (oraklex pattern)
+      console.log('🔄 Starting render loop...');
+      let frameCount = 0;
       sceneManager.startRenderLoop((delta) => {
+        frameCount++;
+
+        // Debug first few frames
+        if (frameCount <= 5 || frameCount % 60 === 0) {
+          console.log(`🎬 Frame ${frameCount}: delta=${delta.toFixed(4)}, effectInstance=${!!effectInstance}`);
+        }
+
         if (effectInstance) {
-          effectInstance.update(delta); // Call REAL effect's update method
+          try {
+            effectInstance.update(delta); // Call REAL effect's update method
+          } catch (err) {
+            console.error(`❌ Effect update error on frame ${frameCount}:`, err);
+          }
+        } else {
+          if (frameCount <= 10) {
+            console.warn(`⚠️  No effectInstance on frame ${frameCount}`);
+          }
         }
       });
+      console.log('✅ Render loop started');
 
       // Setup intersection observer for visibility optimization
       setupVisibilityObserver();
@@ -96,13 +114,27 @@
 
   // CRITICAL: Load REAL effect classes (oraklex.com pattern)
   async function loadEffect() {
-    console.log(`🎨 Loading REAL effect: ${type}`);
+    console.log(`🎨 Loading REAL effect: ${type}`, { sceneManager: !!sceneManager });
 
     switch (type) {
       case 'sinuous-original':
-        const { SinuousOriginalEffect } = await import('./effects/SinuousOriginal');
-        effectInstance = new SinuousOriginalEffect(sceneManager);
-        await effectInstance.init();
+        console.log('📦 Importing SinuousOriginalEffect...');
+        try {
+          const { SinuousOriginalEffect } = await import('./effects/SinuousOriginal');
+          console.log('✅ SinuousOriginalEffect imported');
+
+          console.log('🏗️  Creating SinuousOriginalEffect instance...');
+          effectInstance = new SinuousOriginalEffect(sceneManager);
+          console.log('✅ SinuousOriginalEffect instance created');
+
+          console.log('🚀 Initializing SinuousOriginalEffect...');
+          await effectInstance.init();
+          console.log('✅ SinuousOriginalEffect initialized successfully');
+        } catch (err) {
+          console.error('❌ Failed to load SinuousOriginalEffect:', err);
+          console.log('🔄 Falling back to placeholder effect...');
+          createPlaceholderEffect();
+        }
         break;
 
       // TODO: Add other effects as needed
@@ -119,7 +151,11 @@
         createPlaceholderEffect();
     }
 
-    console.log(`✅ Effect loaded: ${type}`, effectInstance);
+    console.log(`✅ Effect loaded: ${type}`, {
+      effectInstance: !!effectInstance,
+      hasUpdate: !!(effectInstance && effectInstance.update),
+      hasDestroy: !!(effectInstance && effectInstance.destroy)
+    });
   }
 
   // Temporary placeholder for effects not yet ported
